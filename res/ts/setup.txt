@@ -1,0 +1,126 @@
+
+plugin.tx_genericgallery_pi1 {
+	gallery {
+		default {
+			name = Default Gallery
+			template = EXT:generic_gallery/res/templates/default.html
+			codeToFooter = 0
+			damMarker = title, description, file_name, file_path, file_size, file_type, alt_text, caption, hpixels, vpixels, color_space
+			
+			range {
+				content = 1-1000
+			}
+			image {
+				maxW = 800
+				maxH = 600
+			}
+			thumb {
+				1 {
+					maxW = 200
+					maxH = 100
+				}
+			}
+		}
+		
+		multiple_rows {
+			name = Multiple Rows Gallery
+			template = EXT:generic_gallery/res/templates/multiple_rows.html
+			codeToFooter = 0
+			
+			# this list could be used to produce ###DAM_TITLE### or ###DAM_DESCRIPTION### markers
+			damMarker = title, description, file_name, file_path, file_size, file_type, alt_text, caption, hpixels, vpixels, color_space
+			
+			image {
+				maxW = 800
+				maxH = 600
+			}
+			thumb {
+				1 {
+					maxW = 180
+					maxH = 120
+				}
+			}				
+			range {
+				content = 1-1000
+			}
+		}
+		
+		teaser_slider {
+			name = Teaser Slider
+			template = EXT:generic_gallery/res/templates/teaser_slider.html
+			codeToFooter = 0
+			damMarker = title, description, alt_text
+			
+			range {
+				content	= 1-1
+				code = 2-1000
+			}
+			
+			image {
+				maxW = 240
+				maxH = 160
+			}	
+		}
+		
+		json_ajax {
+			name = JSON AJAX demo
+			template = EXT:generic_gallery/res/templates/ajax.html
+			codeToFooter = 0
+			damMarker = title, description, file_name, file_path, file_size, file_type, alt_text, caption, hpixels, vpixels, color_space
+			
+			image {
+				maxW = 200
+				maxH = 120
+			}
+			ajax = 1
+		}
+		
+		custom {
+			name = Custom marker demo
+			template = EXT:generic_gallery/res/templates/custom_marker.html
+			codeToFooter = 0
+			
+			# define marker, all DAM fields available, prefix IMAGE_ neded, please note predefined markers (IMAGE_WIDTH, IMAGE_HEIGHT)
+			marker {
+				# multiple fields possible as backfall
+				IMAGE_DESCRIPTION = description // caption // alt_text // title
+			}
+			
+			image {
+				maxW = 240
+				maxH = 160
+			}
+			
+			range {
+				code = 1-1000
+			}
+			
+			custom {
+				1 {
+					# needed 
+					marker = ###CUSTOM###
+					
+					# index = 3
+					# render image
+					# content {
+						# maxW = 666
+						# maxH = 666
+					# }					
+					# render marker
+					# content = ###IMAGE_DESCRIPTION###
+					
+					# FCEs
+					content {
+						example = TEXT
+						example.value = This works perfectly!
+						example.wrap = <p>|</p>
+						
+						example2 = RECORDS
+						example2.source = 233
+						example2.tables = tt_content
+					}
+				}
+			}
+		}
+	}
+}

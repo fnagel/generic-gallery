@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>module</type>
+		<description>Language labels for extension 'user_headerslider'</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="pi1_title">Generic picture gallery</label>
+			<label index="pi1_plus_wiz_description">This plugin adds a picture gallery. Choose betweeen different predefined gallery types.</label>
+		</languageKey>
+		<languageKey index="en" type="array">
+			<label index="pi1_title">Generic picture gallery</label>
+			<label index="pi1_plus_wiz_description">This plugin adds a picture gallery. Choose betweeen different predefined gallery types.</label>
+		</languageKey>
+		<languageKey index="de" type="array">
+			<label index="pi1_title">Universelle Bildergalerie</label>
+			<label index="pi1_plus_wiz_description">Dieses Plugin bietet verschiedene, vordefinierte Bildergalerien an.</label>
+		</languageKey>
+	</data>
+</T3locallang>

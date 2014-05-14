@@ -1,0 +1,154 @@
+2013-03-xx Felix Nagel  <info@felixnagel.com>
+
+	released v0.3.10 (no changes required)
+	* fixed: changelog (wrong version number in last release)
+	
+2013-03-09 Felix Nagel  <info@felixnagel.com>
+
+	released v0.3.9 (no changes required)
+	* fixed: php warning in in list module
+		
+2012-09-06 Felix Nagel  <info@felixnagel.com>
+
+	released v0.3.8 (no changes required)
+	* same version as 0.3.7 due to problems with TER upload
+	
+2012-09-06 Felix Nagel  <info@felixnagel.com>
+
+	released v0.3.7 (no changes required)
+	* removed: deprecated functions (TYPO3 6.0.0)
+	* changed: TYPO3 4.7 is now max requirement (because of TYPO3 6.0 and FAL)
+	
+2012-08-25 Felix Nagel  <info@felixnagel.com>
+
+	* fixed: exif data wont be displayed when switching to new, recommended EXT:svmetaextract
+	* added: suggest svmetaextract
+	* changed: files and inline code is now added using pageRenderer functions
+	* changed: TYPO3 4.3 is now minimal requirement
+	
+2012-08-12 Felix Nagel  <info@felixnagel.com>
+
+	* added: shuffle (random ordering) for images (thanks to Paints Multimedia for sponsoring, http://www.paints.de)
+	
+2012-06-04 Felix Nagel  <info@felixnagel.com>
+
+	* fixed: BE search problems due to changes in TYPO3 4.6, for livesearch use gg_pictures and gg_content shortcuts
+
+2012-05-24 Felix Nagel  <info@felixnagel.com>
+
+	* improved: small changes to eID
+
+2012-04-27 Felix Nagel  <info@felixnagel.com>
+
+	released v0.3.6 (no changes required)
+	* TYPO3 4.7.0 tested
+	* added: TYPO3 4.1 dependency (needed for IRRE)
+	* added: plugin.tx_genericgallery_pi1.baseWrap.wrap TS, see #33029, THX to Daniel K.
+
+2011-12-30 Felix Nagel  <info@felixnagel.com>
+
+	released v0.3.5 (no changes required)
+	* improved: BE preview for single mode
+	* fixed: small typo in BE
+	* fixed: problem with RTE text and JS string escaping
+	* improved: added sql_free_result()
+	* added: custom marker documentation
+	* fixed: deprecated functions
+
+2011-11-07 Felix Nagel  <info@felixnagel.com>
+
+	released v0.3.4 (changes might be required, see doc)
+	* fixed: BE user group permisson problem
+	* improved: BE preview
+	* fixed: removed linebreaks (\n) in RTE text so its usable in JS strings
+
+2011-09-07 Felix Nagel  <info@felixnagel.com>
+
+	released v0.3.3 (changes might be required, see doc)
+	* fixed: linking problem when using RTE description
+	* fixed: typo in doc, thx to Renate R.
+	* added: documentation about an issue with backend layout and templavoila_framework
+
+2011-07-15 Felix Nagel  <info@felixnagel.com>
+
+	* fixed: issue with endtime in single mode, see http://forumdev.typo3.org/t/214598/ and http://forge.typo3.org/issues/28298
+
+2011-07-12 Felix Nagel  <info@felixnagel.com>
+
+	released v0.3.2 (no changes required)
+	* fixed: issue with single mode, thx to Herman Kremer
+	* improved: IRRE record (single mode) title
+
+2011-06-16 Felix Nagel  <info@felixnagel.com>
+
+	released v0.3.1 (no changes required)
+	* fixed: small issue with BE layout
+
+2011-05-26 Felix Nagel  <info@felixnagel.com>
+
+	released v0.3.0 (changes required)
+	* added: you are now able to set backfalls for DAM fields
+	* added: demo TS via static template
+	* added: gallery mode displayed in BE preview
+	* added: ajax demo
+	* added: custom marker demo
+	* changed: marker WIDTH and HEIGHT to IMAGE_WIDTH and IMAGE_HEIGHT
+	* updated: documentation
+	* improved: code quality
+	* improved: extended demo with exif
+
+2011-03-19 Felix Nagel  <info@felixnagel.com>
+
+	released v0.2.0 (bugfix and feature release, no changes required)
+	* fixed: replacing marker when no ROW and / or IMAGE_X  marker is defined
+	* added: json and xml AJAX support
+	* updated: documentation
+
+2011-02-22 Felix Nagel  <info@felixnagel.com>
+
+	released v0.1.2
+	* fixed: improved BE user right management
+
+2011-02-17 Felix Nagel  <info@felixnagel.com>
+
+	released v0.1.1
+	* fixed: small issue with BE layout
+
+2011-02-16 Felix Nagel  <info@felixnagel.com>
+
+	* first release to TER
+
+2011-02-15 Felix Nagel  <info@felixnagel.com>
+
+	* added localized uid marker
+	* added busy noggin TV framework fallback
+	* added option to enable / disable CMS layout in BE
+	* updated demos to CDN ressources
+	* updated: documentation
+
+2011-01-28 Felix Nagel  <info@felixnagel.com>
+
+	* fixed: problem with EXT:fl_realurl_image and imagesize()
+	* improved: BE layout in mass mode
+
+2011-01-23 Felix Nagel  <info@felixnagel.com>
+
+	* added: documentation
+
+2011-01-20 Felix Nagel  <info@felixnagel.com>
+
+	* improved: TS markup
+
+2011-01-19 Felix Nagel  <info@felixnagel.com>
+
+	* added: title and link fields
+	* added: BE preview layout
+	* fixed: BE layout descriptions
+
+2011-01-17 Felix Nagel  <info@felixnagel.com>
+
+	* added: basic functionality
+
+2011-01-14 Felix Nagel  <info@felixnagel.com>
+
+	* initial start from user_ EXT (Paints Multimedia GmbH, http://paints.de)
