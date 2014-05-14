@@ -12,12 +12,12 @@
 
 $EM_CONF[$_EXTKEY] = array(
 	'title' => 'Generic Gallery',
-	'description' => 'One gallery to rule them all. Template driven for use with any kind of gallery / slide / rotate script. DAM required.',
+	'description' => 'One gallery to rule them all. Template driven for use with any kind of gallery / slide / rotate script.',
 	'category' => 'plugin',
 	'author' => 'Felix Nagel',
 	'author_email' => 'info@felixnagel.com',
 	'shy' => '',
-	'dependencies' => 'dam',
+	'dependencies' => '',
 	'conflicts' => '',
 	'priority' => '',
 	'module' => '',
@@ -32,13 +32,11 @@ $EM_CONF[$_EXTKEY] = array(
 	'version' => '0.3.9',
 	'constraints' => array(
 		'depends' => array(
-			'dam' => '',
-			'typo3' => '4.3.0-4.7.99',
+			'typo3' => '6.0.0-6.2.2',
 		),
 		'conflicts' => array(
 		),
 		'suggests' => array(
-			'svmetaextract' => '',
 		),
 	),
 	'suggests' => array(
