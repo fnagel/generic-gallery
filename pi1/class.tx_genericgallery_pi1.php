@@ -22,9 +22,6 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-require_once(PATH_tslib.'class.tslib_pibase.php');
-
-
 /**
  * Plugin 'Generic Gallery' for the 'generic_gallery' extension.
  *
@@ -59,32 +56,27 @@ class tx_genericgallery_pi1 extends tslib_pibase {
 		$this->conf['refTable'] = 'tx_generic_gallery_pictures';
 		$this->conf['refField'] = 'tx_generic_gallery_picture_single';
 		$this->conf['damFields']  = 'tx_dam.*';
-		
-		if (!t3lib_extMgm::isLoaded('dam')) {
-			$this->handleError('Please check if EXT:dam is installed.');
-			// TODO Non DAM support
+
+		// test if a configuration is present
+		if (!is_array($this->conf['gallery.'])) {
+			$this->handleError('No configuration array found. Please check your TypoScript configuration.');
 		} else {
-			// test if a configuration is present
-			if (!is_array($this->conf['gallery.'])) {			
-				$this->handleError('No configuration array found. Please check your TypoScript configuration.');
-			} else {						
-				if (strlen($this->cObj->data['tx_generic_gallery_predefined']) === 0) {	
-					$this->handleError('Please choose a gallery type.');
-				} else {
-					// store current gallery configuration
-					foreach($this->conf['gallery.'] as $configName => $configArray) {
-						if ($configName == $this->cObj->data['tx_generic_gallery_predefined']) {
-							$this->currentConf = $this->conf['gallery.'][$configName];
-						}
-					}			
-					// check if there is a matching configuration
-					if (!is_array($this->currentConf)) {
-						$this->handleError('No matching configuration array found. Please check your TypoScript configuration and gallery type defined within the FCE.');
-					} else {						
-						$content = $this->renderGallery();
+			if (strlen($this->cObj->data['tx_generic_gallery_predefined']) === 0) {
+				$this->handleError('Please choose a gallery type.');
+			} else {
+				// store current gallery configuration
+				foreach($this->conf['gallery.'] as $configName => $configArray) {
+					if ($configName == $this->cObj->data['tx_generic_gallery_predefined']) {
+						$this->currentConf = $this->conf['gallery.'][$configName];
 					}
 				}
-			}	
+				// check if there is a matching configuration
+				if (!is_array($this->currentConf)) {
+					$this->handleError('No matching configuration array found. Please check your TypoScript configuration and gallery type defined within the FCE.');
+				} else {
+					$content = $this->renderGallery();
+				}
+			}
 		}
 	
 		// set error message
@@ -416,7 +408,7 @@ class tx_genericgallery_pi1 extends tslib_pibase {
 		$damArray["files"] = array();
 		$damArray["rows"] = array();
 		
-		$damFiles = tx_dam_db::getReferencedFiles($this->conf['refTable'], intval($imgUid), $this->conf['refField'],'', $this->conf['damFields']);		
+//		$damFiles = tx_dam_db::getReferencedFiles($this->conf['refTable'], intval($imgUid), $this->conf['refField'],'', $this->conf['damFields']);
 		
 		// check if our row is valid
 		if (isset($damFiles['files']) && count($damFiles['files'])>0) {

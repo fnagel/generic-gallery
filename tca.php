@@ -82,7 +82,7 @@ $TCA['tx_generic_gallery_pictures'] = array (
 				)
 			)
 		),
-		'images' => txdam_getMediaTCA('image_field','tx_generic_gallery_picture_single'),
+//		'images' => txdam_getMediaTCA('image_field','tx_generic_gallery_picture_single'),
 		'contents' => Array (			
 			'exclude' => 1,		
 			'label' => 'LLL:EXT:generic_gallery/locallang_db.xml:generic_gallery_pictures.contents',		
@@ -164,12 +164,12 @@ $TCA['tx_generic_gallery_content'] = array (
 
 
 // change DAM default config
-$TCA["tx_generic_gallery_pictures"]["columns"]["images"]["label"] = "LLL:EXT:generic_gallery/locallang_db.xml:generic_gallery_pictures.images";
-$TCA["tx_generic_gallery_pictures"]["columns"]["images"]["config"]["minitems"] = 1;
-$TCA["tx_generic_gallery_pictures"]["columns"]["images"]["config"]["maxitems"] = 1;
-$TCA["tx_generic_gallery_pictures"]["columns"]["images"]["config"]["size"] = 1;
-$TCA["tx_generic_gallery_pictures"]["columns"]["images"]["config"]["allowed_types"] = "jpg,gif,jpeg,png";
-$TCA["tx_generic_gallery_pictures"]["columns"]["images"]["config"]["disallowed_types"] = "" ;
+//$TCA["tx_generic_gallery_pictures"]["columns"]["images"]["label"] = "LLL:EXT:generic_gallery/locallang_db.xml:generic_gallery_pictures.images";
+//$TCA["tx_generic_gallery_pictures"]["columns"]["images"]["config"]["minitems"] = 1;
+//$TCA["tx_generic_gallery_pictures"]["columns"]["images"]["config"]["maxitems"] = 1;
+//$TCA["tx_generic_gallery_pictures"]["columns"]["images"]["config"]["size"] = 1;
+//$TCA["tx_generic_gallery_pictures"]["columns"]["images"]["config"]["allowed_types"] = "jpg,gif,jpeg,png";
+//$TCA["tx_generic_gallery_pictures"]["columns"]["images"]["config"]["disallowed_types"] = "" ;
 
 
 ?>

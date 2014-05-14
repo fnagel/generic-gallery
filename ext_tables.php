@@ -89,7 +89,7 @@ $tempColumns = array (
 			'maxitems' => 1,
 		)
 	),	
-	'tx_generic_gallery_images' => txdam_getMediaTCA('image_field','tx_generic_gallery_picture_single'),
+//	'tx_generic_gallery_images' => txdam_getMediaTCA('image_field','tx_generic_gallery_picture_single'),
 );
 
 

@@ -22,8 +22,6 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-require_once(PATH_tslib.'class.tslib_pibase.php');
-
 /**
  * Plugin 'Generic Gallery' for the 'generic_gallery' extension.
  *
@@ -63,11 +61,7 @@ class tx_genericgallery_cms_layout extends tslib_pibase {
 		$content = '';			
 		
 		if ($params['row']['list_type'] == 'generic_gallery_pi1')	{
-		
-			require_once(PATH_txdam.'lib/class.tx_dam_image.php');
-			require_once(PATH_txdam.'lib/class.tx_dam_tcefunc.php');
-			require_once(PATH_txdam.'lib/class.tx_dam_guifunc.php');
-			
+
 			// get Extension Manager config
 			$extensionConfiguration = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['generic_gallery']);
 				
@@ -82,7 +76,7 @@ class tx_genericgallery_cms_layout extends tslib_pibase {
 			if ($extensionConfiguration['enable_cms_layout']) {
 				if ($params['row']['tx_generic_gallery_images']) {	
 					// get multiple images
-					$filesArray = tx_dam_db::getReferencedFiles("tt_content", $params['row']['uid'], 'tx_generic_gallery_picture_single','', 'tx_dam.*');	
+//					$filesArray = tx_dam_db::getReferencedFiles("tt_content", $params['row']['uid'], 'tx_generic_gallery_picture_single','', 'tx_dam.*');
 				} else {					
 					$filesArray = array();
 					$filesArray["files"] = array();
@@ -128,7 +122,7 @@ class tx_genericgallery_cms_layout extends tslib_pibase {
 		$damArray["files"] = array();
 		$damArray["rows"] = array();
 		
-		$damFiles = tx_dam_db::getReferencedFiles('tx_generic_gallery_pictures', intval($imgUid), 'tx_generic_gallery_picture_single','', 'tx_dam.*');		
+//		$damFiles = tx_dam_db::getReferencedFiles('tx_generic_gallery_pictures', intval($imgUid), 'tx_generic_gallery_picture_single','', 'tx_dam.*');
 		
 		// check if our row is valid
 		if (isset($damFiles['files']) && count($damFiles['files'])>0) {
@@ -146,7 +140,7 @@ class tx_genericgallery_cms_layout extends tslib_pibase {
 		$count = 0;
 		$shortSum = (count($damArray['rows']) > 10) ? true : false;
 		foreach($damArray['rows'] as $rowDAM)	{
-			$thumb = tx_dam_guiFunc::thumbnail($rowDAM);
+//			$thumb = tx_dam_guiFunc::thumbnail($rowDAM);
 			$title = "";
 			if ($rowDAM['generic_gallery_title']) {
 				$label = "<strong>" . $GLOBALS['LANG']->sL('LLL:EXT:generic_gallery/locallang_db.xml:generic_gallery_pictures.title') . ":</strong> ";
@@ -155,7 +149,7 @@ class tx_genericgallery_cms_layout extends tslib_pibase {
 			if ($shortSum) {
 				$thumb = '<div style="float:left; width:56px; height:56px; margin: 2px 5px 2px 0; padding: 3px; background-color:#fff; border:solid 1px #ccc;">'.$thumb.'</div>';
 			} else {
-				$caption = tx_dam_guiFunc::meta_compileInfoData($rowDAM, 'title, file_name, description:truncate:50', 'paragraph');
+//				$caption = tx_dam_guiFunc::meta_compileInfoData($rowDAM, 'title, file_name, description:truncate:50', 'paragraph');
 				$thumb = '<div style="float:left; width:56px; height:56px; margin: 2px 5px 2px 0; padding: 5px; background-color:#fff; border:solid 1px #ccc;">'.$thumb.'</div>';
 				$thumb = '<div>'.$thumb.$title.$caption.'</div><div style="clear:both"></div>';
 			}
