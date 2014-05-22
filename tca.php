@@ -82,7 +82,18 @@ $TCA['tx_generic_gallery_pictures'] = array(
 				)
 			)
 		),
-//		'images' => txdam_getMediaTCA('image_field','tx_generic_gallery_picture_single'),
+		'images' => array(
+			'label' => 'LLL:EXT:generic_gallery/locallang_db.xml:generic_gallery_pictures.images',
+			'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
+				'tx_generic_gallery_picture_single',
+				array(
+					'size' => '1',
+					'maxitems' => '1',
+					'minitems' => '1',
+				),
+				'jpg,gif,jpeg,png'
+			)
+		),
 		'contents' => Array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:generic_gallery/locallang_db.xml:generic_gallery_pictures.contents',
@@ -107,7 +118,6 @@ $TCA['tx_generic_gallery_pictures'] = array(
 		'2' => array('showitem' => 'contents')
 	)
 );
-
 
 $TCA['tx_generic_gallery_content'] = array(
 	'ctrl' => $TCA['tx_generic_gallery_content']['ctrl'],
@@ -160,15 +170,5 @@ $TCA['tx_generic_gallery_content'] = array(
 		'1' => array('showitem' => 'position, width')
 	)
 );
-
-
-// change DAM default config
-//$TCA["tx_generic_gallery_pictures"]["columns"]["images"]["label"] = "LLL:EXT:generic_gallery/locallang_db.xml:generic_gallery_pictures.images";
-//$TCA["tx_generic_gallery_pictures"]["columns"]["images"]["config"]["minitems"] = 1;
-//$TCA["tx_generic_gallery_pictures"]["columns"]["images"]["config"]["maxitems"] = 1;
-//$TCA["tx_generic_gallery_pictures"]["columns"]["images"]["config"]["size"] = 1;
-//$TCA["tx_generic_gallery_pictures"]["columns"]["images"]["config"]["allowed_types"] = "jpg,gif,jpeg,png";
-//$TCA["tx_generic_gallery_pictures"]["columns"]["images"]["config"]["disallowed_types"] = "" ;
-
 
 ?>

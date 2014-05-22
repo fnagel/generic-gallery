@@ -3,8 +3,6 @@ if (!defined('TYPO3_MODE')) {
 	die ('Access denied.');
 }
 
-include_once(t3lib_extMgm::extPath('generic_gallery') . 'pi1/class.tx_genericgallery_pi1_cms_layout.php');
-
 t3lib_div::loadTCA('tt_content');
 $TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY . '_pi1'] = 'layout,select_key,pages';
 
@@ -20,6 +18,12 @@ t3lib_extMgm::addStaticFile($_EXTKEY, 'res/ts/', 'Generic Gallery demos');
 
 if (TYPO3_MODE == 'BE') {
 	$TBE_MODULES_EXT['xMOD_db_new_content_el']['addElClasses']['tx_genericgallery_pi1_wizicon'] = t3lib_extMgm::extPath($_EXTKEY) . 'pi1/class.tx_genericgallery_pi1_wizicon.php';
+
+	// add dynamic fields
+	t3lib_div::requireOnce(t3lib_extMgm::extPath($_EXTKEY) . 'pi1/class.tx_genericgallery_pi1_addFields.php');
+
+	// preview
+	t3lib_div::requireOnce(t3lib_extMgm::extPath($_EXTKEY) . 'pi1/class.tx_genericgallery_pi1_cms_layout.php');
 }
 
 $TCA['tx_generic_gallery_pictures'] = array(
@@ -89,16 +93,21 @@ $tempColumns = array(
 			'maxitems' => 1,
 		)
 	),
-//	'tx_generic_gallery_images' => txdam_getMediaTCA('image_field','tx_generic_gallery_picture_single'),
+	'tx_generic_gallery_images' => Array(
+		'exclude' => 1,
+		'label' => 'LLL:EXT:generic_gallery/locallang_db.xml:generic_gallery_images',
+		'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
+			'tx_generic_gallery_picture_single',
+			array(
+				'size' => '20',
+				'maxitems' => '1000',
+				'minitems' => '0',
+				'autoSizeMax' => 40,
+			),
+			'jpg,gif,jpeg,png'
+		)
+	),
 );
-
-
-$tempColumns["tx_generic_gallery_images"]["exclude"] = 1;
-$tempColumns["tx_generic_gallery_images"]["label"] = "LLL:EXT:generic_gallery/locallang_db.xml:generic_gallery_images";
-$tempColumns["tx_generic_gallery_images"]["config"]["maxitems"] = 1000;
-$tempColumns["tx_generic_gallery_images"]["config"]["size"] = 20;
-$tempColumns["tx_generic_gallery_images"]["config"]["allowed_types"] = "jpg,gif,jpeg,png";
-$tempColumns["tx_generic_gallery_images"]["config"]["disallowed_types"] = "";
 
 
 // add field to tt_content so we can use irre within our plugin
