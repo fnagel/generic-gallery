@@ -2,7 +2,7 @@
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2010-2012 Felix Nagel <f.nagel@paints.de>
+ *  (c) 2010-2014 Felix Nagel <f.nagel@paints.de>
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -30,12 +30,56 @@
  * @subpackage    tx_generic_gallery
  */
 class tx_genericgallery_pi1 extends tslib_pibase {
-	var $prefixId = 'tx_genericgallery_pi1'; // Same as class name
-	var $scriptRelPath = 'pi1/class.tx_generic_gallery_pi1.php'; // Path to this script relative to the extension dir.
-	var $extKey = 'generic_gallery'; // The extension key.
-	var $pi_checkCHash = true;
+	/**
+	 * @var string
+	 */
+	public $prefixId = 'tx_genericgallery_pi1';
 
-	var $images = array();
+	/**
+	 * @var string
+	 */
+	public $scriptRelPath = 'pi1/class.tx_generic_gallery_pi1.php';
+
+	/**
+	 * @var string
+	 */
+	public $extKey = 'generic_gallery';
+
+	/**
+	 * @var array
+	 */
+	public $conf;
+
+	/**
+	 * @var tslib_cObj
+	 */
+	public $cObj;
+
+
+	/**
+	 * @var array
+	 */
+	protected $currentConf = array();
+
+	/**
+	 * @var bool
+	 */
+	public $pi_checkCHash = TRUE;
+
+	/**
+	 * @var array
+	 */
+	protected $images = array();
+
+	/**
+	 * @var null
+	 */
+	protected $templateHtml = NULL;
+
+	/**
+	 * @var bool
+	 */
+	protected $error = FALSE;
 
 	/**
 	 * The main method of the PlugIn
@@ -44,7 +88,7 @@ class tx_genericgallery_pi1 extends tslib_pibase {
 	 * @param    array $conf : The PlugIn configuration
 	 * @return    The content that is displayed on the website
 	 */
-	function main($content, $conf) {
+	public function main($content, $conf) {
 		$this->conf = $conf;
 		$this->pi_setPiVarDefaults();
 		$this->pi_loadLL();
@@ -65,7 +109,7 @@ class tx_genericgallery_pi1 extends tslib_pibase {
 				$this->handleError('Please choose a gallery type.');
 			} else {
 				// store current gallery configuration
-				foreach ($this->conf['gallery.'] as $configName => $configArray) {
+				foreach ($this->conf['gallery.'] as $configName) {
 					if ($configName == $this->cObj->data['tx_generic_gallery_predefined']) {
 						$this->currentConf = $this->conf['gallery.'][$configName];
 					}
@@ -82,7 +126,7 @@ class tx_genericgallery_pi1 extends tslib_pibase {
 		// set error message
 		if ($this->error) {
 			$append = $content;
-			$content = '<div style="text-align: left; text-size: 10px; color: red; margin: 5px; padding: 5px; background: white; border: 3px solid red;"><strong>Generic Gallery Extension Error</strong><br /><p><em>PID: ' . $this->cObj->data['pid'] . '</em><br /><em>UID: ' . $this->cObj->data['uid'] . '</em></p><p>' . implode("<br />", $this->error) . '</p></div>';
+			$content = '<div style="text-align: left; text-size: 10px; color: red; margin: 5px; padding: 5px; background: white; border: 3px solid red;"><strong>Generic Gallery Extension Error</strong><br /><p><em>PID: ' . $this->cObj->data['pid'] . '</em><br /><em>UID: ' . $this->cObj->data['uid'] . '</em></p><p>' . implode('<br />', $this->error) . '</p></div>';
 			$content .= $append;
 		}
 
@@ -91,8 +135,6 @@ class tx_genericgallery_pi1 extends tslib_pibase {
 		} else {
 			return $this->pi_wrapInBaseClass($content);
 		}
-
-		return $this->pi_wrapInBaseClass($content);
 	}
 
 
@@ -102,9 +144,7 @@ class tx_genericgallery_pi1 extends tslib_pibase {
 	 * @return    Array with the picture rows
 	 */
 
-	function renderGallery() {
-		$content = "";
-		$code = "";
+	protected function renderGallery() {
 		$this->images = array();
 		$this->imageMaxWidth = 0;
 		$this->imageMaxHeight = 0;
@@ -142,9 +182,9 @@ class tx_genericgallery_pi1 extends tslib_pibase {
 		// render code output
 		$code = $this->renderTemplate('code');
 		if ($this->currentConf['codeToFooter']) {
-			$GLOBALS['TSFE']->getPageRenderer()->addJsFooterInlineCode($this->prefixId . "_" . $this->uid, $code);
+			$GLOBALS['TSFE']->getPageRenderer()->addJsFooterInlineCode($this->prefixId . '_' . $this->uid, $code);
 		} else {
-			$GLOBALS['TSFE']->getPageRenderer()->addJsInlineCode($this->prefixId . "_" . $this->uid, $code);
+			$GLOBALS['TSFE']->getPageRenderer()->addJsInlineCode($this->prefixId . '_' . $this->uid, $code);
 		}
 
 		// render content output
@@ -157,9 +197,9 @@ class tx_genericgallery_pi1 extends tslib_pibase {
 		}
 
 		// add header data from template file
-		$template_files = $this->cObj->getSubpart($this->templateHtml, '###TEMPLATE_FILES###');
+		$templateFiles = $this->cObj->getSubpart($this->templateHtml, '###TEMPLATE_FILES###');
 		$subpartArray = $this->getDefaultMarker();
-		$GLOBALS['TSFE']->getPageRenderer()->addHeaderData($this->cObj->substituteMarkerArrayCached($template_files, $subpartArray));
+		$GLOBALS['TSFE']->getPageRenderer()->addHeaderData($this->cObj->substituteMarkerArrayCached($templateFiles, $subpartArray));
 
 		return $content;
 	}
@@ -168,11 +208,11 @@ class tx_genericgallery_pi1 extends tslib_pibase {
 	/**
 	 * Method to render the first image and JS headerdata
 	 *
-	 * @return    Array with the picture rows
+	 * @param $template
+	 * 
+	 * @return    array Array with the picture rows
 	 */
-
-	function renderTemplate($template) {
-
+	protected function renderTemplate($template) {
 		// which template subpart should be rendered?
 		if ($template == 'content') {
 			$templateMarker = '###TEMPLATE_CONTENT###';
@@ -187,7 +227,7 @@ class tx_genericgallery_pi1 extends tslib_pibase {
 		// Fill default subpart marker
 		$subpartArray = $this->getDefaultMarker();
 
-		if ($subparts['row'] != "" && preg_match_all("/###IMAGE_\d+###/", $subparts['row'], $imageMarker)) {
+		if ($subparts['row'] != '' && preg_match_all('/###IMAGE_\d+###/', $subparts['row'], $imageMarker)) {
 
 			// count image marker
 			$imageMarkerCount = count($imageMarker[0]) / 2;
@@ -197,11 +237,11 @@ class tx_genericgallery_pi1 extends tslib_pibase {
 				$subparts['image_' . $x] = $this->cObj->getSubpart($subparts['template'], '###IMAGE_' . $x . '###');
 				// remove unnecessary image marker from row subpart
 				if ($x > 1) {
-					$subparts['row'] = $this->cObj->substituteSubpart($subparts['row'], '###IMAGE_' . $x . '###', "");
+					$subparts['row'] = $this->cObj->substituteSubpart($subparts['row'], '###IMAGE_' . $x . '###', '');
 				}
 			}
 
-			$contentImages = "";
+			$contentImages = '';
 			$imageMarkerArray = array();
 			$switchImageMarker = 1;
 			$switchRow = 0;
@@ -209,7 +249,7 @@ class tx_genericgallery_pi1 extends tslib_pibase {
 
 			// check for range option
 			if ($this->currentConf['range.'][$template]) {
-				$indexArray = t3lib_div::intExplode("-", $this->currentConf['range.'][$template]);
+				$indexArray = t3lib_div::intExplode('-', $this->currentConf['range.'][$template]);
 				$indexStart = $indexArray[0] - 1;
 				$indexEnd = (count($this->images['files']) < $indexArray[1]) ? count($this->images['files']) : $indexArray[1];
 			} else {
@@ -231,12 +271,12 @@ class tx_genericgallery_pi1 extends tslib_pibase {
 					$switchImageMarker = 1;
 
 					$contentImageArray[$switchRow] = $contentImages;
-					$contentImages = "";
+					$contentImages = '';
 					$switchRow++;
 				}
 			}
 
-			$contentRows = "";
+			$contentRows = '';
 			// add all rows
 			foreach ($contentImageArray as $index => $rowContent) {
 				$contentRows .= $this->cObj->substituteSubpart($subparts['row'], '###IMAGE_1###', $rowContent);
@@ -246,34 +286,39 @@ class tx_genericgallery_pi1 extends tslib_pibase {
 			$subpartArray['###ROW###'] = $contentRows;
 		}
 
-		// Complete the template expansion by replacing the "row" marker in the template  
-		$content = $this->cObj->substituteMarkerArrayCached($subparts['template'], null, $subpartArray);
+		// Complete the template expansion by replacing the 'row' marker in the template
+		$content = $this->cObj->substituteMarkerArrayCached($subparts['template'], NULL, $subpartArray);
 
 		return $content;
 	}
 
-	function getImageMarkerArray() {
+	/**
+	 * @return array
+	 */
+	protected function getImageMarkerArray() {
 		$imageMarkerArray = array();
 
 		for ($y = 0; $y < count($this->images['files']); $y++) {
 			// Fill marker array
 			$imageMarkerArray[$y] = $this->renderImageMarker($y);
-			if ($this->images["text"][$y]) {
-				$imageMarkerArray[$y]['###TXT###'] = $this->images["text"][$y];
+			if ($this->images['text'][$y]) {
+				$imageMarkerArray[$y]['###TXT###'] = $this->images['text'][$y];
 			} else {
-				$imageMarkerArray[$y]['###TXT###'] = "";
+				$imageMarkerArray[$y]['###TXT###'] = '';
 			}
-			$imageMarkerArray[$y]['###TITLE###'] = $this->images["title"][$y];
-			$imageMarkerArray[$y]['###LINK###'] = $this->images["link"][$y];
-			$imageMarkerArray[$y]['###FILEPATH###'] = $this->images["files"][$y];
+			$imageMarkerArray[$y]['###TITLE###'] = $this->images['title'][$y];
+			$imageMarkerArray[$y]['###LINK###'] = $this->images['link'][$y];
+			$imageMarkerArray[$y]['###FILEPATH###'] = $this->images['files'][$y];
 			$imageMarkerArray[$y]['###COUNT###'] = $y + 1;
 		}
 
 		return $imageMarkerArray;
 	}
 
-
-	function getCustomMarkerArray() {
+	/**
+	 * @return array
+	 */
+	protected function getCustomMarkerArray() {
 		$customMarkerArray = array();
 
 		if (is_array($this->currentConf['custom.'])) {
@@ -303,7 +348,7 @@ class tx_genericgallery_pi1 extends tslib_pibase {
 						}
 					} else {
 						// type: UID of an FCE
-						$renderedOutput = "";
+						$renderedOutput = '';
 						foreach ($element['content.'] as $name => $options) {
 							if (!strstr($name, '.')) {
 								if (!isset($element['content.'][$name . '.'])) {
@@ -323,20 +368,24 @@ class tx_genericgallery_pi1 extends tslib_pibase {
 		return $customMarkerArray;
 	}
 
-	function renderImageMarker($imageIndex) {
+	/**
+	 * @param $imageIndex
+	 * @return array
+	 */
+	protected function renderImageMarker($imageIndex) {
 		$markerArray = array();
 
 		// render custom marker
 		if (is_array($this->currentConf['marker.'])) {
 			foreach ($this->currentConf['marker.'] as $index => $fields) {
 				if (t3lib_div::isFirstPartOfStr($index, 'IMAGE_')) {
-					$fieldsArray = t3lib_div::trimExplode("//", $fields, true);
+					$fieldsArray = t3lib_div::trimExplode('//', $fields, TRUE);
 					foreach ($fieldsArray as $field) {
-						if ($this->images["dam"][$imageIndex][$field]) {
-							$markerArray['###' . $index . '###'] = $this->images["dam"][$imageIndex][$field];
+						if ($this->images['dam'][$imageIndex][$field]) {
+							$markerArray['###' . $index . '###'] = $this->images['dam'][$imageIndex][$field];
 							break;
 						} else {
-							$markerArray['###' . $index . '###'] = "";
+							$markerArray['###' . $index . '###'] = '';
 						}
 					}
 				}
@@ -345,25 +394,25 @@ class tx_genericgallery_pi1 extends tslib_pibase {
 
 		// render DAM marker
 		if (strlen($this->currentConf['damMarker']) > 0) {
-			$damFields = t3lib_div::trimExplode(",", $this->currentConf['damMarker'], true);
+			$damFields = t3lib_div::trimExplode(',', $this->currentConf['damMarker'], TRUE);
 			foreach ($damFields as $damField) {
-				if ($this->images["dam"][$imageIndex][$damField]) {
-					$markerArray['###DAM_' . strtoupper($damField) . '###'] = $this->images["dam"][$imageIndex][$damField];
+				if ($this->images['dam'][$imageIndex][$damField]) {
+					$markerArray['###DAM_' . strtoupper($damField) . '###'] = $this->images['dam'][$imageIndex][$damField];
 				} else {
-					$markerArray['###DAM_' . strtoupper($damField) . '###'] = "";
+					$markerArray['###DAM_' . strtoupper($damField) . '###'] = '';
 				}
 			}
 		}
 
 		// add file path
-		$imgConf['file'] = $this->images["files"][$imageIndex];
+		$imgConf['file'] = $this->images['files'][$imageIndex];
 
 		if (is_array($this->currentConf['image.'])) {
 			// IMG conf
 			$imgConf['file.'] = $this->currentConf['image.'];
 			// busy noggin framework fallback
-			if ($imgConf['file.']['maxW'] == "templavoila" && $GLOBALS["TSFE"]->register["maxImageWidth"]) {
-				$imgConf['file.']['maxW'] = $GLOBALS["TSFE"]->register["maxImageWidth"];
+			if ($imgConf['file.']['maxW'] == 'templavoila' && $GLOBALS['TSFE']->register['maxImageWidth']) {
+				$imgConf['file.']['maxW'] = $GLOBALS['TSFE']->register['maxImageWidth'];
 			}
 			$markerArray['###IMAGE###'] = $this->cObj->IMG_RESOURCE($imgConf);
 
@@ -387,8 +436,8 @@ class tx_genericgallery_pi1 extends tslib_pibase {
 				$imgConf['file.'] = $confArray;
 				$indexPic = substr($index, 0, -1);
 				// busy noggin framework fallback
-				if ($imgConf['file.']['maxW'] == "templavoila" && $GLOBALS["TSFE"]->register["maxImageWidth"]) {
-					$imgConf['file.']['maxW'] = $GLOBALS["TSFE"]->register["maxImageWidth"];
+				if ($imgConf['file.']['maxW'] == 'templavoila' && $GLOBALS['TSFE']->register['maxImageWidth']) {
+					$imgConf['file.']['maxW'] = $GLOBALS['TSFE']->register['maxImageWidth'];
 				}
 				$markerArray['###THUMB_' . $indexPic . '###'] = $this->cObj->IMG_RESOURCE($imgConf);
 
@@ -402,40 +451,42 @@ class tx_genericgallery_pi1 extends tslib_pibase {
 		return $markerArray;
 	}
 
-	function getDAMImageData($imgUid) {
+	/**
+	 * @param $imgUid
+	 *
+	 * @return array|bool
+	 */
+	protected function getDAMImageData($imgUid) {
 		$damArray = array();
-		$damArray["files"] = array();
-		$damArray["rows"] = array();
+		$damArray['files'] = array();
+		$damArray['rows'] = array();
 
-//		$damFiles = tx_dam_db::getReferencedFiles($this->conf['refTable'], intval($imgUid), $this->conf['refField'],'', $this->conf['damFields']);
+		$damFiles = tx_dam_db::getReferencedFiles($this->conf['refTable'], intval($imgUid), $this->conf['refField'],'', $this->conf['damFields']);
 
 		// check if our row is valid
 		if (isset($damFiles['files']) && count($damFiles['files']) > 0) {
-			$damArray["files"] = current($damFiles['files']);
-			$damArray["rows"] = current($damFiles['rows']);
+			$damArray['files'] = current($damFiles['files']);
+			$damArray['rows'] = current($damFiles['rows']);
 
 			return $damArray;
 		}
 
-
-		return false;
+		return FALSE;
 	}
 
 	/**
 	 * Method to get the image data from one FCE
 	 *
-	 * @return    Array with the picture rows
+	 * @return boolean|array Array with the picture rows
 	 */
-
-	function getSigleImages() {
+	protected function getSigleImages() {
 		$damArray = array();
-		$damArray["files"] = array();
-		$damArray["dam"] = array();
+		$damArray['files'] = array();
+		$damArray['dam'] = array();
 
 		$select = 'uid, pid, title, link, images, contents';
 		$table = $this->conf['refTable'];
 		$where = 'tt_content_id = ' . $this->uid;
-		// always (!) use TYPO3 default function for adding hidden = 0, deleted = 0, group and date statements
 		$where .= $GLOBALS['TSFE']->sys_page->enableFields($table);
 		$order = 'sorting';
 		$group = '';
@@ -447,19 +498,19 @@ class tx_genericgallery_pi1 extends tslib_pibase {
 				// make typolink
 				$linkConf = array(
 					'parameter' => $row['link'],
-					'useCacheHash' => true
+					'useCacheHash' => TRUE
 				);
 				$helperArray = $this->getDAMImageData($row['uid']);
-				$damArray["files"][] = $helperArray["files"];
-				$damArray["text"][] = $this->getDescription($row['uid']);
-				$damArray["title"][] = htmlspecialchars($row['title']);
-				$damArray["link"][] = $this->cObj->typoLink_URL($linkConf);
+				$damArray['files'][] = $helperArray['files'];
+				$damArray['text'][] = $this->getDescription($row['uid']);
+				$damArray['title'][] = htmlspecialchars($row['title']);
+				$damArray['link'][] = $this->cObj->typoLink_URL($linkConf);
 
 				// prepare meta data if needed
-				if (strlen($helperArray["rows"]["meta"]) > 0 && t3lib_extMgm::isLoaded('cc_metaexif')) {
-					$damArray["dam"][] = $this->prepareMetaData($helperArray["rows"]);
+				if (strlen($helperArray['rows']['meta']) > 0 && t3lib_extMgm::isLoaded('cc_metaexif')) {
+					$damArray['dam'][] = $this->prepareMetaData($helperArray['rows']);
 				} else {
-					$damArray["dam"][] = $helperArray["rows"];
+					$damArray['dam'][] = $helperArray['rows'];
 				}
 			}
 		}
@@ -469,49 +520,54 @@ class tx_genericgallery_pi1 extends tslib_pibase {
 		if (isset($damArray['files']) && count($damArray['files']) > 0) {
 			return $damArray;
 		} else {
-			return false;
+			return TRUE;
 		}
 	}
 
-	function getMultipleImages() {
+	/**
+	 * @return array|bool
+	 */
+	protected function getMultipleImages() {
 		$damArray = array();
-		$damArray["files"] = array();
-		$damArray["dam"] = array();
+		$damArray['files'] = array();
+		$damArray['dam'] = array();
 
-		$damFiles = tx_dam_db::getReferencedFiles("tt_content", $this->uid, $this->conf['refField'], '', $this->conf['damFields']);
+		$damFiles = tx_dam_db::getReferencedFiles('tt_content', $this->uid, $this->conf['refField'], '', $this->conf['damFields']);
 
 		// check if our row is valid
 		if (isset($damFiles['files']) && count($damFiles['files']) > 0) {
 			foreach ($damFiles['files'] as $index => $file) {
-				$damArray["files"][] = $file;
+				$damArray['files'][] = $file;
 
 				// prepare meta data if needed
-				if (strlen($damFiles['rows'][$index]["meta"]) > 0 && (t3lib_extMgm::isLoaded('cc_metaexif') || t3lib_extMgm::isLoaded('svmetaextract'))) {
-					$damArray["dam"][] = $this->prepareMetaData($damFiles['rows'][$index]);
+				if (
+					strlen($damFiles['rows'][$index]['meta']) > 0 &&
+					(t3lib_extMgm::isLoaded('cc_metaexif') || t3lib_extMgm::isLoaded('svmetaextract'))
+				) {
+					$damArray['dam'][] = $this->prepareMetaData($damFiles['rows'][$index]);
 				} else {
-					$damArray["dam"][] = $damFiles['rows'][$index];
+					$damArray['dam'][] = $damFiles['rows'][$index];
 				}
 			}
 
 			return $damArray;
 		}
 
-		return false;
+		return FALSE;
 	}
 
 	/**
 	 * Method to render the bodytext areas for every image
 	 *
-	 * @param    string $picture_uid : uid of the picture
-	 * @return    The string with our imagemap
+	 * @param $pictureUid
+	 *
+	 * @return   string The string with our imagemap
 	 */
-
-	function getDescription($picture_uid) {
+	protected function getDescription($pictureUid) {
 
 		$select = 'uid, pid, bodytext, position, width';
 		$table = 'tx_generic_gallery_content';
-		$where = 'pictures_id = ' . $picture_uid;
-		// always (!) use TYPO3 default function for adding hidden = 0, deleted = 0, group and date statements
+		$where = 'pictures_id = ' . $pictureUid;
 		$where .= $GLOBALS['TSFE']->sys_page->enableFields($table);
 		$order = '';
 		$group = '';
@@ -525,23 +581,23 @@ class tx_genericgallery_pi1 extends tslib_pibase {
 				// TODO make RTE configurable
 				$parsedBodyText = $this->pi_RTEcssText($row['bodytext']);
 				// remove linebreaks so we can use the text within JS strings
-				$parsedBodyText = preg_replace('/\n\r|\r\n|\n|\r/s', "", $parsedBodyText);
+				$parsedBodyText = preg_replace('/\n\r|\r\n|\n|\r/s', '', $parsedBodyText);
 				$parsedBodyText = t3lib_div::slashJS($parsedBodyText);
 
 				// get coordinates
-				$coordsArray = t3lib_div::intExplode(",", $row['position'], true);
+				$coordsArray = t3lib_div::intExplode(',', $row['position'], TRUE);
 
 				if (count($coordsArray) && $coordsArray[0] && $coordsArray[1]) {
 					// get width of the rte
-					$width = "";
+					$width = '';
 					if (t3lib_div::compat_version('4.6')) {
 						if (t3lib_utility_Math::convertToPositiveInteger($row['width'])) {
-							$width = "width: " . $row['width'] . "px; ";
+							$width = 'width: ' . $row['width'] . 'px; ';
 						}
 					} else {
 						// TODO remove this in later versions
 						if (t3lib_div::intval_positive($row['width'])) {
-							$width = "width: " . $row['width'] . "px; ";
+							$width = 'width: ' . $row['width'] . 'px; ';
 						}
 					}
 					$content .= '<div style="position: absolute; ' . $width . 'top: ' . $coordsArray[0] . 'px; left: ' . $coordsArray[1] . 'px;">' . $parsedBodyText . '</div>';
@@ -560,10 +616,9 @@ class tx_genericgallery_pi1 extends tslib_pibase {
 	 * Function to render the default marker
 	 *
 	 */
-	public function getDefaultMarker() {
-		$subpartArray = array();
-
+	protected function getDefaultMarker() {
 		$subpartArray = $this->customMarker;
+
 		$subpartArray['###UID###'] = intval($this->cObj->data['uid']);
 		$subpartArray['###_LOCALIZED_UID###'] = intval($this->cObj->data['_LOCALIZED_UID']);
 		$subpartArray['###IMAGE_MAX_WIDTH###'] = $this->imageMaxWidth;
@@ -575,16 +630,16 @@ class tx_genericgallery_pi1 extends tslib_pibase {
 
 	/**
 	 * Function to prepare the EXIF and IPTC meta data
-	 * Exif data converting partly taken from: http://www.zenphoto.org/trac/browser/tags/1.4.0.3/zp-core/exif
+	 * Exif data converting partly taken from:
+	 * http://www.zenphoto.org/trac/browser/tags/1.4.0.3/zp-core/exif
 	 *
 	 */
-	public function prepareMetaData($damArray) {
-		$preparedMetaArray = array();
-		$metaArray = t3lib_div::xml2array($damArray["meta"]);
+	protected function prepareMetaData($damArray) {
+		$metaArray = t3lib_div::xml2array($damArray['meta']);
 
 		// prepare EXIF data
-		if (is_array($metaArray["exif"])) {
-			foreach ($metaArray["exif"] as $key => $value) {
+		if (is_array($metaArray['exif'])) {
+			foreach ($metaArray['exif'] as $key => $value) {
 				// format value if necessary
 				switch ($key) {
 					case 'DateTime':
@@ -670,8 +725,7 @@ class tx_genericgallery_pi1 extends tslib_pibase {
 								$formattedValue = 'Red Eye, Auto-Mode, Return light detected';
 								break;
 							default:
-								$formattedValue = 'Unknown' . ': ' . $value;
-								break;
+								$formattedValue = 'Unknown: ' . $value;
 						}
 						break;
 					case 'MeteringMode':
@@ -698,14 +752,13 @@ class tx_genericgallery_pi1 extends tslib_pibase {
 								$formattedValue = 'Other';
 								break;
 							default:
-								$formattedValue = 'Unknown' . ': ' . $value;
-								break;
+								$formattedValue = 'Unknown: ' . $value;
 						}
 						break;
 					case 'ExifVersion':
 						$formattedValue = $value / 100;
 						break;
-					case 'ColorSpace': // ColorSpace
+					case 'ColorSpace':
 						if ($value == 1) {
 							$formattedValue = 'sRGB';
 						} else {
@@ -714,15 +767,14 @@ class tx_genericgallery_pi1 extends tslib_pibase {
 						break;
 					default:
 						$formattedValue = $value;
-						break;
 				}
-				$damArray["exif_" . $key] = $formattedValue;
+				$damArray['exif_' . $key] = $formattedValue;
 			}
 		}
 		// prepare IPTC data
-		if (is_array($metaArray["iptc"])) {
-			foreach ($metaArray["iptc"] as $key => $value) {
-				$damArray["iptc_" . $key] = $value;
+		if (is_array($metaArray['iptc'])) {
+			foreach ($metaArray['iptc'] as $key => $value) {
+				$damArray['iptc_' . $key] = $value;
 			}
 		}
 
@@ -733,12 +785,16 @@ class tx_genericgallery_pi1 extends tslib_pibase {
 	/**
 	 * Function to fetch the template file
 	 *
+	 * @return void
 	 */
-	public function getTemplateFile() {
+	protected function getTemplateFile() {
 		// Get the template
-		$templateFile = (strlen(trim($this->currentConf['template'])) > 0) ? trim($this->currentConf['template']) : "EXT:generic_gallery/res/templates/default.html";
+		$templateFile = (strlen(trim($this->currentConf['template'])) > 0) ? trim($this->currentConf['template']) : 'EXT:generic_gallery/res/templates/default.html';
 		$this->templateHtml = $this->cObj->fileResource($templateFile);
-		if (!$this->templateHtml) $this->handleError('Error while fetching the template file: <em>' . $templateFile . '</em>');
+
+		if (!$this->templateHtml) {
+			$this->handleError('Error while fetching the template file: <em>' . $templateFile . '</em>');
+		}
 	}
 
 	/**
@@ -747,8 +803,10 @@ class tx_genericgallery_pi1 extends tslib_pibase {
 	 * @param string $key cache key
 	 * @param string $identifier unique identifier
 	 * @param array $data your data to store in cache
+	 *
+	 * @return void
 	 */
-	function setCache($key, $identifier, $data) {
+	protected function setCache($key, $identifier, $data) {
 		$cacheIdentifier = $this->extKey . '-' . $identifier;
 		$cacheHash = md5($cacheIdentifier . $key);
 		t3lib_pageSelect::storeHash(
@@ -761,20 +819,23 @@ class tx_genericgallery_pi1 extends tslib_pibase {
 	/**
 	 * Handles error output for frontend and TYPO3 logging
 	 *
-	 * @param    string    Message to output
-	 * @return    void
+	 * @param  string $msg Message to output
 	 * @see    t3lib::devLog()
 	 * @see    t3lib_div::sysLog()
+	 *
+	 * @return    void
 	 */
-	public function handleError($msg) {
+	protected function handleError($msg) {
 		// prepare FE output
-		if ($this->error === false) $this->error = array();
-		$this->error[] = $msg . "<br />";
+		if ($this->error === FALSE) {
+			$this->error = array();
+		}
+		$this->error[] = $msg . '<br />';
 
-		t3lib_div::sysLog($msg, $this->extKey, 3); // error
+		t3lib_div::sysLog($msg, $this->extKey, 3);
 		// write dev log if enabled
 		if ($GLOBALS['TYPO3_CONF_VARS']['SYS']['enable_DLOG']) {
-			t3lib_div::devLog($msg, $this->extKey, 3); // fatal error
+			t3lib_div::devLog($msg, $this->extKey, 3);
 		}
 	}
 }
