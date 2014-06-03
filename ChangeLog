@@ -1,35 +1,40 @@
-2013-03-xx Felix Nagel  <info@felixnagel.com>
+2014-05-xx Felix Nagel  <info@felixnagel.com>
 
-	released v0.3.10 (no changes required)
+	released v0.4.0 (TYPO3 migration required!)
+	* removed: DAM support, now uses FAL
+	* updated: now depends on TYPO3 6.0-6.2
+
+2013-03-12 Felix Nagel  <info@felixnagel.com>
+
 	* fixed: changelog (wrong version number in last release)
-	
+
 2013-03-09 Felix Nagel  <info@felixnagel.com>
 
 	released v0.3.9 (no changes required)
 	* fixed: php warning in in list module
-		
+
 2012-09-06 Felix Nagel  <info@felixnagel.com>
 
 	released v0.3.8 (no changes required)
 	* same version as 0.3.7 due to problems with TER upload
-	
+
 2012-09-06 Felix Nagel  <info@felixnagel.com>
 
 	released v0.3.7 (no changes required)
 	* removed: deprecated functions (TYPO3 6.0.0)
 	* changed: TYPO3 4.7 is now max requirement (because of TYPO3 6.0 and FAL)
-	
+
 2012-08-25 Felix Nagel  <info@felixnagel.com>
 
 	* fixed: exif data wont be displayed when switching to new, recommended EXT:svmetaextract
 	* added: suggest svmetaextract
 	* changed: files and inline code is now added using pageRenderer functions
 	* changed: TYPO3 4.3 is now minimal requirement
-	
+
 2012-08-12 Felix Nagel  <info@felixnagel.com>
 
 	* added: shuffle (random ordering) for images (thanks to Paints Multimedia for sponsoring, http://www.paints.de)
-	
+
 2012-06-04 Felix Nagel  <info@felixnagel.com>
 
 	* fixed: BE search problems due to changes in TYPO3 4.6, for livesearch use gg_pictures and gg_content shortcuts
