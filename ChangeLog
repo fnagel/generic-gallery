@@ -3,6 +3,8 @@
 	released v0.4.0 (TYPO3 migration required!)
 	* removed: DAM support, now uses FAL
 	* updated: now depends on TYPO3 6.0-6.2
+	* improved: small refactoring, CGL and code clean up
+	* updated: documentation
 
 2013-03-12 Felix Nagel  <info@felixnagel.com>
 
