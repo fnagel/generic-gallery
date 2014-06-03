@@ -87,9 +87,9 @@ $TCA['tx_generic_gallery_pictures'] = array(
 			'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
 				'tx_generic_gallery_picture_single',
 				array(
-					'size' => '1',
-					'maxitems' => '1',
-					'minitems' => '1',
+					'size' => 1,
+					'maxitems' => 1,
+					'minitems' => 1,
 				),
 				'jpg,gif,jpeg,png'
 			)

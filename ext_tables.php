@@ -99,9 +99,9 @@ $tempColumns = array(
 		'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
 			'tx_generic_gallery_picture_single',
 			array(
-				'size' => '20',
-				'maxitems' => '1000',
-				'minitems' => '0',
+				'size' => 20,
+				'maxitems' => 1000,
+				'minitems' => 0,
 				'autoSizeMax' => 40,
 			),
 			'jpg,gif,jpeg,png'
