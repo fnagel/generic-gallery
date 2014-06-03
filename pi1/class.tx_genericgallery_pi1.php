@@ -96,11 +96,6 @@ class tx_genericgallery_pi1 extends tslib_pibase {
 		// set localized UID
 		$this->uid = ($this->cObj->data['_LOCALIZED_UID']) ? intval($this->cObj->data['_LOCALIZED_UID']) : intval($this->cObj->data['uid']);
 
-		// table references
-		$this->conf['refTable'] = 'tx_generic_gallery_pictures';
-		$this->conf['refField'] = 'tx_generic_gallery_picture_single';
-		$this->conf['damFields'] = 'tx_dam.*';
-
 		// test if a configuration is present
 		if (!is_array($this->conf['gallery.'])) {
 			$this->handleError('No configuration array found. Please check your TypoScript configuration.');
@@ -109,7 +104,7 @@ class tx_genericgallery_pi1 extends tslib_pibase {
 				$this->handleError('Please choose a gallery type.');
 			} else {
 				// store current gallery configuration
-				foreach ($this->conf['gallery.'] as $configName) {
+				foreach ($this->conf['gallery.'] as $configName => $configArray) {
 					if ($configName == $this->cObj->data['tx_generic_gallery_predefined']) {
 						$this->currentConf = $this->conf['gallery.'][$configName];
 					}
@@ -209,7 +204,7 @@ class tx_genericgallery_pi1 extends tslib_pibase {
 	 * Method to render the first image and JS headerdata
 	 *
 	 * @param $template
-	 * 
+	 *
 	 * @return    array Array with the picture rows
 	 */
 	protected function renderTemplate($template) {
@@ -242,7 +237,6 @@ class tx_genericgallery_pi1 extends tslib_pibase {
 			}
 
 			$contentImages = '';
-			$imageMarkerArray = array();
 			$switchImageMarker = 1;
 			$switchRow = 0;
 			$contentImageArray = array();
@@ -301,12 +295,8 @@ class tx_genericgallery_pi1 extends tslib_pibase {
 		for ($y = 0; $y < count($this->images['files']); $y++) {
 			// Fill marker array
 			$imageMarkerArray[$y] = $this->renderImageMarker($y);
-			if ($this->images['text'][$y]) {
-				$imageMarkerArray[$y]['###TXT###'] = $this->images['text'][$y];
-			} else {
-				$imageMarkerArray[$y]['###TXT###'] = '';
-			}
 			$imageMarkerArray[$y]['###TITLE###'] = $this->images['title'][$y];
+			$imageMarkerArray[$y]['###TXT###'] = $this->images['text'][$y];
 			$imageMarkerArray[$y]['###LINK###'] = $this->images['link'][$y];
 			$imageMarkerArray[$y]['###FILEPATH###'] = $this->images['files'][$y];
 			$imageMarkerArray[$y]['###COUNT###'] = $y + 1;
@@ -392,28 +382,12 @@ class tx_genericgallery_pi1 extends tslib_pibase {
 			}
 		}
 
-		// render DAM marker
-		if (strlen($this->currentConf['damMarker']) > 0) {
-			$damFields = t3lib_div::trimExplode(',', $this->currentConf['damMarker'], TRUE);
-			foreach ($damFields as $damField) {
-				if ($this->images['dam'][$imageIndex][$damField]) {
-					$markerArray['###DAM_' . strtoupper($damField) . '###'] = $this->images['dam'][$imageIndex][$damField];
-				} else {
-					$markerArray['###DAM_' . strtoupper($damField) . '###'] = '';
-				}
-			}
-		}
-
 		// add file path
 		$imgConf['file'] = $this->images['files'][$imageIndex];
 
 		if (is_array($this->currentConf['image.'])) {
 			// IMG conf
 			$imgConf['file.'] = $this->currentConf['image.'];
-			// busy noggin framework fallback
-			if ($imgConf['file.']['maxW'] == 'templavoila' && $GLOBALS['TSFE']->register['maxImageWidth']) {
-				$imgConf['file.']['maxW'] = $GLOBALS['TSFE']->register['maxImageWidth'];
-			}
 			$markerArray['###IMAGE###'] = $this->cObj->IMG_RESOURCE($imgConf);
 
 			// get actually image size
@@ -435,10 +409,6 @@ class tx_genericgallery_pi1 extends tslib_pibase {
 			foreach ($this->currentConf['thumb.'] as $index => $confArray) {
 				$imgConf['file.'] = $confArray;
 				$indexPic = substr($index, 0, -1);
-				// busy noggin framework fallback
-				if ($imgConf['file.']['maxW'] == 'templavoila' && $GLOBALS['TSFE']->register['maxImageWidth']) {
-					$imgConf['file.']['maxW'] = $GLOBALS['TSFE']->register['maxImageWidth'];
-				}
 				$markerArray['###THUMB_' . $indexPic . '###'] = $this->cObj->IMG_RESOURCE($imgConf);
 
 				$imageSizeArray = $GLOBALS['TSFE']->lastImgResourceInfo;
@@ -454,30 +424,29 @@ class tx_genericgallery_pi1 extends tslib_pibase {
 	/**
 	 * @param $imgUid
 	 *
-	 * @return array|bool
+	 * @return array
 	 */
 	protected function getDAMImageData($imgUid) {
-		$damArray = array();
-		$damArray['files'] = array();
-		$damArray['rows'] = array();
+		$data = array();
 
-		$damFiles = tx_dam_db::getReferencedFiles($this->conf['refTable'], intval($imgUid), $this->conf['refField'],'', $this->conf['damFields']);
+		/* @var $fileRepository TYPO3\CMS\Core\Resource\FileRepository */
+		$fileRepository = t3lib_div::makeInstance('TYPO3\\CMS\\Core\\Resource\\FileRepository');
+		$fileObjects = $fileRepository->findByRelation('tx_generic_gallery_pictures', 'tx_generic_gallery_picture_single', $imgUid);
 
-		// check if our row is valid
-		if (isset($damFiles['files']) && count($damFiles['files']) > 0) {
-			$damArray['files'] = current($damFiles['files']);
-			$damArray['rows'] = current($damFiles['rows']);
-
-			return $damArray;
+		if (count($fileObjects) > 0) {
+			/* @var $file TYPO3\CMS\Core\Resource\FileReference */
+			$file = current($fileObjects);
+			$data['files'] = $file->getPublicUrl();
+			$data['dam'] = $file->getOriginalFile()->getProperties();
 		}
 
-		return FALSE;
+		return $data;
 	}
 
 	/**
 	 * Method to get the image data from one FCE
 	 *
-	 * @return boolean|array Array with the picture rows
+	 * @return array Array with the picture rows
 	 */
 	protected function getSigleImages() {
 		$damArray = array();
@@ -485,7 +454,7 @@ class tx_genericgallery_pi1 extends tslib_pibase {
 		$damArray['dam'] = array();
 
 		$select = 'uid, pid, title, link, images, contents';
-		$table = $this->conf['refTable'];
+		$table = 'tx_generic_gallery_pictures';
 		$where = 'tt_content_id = ' . $this->uid;
 		$where .= $GLOBALS['TSFE']->sys_page->enableFields($table);
 		$order = 'sorting';
@@ -500,60 +469,42 @@ class tx_genericgallery_pi1 extends tslib_pibase {
 					'parameter' => $row['link'],
 					'useCacheHash' => TRUE
 				);
-				$helperArray = $this->getDAMImageData($row['uid']);
-				$damArray['files'][] = $helperArray['files'];
+				$data = $this->getDAMImageData($row['uid']);
+				$damArray['files'][] = $data['files'];
+				$damArray['dam'][] = $data['dam'];
 				$damArray['text'][] = $this->getDescription($row['uid']);
 				$damArray['title'][] = htmlspecialchars($row['title']);
 				$damArray['link'][] = $this->cObj->typoLink_URL($linkConf);
-
-				// prepare meta data if needed
-				if (strlen($helperArray['rows']['meta']) > 0 && t3lib_extMgm::isLoaded('cc_metaexif')) {
-					$damArray['dam'][] = $this->prepareMetaData($helperArray['rows']);
-				} else {
-					$damArray['dam'][] = $helperArray['rows'];
-				}
 			}
 		}
 
 		$GLOBALS['TYPO3_DB']->sql_free_result($res);
 
-		if (isset($damArray['files']) && count($damArray['files']) > 0) {
-			return $damArray;
-		} else {
-			return TRUE;
-		}
+		return $damArray;
 	}
 
 	/**
-	 * @return array|bool
+	 * @return array
 	 */
 	protected function getMultipleImages() {
 		$damArray = array();
 		$damArray['files'] = array();
 		$damArray['dam'] = array();
 
-		$damFiles = tx_dam_db::getReferencedFiles('tt_content', $this->uid, $this->conf['refField'], '', $this->conf['damFields']);
+		/* @var $fileRepository TYPO3\CMS\Core\Resource\FileRepository */
+		$fileRepository = t3lib_div::makeInstance('TYPO3\\CMS\\Core\\Resource\\FileRepository');
+		$fileObjects = $fileRepository->findByRelation('tt_content', 'tx_generic_gallery_picture_single', $this->uid);
 
-		// check if our row is valid
-		if (isset($damFiles['files']) && count($damFiles['files']) > 0) {
-			foreach ($damFiles['files'] as $index => $file) {
-				$damArray['files'][] = $file;
-
-				// prepare meta data if needed
-				if (
-					strlen($damFiles['rows'][$index]['meta']) > 0 &&
-					(t3lib_extMgm::isLoaded('cc_metaexif') || t3lib_extMgm::isLoaded('svmetaextract'))
-				) {
-					$damArray['dam'][] = $this->prepareMetaData($damFiles['rows'][$index]);
-				} else {
-					$damArray['dam'][] = $damFiles['rows'][$index];
-				}
-			}
-
-			return $damArray;
+		/* @var $file TYPO3\CMS\Core\Resource\FileReference */
+		foreach ($fileObjects as $file) {
+			$damArray['files'][] = $file->getPublicUrl();
+			$damArray['dam'][] = $file->getOriginalFile()->getProperties();
+			$damArray['title'][] = $file->getTitle();
+			$damArray['text'][] = $file->getDescription();
+			$damArray['link'][] = '';
 		}
 
-		return FALSE;
+		return $damArray;
 	}
 
 	/**
@@ -590,15 +541,8 @@ class tx_genericgallery_pi1 extends tslib_pibase {
 				if (count($coordsArray) && $coordsArray[0] && $coordsArray[1]) {
 					// get width of the rte
 					$width = '';
-					if (t3lib_div::compat_version('4.6')) {
-						if (t3lib_utility_Math::convertToPositiveInteger($row['width'])) {
-							$width = 'width: ' . $row['width'] . 'px; ';
-						}
-					} else {
-						// TODO remove this in later versions
-						if (t3lib_div::intval_positive($row['width'])) {
-							$width = 'width: ' . $row['width'] . 'px; ';
-						}
+					if (strlen($row['width']) > 0) {
+						$width = 'width: ' . (int) $row['width'] . 'px; ';
 					}
 					$content .= '<div style="position: absolute; ' . $width . 'top: ' . $coordsArray[0] . 'px; left: ' . $coordsArray[1] . 'px;">' . $parsedBodyText . '</div>';
 				} else {
@@ -626,161 +570,6 @@ class tx_genericgallery_pi1 extends tslib_pibase {
 
 		return $subpartArray;
 	}
-
-
-	/**
-	 * Function to prepare the EXIF and IPTC meta data
-	 * Exif data converting partly taken from:
-	 * http://www.zenphoto.org/trac/browser/tags/1.4.0.3/zp-core/exif
-	 *
-	 */
-	protected function prepareMetaData($damArray) {
-		$metaArray = t3lib_div::xml2array($damArray['meta']);
-
-		// prepare EXIF data
-		if (is_array($metaArray['exif'])) {
-			foreach ($metaArray['exif'] as $key => $value) {
-				// format value if necessary
-				switch ($key) {
-					case 'DateTime':
-					case 'DateTimeOriginal':
-					case 'DateTimeDigitized':
-						$formattedValue = strftime(trim($this->currentConf['dateFormat']), strtotime($value));
-						break;
-					case 'ApertureValue':
-					case 'MaxApertureValue':
-						$parts = explode('/', $value);
-						$formattedValue = 'f/' . round(exp(($parts[0] / $parts[1]) * 0.51 * log(2)), 1);
-						break;
-					case 'ShutterSpeedValue':
-						$parts = explode('/', $value);
-						$formattedValue = '1/' . (int)pow(2, $parts[0] / $parts[1]);
-						break;
-					case 'Flash':
-						switch ($value) {
-							case 0:
-								$formattedValue = 'No Flash';
-								break;
-							case 1:
-								$formattedValue = 'Flash';
-								break;
-							case 5:
-								$formattedValue = 'Flash, strobe return light not detected';
-								break;
-							case 7:
-								$formattedValue = 'Flash, strobe return light detected';
-								break;
-							case 9:
-								$formattedValue = 'Compulsory Flash';
-								break;
-							case 13:
-								$formattedValue = 'Compulsory Flash, Return light not detected';
-								break;
-							case 15:
-								$formattedValue = 'Compulsory Flash, Return light detected';
-								break;
-							case 16:
-								$formattedValue = 'No Flash';
-								break;
-							case 24:
-								$formattedValue = 'No Flash';
-								break;
-							case 25:
-								$formattedValue = 'Flash, Auto-Mode';
-								break;
-							case 29:
-								$formattedValue = 'Flash, Auto-Mode, Return light not detected';
-								break;
-							case 31:
-								$formattedValue = 'Flash, Auto-Mode, Return light detected';
-								break;
-							case 32:
-								$formattedValue = 'No Flash';
-								break;
-							case 65:
-								$formattedValue = 'Red Eye';
-								break;
-							case 69:
-								$formattedValue = 'Red Eye, Return light not detected';
-								break;
-							case 71:
-								$formattedValue = 'Red Eye, Return light detected';
-								break;
-							case 73:
-								$formattedValue = 'Red Eye, Compulsory Flash';
-								break;
-							case 77:
-								$formattedValue = 'Red Eye, Compulsory Flash, Return light not detected';
-								break;
-							case 79:
-								$formattedValue = 'Red Eye, Compulsory Flash, Return light detected';
-								break;
-							case 89:
-								$formattedValue = 'Red Eye, Auto-Mode';
-								break;
-							case 93:
-								$formattedValue = 'Red Eye, Auto-Mode, Return light not detected';
-								break;
-							case 95:
-								$formattedValue = 'Red Eye, Auto-Mode, Return light detected';
-								break;
-							default:
-								$formattedValue = 'Unknown: ' . $value;
-						}
-						break;
-					case 'MeteringMode':
-						switch ($value) {
-							case 1:
-								$formattedValue = 'Average';
-								break;
-							case 2:
-								$formattedValue = 'Center Weighted Average';
-								break;
-							case 3:
-								$formattedValue = 'Spot';
-								break;
-							case 4:
-								$formattedValue = 'Multi-Spot';
-								break;
-							case 5:
-								$formattedValue = 'Pattern';
-								break;
-							case 6:
-								$formattedValue = 'Partial';
-								break;
-							case 255:
-								$formattedValue = 'Other';
-								break;
-							default:
-								$formattedValue = 'Unknown: ' . $value;
-						}
-						break;
-					case 'ExifVersion':
-						$formattedValue = $value / 100;
-						break;
-					case 'ColorSpace':
-						if ($value == 1) {
-							$formattedValue = 'sRGB';
-						} else {
-							$formattedValue = 'Uncalibrated';
-						}
-						break;
-					default:
-						$formattedValue = $value;
-				}
-				$damArray['exif_' . $key] = $formattedValue;
-			}
-		}
-		// prepare IPTC data
-		if (is_array($metaArray['iptc'])) {
-			foreach ($metaArray['iptc'] as $key => $value) {
-				$damArray['iptc_' . $key] = $value;
-			}
-		}
-
-		return $damArray;
-	}
-
 
 	/**
 	 * Function to fetch the template file
