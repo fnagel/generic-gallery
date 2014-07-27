@@ -52,10 +52,6 @@ class tx_genericgallery_cms_layout extends tslib_pibase {
 	 */
 	public function getExtensionSummary($params, &$pObj) {
 		$content = '';
-		$filesArray = array(
-			'files' => array(),
-			'rows' => array()
-		);
 
 		if ($params['row']['list_type'] == 'generic_gallery_pi1') {
 
@@ -113,9 +109,11 @@ class tx_genericgallery_cms_layout extends tslib_pibase {
 	}
 
 	/**
-	 * Returns a linked image-tag for thumbnail(s)/fileicons/truetype-font-previews from a database row with a list of image files in a field
-	 * All $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'] extension are made to thumbnails + ttf file (renders font-example)
-	 * Thumbsnails are linked to the show_item.php script which will display further details.
+	 * Returns a linked image-tag for thumbnail(s)/fileicons/truetype-font-previews
+	 * from a database row with a list of image files in a field All
+	 * $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'] extension are made to
+	 * thumbnails + ttf file (renders font-example) Thumbsnails are linked to the
+	 * show_item.php script which will display further details.
 	 *
 	 * @param array $row Row is the database row from the table, $table.
 	 * @param string $table Table name for $row (present in TCA)
@@ -146,11 +144,11 @@ class tx_genericgallery_cms_layout extends tslib_pibase {
 			$referenceUids = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows(
 				'uid',
 				'sys_file_reference',
-				'tablenames = ' . $GLOBALS['TYPO3_DB']->fullQuoteStr($table, 'sys_file_reference')
-				. ' AND fieldname=' . $GLOBALS['TYPO3_DB']->fullQuoteStr($fieldname, 'sys_file_reference')
-				. ' AND uid_foreign=' . (int)$row['uid']
-				. TYPO3\CMS\Backend\Utility\BackendUtility::deleteClause('sys_file_reference')
-				. TYPO3\CMS\Backend\Utility\BackendUtility::versioningPlaceholderClause('sys_file_reference'),
+				'tablenames = ' . $GLOBALS['TYPO3_DB']->fullQuoteStr($table, 'sys_file_reference') .
+				' AND fieldname=' . $GLOBALS['TYPO3_DB']->fullQuoteStr($fieldname, 'sys_file_reference') .
+				' AND uid_foreign=' . (int)$row['uid'] .
+				TYPO3\CMS\Backend\Utility\BackendUtility::deleteClause('sys_file_reference') .
+				TYPO3\CMS\Backend\Utility\BackendUtility::versioningPlaceholderClause('sys_file_reference'),
 				'',
 				$sortingField
 			);
@@ -165,7 +163,10 @@ class tx_genericgallery_cms_layout extends tslib_pibase {
 				}
 
 				// Web image
-				if (TYPO3\CMS\Core\Utility\GeneralUtility::inList($GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'], $fileReferenceObject->getExtension())) {
+				if (TYPO3\CMS\Core\Utility\GeneralUtility::inList(
+					$GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'],
+					$fileReferenceObject->getExtension())
+				) {
 					$imageUrl = $fileObject->process(TYPO3\CMS\Core\Resource\ProcessedFile::CONTEXT_IMAGEPREVIEW, array(
 						'width' => $sizeParts[0],
 						'height' => $sizeParts[1]
@@ -173,7 +174,10 @@ class tx_genericgallery_cms_layout extends tslib_pibase {
 					$imgTag = '<img src="' . $imageUrl . '" alt="' . htmlspecialchars($fileReferenceObject->getName()) . '" />';
 				} else {
 					// Icon
-					$imgTag = TYPO3\CMS\Backend\Utility\IconUtility::getSpriteIconForResource($fileObject, array('title' => $fileObject->getName()));
+					$imgTag = TYPO3\CMS\Backend\Utility\IconUtility::getSpriteIconForResource(
+						$fileObject,
+						array('title' => $fileObject->getName())
+					);
 				}
 				if ($linkInfoPopup) {
 					$onClick = 'top.launchView(\'_FILE\',\'' . $fileObject->getUid() . '\',\'' . $backPath . '\'); return false;';
