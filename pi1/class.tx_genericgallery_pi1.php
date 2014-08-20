@@ -444,6 +444,32 @@ class tx_genericgallery_pi1 extends tslib_pibase {
 	}
 
 	/**
+	 * @param array $data
+	 *
+	 * @return array
+	 */
+	protected function prepareMetaData($data) {
+		foreach ($data as $key => $value) {
+			switch($key) {
+				case 'flash':
+					if (isset($GLOBALS['TCA']['sys_file_metadata']['columns']['flash']['config']['items'])) {
+						$items = (array) $GLOBALS['TCA']['sys_file_metadata']['columns']['flash']['config']['items'];
+						foreach ($items as $item) {
+							if ($item[1] === $value) {
+								$data[$key] = $item[0];
+							}
+						}
+					}
+					break;
+
+				default:
+			}
+		}
+
+		return $data;
+	}
+
+	/**
 	 * Method to get the image data from one FCE
 	 *
 	 * @return array Array with the picture rows
@@ -471,7 +497,7 @@ class tx_genericgallery_pi1 extends tslib_pibase {
 				);
 				$data = $this->getDAMImageData($row['uid']);
 				$damArray['files'][] = $data['files'];
-				$damArray['dam'][] = $data['dam'];
+				$damArray['dam'][] = $this->prepareMetaData($data['dam']);
 				$damArray['text'][] = $this->getDescription($row['uid']);
 				$damArray['title'][] = htmlspecialchars($row['title']);
 				$damArray['link'][] = $this->cObj->typoLink_URL($linkConf);
@@ -498,7 +524,7 @@ class tx_genericgallery_pi1 extends tslib_pibase {
 		/* @var $file TYPO3\CMS\Core\Resource\FileReference */
 		foreach ($fileObjects as $file) {
 			$damArray['files'][] = $file->getPublicUrl();
-			$damArray['dam'][] = $file->getOriginalFile()->getProperties();
+			$damArray['dam'][] = $this->prepareMetaData($file->getOriginalFile()->getProperties());
 			$damArray['title'][] = $file->getTitle();
 			$damArray['text'][] = $file->getDescription();
 			$damArray['link'][] = '';
