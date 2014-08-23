@@ -38,7 +38,7 @@ class tx_genericgallery_ajax {
 	/**
 	 * Initializes the instance of this class.
 	 *
-	 * @return    void
+	 * @return void
 	 */
 	public function __construct() {
 		if (t3lib_div::compat_version('4.6')) {
