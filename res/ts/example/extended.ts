@@ -6,22 +6,30 @@ plugin.tx_genericgallery_pi1 {
 			name = Bildergalerie Test
 			template = EXT:generic_gallery/res/templates/example/extended.html
 			codeToFooter = 0
-			
-			# define marker, all DAM fields available, prefix IMAGE_ neded, please note predefined markers (IMAGE_WIDTH, IMAGE_HEIGHT)
+
+			# define marker, all FAL fields available, prefix IMAGE_ neded, please note predefined markers (IMAGE_WIDTH, IMAGE_HEIGHT)
 			marker {
 				# multiple fields possible as backfall
+				IMAGE_ALT = alt_text // caption // title
+				IMAGE_TITLE = caption // alt_text // title
 				IMAGE_DESCRIPTION = description // caption // alt_text // title
-				IMAGE_ALT = alt_text // caption // alt_text // title
-				IMAGE_EXIF_MODEL = exif_Model
-				IMAGE_EXIF_DATE = exif_DateTime
-				IMAGE_EXIF_VERSCHLUSS = exif_ExposureTime
-				IMAGE_EXIF_ISO = exif_ISOSpeedRatings
-				IMAGE_EXIF_BLENDE = exif_ApertureValue
+
+				IMAGE_CREATOR = creator
+				IMAGE_PUBLISHER = publisher
+				IMAGE_COPY = copyright
+
+				IMAGE_EXIF_MODEL = camera_model
+				IMAGE_EXIF_DATE = crdate
+				IMAGE_EXIF_BRENNWEITE = focal_length
+				IMAGE_EXIF_VERSCHLUSS = shutter_speed_value
+				IMAGE_EXIF_ISO = iso_speed_ratings
+				IMAGE_EXIF_BLENDE = aperture_value
+				IMAGE_EXIF_FLASH = flash
 			}
-			
+
 			ajax = 1
 			dateFormat = %d.%m.%Y %H:%M
-			
+
 			image {
 				maxW = 1280
 				maxH = 800
@@ -39,26 +47,26 @@ plugin.tx_genericgallery_pi1 {
 			range {
 				content = 1-1000
 			}
-			
-				
+
+
 			custom {
 				1 {
-					marker = ###FIRST_IMAGE###	
+					marker = ###FIRST_IMAGE###
 					index = 1
 					content = ###IMAGE###
 				}
 				2 {
-					marker = ###FIRST_IMAGE_HEIGHT###		
+					marker = ###FIRST_IMAGE_HEIGHT###
 					index = 1
 					content = ###THUMB_1_HEIGHT###
 				}
 				3 {
-					marker = ###FIRST_IMAGE_DESCRIPTION###	
+					marker = ###FIRST_IMAGE_DESCRIPTION###
 					index = 1
 					content = ###IMAGE_DESCRIPTION###
 				}
 				4 {
-					marker = ###FIRST_IMAGE_THUMB_1###		
+					marker = ###FIRST_IMAGE_THUMB_1###
 					index = 1
 					content = ###THUMB_1###
 				}

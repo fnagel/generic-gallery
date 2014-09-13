@@ -7,25 +7,25 @@
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
 		<style type="text/css">
 			.tx-genericgallery-pi1 div#generic_gallery_trigger img { float: left; margin: 0 10px 10px 0;}
-		</style>		
+		</style>
 	<!-- ###TEMPLATE_FILES### end -->
-	
+
 		<script type="text/javascript">
 	<!-- ###TEMPLATE_CODE### begin -->
-		$(function() {	
+		$(function() {
 			var uid = ###UID###;
 			var wrapper = $("#c" + uid + " #generic_gallery_trigger");
-			wrapper.find("a").click(function(){				
+			wrapper.find("a").click(function(){
 				$.getJSON('index.php?eID=generic_gallery&uid=' + uid, function(data) {
 					var items = [];
 					$.each(data, function(index) {
-						items.push('<img alt="' + data[index]['###DAM_ALT###'] + '" src="' + data[index]['###IMAGE###'] + '" />');
+						items.push('<img alt="' + data[index]['###IMAGE_ALT###'] + '" src="' + data[index]['###IMAGE###'] + '" />');
 					});
-					wrapper.html(items.join(''));				
+					wrapper.html(items.join(''));
 				});
 				return false;
 			});
-		});	
+		});
 	<!-- ###TEMPLATE_CODE### end -->
 	</script>
 </head>

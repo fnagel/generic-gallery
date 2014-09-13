@@ -3,29 +3,29 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>generic gallery default template file</title>
-	
+
 	<!-- ###TEMPLATE_FILES### begin -->
 		<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
-		
-		<script type="text/javascript" src="typo3conf/ext/generic_gallery/res/js/ui.ariaLightbox.js"></script>		
+
+		<script type="text/javascript" src="typo3conf/ext/generic_gallery/res/js/ui.ariaLightbox.js"></script>
 		<link href="typo3conf/ext/generic_gallery/res/css/lightbox.css" rel="stylesheet" type="text/css" />
 		<style type="text/css">
 		#generic_gallery .ui-helper-clearfix { margin: 0 0 40px 0; }
 		#generic_gallery div a { float: left; margin: 10px;}
 		#generic_gallery div a.first { margin: 10px 10px 10px 0;}
 		#generic_gallery div a.last { margin: 10px 0 10px 10px;}
-		</style>		
+		</style>
 	<!-- ###TEMPLATE_FILES### end -->
-	
+
 		<script type="text/javascript">
 	<!-- ###TEMPLATE_CODE### begin -->
-		$(function() {	
+		$(function() {
 			$("#generic_gallery").ariaLightbox({
-				imageArray: "a.lightboxGallery"			
+				imageArray: "a.lightboxGallery"
 			});
-		});				
+		});
 	<!-- ###TEMPLATE_CODE### end -->
 	</script>
 </head>
@@ -36,27 +36,27 @@
 	<div id="generic_gallery">
 	<!-- ###ROW### begin -->
 		<div class="ui-helper-clearfix">
-		
+
 		<!-- ###IMAGE_1### begin -->
 			<a href="###IMAGE###" class="lightboxGallery first">
-				<img src="###THUMB_1###" alt="###DAM_TITLE###" title="###DAM_DESCRIPTION###" />
+				<img src="###THUMB_1###" alt="###IMAGE_TITLE###" title="###IMAGE_DESCRIPTION###" />
 			</a>
-		<!-- ###IMAGE_1### end -->		
-		
+		<!-- ###IMAGE_1### end -->
+
 		<!-- ###IMAGE_2### begin -->
 			<a href="###IMAGE###" class="lightboxGallery">
-				<img src="###THUMB_1###" alt="###DAM_TITLE###" title="###DAM_DESCRIPTION###" />
+				<img src="###THUMB_1###" alt="###IMAGE_TITLE###" title="###IMAGE_DESCRIPTION###" />
 			</a>
-		<!-- ###IMAGE_2### end -->		
-		
+		<!-- ###IMAGE_2### end -->
+
 		<!-- ###IMAGE_3### begin -->
 			<a href="###IMAGE###" class="lightboxGallery last">
-				<img src="###THUMB_1###" alt="###DAM_TITLE###" title="###DAM_DESCRIPTION###" />
+				<img src="###THUMB_1###" alt="###IMAGE_TITLE###" title="###IMAGE_DESCRIPTION###" />
 			</a>
-		<!-- ###IMAGE_3### end -->		
-		
+		<!-- ###IMAGE_3### end -->
+
 		</div>
-	<!-- ###ROW### end -->		
+	<!-- ###ROW### end -->
 	</div>
 <!-- ###TEMPLATE_CONTENT### end -->
 
