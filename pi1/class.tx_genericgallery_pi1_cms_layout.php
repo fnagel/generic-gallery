@@ -2,7 +2,7 @@
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2010 Felix Nagel <info@felixnagel.com>
+ *  (c) 2010-2014 Felix Nagel <info@felixnagel.com>
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -33,6 +33,8 @@ class tx_genericgallery_cms_layout extends tslib_pibase {
 
 	/**
 	 * Returns picture slide string
+	 *
+	 * @return void
 	 */
 	public function getPictureTitle(&$params, $pObj) {
 		if ($params['table'] === 'tx_generic_gallery_pictures') {
@@ -58,7 +60,7 @@ class tx_genericgallery_cms_layout extends tslib_pibase {
 			// get Extension Manager config
 			$extensionConfiguration = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['generic_gallery']);
 
-			if ($extensionConfiguration['enable_cms_layout']) {
+			if (intval($extensionConfiguration['enable_cms_layout']) !== 1) {
 				return '';
 			}
 
@@ -89,7 +91,7 @@ class tx_genericgallery_cms_layout extends tslib_pibase {
 				$limit = '';
 				$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table, $where, $group, $order, $limit);
 
-				while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
+				while (($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))) {
 					if (is_array($row)) {
 						$content .= $this->thumbCode(
 							$row,
@@ -131,7 +133,7 @@ class tx_genericgallery_cms_layout extends tslib_pibase {
 		$tcaConfig = $GLOBALS['TCA'][$table]['columns'][$field]['config'];
 		// Check and parse the size parameter
 		$sizeParts = array(64, 64);
-		if ($size = trim($size)) {
+		if (($size = trim($size))) {
 			$sizeParts = explode('x', $size . 'x' . $size);
 			if (!(int)$sizeParts[0]) {
 				$size = '';
