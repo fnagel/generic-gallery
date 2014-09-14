@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2014-09-14T21:19:47Z" product-name="gg_extbase">
+		<header/>
+		<body>
+			<trans-unit id="title.description">
+				<source>title</source>
+			</trans-unit>
+			<trans-unit id="link.description">
+				<source>link</source>
+			</trans-unit>
+			<trans-unit id="image.description">
+				<source>image</source>
+			</trans-unit>
+			<trans-unit id="text_items.description">
+				<source>textItems</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
