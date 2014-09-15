@@ -69,7 +69,7 @@
                     "addDeletedField": true,
                     "addHiddenField": true,
                     "addStarttimeEndtimeFields": true,
-                    "aggregateRoot": false,
+                    "aggregateRoot": true,
                     "categorizable": false,
                     "description": "",
                     "mapToTable": "",
@@ -258,7 +258,7 @@
         }
     ],
     "log": {
-        "last_modified": "2014-09-14 09:19",
+        "last_modified": "2014-09-16 12:17",
         "extension_builder_version": "6.2.0",
         "be_user": "Felix Nagel (3)"
     }
