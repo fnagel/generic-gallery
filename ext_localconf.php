@@ -7,12 +7,10 @@ if (!defined('TYPO3_MODE')) {
 	'TYPO3.' . $_EXTKEY,
 	'Gallery',
 	array(
-		'GalleryCollection' => 'list, show',
-		
+		'GalleryCollection' => 'show',
 	),
 	// non-cacheable actions
 	array(
 		'GalleryCollection' => '',
-		
 	)
 );

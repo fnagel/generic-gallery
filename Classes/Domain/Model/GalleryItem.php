@@ -49,7 +49,7 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * image
 	 *
-	 * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
+	 * @var \TYPO3\CMS\Core\Resource\FileInterface
 	 */
 	protected $image = NULL;
 
@@ -110,10 +110,10 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the image
 	 *
-	 * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $image
+	 * @param \TYPO3\CMS\Core\Resource\FileInterface $image
 	 * @return void
 	 */
-	public function setImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $image) {
+	public function setImage(\TYPO3\CMS\Core\Resource\FileInterface $image) {
 		$this->image = $image;
 	}
 

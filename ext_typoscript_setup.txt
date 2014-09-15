@@ -1,0 +1,36 @@
+# table & field mapping
+config.tx_extbase {
+    persistence {
+        classes {
+            \TYPO3\GgExtbase\Domain\Model\GalleryItem {
+                mapping {
+                    tableName = tx_generic_gallery_pictures
+					columns {
+						sorting.mapOnProperty = sorting
+						tstamp.mapOnProperty = tstamp
+						deleted.mapOnProperty = deleted
+						hidden.mapOnProperty = hidden
+						title.mapOnProperty = title
+						link.mapOnProperty = link
+						images.mapOnProperty = image
+						contents.mapOnProperty = textItems
+					}
+                }
+            }
+            \TYPO3\GgExtbase\Domain\Model\TextItem {
+                mapping {
+                    tableName = tx_generic_gallery_content
+					columns {
+						sorting.mapOnProperty = sorting
+						tstamp.mapOnProperty = tstamp
+						deleted.mapOnProperty = deleted
+						hidden.mapOnProperty = hidden
+						bodytext.mapOnProperty = bodytext
+						position.mapOnProperty = position
+						width.mapOnProperty = width
+					}
+                }
+            }
+    	}
+    }
+}

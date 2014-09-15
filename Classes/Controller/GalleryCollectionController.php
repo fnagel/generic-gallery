@@ -1,6 +1,6 @@
 <?php
-namespace TYPO3\GgExtbase\Controller;
 
+namespace TYPO3\GgExtbase\Controller;
 
 /***************************************************************
  *
@@ -27,37 +27,148 @@ namespace TYPO3\GgExtbase\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use \TYPO3\CMS\Extbase\Persistence\ObjectStorage,
+	\TYPO3\GgExtbase\Domain\Model\GalleryItem;
+
 /**
  * GalleryCollectionController
  */
 class GalleryCollectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
 
-	/**
-	 * galleryCollectionRepository
-	 *
-	 * @var \TYPO3\GgExtbase\Domain\Repository\GalleryCollectionRepository
-	 * @inject
-	 */
-	protected $galleryCollectionRepository = NULL;
+	protected $cObjData = array();
+
+	protected $gallery = NULL;
 
 	/**
-	 * action list
+	 * File repository
 	 *
-	 * @return void
+	 * @inject
+	 *
+	 * @var \TYPO3\CMS\Core\Resource\FileRepository
 	 */
-	public function listAction() {
-		$galleryCollections = $this->galleryCollectionRepository->findAll();
-		$this->view->assign('galleryCollections', $galleryCollections);
+	protected $fileRepository = NULL;
+
+
+	/**
+	 * Construct class
+	 *
+	 *
+	 * @return \TYPO3\GgExtbase\Domain\Model\GalleryCollection
+	 */
+	public function __construct() {
+		$this->gallery = new GalleryCollection();
+	}
+
+	protected function initializeAction() {
+		$this->cObjData = $this->configurationManager->getContentObject()->data;
+
+		$this->uid = ($this->cObjData['_LOCALIZED_UID']) ? $this->cObjData['_LOCALIZED_UID'] : intval($this->cObjData['uid']);
+		$this->getItems();
+	}
+
+	protected function getGalleryMode() {
+		if ($this->cObjData['tx_generic_gallery_items']) {
+			return 'items';
+		}
+
+		if ($this->cObjData['tx_generic_gallery_images']) {
+			return 'images';
+		}
+
+		if ($this->cObjData['tx_generic_gallery_collection']) {
+			return 'collaction';
+		}
+
+		return '';
+	}
+
+	protected function getItems() {
+
+		switch($this->getGalleryMode()) {
+			case 'items':
+				$this->gallery->addAll($this->getSigleImages());
+				break;
+
+			case 'images':
+				$this->gallery->addAll($this->getMultipleImages());
+				break;
+
+			case 'collaction':
+				$this->gallery->addAll();
+				break;
+
+			default:
+				throw new \Exception('Gallery mode undefined.');
+		}
 	}
 
 	/**
-	 * action show
+	 * Method to get the image data from one FCE
 	 *
-	 * @param \TYPO3\GgExtbase\Domain\Model\GalleryCollection $galleryCollection
+	 * @return array Array with the picture rows
+	 */
+	protected function getSigleImages() {
+		/* @var $fileRepository TYPO3\CMS\Core\Resource\FileRepository */
+		$fileRepository = t3lib_div::makeInstance('TYPO3\\CMS\\Core\\Resource\\FileRepository');
+		$fileObjects = $fileRepository->findByRelation('tx_generic_gallery_pictures', 'tx_generic_gallery_picture_single', $imgUid);
+
+		$item = new GalleryItem();
+
+		/* @var $object \TYPO3\CMS\Core\Resource\FileReference */
+		$item->setImage($object);
+		$item->setTitle($object->getTitle());
+		$item->setLink($object->getPublicUrl());
+
+		$this->items->attach($item);
+
+		$data = array();
+		$data['files'] = array();
+		$data['dam'] = array();
+
+		$select = 'uid, pid, title, link, images, contents';
+		$table = 'tx_generic_gallery_pictures';
+		$where = 'tt_content_id = ' . $this->uid;
+		$where .= $GLOBALS['TSFE']->sys_page->enableFields($table);
+		$order = 'sorting';
+		$group = '';
+		$limit = '';
+		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table, $where, $group, $order, $limit);
+
+		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
+			if (is_array($row)) {
+				// make typolink
+				$linkConf = array(
+					'parameter' => $row['link'],
+					'useCacheHash' => TRUE
+				);
+				$data = $this->getDAMImageData($row['uid']);
+				$damArray['files'][] = $data['files'];
+				$damArray['dam'][] = $this->prepareMetaData($data['dam']);
+				$damArray['text'][] = $this->getDescription($row['uid']);
+				$damArray['title'][] = htmlspecialchars($row['title']);
+				$damArray['link'][] = $this->cObj->typoLink_URL($linkConf);
+			}
+		}
+
+		$GLOBALS['TYPO3_DB']->sql_free_result($res);
+
+		return $damArray;
+	}
+
+	/**
+	 * @return array
+	 */
+	protected function getMultipleImages() {
+		return $this->fileRepository->findByRelation('tt_content', 'tx_generic_gallery_picture_single', $this->uid);
+	}
+
+	/**
+	 * Show gallery
+	 *
 	 * @return void
 	 */
-	public function showAction(\TYPO3\GgExtbase\Domain\Model\GalleryCollection $galleryCollection) {
-		$this->view->assign('galleryCollection', $galleryCollection);
+	public function showAction() {
+		$this->view->assign('gallery', $this->gallery);
 	}
 
 }
