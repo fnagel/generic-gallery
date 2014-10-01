@@ -152,7 +152,8 @@ $tempColumns = array(
 				'collapseAll' => 1,
 				'expandSingle' => 1,
 			),
-			'maxitems' => 5000,
+			'maxitems' => 1000,
+			'minitems' => 0,
 		)
 	),
 
@@ -164,7 +165,7 @@ $tempColumns = array(
 			'tx_generic_gallery_picture_single',
 			array(
 				'size' => 20,
-				'maxitems' => 1000,
+				'maxitems' => 2000,
 				'minitems' => 0,
 				'autoSizeMax' => 40,
 			),
@@ -179,13 +180,12 @@ $tempColumns = array(
 		'config' => Array(
 			'type' => 'inline',
 			'foreign_table' => 'sys_file_collection',
-			'foreign_field' => 'uid',
 			'appearance' => Array(
-				'useSortable' => 1,
-				'collapseAll' => 1,
+				'collapseAll' => 0,
 				'expandSingle' => 1,
 			),
 			'maxitems' => 1,
+			'minitems' => 0,
 		)
 	),
 );
