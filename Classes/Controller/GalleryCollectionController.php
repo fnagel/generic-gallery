@@ -27,7 +27,8 @@ namespace TYPO3\GgExtbase\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use \TYPO3\CMS\Extbase\Mvc\View\ViewInterface,
+use \TYPO3\CMS\Core\Utility\GeneralUtility,
+	\TYPO3\CMS\Extbase\Mvc\View\ViewInterface,
 	\TYPO3\GgExtbase\Domain\Model\GalleryCollection;
 
 /**
@@ -40,6 +41,10 @@ class GalleryCollectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
 	protected $cObjData = array();
 
 	protected $collection = NULL;
+
+	protected $gallerySettings = array();
+
+	protected $currentSettings = array();
 
 	/**
 	 * Object manager
@@ -61,14 +66,15 @@ class GalleryCollectionController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
 
 	protected function initializeAction() {
 		$this->cObjData = $this->configurationManager->getContentObject()->data;
-
 		$this->uid = (int) ($this->cObjData['_LOCALIZED_UID']) ? $this->cObjData['_LOCALIZED_UID'] : $this->cObjData['uid'];
+		$this->gallerySettings = $this->settings['gallery'];
+		$this->currentSettings = $this->gallerySettings[rtrim($this->cObjData['tx_generic_gallery_predefined'], '.')];
 
 		$this->generateCollection();
 	}
 
 	protected function initializeView(ViewInterface $view) {
-		$view->assign('settings', $this->settings);
+		$view->setTemplatePathAndFilename(GeneralUtility::getFileAbsFileName($this->currentSettings['template']));
 	}
 
 	/**

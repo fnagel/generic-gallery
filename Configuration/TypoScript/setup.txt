@@ -1,12 +1,24 @@
 
 plugin.tx_ggextbase {
+
 	view {
 		templateRootPath = {$plugin.tx_ggextbase.view.templateRootPath}
 		partialRootPath = {$plugin.tx_ggextbase.view.partialRootPath}
 		layoutRootPath = {$plugin.tx_ggextbase.view.layoutRootPath}
 	}
+
 	persistence {
 		storagePid = {$plugin.tx_ggextbase.persistence.storagePid}
 	}
+
+	settings {
+		gallery {
+			default {
+				name = Default Gallery
+				template = EXT:gg_extbase/Resources/Private/Templates/GalleryCollection/Show.html
+			}
+		}
+	}
+
 }
 
