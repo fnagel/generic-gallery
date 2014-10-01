@@ -26,9 +26,10 @@ namespace TYPO3\GgExtbase\Domain\Model;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use TYPO3\CMS\Core\Utility\DebugUtility;
 
 /**
- * GalleryItem
+ * Class GalleryItem
  */
 class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
@@ -52,6 +53,13 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @var string
 	 */
 	protected $link = '';
+
+	/**
+	 * image
+	 *
+	 * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
+	 */
+	protected $imageReference = NULL;
 
 	/**
 	 * image
@@ -126,6 +134,10 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @return \TYPO3\CMS\Core\Resource\File $image
 	 */
 	public function getImage() {
+		if ($this->imageReference !== NULL) {
+			return $this->imageReference->getOriginalResource()->getOriginalFile();
+		}
+
 		return $this->image;
 	}
 

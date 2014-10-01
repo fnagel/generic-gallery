@@ -12,7 +12,7 @@ config.tx_extbase {
 						hidden.mapOnProperty = hidden
 						title.mapOnProperty = title
 						link.mapOnProperty = link
-						images.mapOnProperty = image
+						images.mapOnProperty = imageReference
 						contents.mapOnProperty = textItems
 						tt_content_id.mapOnProperty = ttContentUid
 					}
