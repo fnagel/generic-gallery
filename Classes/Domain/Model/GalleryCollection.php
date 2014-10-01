@@ -49,15 +49,6 @@ class GalleryCollection extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity i
 	 */
 	public function __construct() {
 		$this->items = new ObjectStorage();
-
-		// TODO do this if its is a core collection
-		if ( FALSE ) {
-			// Load the records in each collection
-			/** @var \TYPO3\CMS\Core\Collection\StaticRecordCollection $item */
-			foreach ($this->items as $item) {
-				$item->loadContents();
-			}
-		}
 	}
 
 
@@ -136,17 +127,41 @@ class GalleryCollection extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity i
 
 	/**
 	 *
+	 * @param array|\TYPO3\CMS\Extbase\Persistence\Generic\QueryResult $data
+	 *
+	 * @return $this
+	 */
+	public function addAll($data) {
+		/* @var $object \TYPO3\GgExtbase\Domain\Model\GalleryItem */
+		foreach ($data as $object) {
+			$this->items->attach($object);
+		}
+
+		return $this;
+	}
+
+	/**
+	 *
 	 * @param array $data
 	 *
 	 * @return $this
 	 */
-	public function addAll(array $data) {
-
-		/* @var $object \TYPO3\CMS\Core\Resource\FileReference */
+	public function addAllFromFiles(array $data) {
 		foreach ($data as $object) {
 			$item = new GalleryItem();
-			$item->setImage($object);
-			$item->setTitle($object->getTitle());
+
+			if ($object instanceof \TYPO3\CMS\Core\Resource\FileReference) {
+				/* @var $object \TYPO3\CMS\Core\Resource\FileReference */
+				$item->setTitle($object->getTitle());
+				$item->setImage($object->getOriginalFile());
+			}
+
+			if ($object instanceof \TYPO3\CMS\Core\Resource\File) {
+				/* @var $object \TYPO3\CMS\Core\Resource\File */
+				$item->setTitle($object->getProperty('title'));
+				$item->setImage($object);
+			}
+
 			$item->setLink($object->getPublicUrl());
 
 			$this->items->attach($item);
@@ -174,6 +189,5 @@ class GalleryCollection extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity i
 	public function serialize() {
 		$this->items->serialize();
 	}
-
 
 }
