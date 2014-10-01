@@ -5,10 +5,18 @@
 	<h1>Single View for GalleryCollection</h1>
 
 	<f:flashMessages renderMode="div" />
+
 	<f:section name="main">
 		<ul>
-			<f:for each="{gallery}" as="item">
-				<li>{item.title}</li>
+			<f:for each="{collection}" as="item">
+				<li>
+					{item.title}<br />
+					<f:image
+						width="300c"
+						height="300c"
+						src="{item.image.uid}"
+						alt="{item.image.alternative}" />
+				</li>
 			</f:for>
 		</ul>
 	</f:section>
