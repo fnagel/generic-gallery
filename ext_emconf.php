@@ -16,7 +16,7 @@ $EM_CONF[$_EXTKEY] = array(
 	'category' => 'plugin',
 	'author' => 'Felix Nagel',
 	'author_email' => 'info@felixnagel.com',
-	'state' => 'alpha',
+	'state' => 'beta',
 	'internal' => '',
 	'uploadfolder' => '1',
 	'createDirs' => '',
@@ -25,6 +25,7 @@ $EM_CONF[$_EXTKEY] = array(
 	'constraints' => array(
 		'depends' => array(
 			'typo3' => '6.2',
+			'generic_gallery' => '',
 		),
 		'conflicts' => array(
 		),
