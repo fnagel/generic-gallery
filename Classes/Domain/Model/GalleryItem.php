@@ -33,6 +33,13 @@ namespace TYPO3\GgExtbase\Domain\Model;
 class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
+	 * tt_content UID
+	 *
+	 * @var int
+	 */
+	protected $ttContentUid = '';
+
+	/**
 	 * title
 	 *
 	 * @var string
@@ -49,7 +56,7 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * image
 	 *
-	 * @var \TYPO3\CMS\Core\Resource\FileInterface
+	 * @var \TYPO3\CMS\Core\Resource\File
 	 */
 	protected $image = NULL;
 
@@ -59,6 +66,21 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @var \TYPO3\GgExtbase\Domain\Model\TextItem
 	 */
 	protected $textItems = NULL;
+
+	/**
+	 * @param int $ttContentUid
+	 * @return void
+	 */
+	public function setTtContentUid($ttContentUid) {
+		$this->ttContentUid = $ttContentUid;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getTtContentUid() {
+		return $this->ttContentUid;
+	}
 
 	/**
 	 * Returns the title
@@ -101,7 +123,7 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the image
 	 *
-	 * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference $image
+	 * @return \TYPO3\CMS\Core\Resource\File $image
 	 */
 	public function getImage() {
 		return $this->image;
@@ -110,10 +132,10 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the image
 	 *
-	 * @param \TYPO3\CMS\Core\Resource\FileInterface $image
+	 * @param \TYPO3\CMS\Core\Resource\File $image
 	 * @return void
 	 */
-	public function setImage(\TYPO3\CMS\Core\Resource\FileInterface $image) {
+	public function setImage($image) {
 		$this->image = $image;
 	}
 

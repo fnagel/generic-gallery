@@ -2,7 +2,7 @@
 config.tx_extbase {
     persistence {
         classes {
-            \TYPO3\GgExtbase\Domain\Model\GalleryItem {
+            TYPO3\GgExtbase\Domain\Model\GalleryItem {
                 mapping {
                     tableName = tx_generic_gallery_pictures
 					columns {
@@ -14,10 +14,11 @@ config.tx_extbase {
 						link.mapOnProperty = link
 						images.mapOnProperty = image
 						contents.mapOnProperty = textItems
+						tt_content_id.mapOnProperty = ttContentUid
 					}
                 }
             }
-            \TYPO3\GgExtbase\Domain\Model\TextItem {
+            TYPO3\GgExtbase\Domain\Model\TextItem {
                 mapping {
                     tableName = tx_generic_gallery_content
 					columns {
