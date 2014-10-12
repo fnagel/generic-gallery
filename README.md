@@ -7,7 +7,6 @@ TYPO3 Extension Generic Gallery (Extbase / Fluid rewrite)
 ToDo
 ----
 
-* Fix link in templating
 * Add real demo files
 	* lightbox
 	* teaser
