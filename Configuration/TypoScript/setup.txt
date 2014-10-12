@@ -12,6 +12,9 @@ plugin.tx_ggextbase {
 	}
 
 	settings {
+		# Partial and layout files configured by standard extbase / fluid config, see above
+
+		# Config available gallery types
 		gallery {
 			default {
 				name = Default Gallery
