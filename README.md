@@ -3,6 +3,8 @@ gg_extbase
 
 TYPO3 Extension Generic Gallery (Extbase / Fluid rewrite)
 
+_beta quality_
+
 Features
 --------
 
@@ -13,19 +15,43 @@ Features
 * image collection support (NEW)
 
 
+Roadmap
+-------
+
+* Fix ToDo's
+* Release v1.0.0
+* Update EXT:generic_gallery with notice to this extension
+
+
+Installation
+------------
+
+* Install via EM
+* Add static TS
+* Configure TS and templates as you wish
+
+
+Migration
+---------
+
+_tbd_
+
+
+
 ToDo
 ----
 
-* Add BE preview
+* Remove EXT:generic_gallery dependency
+* Add update script (for plugins)
 * Add real demo files
-	* lightbox
-	* teaser
-	* teaser with positioning
+	* lightbox (default, Bootstrap)
+	* teaser with positioning (Bootstrap Slider)
+* Add BE preview
 * Add documentation
 * Add tests
 
 
-Feature ideas
--------------
+Future ideas
+------------
 
 * Disable textItem position and width fields via TER or TS
