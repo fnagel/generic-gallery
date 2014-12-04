@@ -27,8 +27,7 @@ namespace TYPO3\GgExtbase\Domain\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use \TYPO3\CMS\Extbase\Persistence\ObjectStorage,
-	\TYPO3\GgExtbase\Domain\Model\GalleryItem;
+use \TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * GalleryCollection
@@ -44,7 +43,6 @@ class GalleryCollection extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity i
 	/**
 	 * Construct class
 	 *
-	 *
 	 * @return \TYPO3\GgExtbase\Domain\Model\GalleryCollection
 	 */
 	public function __construct() {
@@ -58,7 +56,6 @@ class GalleryCollection extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity i
 	public function getItems() {
 		return $this->items;
 	}
-
 
 	/**
 	 * @param $items \TYPO3\CMS\Extbase\Persistence\ObjectStorage
