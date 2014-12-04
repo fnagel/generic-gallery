@@ -27,12 +27,17 @@ namespace TYPO3\GgExtbase\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use \TYPO3\GgExtbase\Domain\Model\GalleryCollection;
+use \TYPO3\GgExtbase\Domain\Model\GalleryCollection,
+	TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 
 /**
  * BaseController
  */
 abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
+
+	const GALLERY_TYPE_SINGLE = 'single';
+	const GALLERY_TYPE_IMAGES = 'images';
+	const GALLERY_TYPE_COLLECTION = 'collection';
 
 	protected $uid = NULL;
 
@@ -41,6 +46,8 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
 	protected $gallerySettings = array();
 
 	protected $currentSettings = array();
+
+	protected $galleryType = NULL;
 
 	/**
 	 * GalleryCollection
@@ -67,12 +74,17 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
 		$this->collection = new GalleryCollection();
 	}
 
+	protected function initializeView(ViewInterface $view) {
+		$this->view->assign('galleryType', $this->galleryType);
+	}
+
 	protected function initializeAction() {
 		$this->cObjData = $this->configurationManager->getContentObject()->data;
 		$this->uid = (int) ($this->cObjData['_LOCALIZED_UID']) ? $this->cObjData['_LOCALIZED_UID'] : $this->cObjData['uid'];
 		$this->gallerySettings = $this->settings['gallery'];
 		$this->currentSettings = $this->gallerySettings[rtrim($this->cObjData['tx_generic_gallery_predefined'], '.')];
 
+		$this->determineGalleryType();
 		$this->generateCollection();
 	}
 
@@ -82,20 +94,53 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
 	 * @return void
 	 */
 	protected function generateCollection() {
+		switch ($this->galleryType) {
+			case self::GALLERY_TYPE_SINGLE:
+				$this->collection->addAll($this->getSigleItems());
+				break;
+
+			case self::GALLERY_TYPE_IMAGES:
+				$this->collection->addAllFromFiles($this->getMultipleImages());
+				break;
+
+			case self::GALLERY_TYPE_COLLECTION:
+				$this->collection->addAllFromFiles($this->getCollection());
+				break;
+
+			default;
+		}
+	}
+
+	/**
+	 * Determine gallery type
+	 *
+	 * @return void
+	 */
+	protected function determineGalleryType() {
 		if ($this->cObjData['tx_generic_gallery_items']) {
-			$this->collection->addAll($this->getSigleItems());
+			$this->setGalleryType(self::GALLERY_TYPE_SINGLE);
 			return;
 		}
 
 		if ($this->cObjData['tx_generic_gallery_images']) {
-			$this->collection->addAllFromFiles($this->getMultipleImages());
+			$this->setGalleryType(self::GALLERY_TYPE_IMAGES);
 			return;
 		}
 
 		if ($this->cObjData['tx_generic_gallery_collection']) {
-			$this->collection->addAllFromFiles($this->getCollection());
+			$this->setGalleryType(self::GALLERY_TYPE_COLLECTION);
 			return;
 		}
+	}
+
+	/**
+	 * Generate collection item
+	 *
+	 * @param string $key
+	 * @return void
+	 */
+	protected function setGalleryType($key) {
+		$this->galleryType = $key;
 	}
 
 	/**

@@ -36,6 +36,8 @@ use \TYPO3\CMS\Core\Utility\GeneralUtility,
 class GalleryItemController extends AbstractController {
 
 	protected function initializeView(ViewInterface $view) {
+		parent::initializeView($view);
+
 		$template = GeneralUtility::getFileAbsFileName($this->currentSettings['itemTemplate']);
 
 		if ($template) {

@@ -11,7 +11,9 @@
 						<div class="img-polaroid">
 							<f:render partial="GalleryItem/Image" arguments="{_all}" />
 						</div>
-						<f:render partial="GalleryItem/Caption" arguments="{_all}" />
+						<f:if condition="{galleryType} == 'single'">
+							<f:render partial="GalleryItem/Caption" arguments="{_all}" />
+						</f:if>
 					</figure>
 				</li>
 			</f:for>
