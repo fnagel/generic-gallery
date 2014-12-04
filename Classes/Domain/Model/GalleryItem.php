@@ -99,6 +99,13 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	}
 
 	/**
+	 * @return boolean
+	 */
+	public function isVirtual() {
+		return !((bool) parent::getUid());
+	}
+
+	/**
 	 * @param int $ttContentUid
 	 * @return void
 	 */
@@ -119,7 +126,7 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @return string $title
 	 */
 	public function getTitle() {
-		if ($this->title === NULL) {
+		if ($this->isVirtual()) {
 			return $this->getImage()->getProperties()['title'];
 		}
 
@@ -142,6 +149,10 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @return string $link
 	 */
 	public function getLink() {
+		if ($this->isVirtual() || $this->link === '') {
+			return $this->getImage()->getPublicUrl();
+		}
+
 		return $this->link;
 	}
 

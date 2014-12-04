@@ -174,8 +174,6 @@ class GalleryCollection extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity i
 				$item->setImage($object);
 			}
 
-			$item->setLink($object->getPublicUrl());
-
 			$this->items->attach($item);
 		}
 
