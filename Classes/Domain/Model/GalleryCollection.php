@@ -108,6 +108,23 @@ class GalleryCollection extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity i
 	}
 
 	/**
+	 * Returns item the by uid.
+	 *
+	 * @param string $uid
+	 * @return object The object by item uid.
+	 */
+	public function getByUid($uid) {
+		foreach ($this->items as $item) {
+			/* @var $item \TYPO3\GgExtbase\Domain\Model\GalleryItem */
+			if ((string) $uid === (string) $item->getUid()) {
+				return $item;
+			}
+		}
+
+		return NULL;
+	}
+
+	/**
 	 * Moves to the next entry.
 	 *
 	 * @return void
@@ -152,13 +169,11 @@ class GalleryCollection extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity i
 
 			if ($object instanceof \TYPO3\CMS\Core\Resource\FileReference) {
 				/* @var $object \TYPO3\CMS\Core\Resource\FileReference */
-				$item->setTitle($object->getTitle());
 				$item->setImage($object->getOriginalFile());
 			}
 
 			if ($object instanceof \TYPO3\CMS\Core\Resource\File) {
 				/* @var $object \TYPO3\CMS\Core\Resource\File */
-				$item->setTitle($object->getProperty('title'));
 				$item->setImage($object);
 			}
 

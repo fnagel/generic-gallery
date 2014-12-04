@@ -1,6 +1,6 @@
 <?php
-namespace TYPO3\GgExtbase\Controller;
 
+namespace TYPO3\GgExtbase\Controller;
 
 /***************************************************************
  *
@@ -27,27 +27,30 @@ namespace TYPO3\GgExtbase\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use \TYPO3\CMS\Core\Utility\GeneralUtility,
+	\TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
+
 /**
  * GalleryItemController
  */
-class GalleryItemController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
+class GalleryItemController extends AbstractController {
 
-	/**
-	 * galleryItemRepository
-	 *
-	 * @var \TYPO3\GgExtbase\Domain\Repository\GalleryItemRepository
-	 * @inject
-	 */
-	protected $galleryItemRepository = NULL;
+	protected function initializeView(ViewInterface $view) {
+		$template = GeneralUtility::getFileAbsFileName($this->currentSettings['itemTemplate']);
+
+		if ($template) {
+			$view->setTemplatePathAndFilename($template);
+		}
+	}
 
 	/**
 	 * action show
 	 *
-	 * @param \TYPO3\GgExtbase\Domain\Model\GalleryItem $galleryItem
+	 * @param string $item
 	 * @return void
 	 */
-	public function showAction(\TYPO3\GgExtbase\Domain\Model\GalleryItem $galleryItem) {
-		$this->view->assign('galleryItem', $galleryItem);
+	public function showAction($item) {
+		$this->view->assign('item', $this->collection->getByUid($item));
 	}
 
 }

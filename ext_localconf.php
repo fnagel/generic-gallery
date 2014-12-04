@@ -8,9 +8,11 @@ if (!defined('TYPO3_MODE')) {
 	'Gallery',
 	array(
 		'GalleryCollection' => 'show',
+		'GalleryItem' => 'show',
 	),
 	// non-cacheable actions
 	array(
 		'GalleryCollection' => '',
+		'GalleryItem' => '',
 	)
 );

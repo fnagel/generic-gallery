@@ -1,22 +1,32 @@
+{namespace gg=TYPO3\GgExtbase\ViewHelpers}
 
 <f:layout name="Default" />
 
-This Template is responsible for displaying a single view for a domain object
-
-If you modify this template, do not forget to change the overwrite settings
-in /Configuration/ExtensionBuilder/settings.yaml:
-  Resources:
-    Private:
-      Templates:
-        Show.html: keep
-
-Otherwise your changes will be overwritten the next time you save the extension in the extension builder
-
 <f:section name="main">
-<h1>Single View for GalleryItem</h1>
 
-<f:flashMessages renderMode="div" />
-<f:render partial="GalleryItem/Properties" arguments="{galleryItem:galleryItem}" />
-<f:link.action action="list">Back to list</f:link.action><br />
-<f:link.action action="new">New GalleryItem</f:link.action>
+	<div class="img-polaroid">
+		<figure>
+			<f:image
+				width="800m"
+				height="800m"
+				src="{item.image.uid}"
+				alt="{item.image.alternative}"
+				/>
+		</figure>
+
+		<figcaption>
+			<strong>{item.title}</strong>
+			<p>
+				{item.image.properties.description}
+			</p>
+			<p class="small muted">
+				<f:render partial="GalleryItem/Copyright" arguments="{_all}" />
+			</p>
+		</figcaption>
+
+		<gg:link.typolink configuration="{parameter: item.link}">
+			Download original image
+		</gg:link.typolink>
+	</div>
+
 </f:section>

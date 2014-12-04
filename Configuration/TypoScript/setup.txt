@@ -18,7 +18,12 @@ plugin.tx_ggextbase {
 		gallery {
 			default {
 				name = Default Gallery
+
+				# template for gallery
 				template = EXT:gg_extbase/Resources/Private/Templates/GalleryCollection/Show.html
+
+				# template for item detail view
+#				itemTemplate =
 			}
 		}
 	}

@@ -38,21 +38,21 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 *
 	 * @var int
 	 */
-	protected $ttContentUid = '';
+	protected $ttContentUid;
 
 	/**
 	 * title
 	 *
 	 * @var string
 	 */
-	protected $title = '';
+	protected $title;
 
 	/**
 	 * link
 	 *
 	 * @var string
 	 */
-	protected $link = '';
+	protected $link;
 
 	/**
 	 * image
@@ -76,6 +76,19 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $textItems = NULL;
 
 	/**
+	 * @return string
+	 */
+	public function getUid() {
+		$uid = parent::getUid();
+
+		if ($uid === NULL) {
+			$uid = 'file_reference_' . $this->getImage()->getUid();
+		}
+
+		return $uid;
+	}
+
+	/**
 	 * @param int $ttContentUid
 	 * @return void
 	 */
@@ -96,6 +109,10 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @return string $title
 	 */
 	public function getTitle() {
+		if ($this->title === NULL) {
+			return $this->getImage()->getProperties()['title'];
+		}
+
 		return $this->title;
 	}
 
