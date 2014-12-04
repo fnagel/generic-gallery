@@ -43,6 +43,7 @@ ToDo
 
 * Remove EXT:generic_gallery dependency
 * Add update script (for plugins)
+* Ensure TYPO3 CMS 7.0 compatibility
 * Add real demo files
 	* lightbox (default, Bootstrap)
 	* teaser with positioning (Bootstrap Slider)
