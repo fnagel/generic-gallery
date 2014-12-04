@@ -26,7 +26,8 @@ namespace TYPO3\GgExtbase\Domain\Model;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-use TYPO3\CMS\Core\Utility\DebugUtility;
+
+use \TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * Class GalleryItem
@@ -71,9 +72,18 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * textItems
 	 *
-	 * @var \TYPO3\GgExtbase\Domain\Model\TextItem
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\GgExtbase\Domain\Model\TextItem>
 	 */
-	protected $textItems = NULL;
+	protected $textItems;
+
+
+	/**
+	 * Construct class
+	 */
+	public function __construct() {
+		$this->textItems = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+	}
+
 
 	/**
 	 * @return string
@@ -169,22 +179,47 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	}
 
 	/**
+	 * Sets the textItems
+	 *
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $textItems
+	 * @return void
+	 * @api
+	 */
+	public function setTextItems(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $textItems) {
+		$this->textItems = $textItems;
+	}
+
+	/**
+	 * Adds a textItem
+	 *
+	 * @param \TYPO3\GgExtbase\Domain\Model\TextItem $textItems
+	 * @return void
+	 * @api
+	 */
+	public function addTextItem(\TYPO3\GgExtbase\Domain\Model\TextItem $textItems) {
+		$this->textItems->attach($textItems);
+	}
+
+	/**
+	 * Removes a textItem
+	 *
+	 * @param \TYPO3\GgExtbase\Domain\Model\TextItem $textItems
+	 * @return void
+	 * @api
+	 */
+	public function removeTextItem(\TYPO3\GgExtbase\Domain\Model\TextItem $textItems) {
+		$this->textItems->detach($textItems);
+	}
+
+	/**
 	 * Returns the textItems
 	 *
-	 * @return \TYPO3\GgExtbase\Domain\Model\TextItem $textItems
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage An object storage containing the textItems
+	 * @api
 	 */
 	public function getTextItems() {
 		return $this->textItems;
 	}
 
-	/**
-	 * Sets the textItems
-	 *
-	 * @param \TYPO3\GgExtbase\Domain\Model\TextItem $textItems
-	 * @return void
-	 */
-	public function setTextItems(\TYPO3\GgExtbase\Domain\Model\TextItem $textItems) {
-		$this->textItems = $textItems;
-	}
 
 }

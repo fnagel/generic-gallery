@@ -24,6 +24,16 @@
 			</p>
 		</figcaption>
 
+		<f:if condition="{item.textItems}">
+			<div class="well">
+				<f:for each="{item.textItems}" as="textItem">
+					<p>
+						{textItem.bodytext}
+					</p>
+				</f:for>
+			</div>
+		</f:if>
+
 		<gg:link.typolink configuration="{parameter: item.link}">
 			Download original image
 		</gg:link.typolink>
