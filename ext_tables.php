@@ -12,7 +12,10 @@ $extensionName = \TYPO3\CMS\Core\Utility\GeneralUtility::underscoredToLowerCamel
 );
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
-	$_EXTKEY, 'Configuration/TypoScript', 'Generic Gallery Extbase'
+	$_EXTKEY, 'Configuration/TypoScript', 'Generic Gallery: default'
+);
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
+	$_EXTKEY, 'Configuration/TypoScript/Examples/Bootstrap', 'Generic Gallery: Example - Boostrap'
 );
 
 
