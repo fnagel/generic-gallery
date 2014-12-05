@@ -1,23 +1,29 @@
+{namespace gg=TYPO3\GgExtbase\ViewHelpers}
 
 <f:layout name="Default" />
 
 <f:section name="main">
 
 	<div class="row-fluid">
-		<ul class="thumbnails">
-			<f:for each="{collection}" as="item">
-				<li class="span3">
-					<figure class="thumbnail">
-						<div class="img-polaroid">
-							<f:render partial="GalleryItem/Image" arguments="{_all}" />
-						</div>
-						<f:if condition="{galleryType} == 'single'">
-							<f:render partial="GalleryItem/Caption" arguments="{_all}" />
-						</f:if>
-					</figure>
-				</li>
-			</f:for>
-		</ul>
-	</div>
+		<f:for each="{collection}" as="item" iteration="iterator">
+			<gg:forGroup.begin iteration="{iterator}" max="4">
+				<ul class="thumbnails">
+			</gg:forGroup.begin>
 
+			<li class="span3">
+				<figure class="thumbnail">
+					<div class="img-polaroid">
+						<f:render partial="GalleryItem/Image" arguments="{_all}" />
+					</div>
+					<f:if condition="{galleryType} == 'single'">
+						<f:render partial="GalleryItem/Caption" arguments="{_all}" />
+					</f:if>
+				</figure>
+			</li>
+
+			<gg:forGroup.end iteration="{iterator}" max="4">
+				</ul>
+			</gg:forGroup.end>
+		</f:for>
+	</div>
 </f:section>
