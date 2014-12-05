@@ -7,36 +7,44 @@
 	<div class="img-polaroid">
 		<figure>
 			<f:image
-				width="800m"
+				width="1024m"
 				height="800m"
 				src="{item.image.uid}"
 				alt="{item.image.alternative}"
 				/>
 		</figure>
+	</div>
 
-		<figcaption>
-			<strong>{item.title}</strong>
-			<p>
-				{item.image.properties.description}
-			</p>
-			<p class="small muted">
-				<f:render partial="GalleryItem/Copyright" arguments="{_all}" />
-			</p>
-		</figcaption>
+	<div class="row-fluid">
+		<div class="col-xs-12">
+			<figcaption class="well">
+				<p class="small muted pull-right">
+					<f:render partial="GalleryItem/Copyright" arguments="{_all}" />
+				</p>
+				<p>
+					<strong>
+						<gg:link.typolink configuration="{parameter: item.image.publicUrl}">
+							<i class="icon-cloud-download"></i>
+							<span class="ui-helper-hidden-accessible">Download original image</span>
+						</gg:link.typolink>
+						{item.title}
+					</strong>
+				</p>
+				<p>
+					{item.image.properties.description}
+				</p>
+			</figcaption>
 
-		<f:if condition="{item.textItems}">
-			<div class="well">
-				<f:for each="{item.textItems}" as="textItem">
-					<p>
-						{textItem.bodytext}
-					</p>
-				</f:for>
-			</div>
-		</f:if>
-
-		<gg:link.typolink configuration="{parameter: item.link}">
-			Download original image
-		</gg:link.typolink>
+			<f:if condition="{item.textItems}">
+				<ul class="list-group">
+					<f:for each="{item.textItems}" as="textItem">
+						<li class="list-group-item">
+							{textItem.bodytext}
+						</li>
+					</f:for>
+				</ul>
+			</f:if>
+		</div>
 	</div>
 
 </f:section>
