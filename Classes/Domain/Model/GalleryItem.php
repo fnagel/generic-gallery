@@ -99,6 +99,12 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	}
 
 	/**
+	 * If object is virtual
+	 *
+	 * Virtual means its generated and not a DB relation
+	 * So, if the object is virtual the plugin is of type
+	 * 'imgaes' or 'collection'
+	 *
 	 * @return boolean
 	 */
 	public function isVirtual() {
