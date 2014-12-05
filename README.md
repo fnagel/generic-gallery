@@ -42,11 +42,12 @@ ToDo
 ----
 
 * Remove EXT:generic_gallery dependency
+	* SQL
+	* addFields TS hook
 * Add update script (for plugins)
 * Ensure TYPO3 CMS 7.0 compatibility
 * Add real demo files
-	* lightbox (default, Bootstrap)
-	* teaser with positioning (Bootstrap Slider)
+	* teaser with _positioning_ (Bootstrap Slider)
 * Add BE preview
 * Add documentation
 * Add tests
