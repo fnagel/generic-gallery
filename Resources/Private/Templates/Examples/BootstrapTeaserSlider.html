@@ -3,7 +3,7 @@
 <f:layout name="Default" />
 
 <f:section name="main">
-	<div class="carousel slide" data-ride="carousel">
+	<div id="slider-{uid}" class="carousel slide" data-ride="carousel">
 		<ol class="carousel-indicators">
 			<f:for each="{collection}" as="item" iteration="iterator">
 				<li data-target="#carousel" data-slide-to="{iterator.index}" class="{f:if(condition: '{iterator.index} == 0', then: 'active')}"></li>
@@ -13,15 +13,15 @@
 		<div class="carousel-inner">
 			<f:for each="{collection}" as="item" iteration="iterator">
 				<div class="item{f:if(condition: '{iterator.index} == 0', then: ' active')}">
-					<f:render partial="GalleryItem/Image" arguments="{_all}" />
-					<div class="carousel-caption">
-						<f:render partial="GalleryItem/Caption" arguments="{_all}" />
+					<div style="position: relative;">
+						<f:render partial="GalleryItem/Image" arguments="{_all}" />
+						<f:render partial="GalleryItem/TextItems" arguments="{_all}" />
 					</div>
 				</div>
 			</f:for>
 		</div>
 
-		<a class="carousel-control left" href="#">&lsaquo;</a>
-		<a class="carousel-control right" href="#">&rsaquo;</a>
+		<a class="carousel-control left" href="#slider-{uid}" role="button" data-slide="prev">&lsaquo;</a>
+		<a class="carousel-control right" href="#slider-{uid}" role="button" data-slide="next">&rsaquo;</a>
 	</div>
 </f:section>
