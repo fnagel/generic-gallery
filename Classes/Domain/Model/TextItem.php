@@ -27,6 +27,8 @@ namespace TYPO3\GgExtbase\Domain\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use \TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * TextItem
  */
@@ -63,6 +65,15 @@ class TextItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	}
 
 	/**
+	 * Returns the bodytext
+	 *
+	 * @return string $bodytext
+	 */
+	public function getText() {
+		return $this->getBodytext();
+	}
+
+	/**
 	 * Sets the bodytext
 	 *
 	 * @param string $bodytext
@@ -78,7 +89,12 @@ class TextItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @return string $position
 	 */
 	public function getPosition() {
-		return $this->position;
+		$coordsArray = GeneralUtility::intExplode(',', $this->position, TRUE);
+
+		return array(
+			'x' => $coordsArray[0],
+			'y' => $coordsArray[1]
+		);
 	}
 
 	/**
@@ -110,4 +126,28 @@ class TextItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 		$this->width = $width;
 	}
 
+	/**
+	 * Returns the position
+	 *
+	 * @return string $position
+	 */
+	public function getCssStyles() {
+		$string = '';
+		$position = $this->getPosition();
+		$classes = array(
+			'position' => 'absolute',
+			'left' => $position['x'] . 'px',
+			'top' => $position['y'] . 'px',
+		);
+
+		if ($this->getWidth() !== '') {
+			$classes['width'] = $this->getWidth() . 'px';
+		}
+
+		foreach($classes as $class => $value) {
+			$string .= $class . ': ' . $value . '; ';
+		}
+
+		return $string;
+	}
 }
