@@ -75,6 +75,7 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
 	}
 
 	protected function initializeView(ViewInterface $view) {
+		$this->view->assign('uid', $this->uid);
 		$this->view->assign('galleryType', $this->galleryType);
 	}
 
