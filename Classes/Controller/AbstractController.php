@@ -118,8 +118,8 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
 	 * @return void
 	 */
 	protected function determineGalleryType() {
-		if ($this->cObjData['tx_generic_gallery_items']) {
-			$this->setGalleryType(self::GALLERY_TYPE_SINGLE);
+		if ($this->cObjData['tx_generic_gallery_collection']) {
+			$this->setGalleryType(self::GALLERY_TYPE_COLLECTION);
 			return;
 		}
 
@@ -128,8 +128,8 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
 			return;
 		}
 
-		if ($this->cObjData['tx_generic_gallery_collection']) {
-			$this->setGalleryType(self::GALLERY_TYPE_COLLECTION);
+		if ($this->cObjData['tx_generic_gallery_items']) {
+			$this->setGalleryType(self::GALLERY_TYPE_SINGLE);
 			return;
 		}
 	}
