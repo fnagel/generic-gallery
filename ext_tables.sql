@@ -33,6 +33,8 @@ CREATE TABLE tx_generic_gallery_content (
 	cruser_id int(11) DEFAULT '0' NOT NULL,
 	deleted tinyint(4) DEFAULT '0' NOT NULL,
 	hidden tinyint(4) DEFAULT '0' NOT NULL,
+	starttime int(11) DEFAULT '0' NOT NULL,
+	endtime int(11) DEFAULT '0' NOT NULL,
 	pictures_id int(11) DEFAULT '0' NOT NULL,
 	bodytext mediumtext,
 	position tinytext NOT NULL,

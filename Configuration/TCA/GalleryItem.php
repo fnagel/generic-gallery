@@ -3,60 +3,19 @@ if (!defined ('TYPO3_MODE')) {
 	die ('Access denied.');
 }
 
-$GLOBALS['TCA']['tx_ggextbase_domain_model_galleryitem'] = array(
-	'ctrl' => $GLOBALS['TCA']['tx_ggextbase_domain_model_galleryitem']['ctrl'],
+$GLOBALS['TCA']['tx_generic_gallery_pictures'] = array(
+	'ctrl' => $GLOBALS['TCA']['tx_generic_gallery_pictures']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, link, image, text_items',
+		'showRecordFieldList' => 'hidden, title, link, images, text_items',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, link, image, text_items, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'),
+		'0' => array('showitem' => 'hidden;;1;;1-1-1, title;;2;;1-1-1, link, images')
 	),
 	'palettes' => array(
-		'1' => array('showitem' => ''),
+		'1' => array('showitem' => 'starttime, endtime'),
+		'2' => array('showitem' => 'contents')
 	),
 	'columns' => array(
-	
-		'sys_language_uid' => array(
-			'exclude' => 1,
-			'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.language',
-			'config' => array(
-				'type' => 'select',
-				'foreign_table' => 'sys_language',
-				'foreign_table_where' => 'ORDER BY sys_language.title',
-				'items' => array(
-					array('LLL:EXT:lang/locallang_general.xlf:LGL.allLanguages', -1),
-					array('LLL:EXT:lang/locallang_general.xlf:LGL.default_value', 0)
-				),
-			),
-		),
-		'l10n_parent' => array(
-			'displayCond' => 'FIELD:sys_language_uid:>:0',
-			'exclude' => 1,
-			'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.l18n_parent',
-			'config' => array(
-				'type' => 'select',
-				'items' => array(
-					array('', 0),
-				),
-				'foreign_table' => 'tx_ggextbase_domain_model_galleryitem',
-				'foreign_table_where' => 'AND tx_ggextbase_domain_model_galleryitem.pid=###CURRENT_PID### AND tx_ggextbase_domain_model_galleryitem.sys_language_uid IN (-1,0)',
-			),
-		),
-		'l10n_diffsource' => array(
-			'config' => array(
-				'type' => 'passthrough',
-			),
-		),
-
-		't3ver_label' => array(
-			'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.versionLabel',
-			'config' => array(
-				'type' => 'input',
-				'size' => 30,
-				'max' => 255,
-			)
-		),
-	
 		'hidden' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.hidden',
@@ -112,35 +71,46 @@ $GLOBALS['TCA']['tx_ggextbase_domain_model_galleryitem'] = array(
 			'config' => array(
 				'type' => 'input',
 				'size' => 30,
-				'eval' => 'trim'
+				'eval' => 'trim',
+				'wizards' => array(
+					'_PADDING' => 2,
+					'link' => array(
+						'type' => 'popup',
+						'title' => 'Link',
+						'icon' => 'link_popup.gif',
+						'script' => 'browse_links.php?mode=wizard',
+						'JSopenParams' => 'height=300,width=500,status=0,menubar=0,scrollbars=1'
+					)
+				)
 			),
 		),
-		'image' => array(
-			'exclude' => 1,
-			'label' => 'LLL:EXT:gg_extbase/Resources/Private/Language/locallang_db.xlf:tx_ggextbase_domain_model_galleryitem.image',
+		'images' => array(
+			'label' => 'LLL:EXT:gg_extbase/Resources/Private/Language/locallang_db.xlf:tx_ggextbase_domain_model_galleryitem.images',
 			'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
-				'image',
-				array('maxitems' => 1),
+				'tx_generic_gallery_picture_single',
+				array(
+					'size' => 1,
+					'maxitems' => 1,
+					'minitems' => 1,
+				),
 				$GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
 			),
 		),
-		'text_items' => array(
+		'contents' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:gg_extbase/Resources/Private/Language/locallang_db.xlf:tx_ggextbase_domain_model_galleryitem.text_items',
 			'config' => array(
 				'type' => 'inline',
-				'foreign_table' => 'tx_ggextbase_domain_model_textitem',
+				'foreign_table' => 'tx_generic_gallery_content',
+				'foreign_field' => 'pictures_id',
 				'minitems' => 0,
-				'maxitems' => 1,
+				'maxitems' => 99,
 				'appearance' => array(
-					'collapseAll' => 0,
-					'levelLinksPosition' => 'top',
-					'showSynchronizationLink' => 1,
-					'showPossibleLocalizationRecords' => 1,
-					'showAllLocalizationLink' => 1
+					'useSortable' => 1,
+					'collapseAll' => 1,
+					'expandSingle' => 1,
 				),
 			),
 		),
-		
 	),
 );
