@@ -1,0 +1,2 @@
+	# cat=basic; type=boolean; label=LLL:EXT:gg_extbase/Resources/Private/Language/locallang_db.xlf:extension_manager.enable_cms_layout
+enable_cms_layout = 1
