@@ -20,16 +20,19 @@ $EM_CONF[$_EXTKEY] = array(
 	'internal' => '',
 	'uploadfolder' => '1',
 	'createDirs' => '',
-	'clearCacheOnLoad' => 0,
+	'clearCacheOnLoad' => 1,
 	'version' => '1.0.0beta1',
 	'constraints' => array(
 		'depends' => array(
-			'typo3' => '6.0.0-7.0.99',
-			'generic_gallery' => '',
+			'typo3' => '6.0.0-6.2.99',
 		),
 		'conflicts' => array(
+			'generic_gallery' => '',
 		),
 		'suggests' => array(
+			'filemetadata' => '',
+			'metadata' => '',
+			'media' => ''
 		),
 	),
 );
