@@ -61,8 +61,6 @@ class TcaHook {
 			$settings = $typoscript['plugin.']['tx_ggextbase.']['settings.'];
 			$predef = array();
 
-			var_dump($settings);
-
 			// no config available
 			if (!is_array($settings['gallery.']) || sizeof($settings['gallery.']) === 0) {
 				$optionList[] = array(
