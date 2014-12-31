@@ -186,6 +186,46 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	}
 
 	/**
+	 * Shortcut for image properties
+	 *
+	 * @return array
+	 */
+	public function getImageData() {
+		return array_merge(
+			$this->getImage()->getProperties(),
+			$this->getAdditionalImageProperties()
+		);
+	}
+
+	/**
+	 * Return formatted image properties
+	 *
+	 * @return array
+	 */
+	private function getAdditionalImageProperties() {
+		$properties = $this->getImage()->getProperties();
+		$data = array();
+
+		// process exif data
+		$data['shutter_speed_value'] = $properties['shutter_speed_value'] . 's';
+		$data['aperture_value'] = 'f/' . $properties['aperture_value'];
+		$data['focal_length'] = $properties['focal_length'] . 'mm';
+		$data['iso_speed_ratings'] = 'ISO' . $properties['iso_speed_ratings'];
+
+		// process flash data
+		if (isset($GLOBALS['TCA']['sys_file_metadata']['columns']['flash']['config']['items'])) {
+			$items = (array) $GLOBALS['TCA']['sys_file_metadata']['columns']['flash']['config']['items'];
+			foreach ($items as $item) {
+				if ($item[1] === $properties['flash']) {
+					$data['flash'] = $item[0];
+				}
+			}
+		}
+
+		return $data;
+	}
+
+	/**
 	 * Sets the image
 	 *
 	 * @param \TYPO3\CMS\Core\Resource\File $image
