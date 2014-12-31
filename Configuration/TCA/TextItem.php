@@ -6,14 +6,13 @@ if (!defined ('TYPO3_MODE')) {
 $GLOBALS['TCA']['tx_generic_gallery_content'] = array(
 	'ctrl' => $GLOBALS['TCA']['tx_generic_gallery_content']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'hidden, bodytext, position, width',
+		'showRecordFieldList' => 'hidden,bodytext,position'
 	),
 	'types' => array(
-		'0' => array('showitem' => 'hidden;;1;;1-1-1, bodytext;;2;;1-1-1, ')
+		'0' => array('showitem' => 'hidden;;1;;1-1-1, bodytext')
 	),
 	'palettes' => array(
-		'1' => array('showitem' => 'starttime, endtime'),
-		'2' => array('showitem' => 'position, width')
+		'1' => array('showitem' => 'position, width')
 	),
 	'columns' => array(
 		'hidden' => array(
@@ -61,10 +60,10 @@ $GLOBALS['TCA']['tx_generic_gallery_content'] = array(
 			'label' => 'LLL:EXT:gg_extbase/Resources/Private/Language/locallang_db.xlf:tx_ggextbase_domain_model_textitem.bodytext',
 			'config' => array(
 				'type' => 'text',
-				'cols' => 40,
-				'rows' => 15,
-				'defaultExtras' => 'richtext[*]:rte_transform[flag=rte_enabled|mode=ts]',
+				'cols' => '48',
+				'rows' => '5',
 			),
+			'defaultExtras' => 'richtext[*]:rte_transform[flag=rte_enabled|mode=ts]',
 		),
 		'position' => array(
 			'exclude' => 1,

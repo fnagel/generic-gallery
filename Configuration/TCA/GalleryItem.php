@@ -6,7 +6,7 @@ if (!defined ('TYPO3_MODE')) {
 $GLOBALS['TCA']['tx_generic_gallery_pictures'] = array(
 	'ctrl' => $GLOBALS['TCA']['tx_generic_gallery_pictures']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'hidden, title, link, images, text_items',
+		'showRecordFieldList' => 'hidden,starttime,endtime,tt_content_id,images'
 	),
 	'types' => array(
 		'0' => array('showitem' => 'hidden;;1;;1-1-1, title;;2;;1-1-1, link, images')
@@ -95,6 +95,11 @@ $GLOBALS['TCA']['tx_generic_gallery_pictures'] = array(
 				),
 				$GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
 			),
+		),
+		'tt_content_id' => Array(
+			'config' => Array(
+				'type' => 'passthrough',
+			)
 		),
 		'contents' => array(
 			'exclude' => 1,
