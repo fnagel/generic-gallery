@@ -46,7 +46,6 @@ Migration
 ToDo
 ----
 
-* Add german localization
 * Ensure TYPO3 CMS 7.0 compatibility
 * Add documentation
 * Fix inline @ToDo's
