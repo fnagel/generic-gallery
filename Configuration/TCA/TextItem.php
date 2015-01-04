@@ -6,7 +6,7 @@ if (!defined ('TYPO3_MODE')) {
 $GLOBALS['TCA']['tx_generic_gallery_content'] = array(
 	'ctrl' => $GLOBALS['TCA']['tx_generic_gallery_content']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'hidden,bodytext,position'
+		'showRecordFieldList' => 'hidden, starttime, endtime, bodytext, position, width'
 	),
 	'types' => array(
 		'0' => array('showitem' => 'hidden;;1;;1-1-1, bodytext')

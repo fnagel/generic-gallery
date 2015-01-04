@@ -6,14 +6,13 @@ if (!defined ('TYPO3_MODE')) {
 $GLOBALS['TCA']['tx_generic_gallery_pictures'] = array(
 	'ctrl' => $GLOBALS['TCA']['tx_generic_gallery_pictures']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'hidden,starttime,endtime,tt_content_id,images'
+		'showRecordFieldList' => 'hidden, starttime, endtime, images, tt_content_id, contents'
 	),
 	'types' => array(
-		'0' => array('showitem' => 'hidden;;1;;1-1-1, title;;2;;1-1-1, link, images')
+		'0' => array('showitem' => 'hidden;;1;;1-1-1, title, link, images, contents')
 	),
 	'palettes' => array(
-		'1' => array('showitem' => 'starttime, endtime'),
-		'2' => array('showitem' => 'contents')
+		'1' => array('showitem' => 'starttime, endtime')
 	),
 	'columns' => array(
 		'hidden' => array(

@@ -45,7 +45,7 @@ Migration
 
 ToDo
 ----
-
+* Inline RTE fails sometimes, incorrect buttonset
 * Ensure TYPO3 CMS 7.0 compatibility
 * Add documentation
 * Fix inline @ToDo's
