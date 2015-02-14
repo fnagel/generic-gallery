@@ -1,0 +1,40 @@
+
+plugin.tx_genericgallery {
+	settings {
+		gallery {
+			# Add carousel example
+			bootstrap_slider_image {
+				name = Bootstrap Image Slider
+
+				# template for gallery
+				template = EXT:generic_gallery/Resources/Private/Templates/Examples/BootstrapImageSlider.html
+			}
+			# Add carousel example
+			bootstrap_slider_teaser {
+				name = Bootstrap Teaser Slider
+
+				# template for gallery
+				template = EXT:generic_gallery/Resources/Private/Templates/Examples/BootstrapTeaserSlider.html
+			}
+		}
+	}
+}
+
+# Add asset files for default template
+page {
+	# Make sure jQuery is included!
+
+	includeJSFooter {
+		boostrap = https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js
+		boostrap.external = 1
+		boostrap.disableCompression = 1
+		boostrap.excludeFromConcatenation = 1
+	}
+
+	includeCSS {
+		boostrap = https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css
+		boostrap.external = 1
+		boostrap.disableCompression = 1
+		boostrap.excludeFromConcatenation = 1
+	}
+}

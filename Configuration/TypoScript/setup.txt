@@ -1,0 +1,32 @@
+
+plugin.tx_genericgallery {
+
+	view {
+		templateRootPath = {$plugin.tx_genericgallery.view.templateRootPath}
+		partialRootPath = {$plugin.tx_genericgallery.view.partialRootPath}
+		layoutRootPath = {$plugin.tx_genericgallery.view.layoutRootPath}
+	}
+
+	persistence {
+		storagePid = {$plugin.tx_genericgallery.persistence.storagePid}
+	}
+
+	settings {
+		# Partial and layout files configured by standard extbase / fluid config, see above
+
+		# Config available gallery types
+		gallery {
+			default {
+				name = Default Gallery
+
+				# template for gallery
+				template = EXT:generic_gallery/Resources/Private/Templates/GalleryCollection/Show.html
+
+				# template for item detail view
+				itemTemplate = EXT:generic_gallery/Resources/Private/Templa	tes/GalleryItem/Show.html
+			}
+		}
+	}
+
+}
+

@@ -1,0 +1,10 @@
+{namespace gg=TYPO3\GenericGallery\ViewHelpers}
+
+<gg:link.typolink configuration="{parameter: item.link}">
+	<f:image
+		width="300c"
+		height="300c"
+		src="{item.image.uid}"
+		alt="{item.image.alternative}"
+		/>
+</gg:link.typolink>

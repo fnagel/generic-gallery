@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2014-09-14T21:19:47Z" product-name="genericgallery">
+		<header/>
+		<body>
+			<trans-unit id="bodytext.description">
+				<source>bodytext</source>
+			</trans-unit>
+			<trans-unit id="position.description">
+				<source>position</source>
+			</trans-unit>
+			<trans-unit id="width.description">
+				<source>width</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

@@ -1,18 +1,23 @@
 <?php
 if (!defined('TYPO3_MODE')) {
-	die ('Access denied.');
+	die('Access denied.');
 }
 
-// add plugin
-t3lib_extMgm::addPItoST43($_EXTKEY, 'pi1/class.tx_genericgallery_pi1.php', '_pi1', 'list_type', 1);
+// BE preview
+$TYPO3_CONF_VARS['SC_OPTIONS']['cms/layout/class.tx_cms_layout.php']['list_type_Info']['genericgallery_pi1'][] =
+	'EXT:generic_gallery/Classes/Backend/Hooks/PageLayoutViewHook.php:TYPO3\GenericGallery\Backend\Hooks\PageLayoutViewHook->getExtensionSummary';
 
-// add eID for AJX requests
-$GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include'][$_EXTKEY] = 'EXT:' . $_EXTKEY . '/lib/class.tx_genericgallery_ajax.php';
-
-// add BE layout
-$TYPO3_CONF_VARS['SC_OPTIONS']['cms/layout/class.tx_cms_layout.php']['list_type_Info']['generic_gallery_pi1'][] = 'EXT:generic_gallery/pi1/class.tx_genericgallery_pi1_cms_layout.php:tx_genericgallery_cms_layout->getExtensionSummary';
-
-// add records to the search
-$GLOBALS['TYPO3_CONF_VARS']['SYS']['livesearch']['gg_pictures'] = 'tx_generic_gallery_pictures';
-$GLOBALS['TYPO3_CONF_VARS']['SYS']['livesearch']['gg_content'] = 'tx_generic_gallery_content';
-?>
+// FE plugin
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+	'TYPO3.' . $_EXTKEY,
+	'Pi1',
+	array(
+		'GalleryCollection' => 'show',
+		'GalleryItem' => 'show',
+	),
+	// non-cacheable actions
+	array(
+		'GalleryCollection' => '',
+		'GalleryItem' => '',
+	)
+);

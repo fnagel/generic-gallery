@@ -1,74 +1,101 @@
 <?php
 if (!defined('TYPO3_MODE')) {
-	die ('Access denied.');
+	die('Access denied.');
 }
 
-t3lib_div::loadTCA('tt_content');
-$TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY . '_pi1'] = 'layout,select_key,pages';
+$extensionName = \TYPO3\CMS\Core\Utility\GeneralUtility::underscoredToLowerCamelCase($_EXTKEY);
 
 
-t3lib_extMgm::addPlugin(array(
-	'LLL:EXT:generic_gallery/locallang_db.xml:tt_content.list_type_pi1',
-	$_EXTKEY . '_pi1',
-	t3lib_extMgm::extRelPath($_EXTKEY) . 'ext_icon.gif'
-), 'list_type');
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+	$_EXTKEY,
+	'Pi1',
+	'Generic Gallery'
+);
 
 
-t3lib_extMgm::addStaticFile($_EXTKEY, 'res/ts/', 'Generic Gallery demos');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
+	$_EXTKEY, 'Configuration/TypoScript', 'Generic Gallery: default'
+);
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
+	$_EXTKEY, 'Configuration/TypoScript/Examples/Bootstrap', 'Generic Gallery: Example - Boostrap'
+);
 
-if (TYPO3_MODE == 'BE') {
-	$TBE_MODULES_EXT['xMOD_db_new_content_el']['addElClasses']['tx_genericgallery_pi1_wizicon'] = t3lib_extMgm::extPath($_EXTKEY) . 'pi1/class.tx_genericgallery_pi1_wizicon.php';
 
-	// add dynamic fields
-	t3lib_div::requireOnce(t3lib_extMgm::extPath($_EXTKEY) . 'pi1/class.tx_genericgallery_pi1_addFields.php');
-
-	// preview
-	t3lib_div::requireOnce(t3lib_extMgm::extPath($_EXTKEY) . 'pi1/class.tx_genericgallery_pi1_cms_layout.php');
-}
-
-$TCA['tx_generic_gallery_pictures'] = array(
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr(
+	'tx_generic_gallery_pictures',
+	'EXT:generic_gallery/Resources/Private/Language/locallang_csh_tx_genericgallery_domain_model_galleryitem.xlf'
+);
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_generic_gallery_pictures');
+$GLOBALS['TCA']['tx_generic_gallery_pictures'] = array(
 	'ctrl' => array(
-		'title' => 'LLL:EXT:generic_gallery/locallang_db.xml:generic_gallery_pictures',
+		'title'	=> 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:tx_genericgallery_domain_model_galleryitem',
 		'label' => 'title',
-		'label_userFunc' => 'tx_genericgallery_cms_layout->getPictureTitle',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
 		'cruser_id' => 'cruser_id',
-		'sortby' => 'sorting',
+		'dividers2tabs' => TRUE,
 		'delete' => 'deleted',
 		'enablecolumns' => array(
 			'disabled' => 'hidden',
 			'starttime' => 'starttime',
 			'endtime' => 'endtime',
 		),
-		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'tca.php',
-		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY) . 'icon_tx_genericgallery_pictures.gif',
-		'searchFields' => 'title,link',
+		'searchFields' => 'title,link,image,text_items,',
+		'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) .
+			'Configuration/TCA/GalleryItem.php',
+		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) .
+			'Resources/Public/Icons/tx_genericgallery_domain_model_galleryitem.gif'
 	),
 );
 
-$TCA['tx_generic_gallery_content'] = array(
+
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr(
+	'tx_generic_gallery_content',
+	'EXT:generic_gallery/Resources/Private/Language/locallang_csh_tx_genericgallery_domain_model_textitem.xlf'
+);
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_generic_gallery_content');
+$GLOBALS['TCA']['tx_generic_gallery_content'] = array(
 	'ctrl' => array(
-		'title' => 'LLL:EXT:generic_gallery/locallang_db.xml:generic_gallery_content',
+		'title'	=> 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:tx_genericgallery_domain_model_textitem',
 		'label' => 'bodytext',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
 		'cruser_id' => 'cruser_id',
-		'default_sortby' => 'ORDER BY crdate',
+		'dividers2tabs' => TRUE,
 		'delete' => 'deleted',
 		'enablecolumns' => array(
 			'disabled' => 'hidden',
+			'starttime' => 'starttime',
+			'endtime' => 'endtime',
 		),
-		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'tca.php',
-		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY) . 'icon_tx_genericgallery_content.gif',
-		'searchFields' => 'bodytext',
+		'searchFields' => 'bodytext,position,width,',
+		'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) .
+			'Configuration/TCA/TextItem.php',
+		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) .
+			'Resources/Public/Icons/tx_genericgallery_domain_model_textitem.gif'
 	),
 );
 
+
 $tempColumns = array(
+	// gallery type
+	'tx_generic_gallery_predefined' => Array(
+		'exclude' => 1,
+		'label' => 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xml:generic_gallery_predefined',
+		'config' => Array(
+			'type' => 'select',
+			'allowNonIdValues' => 1,
+			'itemsProcFunc' => 'TYPO3\GenericGallery\Backend\Hooks\TcaHook->addPredefinedFields',
+			'size' => 1,
+			'minitems' => 0,
+			'maxitems' => 1,
+		)
+	),
+
+	// single items
 	'tx_generic_gallery_items' => Array(
 		'exclude' => 1,
-		'label' => 'LLL:EXT:generic_gallery/locallang_db.xml:generic_gallery_items',
+		'label' => 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xml:generic_gallery_items',
 		'config' => Array(
 			'type' => 'inline',
 			'foreign_table' => 'tx_generic_gallery_pictures',
@@ -78,45 +105,45 @@ $tempColumns = array(
 				'collapseAll' => 1,
 				'expandSingle' => 1,
 			),
-			'maxitems' => 5000,
-		)
-	),
-	'tx_generic_gallery_predefined' => Array(
-		'exclude' => 1,
-		'label' => 'LLL:EXT:generic_gallery/locallang_db.xml:generic_gallery_predefined',
-		'config' => Array(
-			'type' => 'select',
-			'allowNonIdValues' => 1,
-			'itemsProcFunc' => 'tx_genericgallery_addFields->addFields_predefined',
-			'size' => 1,
+			'maxitems' => 1000,
 			'minitems' => 0,
-			'maxitems' => 1,
 		)
 	),
+
+	// file reference
 	'tx_generic_gallery_images' => Array(
 		'exclude' => 1,
-		'label' => 'LLL:EXT:generic_gallery/locallang_db.xml:generic_gallery_images',
+		'label' => 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xml:generic_gallery_images',
 		'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
 			'tx_generic_gallery_picture_single',
 			array(
 				'size' => 20,
-				'maxitems' => 1000,
+				'maxitems' => 2000,
 				'minitems' => 0,
 				'autoSizeMax' => 40,
 			),
 			'jpg,gif,jpeg,png'
 		)
 	),
+
+	// collection reference
+	'tx_generic_gallery_collection' => Array(
+		'exclude' => 1,
+		'label' => 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xml:generic_gallery_collection',
+		'config' => Array(
+			'type' => 'inline',
+			'foreign_table' => 'sys_file_collection',
+			'appearance' => Array(
+				'collapseAll' => 0,
+				'expandSingle' => 1,
+			),
+			'maxitems' => 1,
+			'minitems' => 0,
+		)
+	),
 );
 
-
-// add field to tt_content so we can use irre within our plugin
-t3lib_div::loadTCA('tt_content');
-t3lib_extMgm::addTCAcolumns('tt_content', $tempColumns, 1);
-$TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY . '_pi1'] = 'tx_generic_gallery_predefined,tx_generic_gallery_items,tx_generic_gallery_images';
-
-// enable usage of our entries within a standard page
-t3lib_extMgm::allowTableOnStandardPages('tx_generic_gallery_pictures');
-t3lib_extMgm::allowTableOnStandardPages('tx_generic_gallery_content');
-
-?>
+// add field to tt_content
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('tt_content', $tempColumns, 1);
+$TCA['tt_content']['types']['list']['subtypes_addlist'][strtolower($extensionName) . '_pi1'] =
+	'tx_generic_gallery_predefined,tx_generic_gallery_items,tx_generic_gallery_images,tx_generic_gallery_collection';

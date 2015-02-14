@@ -1,2 +1,2 @@
-	# cat=basic; type=boolean; label=LLL:EXT:generic_gallery/locallang_db.xml:EM.enable_cms_layout
+	# cat=basic; type=boolean; label=LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:extension_manager.enable_cms_layout
 enable_cms_layout = 1

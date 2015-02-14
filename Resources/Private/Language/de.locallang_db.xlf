@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2014-09-14T21:19:47Z" product-name="genericgallery">
+		<header/>
+		<body>
+			<trans-unit id="generic_gallery_predefined">
+				<target>Galerie Typ</target>
+			</trans-unit>
+			<trans-unit id="generic_gallery_items">
+				<target>Einzelne Bilder</target>
+			</trans-unit>
+			<trans-unit id="generic_gallery_images">
+				<target>Mehrere Bilder</target>
+			</trans-unit>
+			<trans-unit id="generic_gallery_collection">
+				<target>Bilder Sammlung</target>
+			</trans-unit>
+
+			<trans-unit id="tx_genericgallery_domain_model_galleryitem">
+				<target>Generic Gallery: Bild-Relation</target>
+			</trans-unit>
+			<trans-unit id="tx_genericgallery_domain_model_galleryitem.title">
+				<target>Titel</target>
+			</trans-unit>
+			<trans-unit id="tx_genericgallery_domain_model_galleryitem.link">
+				<target>Link</target>
+			</trans-unit>
+			<trans-unit id="tx_genericgallery_domain_model_galleryitem.images">
+				<target>Bild</target>
+			</trans-unit>
+			<trans-unit id="tx_genericgallery_domain_model_galleryitem.text_items">
+				<target>Beschreibung</target>
+			</trans-unit>
+
+			<trans-unit id="tx_genericgallery_domain_model_textitem">
+				<target>Generic Gallery: Beschreibungs-Relation</target>
+			</trans-unit>
+			<trans-unit id="tx_genericgallery_domain_model_textitem.bodytext">
+				<target>Beschreibung</target>
+			</trans-unit>
+			<trans-unit id="tx_genericgallery_domain_model_textitem.position">
+				<target>Position (definiert als Koordinate oben links, z.B. 100,200)</target>
+			</trans-unit>
+			<trans-unit id="tx_genericgallery_domain_model_textitem.width">
+				<target>Breite des Text (benutze Pixel Werte wie 300)</target>
+			</trans-unit>
+
+			<trans-unit id="cms_layout.missing_config">
+				<target>Keine TypoScript-Konfiguration gefunden.</target>
+			</trans-unit>
+			<trans-unit id="cms_layout.please_select">
+				<target>Bitte wähle einen Galerie Typ.</target>
+			</trans-unit>
+
+			<trans-unit id="extension_manager.enable_cms_layout">
+				<target>CMS Layout einschalten: Bessere Backend Previews einschalten.</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
