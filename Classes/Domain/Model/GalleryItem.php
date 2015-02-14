@@ -1,5 +1,5 @@
 <?php
-namespace TYPO3\GgExtbase\Domain\Model;
+namespace TYPO3\GenericGallery\Domain\Model;
 
 
 /***************************************************************
@@ -72,7 +72,7 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * textItems
 	 *
-	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\GgExtbase\Domain\Model\TextItem>
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\GenericGallery\Domain\Model\TextItem>
 	 */
 	protected $textItems;
 
@@ -249,22 +249,22 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Adds a textItem
 	 *
-	 * @param \TYPO3\GgExtbase\Domain\Model\TextItem $textItems
+	 * @param \TYPO3\GenericGallery\Domain\Model\TextItem $textItems
 	 * @return void
 	 * @api
 	 */
-	public function addTextItem(\TYPO3\GgExtbase\Domain\Model\TextItem $textItems) {
+	public function addTextItem(\TYPO3\GenericGallery\Domain\Model\TextItem $textItems) {
 		$this->textItems->attach($textItems);
 	}
 
 	/**
 	 * Removes a textItem
 	 *
-	 * @param \TYPO3\GgExtbase\Domain\Model\TextItem $textItems
+	 * @param \TYPO3\GenericGallery\Domain\Model\TextItem $textItems
 	 * @return void
 	 * @api
 	 */
-	public function removeTextItem(\TYPO3\GgExtbase\Domain\Model\TextItem $textItems) {
+	public function removeTextItem(\TYPO3\GenericGallery\Domain\Model\TextItem $textItems) {
 		$this->textItems->detach($textItems);
 	}
 

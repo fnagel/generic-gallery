@@ -1,5 +1,5 @@
 
-plugin.tx_ggextbase {
+plugin.tx_genericgallery {
 	settings {
 		gallery {
 			# Add carousel example
@@ -7,14 +7,14 @@ plugin.tx_ggextbase {
 				name = Bootstrap Image Slider
 
 				# template for gallery
-				template = EXT:gg_extbase/Resources/Private/Templates/Examples/BootstrapImageSlider.html
+				template = EXT:generic_gallery/Resources/Private/Templates/Examples/BootstrapImageSlider.html
 			}
 			# Add carousel example
 			bootstrap_slider_teaser {
 				name = Bootstrap Teaser Slider
 
 				# template for gallery
-				template = EXT:gg_extbase/Resources/Private/Templates/Examples/BootstrapTeaserSlider.html
+				template = EXT:generic_gallery/Resources/Private/Templates/Examples/BootstrapTeaserSlider.html
 			}
 		}
 	}

@@ -1,10 +1,10 @@
 <?php
-namespace TYPO3\GgExtbase\Tests\Unit\Controller;
+namespace TYPO3\GenericGallery\Tests\Unit\Controller;
 /***************************************************************
  *  Copyright notice
  *
  *  (c) 2014 Felix Nagel <info@felixnagel.com>
- *  			
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -25,19 +25,19 @@ namespace TYPO3\GgExtbase\Tests\Unit\Controller;
  ***************************************************************/
 
 /**
- * Test case for class TYPO3\GgExtbase\Controller\GalleryCollectionController.
+ * Test case for class TYPO3\GenericGallery\Controller\GalleryCollectionController.
  *
  * @author Felix Nagel <info@felixnagel.com>
  */
 class GalleryCollectionControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
-	 * @var \TYPO3\GgExtbase\Controller\GalleryCollectionController
+	 * @var \TYPO3\GenericGallery\Controller\GalleryCollectionController
 	 */
 	protected $subject = NULL;
 
 	protected function setUp() {
-		$this->subject = $this->getMock('TYPO3\\GgExtbase\\Controller\\GalleryCollectionController', array('redirect', 'forward', 'addFlashMessage'), array(), '', FALSE);
+		$this->subject = $this->getMock('TYPO3\\GenericGallery\\Controller\\GalleryCollectionController', array('redirect', 'forward', 'addFlashMessage'), array(), '', FALSE);
 	}
 
 	protected function tearDown() {
@@ -51,7 +51,7 @@ class GalleryCollectionControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 
 		$allGalleryCollections = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', FALSE);
 
-		$galleryCollectionRepository = $this->getMock('TYPO3\\GgExtbase\\Domain\\Repository\\GalleryCollectionRepository', array('findAll'), array(), '', FALSE);
+		$galleryCollectionRepository = $this->getMock('TYPO3\\GenericGallery\\Domain\\Repository\\GalleryCollectionRepository', array('findAll'), array(), '', FALSE);
 		$galleryCollectionRepository->expects($this->once())->method('findAll')->will($this->returnValue($allGalleryCollections));
 		$this->inject($this->subject, 'galleryCollectionRepository', $galleryCollectionRepository);
 
@@ -66,7 +66,7 @@ class GalleryCollectionControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 	 * @test
 	 */
 	public function showActionAssignsTheGivenGalleryCollectionToView() {
-		$galleryCollection = new \TYPO3\GgExtbase\Domain\Model\GalleryCollection();
+		$galleryCollection = new \TYPO3\GenericGallery\Domain\Model\GalleryCollection();
 
 		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
 		$this->inject($this->subject, 'view', $view);

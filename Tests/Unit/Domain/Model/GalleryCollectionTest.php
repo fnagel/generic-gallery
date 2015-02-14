@@ -1,6 +1,6 @@
 <?php
 
-namespace TYPO3\GgExtbase\Tests\Unit\Domain\Model;
+namespace TYPO3\GenericGallery\Tests\Unit\Domain\Model;
 
 /***************************************************************
  *  Copyright notice
@@ -27,7 +27,7 @@ namespace TYPO3\GgExtbase\Tests\Unit\Domain\Model;
  ***************************************************************/
 
 /**
- * Test case for class \TYPO3\GgExtbase\Domain\Model\GalleryCollection.
+ * Test case for class \TYPO3\GenericGallery\Domain\Model\GalleryCollection.
  *
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
@@ -36,12 +36,12 @@ namespace TYPO3\GgExtbase\Tests\Unit\Domain\Model;
  */
 class GalleryCollectionTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	/**
-	 * @var \TYPO3\GgExtbase\Domain\Model\GalleryCollection
+	 * @var \TYPO3\GenericGallery\Domain\Model\GalleryCollection
 	 */
 	protected $subject = NULL;
 
 	protected function setUp() {
-		$this->subject = new \TYPO3\GgExtbase\Domain\Model\GalleryCollection();
+		$this->subject = new \TYPO3\GenericGallery\Domain\Model\GalleryCollection();
 	}
 
 	protected function tearDown() {

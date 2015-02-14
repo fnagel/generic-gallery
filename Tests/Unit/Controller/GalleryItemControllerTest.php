@@ -1,10 +1,10 @@
 <?php
-namespace TYPO3\GgExtbase\Tests\Unit\Controller;
+namespace TYPO3\GenericGallery\Tests\Unit\Controller;
 /***************************************************************
  *  Copyright notice
  *
  *  (c) 2014 Felix Nagel <info@felixnagel.com>
- *  			
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -25,19 +25,19 @@ namespace TYPO3\GgExtbase\Tests\Unit\Controller;
  ***************************************************************/
 
 /**
- * Test case for class TYPO3\GgExtbase\Controller\GalleryItemController.
+ * Test case for class TYPO3\GenericGallery\Controller\GalleryItemController.
  *
  * @author Felix Nagel <info@felixnagel.com>
  */
 class GalleryItemControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
-	 * @var \TYPO3\GgExtbase\Controller\GalleryItemController
+	 * @var \TYPO3\GenericGallery\Controller\GalleryItemController
 	 */
 	protected $subject = NULL;
 
 	protected function setUp() {
-		$this->subject = $this->getMock('TYPO3\\GgExtbase\\Controller\\GalleryItemController', array('redirect', 'forward', 'addFlashMessage'), array(), '', FALSE);
+		$this->subject = $this->getMock('TYPO3\\GenericGallery\\Controller\\GalleryItemController', array('redirect', 'forward', 'addFlashMessage'), array(), '', FALSE);
 	}
 
 	protected function tearDown() {
@@ -48,7 +48,7 @@ class GalleryItemControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @test
 	 */
 	public function showActionAssignsTheGivenGalleryItemToView() {
-		$galleryItem = new \TYPO3\GgExtbase\Domain\Model\GalleryItem();
+		$galleryItem = new \TYPO3\GenericGallery\Domain\Model\GalleryItem();
 
 		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
 		$this->inject($this->subject, 'view', $view);

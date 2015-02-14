@@ -1,6 +1,6 @@
 <?php
 
-namespace TYPO3\GgExtbase\Domain\Model;
+namespace TYPO3\GenericGallery\Domain\Model;
 
 /***************************************************************
  *
@@ -43,7 +43,7 @@ class GalleryCollection extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity i
 	/**
 	 * Construct class
 	 *
-	 * @return \TYPO3\GgExtbase\Domain\Model\GalleryCollection
+	 * @return \TYPO3\GenericGallery\Domain\Model\GalleryCollection
 	 */
 	public function __construct() {
 		$this->items = new ObjectStorage();
@@ -112,7 +112,7 @@ class GalleryCollection extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity i
 	 */
 	public function getByUid($uid) {
 		foreach ($this->items as $item) {
-			/* @var $item \TYPO3\GgExtbase\Domain\Model\GalleryItem */
+			/* @var $item \TYPO3\GenericGallery\Domain\Model\GalleryItem */
 			if ((string) $uid === (string) $item->getUid()) {
 				return $item;
 			}
@@ -146,7 +146,7 @@ class GalleryCollection extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity i
 	 * @return $this
 	 */
 	public function addAll($data) {
-		/* @var $object \TYPO3\GgExtbase\Domain\Model\GalleryItem */
+		/* @var $object \TYPO3\GenericGallery\Domain\Model\GalleryItem */
 		foreach ($data as $object) {
 			$this->items->attach($object);
 		}

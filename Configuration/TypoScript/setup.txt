@@ -1,14 +1,14 @@
 
-plugin.tx_ggextbase {
+plugin.tx_genericgallery {
 
 	view {
-		templateRootPath = {$plugin.tx_ggextbase.view.templateRootPath}
-		partialRootPath = {$plugin.tx_ggextbase.view.partialRootPath}
-		layoutRootPath = {$plugin.tx_ggextbase.view.layoutRootPath}
+		templateRootPath = {$plugin.tx_genericgallery.view.templateRootPath}
+		partialRootPath = {$plugin.tx_genericgallery.view.partialRootPath}
+		layoutRootPath = {$plugin.tx_genericgallery.view.layoutRootPath}
 	}
 
 	persistence {
-		storagePid = {$plugin.tx_ggextbase.persistence.storagePid}
+		storagePid = {$plugin.tx_genericgallery.persistence.storagePid}
 	}
 
 	settings {
@@ -20,10 +20,10 @@ plugin.tx_ggextbase {
 				name = Default Gallery
 
 				# template for gallery
-				template = EXT:gg_extbase/Resources/Private/Templates/GalleryCollection/Show.html
+				template = EXT:generic_gallery/Resources/Private/Templates/GalleryCollection/Show.html
 
 				# template for item detail view
-				itemTemplate = EXT:gg_extbase/Resources/Private/Templa	tes/GalleryItem/Show.html
+				itemTemplate = EXT:generic_gallery/Resources/Private/Templa	tes/GalleryItem/Show.html
 			}
 		}
 	}

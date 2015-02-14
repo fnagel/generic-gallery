@@ -1,6 +1,6 @@
 <?php
 
-namespace TYPO3\GgExtbase\Controller;
+namespace TYPO3\GenericGallery\Controller;
 
 /***************************************************************
  *

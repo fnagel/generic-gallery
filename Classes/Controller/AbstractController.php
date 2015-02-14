@@ -1,6 +1,6 @@
 <?php
 
-namespace TYPO3\GgExtbase\Controller;
+namespace TYPO3\GenericGallery\Controller;
 
 /***************************************************************
  *
@@ -27,7 +27,7 @@ namespace TYPO3\GgExtbase\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use \TYPO3\GgExtbase\Domain\Model\GalleryCollection,
+use \TYPO3\GenericGallery\Domain\Model\GalleryCollection,
 	TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 
 /**
@@ -52,7 +52,7 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
 	/**
 	 * GalleryCollection
 	 *
-	 * @var \TYPO3\GgExtbase\Domain\Model\GalleryCollection
+	 * @var \TYPO3\GenericGallery\Domain\Model\GalleryCollection
 	 */
 	protected $collection = NULL;
 
@@ -150,8 +150,8 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
 	 * @return \TYPO3\CMS\Extbase\Persistence\Generic\QueryResult
 	 */
 	protected function getSigleItems() {
-		/* @var $itemRepository \TYPO3\GgExtbase\Domain\Repository\GalleryItemRepository */
-		$itemRepository = $this->objectManager->get('TYPO3\\GgExtbase\\Domain\\Repository\\GalleryItemRepository');
+		/* @var $itemRepository \TYPO3\GenericGallery\Domain\Repository\GalleryItemRepository */
+		$itemRepository = $this->objectManager->get('TYPO3\\GenericGallery\\Domain\\Repository\\GalleryItemRepository');
 		$items = $itemRepository->findByTtContentUid($this->uid);
 
 		return $items;

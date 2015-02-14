@@ -1,6 +1,6 @@
 <?php
 
-namespace TYPO3\GgExtbase\Domain\Repository;
+namespace TYPO3\GenericGallery\Domain\Repository;
 
 /***************************************************************
  *

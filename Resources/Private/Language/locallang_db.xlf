@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2014-09-14T21:19:47Z" product-name="gg_extbase">
+	<file source-language="en" datatype="plaintext" original="messages" date="2014-09-14T21:19:47Z" product-name="genericgallery">
 		<header/>
 		<body>
 			<trans-unit id="generic_gallery_predefined">
@@ -16,32 +16,32 @@
 				<source>Gallery Collection</source>
 			</trans-unit>
 
-			<trans-unit id="tx_ggextbase_domain_model_galleryitem">
+			<trans-unit id="tx_genericgallery_domain_model_galleryitem">
 				<source>Generic Gallery: picture relation</source>
 			</trans-unit>
-			<trans-unit id="tx_ggextbase_domain_model_galleryitem.title">
+			<trans-unit id="tx_genericgallery_domain_model_galleryitem.title">
 				<source>Title</source>
 			</trans-unit>
-			<trans-unit id="tx_ggextbase_domain_model_galleryitem.link">
+			<trans-unit id="tx_genericgallery_domain_model_galleryitem.link">
 				<source>Link</source>
 			</trans-unit>
-			<trans-unit id="tx_ggextbase_domain_model_galleryitem.images">
+			<trans-unit id="tx_genericgallery_domain_model_galleryitem.images">
 				<source>Image</source>
 			</trans-unit>
-			<trans-unit id="tx_ggextbase_domain_model_galleryitem.text_items">
+			<trans-unit id="tx_genericgallery_domain_model_galleryitem.text_items">
 				<source>Descriptions</source>
 			</trans-unit>
 
-			<trans-unit id="tx_ggextbase_domain_model_textitem">
+			<trans-unit id="tx_genericgallery_domain_model_textitem">
 				<source>Generic Gallery: description relation</source>
 			</trans-unit>
-			<trans-unit id="tx_ggextbase_domain_model_textitem.bodytext">
+			<trans-unit id="tx_genericgallery_domain_model_textitem.bodytext">
 				<source>Description</source>
 			</trans-unit>
-			<trans-unit id="tx_ggextbase_domain_model_textitem.position">
+			<trans-unit id="tx_genericgallery_domain_model_textitem.position">
 				<source>Position (use coordinates starting top left, like 100,200)</source>
 			</trans-unit>
-			<trans-unit id="tx_ggextbase_domain_model_textitem.width">
+			<trans-unit id="tx_genericgallery_domain_model_textitem.width">
 				<source>Width of the textfield (in px, example: 300)</source>
 			</trans-unit>
 

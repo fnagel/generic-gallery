@@ -1,5 +1,5 @@
-gg_extbase
-==========
+Generic Gallery
+===============
 
 TYPO3 CMS Extension Generic Gallery (Extbase / Fluid rewrite)
 
@@ -17,14 +17,6 @@ Features
 * image collection support (NEW)
 
 
-Roadmap
--------
-
-* Fix some ToDo's
-* Release v1.0.0
-* Update EXT:generic_gallery with notice to this extension
-
-
 Installation
 ------------
 
@@ -33,18 +25,28 @@ Installation
 * Configure TS and templates as you wish
 
 
-Migration
----------
+Migration from pibase to extbase / fluid version
+------------------------------------------------
 
 * Run update script in EM
 * Change TypoScript path
 	* from `plugin.tx_genericgallery_pi1.gallery`
-	* to `plugin.tx_ggextbase.settings.gallery`
+	* to `plugin.tx_genericgallery.settings.gallery`
+* Adjust TypoScript gallery settings
 * Update your templates to fluid structure
+
+
+
+Roadmap
+-------
+
+* Fix some ToDo's
+* Release v1.0.0
 
 
 ToDo
 ----
+* Test examples again after moving repo
 * Inline RTE fails sometimes, incorrect buttonset
 * Ensure TYPO3 CMS 7.0 compatibility
 * Add documentation

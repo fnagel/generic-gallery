@@ -57,7 +57,7 @@ $GLOBALS['TCA']['tx_generic_gallery_pictures'] = array(
 
 		'title' => array(
 			'exclude' => 1,
-			'label' => 'LLL:EXT:gg_extbase/Resources/Private/Language/locallang_db.xlf:tx_ggextbase_domain_model_galleryitem.title',
+			'label' => 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:tx_genericgallery_domain_model_galleryitem.title',
 			'config' => array(
 				'type' => 'input',
 				'size' => 30,
@@ -66,7 +66,7 @@ $GLOBALS['TCA']['tx_generic_gallery_pictures'] = array(
 		),
 		'link' => array(
 			'exclude' => 1,
-			'label' => 'LLL:EXT:gg_extbase/Resources/Private/Language/locallang_db.xlf:tx_ggextbase_domain_model_galleryitem.link',
+			'label' => 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:tx_genericgallery_domain_model_galleryitem.link',
 			'config' => array(
 				'type' => 'input',
 				'size' => 30,
@@ -84,7 +84,7 @@ $GLOBALS['TCA']['tx_generic_gallery_pictures'] = array(
 			),
 		),
 		'images' => array(
-			'label' => 'LLL:EXT:gg_extbase/Resources/Private/Language/locallang_db.xlf:tx_ggextbase_domain_model_galleryitem.images',
+			'label' => 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:tx_genericgallery_domain_model_galleryitem.images',
 			'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
 				'tx_generic_gallery_picture_single',
 				array(
@@ -102,7 +102,7 @@ $GLOBALS['TCA']['tx_generic_gallery_pictures'] = array(
 		),
 		'contents' => array(
 			'exclude' => 1,
-			'label' => 'LLL:EXT:gg_extbase/Resources/Private/Language/locallang_db.xlf:tx_ggextbase_domain_model_galleryitem.text_items',
+			'label' => 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:tx_genericgallery_domain_model_galleryitem.text_items',
 			'config' => array(
 				'type' => 'inline',
 				'foreign_table' => 'tx_generic_gallery_content',

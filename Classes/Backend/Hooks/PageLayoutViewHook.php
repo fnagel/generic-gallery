@@ -1,6 +1,6 @@
 <?php
 
-namespace TYPO3\GgExtbase\Backend\Hooks;
+namespace TYPO3\GenericGallery\Backend\Hooks;
 
 /***************************************************************
  * Copyright notice
@@ -35,7 +35,7 @@ use \TYPO3\CMS\Core\Utility\GeneralUtility,
  * Hook class for PageLayoutView hook `list_type_Info`
  *
  * @author Felix Nagel <info@felixnagel.com>
- * @package \TYPO3\GgExtbase\Backend\Hooks
+ * @package \TYPO3\GenericGallery\Backend\Hooks
  */
 class PageLayoutViewHook {
 
@@ -53,7 +53,7 @@ class PageLayoutViewHook {
 		array &$parameters = array(),
 		\TYPO3\CMS\Backend\View\PageLayoutView &$parentObject
 	) {
-		if ($parameters['row']['list_type'] !== 'ggextbase_gallery') {
+		if ($parameters['row']['list_type'] !== 'genericgallery_gallery') {
 			return '';
 		}
 
@@ -166,7 +166,7 @@ class PageLayoutViewHook {
 	 */
 	protected function isEnabledInExtensionManager() {
 		// get Extension Manager config
-		$extensionConfiguration = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['gg_extbase']);
+		$extensionConfiguration = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['genericgallery']);
 
 		if (intval($extensionConfiguration['enable_cms_layout']) !== 1) {
 			return FALSE;

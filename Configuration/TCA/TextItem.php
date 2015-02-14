@@ -57,7 +57,7 @@ $GLOBALS['TCA']['tx_generic_gallery_content'] = array(
 
 		'bodytext' => array(
 			'exclude' => 1,
-			'label' => 'LLL:EXT:gg_extbase/Resources/Private/Language/locallang_db.xlf:tx_ggextbase_domain_model_textitem.bodytext',
+			'label' => 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:tx_genericgallery_domain_model_textitem.bodytext',
 			'config' => array(
 				'type' => 'text',
 				'cols' => '48',
@@ -67,7 +67,7 @@ $GLOBALS['TCA']['tx_generic_gallery_content'] = array(
 		),
 		'position' => array(
 			'exclude' => 1,
-			'label' => 'LLL:EXT:gg_extbase/Resources/Private/Language/locallang_db.xlf:tx_ggextbase_domain_model_textitem.position',
+			'label' => 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:tx_genericgallery_domain_model_textitem.position',
 			'config' => array(
 				'type' => 'input',
 				'size' => 10,
@@ -77,7 +77,7 @@ $GLOBALS['TCA']['tx_generic_gallery_content'] = array(
 		),
 		'width' => array(
 			'exclude' => 1,
-			'label' => 'LLL:EXT:gg_extbase/Resources/Private/Language/locallang_db.xlf:tx_ggextbase_domain_model_textitem.width',
+			'label' => 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:tx_genericgallery_domain_model_textitem.width',
 			'config' => array(
 				'type' => 'input',
 				'size' => 10,

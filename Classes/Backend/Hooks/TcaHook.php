@@ -1,6 +1,6 @@
 <?php
 
-namespace TYPO3\GgExtbase\Backend\Hooks;
+namespace TYPO3\GenericGallery\Backend\Hooks;
 
 /***************************************************************
  * Copyright notice
@@ -32,7 +32,7 @@ use \TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @todo fix this whole class, introduce TS settings class
  * @author Felix Nagel <info@felixnagel.com>
- * @package \TYPO3\GgExtbase\Backend\Hooks
+ * @package \TYPO3\GenericGallery\Backend\Hooks
  */
 class TcaHook {
 
@@ -58,13 +58,13 @@ class TcaHook {
 			}
 
 			$typoscript = $this->loadTS($pid);
-			$settings = $typoscript['plugin.']['tx_ggextbase.']['settings.'];
+			$settings = $typoscript['plugin.']['tx_genericgallery.']['settings.'];
 			$predef = array();
 
 			// no config available
 			if (!is_array($settings['gallery.']) || sizeof($settings['gallery.']) === 0) {
 				$optionList[] = array(
-					0 => $LANG->sL('LLL:EXT:gg_extbase/Resources/Private/Language/locallang_db.xlf:cms_layout.missing_config'), 1 => ''
+					0 => $LANG->sL('LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:cms_layout.missing_config'), 1 => ''
 				);
 
 				return $config['items'] = array_merge($config['items'], $optionList);
@@ -83,7 +83,7 @@ class TcaHook {
 			}
 
 			$optionList = array();
-			$optionList[] = array(0 => $LANG->sL('LLL:EXT:gg_extbase/Resources/Private/Language/locallang_db.xlf:cms_layout.please_select'), 1 => '');
+			$optionList[] = array(0 => $LANG->sL('LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:cms_layout.please_select'), 1 => '');
 			foreach ($predef as $k => $v) {
 				$optionList[] = array(0 => $v, 1 => $k);
 			}

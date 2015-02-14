@@ -1,5 +1,5 @@
 <?php
-namespace TYPO3\GgExtbase\Domain\Model;
+namespace TYPO3\GenericGallery\Domain\Model;
 
 
 /***************************************************************

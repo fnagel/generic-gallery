@@ -3,7 +3,7 @@
 /**
  * Class ext_update
  *
- * Performs update tasks for extension gg_extbase
+ * Performs update tasks for extension genericgallery
  */
 class ext_update {
 
@@ -17,7 +17,7 @@ class ext_update {
 			'tt_content',
 			'list_type = "generic_gallery_pi1"',
 			array(
-				'list_type' => 'ggextbase_gallery'
+				'list_type' => 'genericgallery_pi1'
 			)
 		);
 

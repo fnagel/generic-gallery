@@ -1,6 +1,6 @@
 <?php
 
-namespace TYPO3\GgExtbase\ViewHelpers\Link;
+namespace TYPO3\GenericGallery\ViewHelpers\Link;
 
 /***************************************************************
  *  Copyright notice

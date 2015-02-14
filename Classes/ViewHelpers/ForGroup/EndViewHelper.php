@@ -1,6 +1,6 @@
 <?php
 
-namespace TYPO3\GgExtbase\ViewHelpers\ForGroup;
+namespace TYPO3\GenericGallery\ViewHelpers\ForGroup;
 
 /***************************************************************
  *  Copyright notice

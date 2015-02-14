@@ -219,9 +219,9 @@
             "targetVersion": "6.2",
             "version": ""
         },
-        "extensionKey": "gg_extbase",
+        "extensionKey": "genericgallery",
         "name": "Generic Gallery Extbase",
-        "originalExtensionKey": "gg_extbase",
+        "originalExtensionKey": "genericgallery",
         "persons": [
             {
                 "company": "",
