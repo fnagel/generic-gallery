@@ -12,7 +12,7 @@
 
 $EM_CONF[$_EXTKEY] = array(
 	'title' => 'Generic Gallery Extbase',
-	'description' => '',
+	'description' => 'One gallery to rule them all. Extbase & Fluid driven for use with any gallery / slide / rotate plugin.',
 	'category' => 'plugin',
 	'author' => 'Felix Nagel',
 	'author_email' => 'info@felixnagel.com',
