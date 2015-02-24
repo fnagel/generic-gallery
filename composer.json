@@ -1,0 +1,20 @@
+{
+  "name": "felixnagel/generic-gallery",
+  "description": "TYPO3 CMS gallery extension.",
+  "type": "typo3-cms-extension",
+  "keywords": [
+    "TYPO3 CMS",
+    "gallery",
+    "image",
+    "slider",
+    "lightbox",
+    "extbase",
+    "fluid"
+  ],
+  "homepage": "https://github.com/fnagel/generic-gallery",
+  "license": "GPL-2.0+",
+  "version": "1.0.0",
+  "support": {
+    "issues": "https://github.com/fnagel/generic-gallery/issues"
+  }
+}
