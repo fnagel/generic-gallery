@@ -15,6 +15,7 @@ Features
 * Single item support
 * multiple images support
 * image collection support (NEW)
+* Twitter Bootstrap Examples
 
 
 Installation
@@ -35,13 +36,14 @@ Migration from pibase to extbase / fluid version
 * Adjust TypoScript gallery settings
 * Update your templates to fluid structure
 
+_See demos:_ `Configuration/TypoScript/Examples`
 
 
 Roadmap
 -------
 
 * Fix some ToDo's
-* Release v1.0.0
+* Release v1.0.0 by pushing a tag (Gizzle Github Hook)
 
 
 ToDo
