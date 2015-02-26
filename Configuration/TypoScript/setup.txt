@@ -7,10 +7,6 @@ plugin.tx_genericgallery {
 		layoutRootPath = {$plugin.tx_genericgallery.view.layoutRootPath}
 	}
 
-	persistence {
-		storagePid = {$plugin.tx_genericgallery.persistence.storagePid}
-	}
-
 	settings {
 		# Partial and layout files configured by standard extbase / fluid config, see above
 
@@ -23,7 +19,7 @@ plugin.tx_genericgallery {
 				template = EXT:generic_gallery/Resources/Private/Templates/GalleryCollection/Show.html
 
 				# template for item detail view
-				itemTemplate = EXT:generic_gallery/Resources/Private/Templa	tes/GalleryItem/Show.html
+				itemTemplate = EXT:generic_gallery/Resources/Private/Templates/GalleryItem/Show.html
 			}
 		}
 	}
