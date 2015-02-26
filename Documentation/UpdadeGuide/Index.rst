@@ -6,8 +6,11 @@
 Updade Guide
 ------------
 
-Please take a look in the ChnageLog
-(typo3conf/ext/generic\_gallery/ChangeLog).
+.. only:: html
+
+	.. contents:: Within this page
+		:local:
+		:depth: 3
 
 
 
