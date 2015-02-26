@@ -7,6 +7,38 @@ Tutorial
 --------
 
 
+.. only:: html
+
+	.. contents:: Within this page
+		:local:
+		:depth: 3
+
+
+
+How to use Exif & IPTC
+^^^^^^^^^^^^^^^^^^^^^^
+
+You need to install EXT:filemetadata and use an extension like EXT:metadata or similar to extract the
+meta data and make it available via FAL properties.
+
+@todo Add more specific notice on how to use EXIF properties
+
+
+
+
+
+
+.. important::
+
+	All tutorials after this notice need to be updated to match version 1.0.0.
+
+
+
+
+
+@todo: OUTDATED CONTENT
+
+
 Custom marker (how to render any content)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -127,13 +159,6 @@ Example URL:
 ::
 
    index.php?eID=generic_gallery&uid=###UID###&type=json
-
-
-
-How to use Exif & IPTC
-^^^^^^^^^^^^^^^^^^^^^^
-
-Currently not possible as FAL does not provide these information.
 
 
 Preview is cropped / has overflow:hidden

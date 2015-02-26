@@ -6,8 +6,14 @@
 Known problems
 --------------
 
-Please see: `http://forge.typo3.org/projects/extension-
-generic\_gallery/issues <http://forge.typo3.org/projects/extension-
-generic_gallery/issues>`_
+Please see:
+http://forge.typo3.org/projects/extension-generic\_gallery/issues
+https://github.com/fnagel/generic-gallery/issues
 
 
+Contribution
+------------
+
+Any help is appreciated. Please feel free to drop me a line, open issues or send pull requests.
+
+It is possible to sponsor features and bugfixes!

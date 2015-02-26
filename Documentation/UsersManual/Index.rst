@@ -6,6 +6,9 @@
 Users manual
 ------------
 
+Target group: **Editors**
+
+
 - Add a Generic Gallery plugin to your page.
 
 - Choose a gallery type
@@ -28,8 +31,12 @@ Users manual
 
     - Quick add many images
 
+  - Collection Mode
+
+    - Add a predefined collection
+
 - Save and enjoy!
 
-**Please note:** Mass mode always overwrites Single mode.
+**Please note:** Collection Mode overwrites Mass mode overwrites Single mode.
 
 

@@ -19,7 +19,7 @@ EXT: Generic Gallery
 		en
 
 	:Description:
-		This is a TYPO3 Extbase / Fluid blog extension which aims to replace t3blog.
+		One gallery to rule them all. Template driven for use with any kind of gallery / slide / rotate script.
 
 	:Keywords:
 		forEditors, forAdmins, forBeginners, fal, gallery, picture, image, slideshow, slider, exif, iptc

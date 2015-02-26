@@ -11,6 +11,53 @@ Please take a look in the ChnageLog
 
 
 
+Update from 0.4.x to 1.0.x
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**New features overview**
+
+- Migration from pibase to extbase / fluid
+
+- Better FAL support
+
+- Image detail view
+
+- Image collection support
+
+- Twitter Bootstrap Examples
+
+
+**How to upgrade**
+
+First of all you need to upgrade TYPO3 to 6.x and migrate all DAM
+records to FAL. This task exceeds the scope of this documentation.
+
+- Update via Extension Manager
+
+- Run update script in Extension Manager
+
+- Adjust TypoScript
+
+  - Change TypoScript path
+
+    - from :code:`plugin.tx_genericgallery_pi1.gallery`
+
+    - to :code:`plugin.tx_genericgallery.settings.gallery`
+  - Change gallery settings to new specification
+
+- Update your templates to match fluid structure
+
+
+See demos: :code:`/Configuration/TypoScript/Examples`
+
+
+.. tip::
+
+	You will need to install EXT:filemetadata and EXT:metadata in order to use EXIF data
+
+
+
+
 Update from 0.3.x to 0.4.0
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 

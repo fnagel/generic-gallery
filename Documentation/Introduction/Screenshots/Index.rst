@@ -6,16 +6,14 @@
 Screenshots
 ^^^^^^^^^^^
 
-No screenshots as this extension works with almost every possible HTML
-/ Java-Script construction. Take a look at the demo galleries in the
-res directory.
+No screenshots as this extension works with almost every possible HTML / Java-Script construction.
+Take a look at the examples.
 
 
 Live examples
 """""""""""""
 
-`http://www.felixnagel.com/fotografie/
-<http://www.felixnagel.com/fotografie/>`_
+http://www.felixnagel.com/fotografie/
 
 Please help me to add more examples here!
 

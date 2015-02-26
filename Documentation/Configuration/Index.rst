@@ -12,8 +12,6 @@ Configuration
    :titlesonly:
    :glob:
 
-   Installation/Index
    Typoscript/Index
-   Reference/Index
    Template/Index
 
