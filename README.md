@@ -10,9 +10,7 @@ _beta quality_
 Roadmap
 -------
 
-* Test examples again after moving repo
-* Add FAL meta data examples
-* Re-Check this whole thing
+* Test examples again after moving repo (re-check this whole thing)
 * Release v1.0.0 by pushing a tag (Gizzle Github Hook)
 
 

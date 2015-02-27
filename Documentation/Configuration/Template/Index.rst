@@ -15,6 +15,9 @@ Templating
 	There's a view helper for that.
 
 
+.. _configuration-template:
+
+
 Nothing special here, just default Fluid templating.
 Take a look at the default templates and examples!
 
@@ -26,6 +29,9 @@ ViewHelpers
 **ForGroup**
 
 A pair of ViewHelpers to assist you when building groups of items.
+
+
+**Example**
 
 .. code-block:: xml
 
@@ -64,3 +70,38 @@ Result:
 			yellow
 		</li>
 	</ul>
+
+
+FAL Metadata
+""""""""""""
+
+Use the :code:`imageData` getter for prepared image meta data: :code:`item.imageData`
+Prepared means you will receive some properties in a human readable format.
+
+Use :code:`item.image.properties` for raw FAL meta data.
+
+.. tip::
+
+	Which meta data is available depends on your installation and extensions.
+
+
+**Example**
+
+This examples is tested with EXT::code:`metadata`.
+
+.. code-block:: xml
+
+	<f:for each="{collection}" as="item" iteration="iterator">
+		<figure>
+			<f:image src="{item.image.uid}" alt="{item.image.properties.description}" />
+			<p>
+				{item.imageData.camera_model} {item.imageData.shutter_speed_value} {item.imageData.aperture_value}
+				{item.imageData.focal_length} {item.imageData.iso_speed_ratings} ({item.imageData.flash})
+			</p>
+		</figure>
+	</f:for>
+
+
+
+
+

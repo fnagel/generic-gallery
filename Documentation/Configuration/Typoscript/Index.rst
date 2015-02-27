@@ -5,7 +5,8 @@
 
 .. include:: ../../Includes.txt
 
-.. _configuration:
+.. _configuration-typoscript:
+
 
 TypoScript Reference
 =======================
@@ -14,8 +15,6 @@ Feel free to use the constant editor (go to: module template, root page,
 constant editor, beautyofcode) to edit this settings. Add a Typoscript
 template to overwrite these settings at any point in your sitetree(s).
 
-
-.. _configuration-typoscript:
 
 TypoScript Reference
 --------------------

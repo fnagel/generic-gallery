@@ -19,20 +19,13 @@ How to use Exif & IPTC
 ^^^^^^^^^^^^^^^^^^^^^^
 
 You need to install EXT:filemetadata and use an extension like EXT:metadata or similar to extract the
-meta data and make it available via FAL properties.
-
-@todo Add more specific notice on how to use EXIF properties
-
-
-
-
+meta data from your files and make it available via FAL properties.
+See :ref:`configuration-template` for more information on how to use the meta data in your templates.
 
 
 .. important::
 
 	All tutorials after this notice need to be updated to match version 1.0.0.
-
-
 
 
 
