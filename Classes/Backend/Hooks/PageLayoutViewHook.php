@@ -53,7 +53,7 @@ class PageLayoutViewHook {
 		array &$parameters = array(),
 		\TYPO3\CMS\Backend\View\PageLayoutView &$parentObject
 	) {
-		if ($parameters['row']['list_type'] !== 'genericgallery_gallery') {
+		if ($parameters['row']['list_type'] !== 'genericgallery_pi1') {
 			return '';
 		}
 
@@ -104,6 +104,8 @@ class PageLayoutViewHook {
 	}
 
 	/**
+	 * @todo
+	 *
 	 * @param array $data
 	 * @return string
 	 */
@@ -166,7 +168,7 @@ class PageLayoutViewHook {
 	 */
 	protected function isEnabledInExtensionManager() {
 		// get Extension Manager config
-		$extensionConfiguration = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['genericgallery']);
+		$extensionConfiguration = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['generic_gallery']);
 
 		if (intval($extensionConfiguration['enable_cms_layout']) !== 1) {
 			return FALSE;
