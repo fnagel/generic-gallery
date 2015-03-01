@@ -25,11 +25,11 @@ namespace TYPO3\GenericGallery\Backend\Hooks;
  * This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use \TYPO3\CMS\Core\Utility\GeneralUtility,
-	\TYPO3\CMS\Backend\Utility\BackendUtility,
-	\TYPO3\CMS\Core\Resource\ResourceFactory,
-	\TYPO3\CMS\Core\Resource\ProcessedFile,
-	\TYPO3\CMS\Backend\Utility\IconUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility,
+	TYPO3\CMS\Backend\Utility\BackendUtility,
+	TYPO3\CMS\Core\Resource\ResourceFactory,
+	TYPO3\CMS\Core\Resource\ProcessedFile,
+	TYPO3\CMS\Backend\Utility\IconUtility;
 
 /**
  * Hook class for PageLayoutView hook `list_type_Info`

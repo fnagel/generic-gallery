@@ -27,7 +27,7 @@ namespace TYPO3\GenericGallery\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use \TYPO3\GenericGallery\Domain\Model\GalleryCollection,
+use TYPO3\GenericGallery\Domain\Model\GalleryCollection,
 	TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 
 /**
@@ -81,7 +81,7 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
 
 	protected function initializeAction() {
 		$this->cObjData = $this->configurationManager->getContentObject()->data;
-		$this->uid = (int) ($this->cObjData['_LOCALIZED_UID']) ? $this->cObjData['_LOCALIZED_UID'] : $this->cObjData['uid'];
+		$this->uid = (int)($this->cObjData['_LOCALIZED_UID']) ? $this->cObjData['_LOCALIZED_UID'] : $this->cObjData['uid'];
 		$this->gallerySettings = $this->settings['gallery'];
 		$this->currentSettings = $this->gallerySettings[rtrim($this->cObjData['tx_generic_gallery_predefined'], '.')];
 
@@ -175,7 +175,7 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
 		$resourceFactory = $this->objectManager->get('TYPO3\\CMS\\Core\\Resource\\ResourceFactory');
 
 		/* @var $collection \TYPO3\CMS\Core\Resource\Collection\AbstractFileCollection */
-		$collection = $resourceFactory->getCollectionObject((int) $this->cObjData['tx_generic_gallery_collection']);
+		$collection = $resourceFactory->getCollectionObject((int)$this->cObjData['tx_generic_gallery_collection']);
 		$collection->loadContents();
 
 		return $collection->getItems();

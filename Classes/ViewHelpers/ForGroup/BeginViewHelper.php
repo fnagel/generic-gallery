@@ -25,6 +25,7 @@ namespace TYPO3\GenericGallery\ViewHelpers\ForGroup;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
+
 /**
  * ForGroupViewHelper
  */
@@ -34,7 +35,7 @@ class BeginViewHelper extends AbstractViewHelper {
 	 * @return mixed
 	 */
 	public function render() {
-		if ($this->iteration['isFirst'] || ($this->iteration['cycle'] % $this->max) === 1 ) {
+		if ($this->iteration['isFirst'] || ($this->iteration['cycle'] % $this->max) === 1) {
 			return $this->renderChildren();
 		}
 

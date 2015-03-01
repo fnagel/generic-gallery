@@ -1,4 +1,3 @@
-
 plugin.tx_genericgallery {
 	settings {
 		gallery {
@@ -9,6 +8,7 @@ plugin.tx_genericgallery {
 				# template for gallery
 				template = EXT:generic_gallery/Resources/Private/Templates/Examples/BootstrapImageSlider.html
 			}
+
 			# Add carousel example
 			bootstrap_slider_teaser {
 				name = Bootstrap Teaser Slider

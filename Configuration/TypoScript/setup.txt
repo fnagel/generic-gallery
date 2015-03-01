@@ -1,6 +1,4 @@
-
 plugin.tx_genericgallery {
-
 	view {
 		templateRootPath = {$plugin.tx_genericgallery.view.templateRootPath}
 		partialRootPath = {$plugin.tx_genericgallery.view.partialRootPath}
@@ -23,6 +21,5 @@ plugin.tx_genericgallery {
 			}
 		}
 	}
-
 }
 

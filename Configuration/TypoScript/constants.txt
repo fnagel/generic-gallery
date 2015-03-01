@@ -1,4 +1,3 @@
-
 plugin.tx_genericgallery {
 	view {
 		# cat=plugin.tx_genericgallery/file; type=string; label=Path to template root (FE)

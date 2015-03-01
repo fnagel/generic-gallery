@@ -1,6 +1,6 @@
 <?php
-namespace TYPO3\GenericGallery\Domain\Model;
 
+namespace TYPO3\GenericGallery\Domain\Model;
 
 /***************************************************************
  *
@@ -27,7 +27,7 @@ namespace TYPO3\GenericGallery\Domain\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * TextItem
@@ -144,7 +144,7 @@ class TextItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 			$classes['width'] = $this->getWidth() . 'px';
 		}
 
-		foreach($classes as $class => $value) {
+		foreach ($classes as $class => $value) {
 			$string .= $class . ': ' . $value . '; ';
 		}
 

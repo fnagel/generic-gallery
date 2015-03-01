@@ -28,7 +28,7 @@ $extensionName = \TYPO3\CMS\Core\Utility\GeneralUtility::underscoredToLowerCamel
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_generic_gallery_pictures');
 $GLOBALS['TCA']['tx_generic_gallery_pictures'] = array(
 	'ctrl' => array(
-		'title'	=> 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:tx_genericgallery_domain_model_galleryitem',
+		'title' => 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:tx_genericgallery_domain_model_galleryitem',
 		'label' => 'title',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
@@ -56,7 +56,7 @@ $GLOBALS['TCA']['tx_generic_gallery_pictures'] = array(
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_generic_gallery_content');
 $GLOBALS['TCA']['tx_generic_gallery_content'] = array(
 	'ctrl' => array(
-		'title'	=> 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:tx_genericgallery_domain_model_textitem',
+		'title' => 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:tx_genericgallery_domain_model_textitem',
 		'label' => 'bodytext',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',

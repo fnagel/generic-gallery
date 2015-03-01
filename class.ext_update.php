@@ -10,7 +10,7 @@ class ext_update {
 	/**
 	 * Main function, returning the HTML content of the module
 	 *
-	 * @return	string		HTML
+	 * @return string HTML
 	 */
 	public function main() {
 		$GLOBALS['TYPO3_DB']->exec_UPDATEquery(
@@ -28,8 +28,8 @@ class ext_update {
 	 * Checks how many rows are found and returns true if there are any
 	 * (this function is called from the extension manager)
 	 *
-	 * @param	string		$what: what should be updated
-	 * @return	boolean
+	 * @param string $what : what should be updated
+	 * @return boolean
 	 */
 	public function access($what = 'all') {
 		return $GLOBALS['BE_USER']->isAdmin();

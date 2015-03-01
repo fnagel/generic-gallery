@@ -27,7 +27,7 @@ namespace TYPO3\GenericGallery\Domain\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use \TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * GalleryCollection
@@ -113,7 +113,7 @@ class GalleryCollection extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity i
 	public function getByUid($uid) {
 		foreach ($this->items as $item) {
 			/* @var $item \TYPO3\GenericGallery\Domain\Model\GalleryItem */
-			if ((string) $uid === (string) $item->getUid()) {
+			if ((string)$uid === (string)$item->getUid()) {
 				return $item;
 			}
 		}

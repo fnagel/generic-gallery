@@ -1,6 +1,6 @@
 <?php
-namespace TYPO3\GenericGallery\Domain\Model;
 
+namespace TYPO3\GenericGallery\Domain\Model;
 
 /***************************************************************
  *
@@ -26,8 +26,6 @@ namespace TYPO3\GenericGallery\Domain\Model;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
-use \TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * Class GalleryItem
@@ -108,7 +106,7 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @return boolean
 	 */
 	public function isVirtual() {
-		return !((bool) parent::getUid());
+		return !((bool)parent::getUid());
 	}
 
 	/**
@@ -214,7 +212,7 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 		// process flash data
 		if (isset($GLOBALS['TCA']['sys_file_metadata']['columns']['flash']['config']['items'])) {
-			$items = (array) $GLOBALS['TCA']['sys_file_metadata']['columns']['flash']['config']['items'];
+			$items = (array)$GLOBALS['TCA']['sys_file_metadata']['columns']['flash']['config']['items'];
 			foreach ($items as $item) {
 				if ($item[1] === $properties['flash']) {
 					$data['flash'] = $item[0];
