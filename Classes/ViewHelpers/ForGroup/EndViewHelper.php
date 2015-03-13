@@ -5,7 +5,7 @@ namespace TYPO3\GenericGallery\ViewHelpers\ForGroup;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2014 Felix Nagel <info@felixnagel.com>
+ *  (c) 2014-2015 Felix Nagel <info@felixnagel.com>
  *
  *  All rights reserved
  *

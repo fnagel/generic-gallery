@@ -3,20 +3,10 @@ Generic Gallery
 
 TYPO3 CMS Extension Generic Gallery (Extbase / Fluid rewrite)
 
-_beta quality_
-
-
-
-Roadmap
--------
-
-* Test examples again after moving repo (re-check this whole thing)
-* Release v1.0.0 by pushing a tag (Gizzle Github Hook)
-
 
 ToDo
 ----
-* Inline RTE fails sometimes, incorrect buttonset
+* Check Unit Tests
 * Ensure TYPO3 CMS 7.0 compatibility
 * Fix inline @ToDo's
 
