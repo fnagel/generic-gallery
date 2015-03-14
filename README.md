@@ -6,17 +6,17 @@ TYPO3 CMS Extension Generic Gallery (Extbase / Fluid rewrite)
 
 ToDo
 ----
-* Check Unit Tests
+
 * Ensure TYPO3 CMS 7.0 compatibility
+* Improve and add more unit tests
 * Fix inline @ToDo's
 
 
 Future ideas
 ------------
 
-* Add collection preview in BE
-* Add TS type preview in BE
-* Add unit tests
+* Add collection images preview in BE
+* Add gallery name preview in BE (via TS)
 * Disable textItem position and width fields via TER or TS
 
 
