@@ -35,10 +35,31 @@ use \TYPO3\GenericGallery\Utility\EmConfiguration,
 /**
  * Hook class for PageLayoutView hook `list_type_Info`
  *
- * @author Felix Nagel <info@felixnagel.com>
- * @package \TYPO3\GenericGallery\Backend\Hooks
+ * @todo Use localization
  */
 class PageLayoutViewHook {
+
+	/*
+	 * Current row data
+	 *
+	 * @var array
+	 */
+	private $data = NULL;
+
+	/**
+	 * Table information
+	 *
+	 * @var array
+	 */
+	public $tableData = array();
+
+	/**
+	 * Image previews
+	 *
+	 * @var string
+	 */
+	public $imagePreviewHtml = '';
+
 
 	/**
 	 * Returns information about this plugin content
@@ -62,65 +83,72 @@ class PageLayoutViewHook {
 			return '';
 		}
 
-		return $this->renderPreview($parameters['row']);
+		$this->data = $parameters['row'];
+
+		return $this->renderPreview();
 	}
 
 	/**
-	 * @param string $type
-	 * @return string
+	 * Render infos
+	 *
+	 * @return void
 	 */
-	protected function renderTitle($type = 'invalid') {
-		$title = '';
-
-		$title .= '<strong>Generic Gallery</strong><br>';
-		$title .= 'Source: <em>' . $type . '</em><br><br>';
-
-		return $title;
+	protected function renderInfo() {
+		// @todo Use TS setting gallery name
+		$this->tableData[] = array('Type', rtrim($this->data['tx_generic_gallery_predefined'], '.'));
 	}
 
 	/**
-	 * @param array $data
 	 * @return string
 	 */
-	protected function renderPreview($data) {
-		$result = '';
+	protected function renderPreview() {
+		$html = '';
 
-		if ($data['tx_generic_gallery_collection']) {
+		$this->renderInfo();
 
-			$result .= $this->renderTitle('collection');
-			$result .= $this->renderCollectionPreview($data);
+		if ($this->data['tx_generic_gallery_collection']) {
+			$this->renderCollectionPreview();
 
-		} elseif ($data['tx_generic_gallery_images']) {
+		} elseif ($this->data['tx_generic_gallery_images']) {
+			$this->renderImagesPreview();
 
-			$result .= $this->renderTitle('images');
-			$result .= $this->renderImagesPreview($data);
-
-		} elseif ($data['tx_generic_gallery_items']) {
-
-			$result .= $this->renderTitle('items');
-			$result .= $this->renderItemsPreview($data);
+		} elseif ($this->data['tx_generic_gallery_items']) {
+			$this->renderItemsPreview();
 		}
 
-		return $result;
+		$html .= '<strong>Generic Gallery</strong><br>';
+
+		$html .= $this->renderInfoTable();
+
+		if ($this->imagePreviewHtml !== '') {
+			$html .= '<br>' . $this->imagePreviewHtml;
+		}
+
+		return $html;
 	}
 
 	/**
-	 * @todo
+	 * @todo Add image preview
 	 *
-	 * @param array $data
-	 * @return string
+	 * @return void
 	 */
-	protected function renderCollectionPreview($data) {
-		return '';
+	protected function renderCollectionPreview() {
+		$collection = BackendUtility::getRecord('sys_file_collection', $this->data['tx_generic_gallery_collection']);
+		$this->tableData[] = array('Source', 'collection');
+		$this->tableData[] = array('Name', $collection['title']);
+		$this->tableData[] = array('Images', $collection['files']);
+
+		$this->imagePreviewHtml = '';
 	}
 
 	/**
-	 * @param array $data
-	 * @return string
+	 * @return void
 	 */
-	protected function renderImagesPreview($data) {
-		return $this->thumbCode(
-			$data,
+	protected function renderImagesPreview() {
+		$this->tableData[] = array('Source', 'images');
+
+		$this->imagePreviewHtml = $this->thumbCode(
+			$this->data,
 			'tt_content',
 			'tx_generic_gallery_images',
 			'tx_generic_gallery_picture_single',
@@ -129,10 +157,20 @@ class PageLayoutViewHook {
 	}
 
 	/**
+	 * @return void
+	 */
+	protected function renderItemsPreview() {
+		// @todo Use localization
+		$this->tableData[] = array('Source', 'items');
+
+		$this->imagePreviewHtml = $this->getItemsImagePreviews($this->data);
+	}
+
+	/**
 	 * @param array $data
 	 * @return string
 	 */
-	protected function renderItemsPreview($data) {
+	protected function getItemsImagePreviews($data) {
 		$result = '';
 
 		/* @var $database \TYPO3\CMS\Core\Database\DatabaseConnection */
@@ -163,6 +201,25 @@ class PageLayoutViewHook {
 
 		return $result;
 	}
+
+	/**
+	 * Render the settings as table for Web>Page module
+	 *
+	 * @return string
+	 */
+	protected function renderInfoTable() {
+		if (count($this->tableData) == 0) {
+			return '';
+		}
+
+		$content = '';
+		foreach ($this->tableData as $line) {
+			$content .= '<strong style="width: 80px; display: inline-block;">' . $line[0] . '</strong>' . ' ' . $line[1] . '<br />';
+		}
+
+		return '<br><pre style="white-space: normal;">' . $content . '</pre>';
+	}
+
 
 	/**
 	 * Returns a linked image-tag for thumbnail(s)/fileicons/truetype-font-previews
