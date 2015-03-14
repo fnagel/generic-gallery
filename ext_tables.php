@@ -4,6 +4,7 @@ if (!defined('TYPO3_MODE')) {
 }
 
 $extensionName = \TYPO3\CMS\Core\Utility\GeneralUtility::underscoredToLowerCamelCase($_EXTKEY);
+$configuration = \TYPO3\GenericGallery\Utility\EmConfiguration::getSettings();
 
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
@@ -134,7 +135,6 @@ $tempColumns = array(
 			'type' => 'group',
 			'internal_type' => 'db',
 			'allowed' => 'sys_file_collection',
-			'foreign_table' => 'sys_file_collection',
 			'size' => 1,
 			'maxitems' => 1,
 			'minitems' => 0,
@@ -165,6 +165,19 @@ $tempColumns = array(
 		)
 	),
 );
+
+if ($configuration->getUseInlineCollection()) {
+	$tempColumns['tx_generic_gallery_collection']['config'] = array(
+		'type' => 'inline',
+		'foreign_table' => 'sys_file_collection',
+		'appearance' => Array(
+			'collapseAll' => 0,
+			'expandSingle' => 1,
+		),
+		'maxitems' => 1,
+		'minitems' => 0,
+	);
+}
 
 // add field to tt_content
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('tt_content', $tempColumns, 1);

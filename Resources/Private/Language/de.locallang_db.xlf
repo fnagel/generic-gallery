@@ -53,7 +53,10 @@
 			</trans-unit>
 
 			<trans-unit id="extension_manager.enable_cms_layout">
-				<target>CMS Layout einschalten: Bessere Backend Previews einschalten.</target>
+				<target>Previews im BE einschalten: Bessere Backend Previews mit Thumbnails und weiteren Informationen einschalten.</target>
+			</trans-unit>
+			<trans-unit id="extension_manager.use_inline_collection">
+				<target>Collection Darstellung im BE: Collection als Datensatz vom Typ 'inline' darstellen. Bessere Usability aber keine Möglichkeit bereits existierende Collections zu nutzen.</target>
 			</trans-unit>
 		</body>
 	</file>

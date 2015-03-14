@@ -23,13 +23,18 @@ meta data from your files and make it available via FAL properties.
 See :ref:`configuration-template` for more information on how to use the meta data in your templates.
 
 
+How to add existing collections
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+It's possible to disable inline editing of collection records in the plugin.
+Disable :code:`use_inline_collection` in the extension manager.
+
+
+
 .. important::
 
 	All tutorials after this notice need to be updated to match version 1.0.0.
-
-
-
-@todo: OUTDATED CONTENT
+	@todo: OUTDATED CONTENT
 
 
 Custom marker (how to render any content)

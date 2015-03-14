@@ -55,6 +55,9 @@
 			<trans-unit id="extension_manager.enable_cms_layout">
 				<source>No TypoScript-configuration found.</source>
 			</trans-unit>
+			<trans-unit id="extension_manager.use_inline_collection">
+				<target>Collection rendering in BE: Display collection as 'inline' type. Improved usability but no option to add existing collection records.</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

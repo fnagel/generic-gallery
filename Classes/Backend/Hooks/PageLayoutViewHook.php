@@ -25,7 +25,8 @@ namespace TYPO3\GenericGallery\Backend\Hooks;
  * This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use TYPO3\CMS\Core\Utility\GeneralUtility,
+use \TYPO3\GenericGallery\Utility\EmConfiguration,
+	TYPO3\CMS\Core\Utility\GeneralUtility,
 	TYPO3\CMS\Backend\Utility\BackendUtility,
 	TYPO3\CMS\Core\Resource\ResourceFactory,
 	TYPO3\CMS\Core\Resource\ProcessedFile,
@@ -57,7 +58,7 @@ class PageLayoutViewHook {
 			return '';
 		}
 
-		if (!$this->isEnabledInExtensionManager()) {
+		if (!EmConfiguration::getSettings()->isEnableCmsLayout()) {
 			return '';
 		}
 
@@ -161,20 +162,6 @@ class PageLayoutViewHook {
 		$database->sql_free_result($res);
 
 		return $result;
-	}
-
-	/**
-	 * @return bool
-	 */
-	protected function isEnabledInExtensionManager() {
-		// get Extension Manager config
-		$extensionConfiguration = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['generic_gallery']);
-
-		if (intval($extensionConfiguration['enable_cms_layout']) !== 1) {
-			return FALSE;
-		}
-
-		return TRUE;
 	}
 
 	/**

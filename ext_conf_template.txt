@@ -1,2 +1,5 @@
 	# cat=basic; type=boolean; label=LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:extension_manager.enable_cms_layout
 enable_cms_layout = 1
+
+	# cat=basic; type=options[LLL:EXT:lang/locallang_common.xlf:no=0,LLL:EXT:lang/locallang_common.xlf:yes=1]; label=LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:extension_manager.use_inline_collection
+use_inline_collection = 1
