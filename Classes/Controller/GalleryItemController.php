@@ -27,8 +27,7 @@ namespace TYPO3\GenericGallery\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use TYPO3\CMS\Core\Utility\GeneralUtility,
-	TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
+use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 
 /**
  * GalleryItemController
@@ -36,13 +35,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility,
 class GalleryItemController extends AbstractController {
 
 	protected function initializeView(ViewInterface $view) {
+		$this->template = $this->currentSettings['itemTemplate'];
 		parent::initializeView($view);
-
-		$template = GeneralUtility::getFileAbsFileName($this->currentSettings['itemTemplate']);
-
-		if ($template) {
-			$view->setTemplatePathAndFilename($template);
-		}
 	}
 
 	/**

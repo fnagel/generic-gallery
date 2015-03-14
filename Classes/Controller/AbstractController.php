@@ -28,6 +28,7 @@ namespace TYPO3\GenericGallery\Controller;
  ***************************************************************/
 
 use TYPO3\GenericGallery\Domain\Model\GalleryCollection,
+	TYPO3\CMS\Core\Utility\GeneralUtility,
 	TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 
 /**
@@ -48,6 +49,8 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
 	protected $currentSettings = array();
 
 	protected $galleryType = NULL;
+
+	protected $template = NULL;
 
 	/**
 	 * GalleryCollection
@@ -77,6 +80,12 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
 	protected function initializeView(ViewInterface $view) {
 		$this->view->assign('uid', $this->uid);
 		$this->view->assign('galleryType', $this->galleryType);
+
+		$template = GeneralUtility::getFileAbsFileName($this->template);
+
+		if ($template !== '') {
+			$view->setTemplatePathAndFilename($template);
+		}
 	}
 
 	protected function initializeAction() {
@@ -175,7 +184,7 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
 		$resourceFactory = $this->objectManager->get('TYPO3\\CMS\\Core\\Resource\\ResourceFactory');
 
 		/* @var $collection \TYPO3\CMS\Core\Resource\Collection\AbstractFileCollection */
-		$collection = $resourceFactory->getCollectionObject((int)$this->cObjData['tx_generic_gallery_collection']);
+		$collection = $resourceFactory->getCollectionObject((int) $this->cObjData['tx_generic_gallery_collection']);
 		$collection->loadContents();
 
 		return $collection->getItems();
