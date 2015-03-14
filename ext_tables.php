@@ -131,14 +131,37 @@ $tempColumns = array(
 		'exclude' => 1,
 		'label' => 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xml:generic_gallery_collection',
 		'config' => Array(
-			'type' => 'inline',
+			'type' => 'group',
+			'internal_type' => 'db',
+			'allowed' => 'sys_file_collection',
 			'foreign_table' => 'sys_file_collection',
-			'appearance' => Array(
-				'collapseAll' => 0,
-				'expandSingle' => 1,
-			),
+			'size' => 1,
 			'maxitems' => 1,
 			'minitems' => 0,
+			'wizards' => array(
+				'edit' => array(
+					'type' => 'popup',
+					'title' => 'Edit',
+					'script' => 'wizard_edit.php',
+					'icon' => 'edit2.gif',
+					'popup_onlyOpenIfSelected' => 1,
+					'JSopenParams' => 'height=350,width=580,status=0,menubar=0,scrollbars=1',
+				),
+				'add' => Array(
+					'type' => 'script',
+					'title' => 'Create new',
+					'icon' => 'add.gif',
+					'params' => array(
+						'table' => 'sys_file_collection',
+						'pid' => '###CURRENT_PID###',
+						'setValue' => 'prepend'
+					),
+					'script' => 'wizard_add.php',
+				),
+				'suggest' => array(
+					'type' => 'suggest',
+				),
+			),
 		)
 	),
 );
