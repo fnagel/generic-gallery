@@ -5,7 +5,7 @@ namespace TYPO3\GenericGallery\Backend\Hooks;
 /***************************************************************
  * Copyright notice
  *
- * (c) 2014-2015 Felix Nagel (info@felixnagel.com)
+ * (c) 2014 Felix Nagel (info@felixnagel.com)
  * All rights reserved
  *
  * This script is part of the TYPO3 project. The TYPO3 project is
@@ -96,7 +96,7 @@ class PageLayoutViewHook {
 
 		} elseif ($data['tx_generic_gallery_items']) {
 
-			$result .= $this->renderTitle('collection');
+			$result .= $this->renderTitle('items');
 			$result .= $this->renderItemsPreview($data);
 		}
 
