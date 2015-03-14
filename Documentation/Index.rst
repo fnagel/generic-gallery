@@ -22,7 +22,7 @@ EXT: Generic Gallery
 		One gallery to rule them all. Template driven for use with any kind of gallery / slide / rotate script.
 
 	:Keywords:
-		forEditors, forAdmins, forBeginners, fal, gallery, picture, image, slideshow, slider, exif, iptc
+		forEditors, forAdmins, forBeginners, fal, gallery, picture, image, collection, slideshow, slider, exif, iptc
 
 	:Copyright:
 		2011-2015
