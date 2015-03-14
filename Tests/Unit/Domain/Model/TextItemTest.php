@@ -35,85 +35,109 @@ namespace TYPO3\GenericGallery\Tests\Unit\Domain\Model;
  * @author Felix Nagel <info@felixnagel.com>
  */
 class TextItemTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
+
+	/**
+	 * @var \TYPO3\CMS\Extbase\Object\ObjectManager
+	 */
+	protected $objectManager = NULL;
+
 	/**
 	 * @var \TYPO3\GenericGallery\Domain\Model\TextItem
 	 */
-	protected $subject = NULL;
+	protected $fixture = NULL;
 
+	/**
+	 * @return void
+	 */
 	protected function setUp() {
-		$this->subject = new \TYPO3\GenericGallery\Domain\Model\TextItem();
+		$this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
+		$this->fixture = $this->objectManager->get('TYPO3\\GenericGallery\\Domain\\Model\\TextItem');
 	}
 
+	/**
+	 * @return void
+	 */
 	protected function tearDown() {
-		unset($this->subject);
+		unset($this->fixture);
 	}
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function getBodytextReturnsInitialValueForString() {
 		$this->assertSame(
 			'',
-			$this->subject->getBodytext()
+			$this->fixture->getBodytext()
 		);
 	}
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function setBodytextForStringSetsBodytext() {
-		$this->subject->setBodytext('Conceived at T3CON10');
+		$this->fixture->setBodytext('Conceived at T3CON10');
 
 		$this->assertAttributeEquals(
 			'Conceived at T3CON10',
 			'bodytext',
-			$this->subject
+			$this->fixture
 		);
 	}
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function getPositionReturnsInitialValueForString() {
 		$this->assertSame(
-			'',
-			$this->subject->getPosition()
+			array(
+				'x' => NULL,
+				'y' => NULL
+			),
+			$this->fixture->getPosition()
 		);
 	}
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function setPositionForStringSetsPosition() {
-		$this->subject->setPosition('Conceived at T3CON10');
+		$this->fixture->setPosition('100,200');
 
-		$this->assertAttributeEquals(
-			'Conceived at T3CON10',
-			'position',
-			$this->subject
+		$this->assertSame(
+			array(
+				'x' => 100,
+				'y' => 200
+			),
+			$this->fixture->getPosition()
 		);
 	}
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function getWidthReturnsInitialValueForString() {
 		$this->assertSame(
 			'',
-			$this->subject->getWidth()
+			$this->fixture->getWidth()
 		);
 	}
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function setWidthForStringSetsWidth() {
-		$this->subject->setWidth('Conceived at T3CON10');
+		$this->fixture->setWidth(100);
 
 		$this->assertAttributeEquals(
-			'Conceived at T3CON10',
+			100,
 			'width',
-			$this->subject
+			$this->fixture
 		);
 	}
 }

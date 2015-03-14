@@ -35,110 +35,136 @@ namespace TYPO3\GenericGallery\Tests\Unit\Domain\Model;
  * @author Felix Nagel <info@felixnagel.com>
  */
 class GalleryItemTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
+
+	/**
+	 * @var \TYPO3\CMS\Extbase\Object\ObjectManager
+	 */
+	protected $objectManager = NULL;
+
 	/**
 	 * @var \TYPO3\GenericGallery\Domain\Model\GalleryItem
 	 */
-	protected $subject = NULL;
+	protected $fixture = NULL;
 
+	/**
+	 * @return void
+	 */
 	protected function setUp() {
-		$this->subject = new \TYPO3\GenericGallery\Domain\Model\GalleryItem();
+		$this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
+		$this->fixture = $this->objectManager->get('TYPO3\\GenericGallery\\Domain\\Model\\GalleryItem');
 	}
 
+	/**
+	 * @return void
+	 */
 	protected function tearDown() {
-		unset($this->subject);
+		unset($this->fixture);
 	}
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function getTitleReturnsInitialValueForString() {
+		$this->markTestSkipped("to be written (FAL related)");
+
 		$this->assertSame(
 			'',
-			$this->subject->getTitle()
+			$this->fixture->getTitle()
 		);
 	}
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function setTitleForStringSetsTitle() {
-		$this->subject->setTitle('Conceived at T3CON10');
+		$this->fixture->setTitle('Conceived at T3CON10');
 
 		$this->assertAttributeEquals(
 			'Conceived at T3CON10',
 			'title',
-			$this->subject
+			$this->fixture
 		);
 	}
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function getLinkReturnsInitialValueForString() {
+		$this->markTestSkipped("to be written (FAL related)");
+
 		$this->assertSame(
 			'',
-			$this->subject->getLink()
+			$this->fixture->getLink()
 		);
 	}
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function setLinkForStringSetsLink() {
-		$this->subject->setLink('Conceived at T3CON10');
+		$this->fixture->setLink('http://www.domain.com');
 
 		$this->assertAttributeEquals(
-			'Conceived at T3CON10',
+			'http://www.domain.com',
 			'link',
-			$this->subject
+			$this->fixture
 		);
 	}
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function getImageReturnsInitialValueForFileReference() {
 		$this->assertEquals(
 			NULL,
-			$this->subject->getImage()
+			$this->fixture->getImage()
 		);
 	}
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function setImageForFileReferenceSetsImage() {
-		$fileReferenceFixture = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
-		$this->subject->setImage($fileReferenceFixture);
+		// @todo FAL relations needs fixing
+		$fileReferenceFixture = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Domain\\Model\\FileReference');
+		$this->fixture->setImage($fileReferenceFixture);
 
 		$this->assertAttributeEquals(
 			$fileReferenceFixture,
 			'image',
-			$this->subject
+			$this->fixture
 		);
 	}
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function getTextItemsReturnsInitialValueForTextItem() {
 		$this->assertEquals(
-			NULL,
-			$this->subject->getTextItems()
+			new \TYPO3\CMS\Extbase\Persistence\ObjectStorage(),
+			$this->fixture->getTextItems()
 		);
 	}
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function setTextItemsForTextItemSetsTextItems() {
-		$textItemsFixture = new \TYPO3\GenericGallery\Domain\Model\TextItem();
-		$this->subject->setTextItems($textItemsFixture);
+		$textItemsFixture = $this->objectManager->get('TYPO3\\GenericGallery\\Domain\\Model\\TextItem');
+		$this->fixture->addTextItem($textItemsFixture);
 
 		$this->assertAttributeEquals(
-			$textItemsFixture,
+			$this->fixture->getTextItems(),
 			'textItems',
-			$this->subject
+			$this->fixture
 		);
 	}
 }

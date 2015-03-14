@@ -35,21 +35,35 @@ namespace TYPO3\GenericGallery\Tests\Unit\Domain\Model;
  * @author Felix Nagel <info@felixnagel.com>
  */
 class GalleryCollectionTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
+
+	/**
+	 * @var \TYPO3\CMS\Extbase\Object\ObjectManager
+	 */
+	protected $objectManager = NULL;
+
 	/**
 	 * @var \TYPO3\GenericGallery\Domain\Model\GalleryCollection
 	 */
-	protected $subject = NULL;
+	protected $fixture = NULL;
 
+	/**
+	 * @return void
+	 */
 	protected function setUp() {
-		$this->subject = new \TYPO3\GenericGallery\Domain\Model\GalleryCollection();
+		$this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
+		$this->fixture = $this->objectManager->get('TYPO3\\GenericGallery\\Domain\\Model\\GalleryCollection');
 	}
 
+	/**
+	 * @return void
+	 */
 	protected function tearDown() {
-		unset($this->subject);
+		unset($this->fixture);
 	}
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function dummyTestToNotLeaveThisFileEmpty() {
 		$this->markTestIncomplete();
