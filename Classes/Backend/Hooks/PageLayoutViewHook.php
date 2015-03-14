@@ -86,13 +86,13 @@ class PageLayoutViewHook {
 	}
 
 	/**
-	 * Render infos
+	 * Render header
 	 *
-	 * @return void
+	 * @return string
 	 */
-	protected function renderInfo() {
-		// @todo Use TS setting gallery name
-		$this->tableData[] = array('Type', rtrim($this->data['tx_generic_gallery_predefined'], '.'));
+	protected function renderHeader() {
+		$editLink = BackendUtility::editOnClick('&edit[tt_content][' . $this->data['uid'] . ']=edit', $GLOBALS['BACK_PATH']);
+		return '<strong><a href="#" onclick="' . $editLink . '">Generic Gallery</strong><br>';
 	}
 
 	/**
@@ -101,7 +101,8 @@ class PageLayoutViewHook {
 	protected function renderPreview() {
 		$html = '';
 
-		$this->renderInfo();
+		// @todo Use TS setting gallery name
+		$this->tableData[] = array('Type', rtrim($this->data['tx_generic_gallery_predefined'], '.'));
 
 		if ($this->data['tx_generic_gallery_collection']) {
 			$this->renderCollectionPreview();
@@ -113,8 +114,7 @@ class PageLayoutViewHook {
 			$this->renderItemsPreview();
 		}
 
-		$html .= '<strong>Generic Gallery</strong><br>';
-
+		$html .= $this->renderHeader();
 		$html .= $this->renderInfoTable();
 
 		if ($this->imagePreviewHtml !== '') {
