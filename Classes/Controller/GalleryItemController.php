@@ -34,6 +34,11 @@ use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
  */
 class GalleryItemController extends AbstractController {
 
+	/**
+	 * Initializes the view before invoking an action method.
+	 *
+	 * @return void
+	 */
 	protected function initializeView(ViewInterface $view) {
 		$this->template = $this->currentSettings['itemTemplate'];
 		parent::initializeView($view);

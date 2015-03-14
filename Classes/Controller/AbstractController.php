@@ -77,6 +77,11 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
 		$this->collection = new GalleryCollection();
 	}
 
+	/**
+	 * Initializes the view before invoking an action method.
+	 *
+	 * @return void
+	 */
 	protected function initializeView(ViewInterface $view) {
 		$this->view->assign('uid', $this->uid);
 		$this->view->assign('galleryType', $this->galleryType);
