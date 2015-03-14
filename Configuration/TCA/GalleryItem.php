@@ -95,8 +95,8 @@ $GLOBALS['TCA']['tx_generic_gallery_pictures'] = array(
 				$GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
 			),
 		),
-		'tt_content_id' => Array(
-			'config' => Array(
+		'tt_content_id' => array(
+			'config' => array(
 				'type' => 'passthrough',
 			)
 		),
