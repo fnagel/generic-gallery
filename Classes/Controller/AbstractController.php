@@ -85,6 +85,8 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
 
 		if ($template !== '') {
 			$view->setTemplatePathAndFilename($template);
+		} else {
+			$this->logError('Template for settings.gallery.' . $this->galleryKey . ' not found!');
 		}
 	}
 
@@ -92,7 +94,8 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
 		$this->cObjData = $this->configurationManager->getContentObject()->data;
 		$this->uid = (int)($this->cObjData['_LOCALIZED_UID']) ? $this->cObjData['_LOCALIZED_UID'] : $this->cObjData['uid'];
 		$this->gallerySettings = $this->settings['gallery'];
-		$this->currentSettings = $this->gallerySettings[rtrim($this->cObjData['tx_generic_gallery_predefined'], '.')];
+		$this->galleryKey = rtrim($this->cObjData['tx_generic_gallery_predefined'], '.');
+		$this->currentSettings = $this->gallerySettings[$this->galleryKey];
 
 		$this->determineGalleryType();
 		$this->generateCollection();
@@ -188,7 +191,21 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
 		$collection->loadContents();
 
 		return $collection->getItems();
+	}
 
+	/**
+	 * Log error
+	 *
+	 * @parama $message Error message
+	 * @param integer $error Error level. 0 = message, 1 = error (user problem), 2 = System Error (which should not happen), 3 = security notice (admin)
+	 * @return void
+	 */
+	protected function logError($message = '', $error = 2) {
+		/* @var $backendUserAuthentication \TYPO3\CMS\Core\Authentication\BackendUserAuthentication */
+		$backendUserAuthentication = GeneralUtility::makeInstance(
+			'TYPO3\\CMS\\Core\\Authentication\\BackendUserAuthentication'
+		);
+		$backendUserAuthentication->simplelog('Error: ' . $message, 'tx_generic_gallery', $error);
 	}
 
 }
