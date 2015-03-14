@@ -140,7 +140,7 @@ class PageLayoutViewHook {
 		$select = 'uid, title';
 		$table = 'tx_generic_gallery_pictures';
 		$where = 'tt_content_id = ' . $data['uid'];
-		$where .= BackendUtility::BEenableFields($table);
+		$where .= BackendUtility::BEenableFields($table) . ' AND ' . $table . '.deleted = 0';
 		$order = 'sorting';
 		$group = '';
 		$limit = '';
@@ -150,7 +150,7 @@ class PageLayoutViewHook {
 		while (($row = $database->sql_fetch_assoc($res))) {
 			if (is_array($row)) {
 				$result .= $this->thumbCode(
-					$data,
+					$row,
 					'tx_generic_gallery_pictures',
 					'images',
 					'tx_generic_gallery_picture_single',
