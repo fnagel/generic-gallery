@@ -26,7 +26,8 @@ namespace TYPO3\GenericGallery\Backend\Hooks;
  ***************************************************************/
 
 use \TYPO3\GenericGallery\Utility\EmConfiguration,
-	TYPO3\CMS\Backend\Utility\BackendUtility;
+	\TYPO3\CMS\Backend\Utility\IconUtility,
+	\TYPO3\CMS\Backend\Utility\BackendUtility;
 
 /**
  * Hook class for PageLayoutView hook `list_type_Info`
@@ -130,8 +131,10 @@ class PageLayoutViewHook {
 	 */
 	protected function renderCollectionPreview() {
 		$collection = BackendUtility::getRecord('sys_file_collection', $this->data['tx_generic_gallery_collection']);
+		$nameValue = $this->getRecordLink($collection, 'sys_file_collection', $collection['title']);
+
 		$this->tableData[] = array('Source', 'collection');
-		$this->tableData[] = array('Name', $collection['title']);
+		$this->tableData[] = array('Name', $nameValue);
 		$this->tableData[] = array('Images', $collection['files']);
 
 		$this->imagePreviewHtml = '';
@@ -196,6 +199,23 @@ class PageLayoutViewHook {
 		$database->sql_free_result($res);
 
 		return $result;
+	}
+
+
+	/**
+	 * @return string
+	 */
+	protected function getRecordLink($record, $table, $content = '', $addIcon = TRUE) {
+		if ($content === '') {
+			$content = htmlspecialchars(BackendUtility::getRecordTitle($table, $record));
+		}
+
+		if ($addIcon) {
+			$icon = IconUtility::getSpriteIconForRecord($table, $record, array('title' => 'Uid: ' . $record['uid']));
+			$content = $icon . $content;
+		}
+
+		return $GLOBALS['SOBE']->doc->wrapClickMenuOnIcon($content, $table, $record['uid'], 1, '', '+info,edit');
 	}
 
 	/**
