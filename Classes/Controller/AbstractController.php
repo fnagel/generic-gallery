@@ -80,6 +80,8 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
 	/**
 	 * Initializes the view before invoking an action method.
 	 *
+	 * @param \TYPO3\CMS\Extbase\Mvc\View\ViewInterface $view
+	 *
 	 * @return void
 	 */
 	protected function initializeView(ViewInterface $view) {
@@ -201,7 +203,7 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
 	/**
 	 * Log error
 	 *
-	 * @parama $message Error message
+	 * @param string $message Error message
 	 * @param integer $error Error level. 0 = message, 1 = error (user problem), 2 = System Error (which should not happen), 3 = security notice (admin)
 	 * @return void
 	 */
