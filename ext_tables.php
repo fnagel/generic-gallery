@@ -4,6 +4,7 @@ if (!defined('TYPO3_MODE')) {
 }
 
 $extensionName = \TYPO3\CMS\Core\Utility\GeneralUtility::underscoredToLowerCamelCase($_EXTKEY);
+$pluginSignature = strtolower($extensionName) . '_pi1';
 $configuration = \TYPO3\GenericGallery\Utility\EmConfiguration::getSettings();
 
 
@@ -179,7 +180,10 @@ if ($configuration->getUseInlineCollection()) {
 	);
 }
 
-// add field to tt_content
+// Add field to tt_content
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('tt_content', $tempColumns, 1);
-$TCA['tt_content']['types']['list']['subtypes_addlist'][strtolower($extensionName) . '_pi1'] =
+$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] =
 	'tx_generic_gallery_predefined,tx_generic_gallery_items,tx_generic_gallery_images,tx_generic_gallery_collection';
+
+// Remove unneeded fields
+$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist'][$pluginSignature] = 'select_key,recursive,pages';
