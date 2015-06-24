@@ -30,11 +30,24 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 /**
  * Hook class for PageLayoutView hook `list_type_Info`
  *
- * @todo fix this whole class, introduce TS settings class
  * @author Felix Nagel <info@felixnagel.com>
- * @package \TYPO3\GenericGallery\Backend\Hooks
  */
 class TcaHook {
+
+	/**
+	 * @var \TYPO3\CMS\Extbase\Object\Container\Container
+	 */
+	protected $objectContainer = NULL;
+
+	/**
+	 * @var \TYPO3\CMS\Extbase\Object\ObjectManager
+	 */
+	protected $objectManager = NULL;
+
+	/**
+	 * @var \TYPO3\GenericGallery\Service\SettingsService
+	 */
+	protected $settingsService = NULL;
 
 	/**
 	 * Sets the items for the "Predefined" dropdown.
@@ -47,20 +60,13 @@ class TcaHook {
 			$pid = $config['row']['pid'];
 			if ($pid < 0) {
 				$contentUid = str_replace('-', '', $pid);
-				$res = $this->getDatabase()->exec_SELECTquery('pid', 'tt_content', 'uid=' . $contentUid);
-				if ($res) {
-					$row = $this->getDatabase()->sql_fetch_assoc($res);
-					$pid = $row['pid'];
-					$this->getDatabase()->sql_free_result($res);
-				}
+				$row = $this->getDatabase()->exec_SELECTgetSingleRow('pid', 'tt_content', 'uid=' . $contentUid);
 			}
 
-			$typoscript = $this->loadTypoScript($pid);
-			$settings = $typoscript['plugin.']['tx_genericgallery.']['settings.'];
-			$predef = array();
+			$settings = $this->getTypoScriptService()->setPageUid($row['pid'])->getTypoScriptSettings();
 
 			// no config available
-			if (!is_array($settings['gallery.']) || sizeof($settings['gallery.']) === 0) {
+			if (!is_array($settings['gallery']) || count($settings['gallery']) < 1) {
 				$optionList[] = array(
 					0 => $this->translate('cms_layout.missing_config'), 1 => ''
 				);
@@ -69,22 +75,18 @@ class TcaHook {
 			}
 
 			// for each view
-			foreach ($settings['gallery.'] as $key => $view) {
+			$optionList = array();
+			$optionList[] = array(0 => $this->translate('cms_layout.please_select'), 1 => '');
+			foreach ($settings['gallery'] as $key => $view) {
 
 				if (is_array($view)) {
-					$beName = $view['name'];
-
-					if (!$predef[$key]) {
-						$predef[$key] = $beName;
-					}
+					$optionList[] = array(
+						0 => ($view['name']) ? $view['name'] : $key,
+						1 => $key . '.',
+					);
 				}
 			}
 
-			$optionList = array();
-			$optionList[] = array(0 => $this->translate('cms_layout.please_select'), 1 => '');
-			foreach ($predef as $k => $v) {
-				$optionList[] = array(0 => $v, 1 => $k);
-			}
 			$config['items'] = array_merge($config['items'], $optionList);
 		}
 
@@ -112,23 +114,28 @@ class TcaHook {
 	}
 
 	/**
-	 * Loads the TypoScript for the current page
-	 *
-	 * @param int $pageUid
-	 * @return array The TypoScript setup
+	 * @return \TYPO3\GenericGallery\Service\SettingsService
 	 */
-	protected function loadTypoScript($pageUid) {
-		/* @var $sysPageObject \TYPO3\CMS\Frontend\Page\PageRepository */
-		$sysPageObject = GeneralUtility::makeInstance('TYPO3\\CMS\\Frontend\\Page\\PageRepository');
-		$rootLine = $sysPageObject->getRootLine($pageUid);
+	protected function getTypoScriptService() {
+		if ($this->settingsService === NULL) {
+			$this->settingsService = $this->getObjectContainer()->getInstance(
+				'TYPO3\\GenericGallery\\Service\\SettingsService'
+			);
+		}
 
-		/* @var $templateService \TYPO3\CMS\Core\TypoScript\ExtendedTemplateService */
-		$templateService = GeneralUtility::makeInstance('TYPO3\CMS\Core\TypoScript\ExtendedTemplateService');
-		$templateService->tt_track = 0;
-		$templateService->init();
-		$templateService->runThroughTemplates($rootLine);
-		$templateService->generateConfig();
+		return $this->settingsService;
+	}
 
-		return $templateService->setup;
+	/**
+	 * Get object container
+	 *
+	 * @return \TYPO3\CMS\Extbase\Object\Container\Container
+	 */
+	protected function getObjectContainer() {
+		if ($this->objectContainer == NULL) {
+			$this->objectContainer = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\Container\\Container');
+		}
+
+		return $this->objectContainer;
 	}
 }
