@@ -14,6 +14,22 @@ Updade Guide
 
 
 
+Update from 1.0.x to 1.1.0
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**New features overview**
+
+- TYPO3 7.x compatibility
+
+- Better backend previews (for example collection image preview)
+
+
+**How to upgrade**
+
+Just clear the cache in install tool.
+
+
+
 Update from 0.4.x to 1.0.x
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
