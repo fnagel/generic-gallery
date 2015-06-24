@@ -1,6 +1,11 @@
 {
   "name": "felixnagel/generic-gallery",
   "description": "TYPO3 CMS gallery extension.",
+  "autoload": {
+    "psr-4": {
+      "TYPO3\\T3extblog\\": "Classes/"
+    }
+  },
   "type": "typo3-cms-extension",
   "keywords": [
     "TYPO3 CMS",
@@ -16,5 +21,11 @@
   "version": "1.0.0",
   "support": {
     "issues": "https://github.com/fnagel/generic-gallery/issues"
-  }
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/TYPO3/TYPO3.CMS"
+    }
+  ]
 }
