@@ -148,8 +148,6 @@ class PageLayoutViewHook {
 	}
 
 	/**
-	 * @todo Add image preview
-	 *
 	 * @return void
 	 */
 	protected function renderCollectionPreview() {
@@ -157,10 +155,15 @@ class PageLayoutViewHook {
 		$nameValue = $this->getRecordLink($collection, 'sys_file_collection', $collection['title']);
 
 		$this->tableData[] = array('Source', 'collection');
-		$this->tableData[] = array('Name', $nameValue);
 		$this->tableData[] = array('Images', $collection['files']);
+		$this->tableData[] = array('Name', $nameValue);
 
-		$this->imagePreviewHtml = '';
+		$this->imagePreviewHtml = BackendUtility::thumbCode(
+			$collection,
+			'sys_file_collection',
+			'files',
+			$GLOBALS['BACK_PATH']
+		);
 	}
 
 	/**
@@ -168,12 +171,12 @@ class PageLayoutViewHook {
 	 */
 	protected function renderImagesPreview() {
 		$this->tableData[] = array('Source', 'images');
+		$this->tableData[] = array('Images', $this->data['tx_generic_gallery_images']);
 
 		$this->imagePreviewHtml = BackendUtility::thumbCode(
 			$this->data,
 			'tt_content',
 			'tx_generic_gallery_images',
-			'tx_generic_gallery_picture_single',
 			$GLOBALS['BACK_PATH']
 		);
 	}
@@ -201,6 +204,7 @@ class PageLayoutViewHook {
 		$where .= BackendUtility::BEenableFields($table) . ' AND ' . $table . '.deleted = 0';
 
 		$rows = $this->getDatabase()->exec_SELECTgetRows($select, $table, $where, '', 'sorting');
+		$this->tableData[] = array('Images', count($rows));
 		if ($rows === NULL) {
 			return $result;
 		}
@@ -211,7 +215,6 @@ class PageLayoutViewHook {
 				$row,
 				'tx_generic_gallery_pictures',
 				'images',
-				'tx_generic_gallery_picture_single',
 				$GLOBALS['BACK_PATH']
 			);
 		}
