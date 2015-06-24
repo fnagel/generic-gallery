@@ -5,7 +5,7 @@ namespace TYPO3\GenericGallery\Backend\Hooks;
 /***************************************************************
  * Copyright notice
  *
- * (c) 2014 Felix Nagel (info@felixnagel.com)
+ * (c) 2015 Felix Nagel (info@felixnagel.com)
  * All rights reserved
  *
  * This script is part of the TYPO3 project. The TYPO3 project is
@@ -172,31 +172,26 @@ class PageLayoutViewHook {
 	protected function getItemsImagePreviews($data) {
 		$result = '';
 
-		/* @var $database \TYPO3\CMS\Core\Database\DatabaseConnection */
-		$database = $GLOBALS['TYPO3_DB'];
 		$select = 'uid, title';
 		$table = 'tx_generic_gallery_pictures';
 		$where = 'tt_content_id = ' . $data['uid'];
 		$where .= BackendUtility::BEenableFields($table) . ' AND ' . $table . '.deleted = 0';
-		$order = 'sorting';
-		$group = '';
-		$limit = '';
 
-		$res = $database->exec_SELECTquery($select, $table, $where, $group, $order, $limit);
-
-		while (($row = $database->sql_fetch_assoc($res))) {
-			if (is_array($row)) {
-				$result .= BackendUtility::thumbCode(
-					$row,
-					'tx_generic_gallery_pictures',
-					'images',
-					'tx_generic_gallery_picture_single',
-					$GLOBALS['BACK_PATH']
-				);
-			}
+		$rows = $this->getDatabase()->exec_SELECTgetRows($select, $table, $where, '', 'sorting');
+		if ($rows === NULL) {
+			return $result;
 		}
 
-		$database->sql_free_result($res);
+		// Get thumbs
+		foreach ($rows as $row) {
+			$result .= BackendUtility::thumbCode(
+				$row,
+				'tx_generic_gallery_pictures',
+				'images',
+				'tx_generic_gallery_picture_single',
+				$GLOBALS['BACK_PATH']
+			);
+		}
 
 		return $result;
 	}
@@ -235,4 +230,12 @@ class PageLayoutViewHook {
 
 		return '<br><pre style="white-space: normal;">' . $content . '</pre>';
 	}
+
+	/**
+	 * @return \TYPO3\CMS\Core\Database\DatabaseConnection
+	 */
+	protected function getDatabase() {
+		return $GLOBALS['TYPO3_DB'];
+	}
+
 }
