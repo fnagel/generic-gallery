@@ -26,6 +26,7 @@ namespace TYPO3\GenericGallery\Backend\Hooks;
  ***************************************************************/
 
 use \TYPO3\GenericGallery\Utility\EmConfiguration,
+	\TYPO3\CMS\Core\Utility\GeneralUtility,
 	\TYPO3\CMS\Backend\Utility\IconUtility,
 	\TYPO3\CMS\Backend\Utility\BackendUtility;
 
@@ -35,6 +36,28 @@ use \TYPO3\GenericGallery\Utility\EmConfiguration,
  * @todo Use localization
  */
 class PageLayoutViewHook {
+
+	/**
+	 * @var \TYPO3\CMS\Extbase\Object\Container\Container
+	 */
+	protected $objectContainer = NULL;
+
+	/**
+	 * @var \TYPO3\CMS\Extbase\Object\ObjectManager
+	 */
+	protected $objectManager = NULL;
+
+	/**
+	 * @var \TYPO3\GenericGallery\Service\SettingsService
+	 */
+	protected $settingsService = NULL;
+
+	/*
+	 * Current page settings
+	 *
+	 * @var array
+	 */
+	private $settings = NULL;
 
 	/*
 	 * Current row data
@@ -81,6 +104,7 @@ class PageLayoutViewHook {
 		}
 
 		$this->data = $parameters['row'];
+		$this->settings = $this->getTypoScriptService()->getTypoScriptSettings();
 
 		return $this->renderPreview();
 	}
@@ -101,8 +125,7 @@ class PageLayoutViewHook {
 	protected function renderPreview() {
 		$html = '';
 
-		// @todo Use TS setting gallery name
-		$this->tableData[] = array('Type', rtrim($this->data['tx_generic_gallery_predefined'], '.'));
+		$this->setGalleryType();
 
 		if ($this->data['tx_generic_gallery_collection']) {
 			$this->renderCollectionPreview();
@@ -225,7 +248,8 @@ class PageLayoutViewHook {
 
 		$content = '';
 		foreach ($this->tableData as $line) {
-			$content .= '<strong style="width: 80px; display: inline-block;">' . $line[0] . '</strong>' . ' ' . $line[1] . '<br />';
+			$content .= '<strong style="width: 80px; display: inline-block;">' .
+				$line[0] . '</strong>' . ' ' . $line[1] . '<br />';
 		}
 
 		return '<br><pre style="white-space: normal;">' . $content . '</pre>';
@@ -236,6 +260,61 @@ class PageLayoutViewHook {
 	 */
 	protected function getDatabase() {
 		return $GLOBALS['TYPO3_DB'];
+	}
+
+	/**
+	 * @param string $key
+	 * @param string $keyPrefix
+	 *
+	 * @return string
+	 */
+	protected function translate(
+		$key,
+		$keyPrefix = 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf'
+	) {
+		return $GLOBALS['LANG']->sL($keyPrefix . ':' . $key);
+	}
+
+	/**
+	 * @return \TYPO3\GenericGallery\Service\SettingsService
+	 */
+	protected function getTypoScriptService() {
+		if ($this->settingsService === NULL) {
+			$this->settingsService = $this->getObjectContainer()->getInstance(
+				'TYPO3\\GenericGallery\\Service\\SettingsService'
+			);
+		}
+
+		return $this->settingsService;
+	}
+
+	/**
+	 * Get object container
+	 *
+	 * @return \TYPO3\CMS\Extbase\Object\Container\Container
+	 */
+	protected function getObjectContainer() {
+		if ($this->objectContainer == NULL) {
+			$this->objectContainer = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\Container\\Container');
+		}
+
+		return $this->objectContainer;
+	}
+
+	/**
+	 * Set gallery type name
+	 */
+	protected function setGalleryType() {
+		$typeName = rtrim($this->data['tx_generic_gallery_predefined'], '.');
+
+		if (
+			array_key_exists($typeName, $this->settings['gallery']) &&
+			array_key_exists('name', $this->settings['gallery'][$typeName])
+		) {
+			$typeName = $this->settings['gallery'][$typeName]['name'];
+		}
+
+		$this->tableData[] = array('Type', $typeName);
 	}
 
 }

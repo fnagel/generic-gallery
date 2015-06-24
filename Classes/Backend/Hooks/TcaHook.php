@@ -28,7 +28,7 @@ namespace TYPO3\GenericGallery\Backend\Hooks;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
- * Hook class for PageLayoutView hook `list_type_Info`
+ * Hook class for TCA hook
  *
  * @author Felix Nagel <info@felixnagel.com>
  */
@@ -61,9 +61,10 @@ class TcaHook {
 			if ($pid < 0) {
 				$contentUid = str_replace('-', '', $pid);
 				$row = $this->getDatabase()->exec_SELECTgetSingleRow('pid', 'tt_content', 'uid=' . $contentUid);
+				$this->getTypoScriptService()->setPageUid($row['pid']);
 			}
 
-			$settings = $this->getTypoScriptService()->setPageUid($row['pid'])->getTypoScriptSettings();
+			$settings = $this->getTypoScriptService()->getTypoScriptSettings();
 
 			// no config available
 			if (!is_array($settings['gallery']) || count($settings['gallery']) < 1) {
