@@ -9,10 +9,15 @@ $GLOBALS['TCA']['tx_generic_gallery_content'] = array(
 		'showRecordFieldList' => 'hidden, starttime, endtime, bodytext, position, width'
 	),
 	'types' => array(
-		'0' => array('showitem' => 'hidden;;1;;1-1-1, bodytext')
+		'0' => array(
+			'showitem' => 'hidden, --palette--;;palettePositioning, bodytext'
+		)
 	),
 	'palettes' => array(
-		'1' => array('showitem' => 'position, width')
+		'palettePositioning' => array(
+			'showitem' => 'position, width,',
+			'canNotCollapse' => FALSE
+		)
 	),
 	'columns' => array(
 		'hidden' => array(
