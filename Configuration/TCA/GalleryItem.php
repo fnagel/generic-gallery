@@ -76,8 +76,13 @@ $GLOBALS['TCA']['tx_generic_gallery_pictures'] = array(
 					'link' => array(
 						'type' => 'popup',
 						'title' => 'Link',
-						'icon' => 'link_popup.gif',
-						'script' => 'browse_links.php?mode=wizard',
+						'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_link.gif',
+						'module' => array(
+							'name' => 'wizard_element_browser',
+							'urlParameters' => array(
+								'mode' => 'wizard',
+							)
+						),
 						'JSopenParams' => 'height=300,width=500,status=0,menubar=0,scrollbars=1'
 					)
 				)
@@ -118,3 +123,11 @@ $GLOBALS['TCA']['tx_generic_gallery_pictures'] = array(
 		),
 	),
 );
+
+// @todo Remove this when 6.2 is no longer relevant
+if (version_compare(TYPO3_branch, '7.0', '<')) {
+	unset($GLOBALS['TCA']['tx_generic_gallery_pictures']['columns']['link']['config']['wizards']['link']['module']);
+
+	$GLOBALS['TCA']['tx_generic_gallery_pictures']['columns']['link']['config']['wizards']['link']['script'] = 'browse_links.php?mode=wizard';
+	$GLOBALS['TCA']['tx_generic_gallery_pictures']['columns']['link']['config']['wizards']['link']['icon'] = 'link_popup.gif';
+}
