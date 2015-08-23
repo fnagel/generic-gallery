@@ -14,6 +14,24 @@ Updade Guide
 
 
 
+Update from 1.1.0 to 1.2.0
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**New features overview**
+
+- TYPO3 7.4 compatibility
+
+- Improve and fix examples
+
+- Update examples to Twitter Bootstrap 3.3.5
+
+
+**How to upgrade**
+
+Just clear the cache.
+
+
+
 Update from 1.0.x to 1.1.0
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
