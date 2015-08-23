@@ -4,17 +4,15 @@
 
 <f:section name="main">
 
-	<div class="row-fluid">
+	<div class="row">
 		<f:for each="{collection}" as="item" iteration="iterator">
 			<gg:forGroup.begin iteration="{iterator}" max="4">
-				<ul class="thumbnails">
+				<ul class="thumbnails list-unstyled">
 			</gg:forGroup.begin>
 
-			<li class="span3">
+			<li class="col-md-3">
 				<figure class="thumbnail">
-					<div class="img-polaroid">
-						<f:render partial="GalleryItem/Image" arguments="{_all}" />
-					</div>
+					<f:render partial="GalleryItem/Image" arguments="{_all}" />
 					<f:if condition="{galleryType} == 'single'">
 						<f:render partial="GalleryItem/Caption" arguments="{_all}" />
 					</f:if>

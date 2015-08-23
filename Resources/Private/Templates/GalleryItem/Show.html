@@ -4,37 +4,37 @@
 
 <f:section name="main">
 
-	<div class="img-polaroid">
-		<figure>
-			<f:image
-				width="1024m"
-				height="800m"
-				src="{item.image.uid}"
-				alt="{item.image.alternative}"
-				/>
-		</figure>
-	</div>
 
-	<div class="row-fluid">
+	<div class="row">
 		<div class="col-xs-12">
-			<figcaption class="well">
-				<p class="small muted pull-right">
-					<f:render partial="GalleryItem/Copyright" arguments="{_all}" />
-				</p>
-				<p>
-					<strong>
-						<gg:link.typolink configuration="{parameter: item.image.publicUrl}">
-							<i class="icon-cloud-download"></i>
-							<span class="ui-helper-hidden-accessible">Download original image</span>
-						</gg:link.typolink>
-						{item.title}
-					</strong>
-				</p>
-				<br>
-				<p>
-					{item.image.properties.description}
-				</p>
-			</figcaption>
+			<figure class="thumbnail">
+				<f:image
+					width="1024m"
+					height="800m"
+					src="{item.image.uid}"
+					alt="{item.image.alternative}" />
+
+				<figcaption class="caption">
+					<p class="small muted pull-right">
+						<f:render partial="GalleryItem/Copyright" arguments="{_all}" />
+					</p>
+					<p>
+						<strong>
+							<gg:link.typolink configuration="{parameter: item.image.publicUrl}">
+								<i class="icon icon-cloud-download glyphicon glyphicon-download"></i>
+								<span class="sr-only">Download original image</span>
+							</gg:link.typolink>
+							{item.title}
+						</strong>
+					</p>
+					<f:if condition="{item.image.properties.description}">
+						<br>
+						<p>
+							{item.image.properties.description}
+						</p>
+					</f:if>
+				</figcaption>
+			</figure>
 
 			<f:if condition="{item.textItems}">
 				<ul class="list-group">
