@@ -9,7 +9,7 @@ $GLOBALS['TCA']['tx_generic_gallery_pictures'] = array(
 		'showRecordFieldList' => 'hidden, starttime, endtime, images, tt_content_id, contents'
 	),
 	'types' => array(
-		'0' => array('showitem' => 'hidden;;1;;1-1-1, title, link, images, contents')
+		'0' => array('showitem' => 'hidden, --palette--;;1, title, link, images, contents')
 	),
 	'palettes' => array(
 		'1' => array('showitem' => 'starttime, endtime')
