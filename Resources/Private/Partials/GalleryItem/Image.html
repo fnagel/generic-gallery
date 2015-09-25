@@ -4,10 +4,11 @@
 	<f:then>
 		<gg:link.typolink configuration="{parameter: item.link}">
 			<f:image
-					width="900c"
-					height="500c"
-					src="{item.image.uid}"
-					alt="{item.image.alternative}" />
+				width="900c"
+				height="500c"
+				src="{item.image.uid}"
+				title="{item.imageData.title}"
+				alt="{item.imageData.alternative}" />
 		</gg:link.typolink>
 	</f:then>
 	<f:else>

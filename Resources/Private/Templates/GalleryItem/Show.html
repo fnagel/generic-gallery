@@ -4,7 +4,6 @@
 
 <f:section name="main">
 
-
 	<div class="row">
 		<div class="col-xs-12">
 			<figure class="thumbnail">
@@ -12,7 +11,7 @@
 					width="1024m"
 					height="800m"
 					src="{item.image.uid}"
-					alt="{item.image.alternative}" />
+					alt="{item.imageData.alternative}" />
 
 				<figcaption class="caption">
 					<p class="small muted pull-right">
@@ -27,7 +26,7 @@
 							{item.title}
 						</strong>
 					</p>
-					<f:if condition="{item.image.properties.description}">
+					<f:if condition="{item.imageData.description}">
 						<br>
 						<p>
 							{item.image.properties.description}

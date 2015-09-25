@@ -167,6 +167,7 @@ class GalleryCollection extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity i
 			if ($object instanceof \TYPO3\CMS\Core\Resource\FileReference) {
 				/* @var $object \TYPO3\CMS\Core\Resource\FileReference */
 				$item->setImage($object->getOriginalFile());
+				$item->setImageReference($object);
 			}
 
 			if ($object instanceof \TYPO3\CMS\Core\Resource\File) {

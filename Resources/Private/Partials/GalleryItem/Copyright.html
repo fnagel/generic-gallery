@@ -1,21 +1,21 @@
-<f:if condition="{item.image.properties.copyright_notice}">
+<f:if condition="{item.imageData.copyright_notice}">
 	<f:then>
-		&copy; {item.image.properties.author}
+		&copy; {item.imageData.author}
 	</f:then>
 	<f:else>
-		<f:if condition="{item.image.properties.creator}">
-			&copy; {item.image.properties.creator}
+		<f:if condition="{item.imageData.creator}">
+			&copy; {item.imageData.creator}
 		</f:if>
 	</f:else>
 </f:if>
 
-<f:if condition="{item.image.properties.source}">
+<f:if condition="{item.imageData.source}">
 	<f:then>
-		, {item.image.properties.source}
+		, {item.imageData.source}
 	</f:then>
 	<f:else>
-		<f:if condition="{item.image.properties.publisher}">
-			, {item.image.properties.publisher}
+		<f:if condition="{item.imageData.publisher}">
+			, {item.imageData.publisher}
 		</f:if>
 	</f:else>
 </f:if>
