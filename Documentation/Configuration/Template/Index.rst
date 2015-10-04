@@ -75,8 +75,9 @@ Result:
 FAL Metadata
 """"""""""""
 
-Use the :code:`imageData` getter for prepared image meta data: :code:`item.imageData`
-Prepared means you will receive some properties in a human readable format.
+Use the :code:`imageData` property for image meta data. The :code:`imageData` array provides the FAL meta data merged
+with inline file reference meta data. In addition :code:`imageData` processes some EXIF meta data to be more usable
+(some properties are transformed into a human readable format).
 
 Use :code:`item.image.properties` for raw FAL meta data.
 
@@ -93,7 +94,7 @@ This examples is tested with EXT::code:`metadata`.
 
 	<f:for each="{collection}" as="item" iteration="iterator">
 		<figure>
-			<f:image src="{item.image.uid}" alt="{item.image.properties.description}" />
+			<f:image src="{item.image.uid}" alt="{item.imageData.description}" />
 			<p>
 				{item.imageData.camera_model} {item.imageData.shutter_speed_value} {item.imageData.aperture_value}
 				{item.imageData.focal_length} {item.imageData.iso_speed_ratings} ({item.imageData.flash})

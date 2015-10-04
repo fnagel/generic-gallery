@@ -14,6 +14,23 @@ Upgrade Guide
 
 
 
+Update from 1.2.x to 1.3.0
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**New features overview**
+
+- TYPO3 7.5 compatibility
+
+- Merge FAL file meta data with inline meta data (file reference)
+
+
+**How to upgrade**
+
+Just clear the cache and check your templates. Make sure to use :code:`{item.imageData.description}` instead of
+:code:`{item.image.properties.description}` when ou want to use merged meta data.
+
+
+
 Update from 1.1.0 to 1.2.0
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
