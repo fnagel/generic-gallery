@@ -56,7 +56,7 @@ EXT: Generic Gallery
 	Administration/Index
 	Configuration/Index
 	Tutorial/Index
-	UpdadeGuide/Index
+	UpgradeGuide/Index
 	KnownProblems/Index
 	To-doList/Index
 	Changelog/Index

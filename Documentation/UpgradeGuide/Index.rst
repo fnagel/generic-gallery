@@ -3,8 +3,8 @@
 .. include:: ../Includes.txt
 
 
-Updade Guide
-------------
+Upgrade Guide
+-------------
 
 .. only:: html
 
