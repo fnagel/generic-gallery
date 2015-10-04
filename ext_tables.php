@@ -46,8 +46,7 @@ $boot = function($packageKey) {
 			'searchFields' => 'title,link,image,text_items,',
 			'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($packageKey) .
 				'Configuration/TCA/GalleryItem.php',
-			'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($packageKey) .
-				'Resources/Public/Icons/tx_genericgallery_domain_model_galleryitem.gif'
+			'iconfile' => 'EXT:generic_gallery/Resources/Public/Icons/tx_genericgallery_domain_model_galleryitem.gif'
 		),
 	);
 
@@ -74,10 +73,18 @@ $boot = function($packageKey) {
 			'searchFields' => 'bodytext,position,width,',
 			'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($packageKey) .
 				'Configuration/TCA/TextItem.php',
-			'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($packageKey) .
-				'Resources/Public/Icons/tx_genericgallery_domain_model_textitem.gif'
+			'iconfile' => 'EXT:generic_gallery/Resources/Public/Icons/tx_genericgallery_domain_model_textitem.gif'
 		),
 	);
+
+	// Use old icon path for TYPO3 6.2
+	// @todo Remove this when 6.2 is no longer relevant
+	if (version_compare(TYPO3_branch, '7.0', '<')) {
+		$iconPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($packageKey) . 'Resources/Public/Icons/';
+
+		$GLOBALS['TCA']['tx_generic_gallery_pictures']['ctrl']['iconfile'] = $iconPath . 'galleryitem.gif';
+		$GLOBALS['TCA']['tx_generic_gallery_content']['ctrl']['iconfile'] =	$iconPath . 'tx_genericgallery_domain_model_textitem.gif';
+	}
 
 
 	$tempColumns = array(
