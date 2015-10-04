@@ -42,7 +42,7 @@ class EmConfiguration {
 	 * @return \TYPO3\GenericGallery\Domain\Model\Dto\EmConfiguration
 	 * @throws \Exception If the configuration is invalid.
 	 */
-	public static function getSettings() {
+	static public function getSettings() {
 		$configuration = self::parseSettings();
 		GeneralUtility::requireOnce(
 			ExtensionManagementUtility::extPath('generic_gallery') . 'Classes/Domain/Model/Dto/EmConfiguration.php'
@@ -56,7 +56,7 @@ class EmConfiguration {
 	 *
 	 * @return array unserialized extconf settings
 	 */
-	public static function parseSettings() {
+	static public function parseSettings() {
 		$settings = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['generic_gallery']);
 
 		if (!is_array($settings)) {
