@@ -27,6 +27,9 @@ namespace TYPO3\GenericGallery\Domain\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Core\Resource\FileReference as CoreFileReference;
+use TYPO3\CMS\Extbase\Domain\Model\FileReference as ExtbaseFileReference;
+
 /**
  * Class GalleryItem
  */
@@ -56,7 +59,7 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * image
 	 *
-	 * @var \TYPO3\CMS\Core\Resource\FileReference
+	 * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
 	 */
 	protected $imageReference = NULL;
 
@@ -176,6 +179,10 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @return \TYPO3\CMS\Core\Resource\File $image
 	 */
 	public function getImage() {
+		if ($this->image === NULL) {
+			return $this->imageReference->getOriginalResource()->getOriginalFile();
+		}
+
 		return $this->image;
 	}
 
@@ -192,7 +199,7 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 		if ($this->imageReference !== NULL) {
 			// Overwrite with reference inline data
-			$imageData = array_merge($imageData, $this->imageReference->getReferenceProperties());
+			$imageData = array_merge($imageData, $this->imageReference->getOriginalResource()->getReferenceProperties());
 		}
 
 		return $imageData;
@@ -239,11 +246,19 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the imageReference
 	 *
-	 * @param \TYPO3\CMS\Core\Resource\FileReference $imageReference
+	 * @param CoreFileReference|ExtbaseFileReference $imageReference
 	 * @return void
 	 */
 	public function setImageReference($imageReference) {
-		$this->imageReference = $imageReference;
+		$fileReference = $imageReference;
+
+		// Normalize to extbase file reference
+		if ($imageReference instanceof CoreFileReference) {
+			$fileReference = new ExtbaseFileReference();
+			$fileReference->setOriginalResource($imageReference);
+		}
+
+		$this->imageReference = $fileReference;
 	}
 
 	/**
