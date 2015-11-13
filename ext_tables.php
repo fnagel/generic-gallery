@@ -46,7 +46,9 @@ $boot = function($packageKey) {
 			'searchFields' => 'title,link,image,text_items,',
 			'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($packageKey) .
 				'Configuration/TCA/GalleryItem.php',
-			'iconfile' => 'EXT:generic_gallery/Resources/Public/Icons/tx_genericgallery_domain_model_galleryitem.gif'
+			'typeicon_classes' => [
+					'default' => 'extensions-generic-gallery-pictures',
+			],
 		),
 	);
 
@@ -73,7 +75,9 @@ $boot = function($packageKey) {
 			'searchFields' => 'bodytext,position,width,',
 			'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($packageKey) .
 				'Configuration/TCA/TextItem.php',
-			'iconfile' => 'EXT:generic_gallery/Resources/Public/Icons/tx_genericgallery_domain_model_textitem.gif'
+			'typeicon_classes' => [
+				'default' => 'extensions-generic-gallery-content',
+			],
 		),
 	);
 
@@ -84,6 +88,19 @@ $boot = function($packageKey) {
 
 		$GLOBALS['TCA']['tx_generic_gallery_pictures']['ctrl']['iconfile'] = $iconPath . 'galleryitem.gif';
 		$GLOBALS['TCA']['tx_generic_gallery_content']['ctrl']['iconfile'] =	$iconPath . 'tx_genericgallery_domain_model_textitem.gif';
+	} else {
+		/* @var $iconRegistry \TYPO3\CMS\Core\Imaging\IconRegistry */
+		$iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconRegistry::class);
+		$iconRegistry->registerIcon(
+			'extensions-generic-gallery-pictures',
+			\TYPO3\CMS\Core\Imaging\IconProvider\BitmapIconProvider::class,
+			['source' => 'EXT:generic_gallery/Resources/Public/Icons/tx_genericgallery_domain_model_galleryitem.gif']
+		);
+		$iconRegistry->registerIcon(
+			'extensions-generic-gallery-content',
+			\TYPO3\CMS\Core\Imaging\IconProvider\BitmapIconProvider::class,
+			['source' => 'EXT:generic_gallery/Resources/Public/Icons/tx_genericgallery_domain_model_textitem.gif']
+		);
 	}
 
 
