@@ -94,6 +94,7 @@ $boot = function($packageKey) {
 			'label' => 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xml:generic_gallery_predefined',
 			'config' => Array(
 				'type' => 'select',
+				'renderType' => 'selectSingle',
 				'allowNonIdValues' => 1,
 				'itemsProcFunc' => 'TYPO3\GenericGallery\Backend\Hooks\TcaHook->addPredefinedFields',
 				'size' => 1,
