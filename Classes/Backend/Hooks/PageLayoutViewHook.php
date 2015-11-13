@@ -25,6 +25,8 @@ namespace TYPO3\GenericGallery\Backend\Hooks;
  * This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Core\Imaging\Icon;
+use TYPO3\CMS\Core\Imaging\IconFactory;
 use \TYPO3\GenericGallery\Utility\EmConfiguration,
 	\TYPO3\CMS\Core\Utility\GeneralUtility,
 	\TYPO3\CMS\Backend\Utility\IconUtility,
@@ -232,11 +234,23 @@ class PageLayoutViewHook {
 		}
 
 		if ($addIcon) {
-			$icon = IconUtility::getSpriteIconForRecord($table, $record, array('title' => 'Uid: ' . $record['uid']));
+			if (version_compare(TYPO3_branch, '7.0', '<')) {
+				$icon = IconUtility::getSpriteIconForRecord($table, $record, array('title' => 'Uid: ' . $record['uid']));
+			} else {
+				$iconFactory = GeneralUtility::makeInstance(IconFactory::class);
+				$icon = $iconFactory->getIconForRecord($table, $record, Icon::SIZE_SMALL)->render();
+			}
+
 			$content = $icon . $content;
 		}
 
-		return $GLOBALS['SOBE']->doc->wrapClickMenuOnIcon($content, $table, $record['uid'], 1, '', '+info,edit');
+		if (version_compare(TYPO3_branch, '7.0', '<')) {
+			$output = $GLOBALS['SOBE']->doc->wrapClickMenuOnIcon($content, $table, $record['uid'], 1, '', '+info,edit');
+		} else {
+			$output = BackendUtility::wrapClickMenuOnIcon($content, $table, $record['uid'], 1, '', '+info,edit');
+		}
+
+		return $output;
 	}
 
 	/**
