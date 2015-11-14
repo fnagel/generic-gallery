@@ -85,9 +85,10 @@ $boot = function($packageKey) {
 	// @todo Remove this when 6.2 is no longer relevant
 	if (version_compare(TYPO3_branch, '7.0', '<')) {
 		$iconPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($packageKey) . 'Resources/Public/Icons/';
-
-		$GLOBALS['TCA']['tx_generic_gallery_pictures']['ctrl']['iconfile'] = $iconPath . 'galleryitem.gif';
-		$GLOBALS['TCA']['tx_generic_gallery_content']['ctrl']['iconfile'] =	$iconPath . 'tx_genericgallery_domain_model_textitem.gif';
+		\TYPO3\CMS\Backend\Sprite\SpriteManager::addSingleIcons(array(
+			'pictures' => $iconPath . 'tx_genericgallery_domain_model_galleryitem.gif',
+			'content' => $iconPath . 'tx_genericgallery_domain_model_textitem.gif',
+		), 'generic-gallery');
 	} else {
 		/* @var $iconRegistry \TYPO3\CMS\Core\Imaging\IconRegistry */
 		$iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconRegistry::class);
