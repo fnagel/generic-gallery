@@ -19,7 +19,7 @@ Update from 1.2.x to 1.3.0
 
 **New features overview**
 
-- TYPO3 7.5 compatibility
+- TYPO3 7.6 compatibility
 
 - Merge FAL file meta data with inline meta data (file reference)
 

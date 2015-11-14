@@ -6,8 +6,9 @@ TYPO3 CMS Extension Generic Gallery (Extbase / Fluid rewrite)
 
 ToDo
 ----
-
-* Issue when saving new collection (seems like a TYPO3 7.6 core issue)
+* 7.6 compatibility
+	* Issue when saving new collection (seems like a TYPO3 7.6 core issue)
+	* collection inline wizard
 * Improve and add more unit tests
 * Fix inline @ToDo's
 
