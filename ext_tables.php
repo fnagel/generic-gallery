@@ -166,25 +166,6 @@ $boot = function($packageKey) {
 				'maxitems' => 1,
 				'minitems' => 0,
 				'wizards' => array(
-					'edit' => array(
-						'type' => 'popup',
-						'title' => 'Edit',
-						'script' => 'wizard_edit.php',
-						'icon' => 'edit2.gif',
-						'popup_onlyOpenIfSelected' => 1,
-						'JSopenParams' => 'height=350,width=580,status=0,menubar=0,scrollbars=1',
-					),
-					'add' => Array(
-						'type' => 'script',
-						'title' => 'Create new',
-						'icon' => 'add.gif',
-						'params' => array(
-							'table' => 'sys_file_collection',
-							'pid' => '###CURRENT_PID###',
-							'setValue' => 'prepend'
-						),
-						'script' => 'wizard_add.php',
-					),
 					'suggest' => array(
 						'type' => 'suggest',
 					),
@@ -193,7 +174,36 @@ $boot = function($packageKey) {
 		),
 	);
 
+	// @todo Remove this when 6.2 is no longer relevant
+	if (version_compare(TYPO3_branch, '7.0', '<')) {
+		$tempColumns['tx_generic_gallery_collection']['config']['wizards'] = array(
+			'edit' => array(
+				'type' => 'popup',
+				'title' => 'Edit',
+				'script' => 'wizard_edit.php',
+				'icon' => 'edit2.gif',
+				'popup_onlyOpenIfSelected' => 1,
+				'JSopenParams' => 'height=350,width=580,status=0,menubar=0,scrollbars=1',
+			),
+			'add' => Array(
+				'type' => 'script',
+				'title' => 'Create new',
+				'icon' => 'add.gif',
+				'params' => array(
+						'table' => 'sys_file_collection',
+						'pid' => '###CURRENT_PID###',
+						'setValue' => 'prepend'
+				),
+				'script' => 'wizard_add.php',
+			),
+			'suggest' => array(
+				'type' => 'suggest',
+			),
+		);
+	}
+
 	if ($configuration->getUseInlineCollection()) {
+		unset($tempColumns['tx_generic_gallery_collection']['config']['wizards']);
 		$tempColumns['tx_generic_gallery_collection']['config'] = array(
 			'type' => 'inline',
 			'foreign_table' => 'sys_file_collection',
