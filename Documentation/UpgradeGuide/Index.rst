@@ -27,7 +27,7 @@ Update from 1.2.x to 1.3.0
 **How to upgrade**
 
 Just clear the cache and check your templates. Make sure to use :code:`{item.imageData.description}` instead of
-:code:`{item.image.properties.description}` when ou want to use merged meta data.
+:code:`{item.image.properties.description}` when you want to use merged meta data.
 
 
 
