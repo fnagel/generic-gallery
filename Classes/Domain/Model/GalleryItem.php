@@ -194,13 +194,13 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	public function getImageData() {
 		$imageData = $this->getImage()->getProperties();
 
+		if ($this->imageReference !== NULL) {
+			// Overwrite with merged reference inline data
+			$imageData = $this->imageReference->getOriginalResource()->getProperties();
+		}
+
 		// Merge with modified meta data
 		$imageData = array_merge($imageData, $this->getAdditionalImageProperties());
-
-		if ($this->imageReference !== NULL) {
-			// Overwrite with reference inline data
-			$imageData = array_merge($imageData, $this->imageReference->getOriginalResource()->getReferenceProperties());
-		}
 
 		return $imageData;
 	}
