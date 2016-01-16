@@ -67,6 +67,7 @@ $GLOBALS['TCA']['tx_generic_gallery_content'] = array(
 				'type' => 'text',
 				'cols' => '48',
 				'rows' => '5',
+				'softref' => 'typolink_tag,email[subst],url',
 			),
 			'defaultExtras' => 'richtext[*]:rte_transform[flag=rte_enabled|mode=ts]',
 		),

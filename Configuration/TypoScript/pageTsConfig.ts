@@ -1,0 +1,5 @@
+# Link validator config
+mod.linkvalidator.searchFields {
+	tx_generic_gallery_pictures = link
+	tx_generic_gallery_content = bodytext
+}

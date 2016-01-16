@@ -225,6 +225,11 @@ $boot = function($packageKey) {
 	// Remove unneeded fields
 	$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist'][$pluginSignature] = 'select_key,recursive,pages';
 
+	// Add page TS config
+	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig(
+		'<INCLUDE_TYPOSCRIPT: source="FILE:EXT:generic_gallery/Configuration/TypoScript/pageTsConfig.ts">'
+	);
+
 };
 
 $boot($_EXTKEY);
