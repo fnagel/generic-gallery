@@ -28,6 +28,7 @@ namespace TYPO3\GenericGallery\Domain\Model;
  ***************************************************************/
 
 use TYPO3\CMS\Core\Resource\FileReference as CoreFileReference;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference as ExtbaseFileReference;
 
 /**
@@ -102,14 +103,14 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * If object is virtual
 	 *
-	 * Virtual means its generated and not a DB relation
+	 * Virtual means it's generated and not a DB relation
 	 * So, if the object is virtual the plugin is of type
-	 * 'imgaes' or 'collection'
+	 * 'images' or 'collection'
 	 *
 	 * @return boolean
 	 */
 	public function isVirtual() {
-		return !((bool)parent::getUid());
+		return !((bool) parent::getUid());
 	}
 
 	/**
@@ -157,10 +158,37 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function getLink() {
 		if ($this->isVirtual() || $this->link === '') {
+			// Render cropped image if reference with crop available
+			// @todo Remove version compare when 6.2 is no longer relevant
+			if ($this->imageReference !== NULL && version_compare(TYPO3_branch, '7.2', '>=')) {
+				if ($this->imageReference->getOriginalResource()->getProperty('crop') !== NULL) {
+					return $this->getCroppedImageLinkFromReference();
+				}
+			}
+
 			return $this->getImage()->getPublicUrl();
 		}
 
 		return $this->link;
+	}
+
+	/**
+	 * Get url to cropped image from reference
+	 *
+	 * @return string
+	 */
+	protected function getCroppedImageLinkFromReference() {
+		/* @var $objectManager \TYPO3\CMS\Extbase\Object\ObjectManagerInterface */
+		$objectManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
+		/* @var $imageService \TYPO3\CMS\Extbase\Service\ImageService */
+		$imageService = $objectManager->get('TYPO3\\CMS\\Extbase\\Service\\ImageService');
+
+		$processedImage = $imageService->applyProcessingInstructions(
+			$this->imageReference->getOriginalResource(),
+			array('crop' => $this->imageReference->getOriginalResource()->getProperty('crop'))
+		);
+
+		return $imageService->getImageUri($processedImage);
 	}
 
 	/**
@@ -262,6 +290,15 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	}
 
 	/**
+	 * Gets the imageReference
+	 *
+	 * @return ExtbaseFileReference
+	 */
+	public function getImageReference() {
+		return $this->imageReference;
+	}
+
+	/**
 	 * Sets the textItems
 	 *
 	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $textItems
@@ -303,6 +340,5 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	public function getTextItems() {
 		return $this->textItems;
 	}
-
 
 }

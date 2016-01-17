@@ -10,7 +10,7 @@
 				<f:image
 					width="1024m"
 					height="800m"
-					src="{item.image.uid}"
+					image="{f:if(condition: '{item.imageReference}', then: '{item.imageReference}', else: '{item.image}')}"
 					alt="{item.imageData.alternative}" />
 
 				<figcaption class="caption">
