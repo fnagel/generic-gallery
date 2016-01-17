@@ -9,10 +9,15 @@ $GLOBALS['TCA']['tx_generic_gallery_pictures'] = array(
 		'showRecordFieldList' => 'hidden, starttime, endtime, images, tt_content_id, contents'
 	),
 	'types' => array(
-		'0' => array('showitem' => 'hidden, --palette--;;1, title, link, images, contents')
+		'0' => array('showitem' => '
+			--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:palette.general,
+				title, link, images, contents,
+			--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
+				hidden, --palette--;;visibility
+		')
 	),
 	'palettes' => array(
-		'1' => array('showitem' => 'starttime, endtime')
+		'visibility' => array('showitem' => 'starttime, endtime'),
 	),
 	'columns' => array(
 		'hidden' => array(
@@ -97,6 +102,13 @@ $GLOBALS['TCA']['tx_generic_gallery_pictures'] = array(
 					'size' => 1,
 					'maxitems' => 1,
 					'minitems' => 1,
+					'foreign_types' => array(
+						\TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => array(
+							'showitem' => '
+								--palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.basicoverlayPalette;genericGalleryImagePalette,
+								--palette--;;filePalette'
+						),
+					),
 				),
 				$GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
 			),
@@ -132,3 +144,9 @@ if (version_compare(TYPO3_branch, '7.0', '<')) {
 	$GLOBALS['TCA']['tx_generic_gallery_pictures']['columns']['link']['config']['wizards']['link']['script'] = 'browse_links.php?mode=wizard';
 	$GLOBALS['TCA']['tx_generic_gallery_pictures']['columns']['link']['config']['wizards']['link']['icon'] = 'link_popup.gif';
 }
+
+// Add new palette type
+$GLOBALS['TCA']['sys_file_reference']['palettes']['genericGalleryImagePalette'] = array(
+	'showitem' => 'title, alternative, --linebreak--, description',
+	'canNotCollapse' => TRUE
+);
