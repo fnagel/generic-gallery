@@ -1,19 +1,10 @@
 {namespace gg=TYPO3\GenericGallery\ViewHelpers}
 
-<f:if condition="{item.link}">
-	<f:then>
-		<gg:link.typolink configuration="{parameter: item.link}">
-			<f:image
-				width="900c"
-				height="500c"
-				image="{f:if(condition: '{item.imageReference}', then: '{item.imageReference}', else: '{item.image}')}"
-				title="{item.imageData.title}"
-				alt="{item.imageData.alternative}" />
-		</gg:link.typolink>
-	</f:then>
-	<f:else>
-		<f:link.action action="show" controller="GalleryItem" arguments="{item: item.uid}">
-			{item.title}
-		</f:link.action>
-	</f:else>
-</f:if>
+<gg:link.typolink configuration="{parameter: item.link}">
+	<f:image
+		width="900c"
+		height="500c"
+		image="{f:if(condition: '{item.imageReference}', then: '{item.imageReference}', else: '{item.image}')}"
+		title="{item.imageData.title}"
+		alt="{item.imageData.alternative}" />
+</gg:link.typolink>
