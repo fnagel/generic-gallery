@@ -150,6 +150,13 @@ $boot = function($packageKey) {
 					'maxitems' => 2000,
 					'minitems' => 0,
 					'autoSizeMax' => 40,
+					'foreign_types' => array(
+						\TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => array(
+							'showitem' => '
+								--palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.basicoverlayPalette;genericGalleryImagePalette,
+								--palette--;;filePalette'
+						),
+					),
 				),
 				'jpg,gif,jpeg,png'
 			)
@@ -221,6 +228,17 @@ $boot = function($packageKey) {
 	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('tt_content', $tempColumns);
 	$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] =
 		'tx_generic_gallery_predefined,tx_generic_gallery_items,tx_generic_gallery_images,tx_generic_gallery_collection';
+
+	// Add new palette type
+	$GLOBALS['TCA']['sys_file_reference']['palettes']['genericGalleryImagePalette'] = array(
+		'showitem' => 'title, alternative, --linebreak--, description',
+		'canNotCollapse' => TRUE
+	);
+	// @todo Move this to default some time
+	if (version_compare(TYPO3_branch, '7.2', '>=')) {
+		// Add image cropping functionality
+		$GLOBALS['TCA']['sys_file_reference']['palettes']['genericGalleryImagePalette']['showitem'] .= ',--linebreak--,crop';
+	}
 
 	// Remove unneeded fields
 	$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist'][$pluginSignature] = 'select_key,recursive,pages';
