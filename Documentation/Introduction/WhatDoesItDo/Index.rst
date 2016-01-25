@@ -23,9 +23,11 @@ Features
 * Multiple images support
 * Image collection support
 * Image detail view
+* Makes use of TYPO3 built-in image cropping
 * Easy templating
 * EXIF and IPTC support
 * All properties provided by FAL could be used
 * Comes with a nice BE layout
 * Twitter Bootstrap Examples
+* TYPO3 Linkhandler support
 

@@ -14,6 +14,24 @@ Upgrade Guide
 
 
 
+Update from 1.3.x to 1.4.0
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**New features overview**
+
+- Bugfix for "Merge FAL file meta data with file reference data"
+
+- Support for TYPO3 link validator
+
+- Use built-in image cropping (since TYPO3 7.2)
+
+
+**How to upgrade**
+
+Just clear the cache and check your templates. Make sure to use new image rendering condition:
+:code:`<f:image image="{f:if(condition: '{item.imageReference}', then: '{item.imageReference}', else: '{item.image}')}" />`
+
+
 Update from 1.2.x to 1.3.0
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -28,7 +46,6 @@ Update from 1.2.x to 1.3.0
 
 Just clear the cache and check your templates. Make sure to use :code:`{item.imageData.description}` instead of
 :code:`{item.image.properties.description}` when you want to use merged meta data.
-
 
 
 Update from 1.1.0 to 1.2.0
