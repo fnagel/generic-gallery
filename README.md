@@ -9,6 +9,7 @@ ToDo
 
 * Improve and add more unit tests
 * Fix inline @ToDo's
+* Move custom link fields to sys_file_reference link field
 
 
 Future ideas
