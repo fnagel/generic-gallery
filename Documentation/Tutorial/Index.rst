@@ -30,133 +30,25 @@ It's possible to disable inline editing of collection records in the plugin.
 Disable :code:`use_inline_collection` in the extension manager.
 
 
-
-.. important::
-
-	All tutorials after this notice need to be updated to match version 1.0.0.
-	@todo: OUTDATED CONTENT
-
-
 Custom marker (how to render any content)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Its possible to render additional content marker. There are two
-possibilities:
-
-#. Render an specific image or an image specific field (description,
-   title, etc).
-
-#. Render any content as long as its possible by standard TypoScript
-   notation.
-
-Both cases need a marker which will be used within the templates.
-
-**Image specific**
-
-Needs an  *index* to specify which image should be rendered. Use
-*content* to define if a image (IMG conf) or a specific generic marker
-(default generic\_gallery marker including ###) should be used.
-
-::
-
-   plugin.tx_genericgallery_pi1.gallery.example {
-           custom {
-                   1 {
-                           marker = ###CUSTOM_IMAGE###
-                           index = 3
-                           content {
-                                   maxW = 666
-                                   maxH = 666
-                           }
-                   }
-
-                   2 {
-                           marker = ###CUSTOM_IMAGE_TEXT###
-                           index = 3
-                           content = ###IMAGE_DESCRIPTION###
-                   }
-           }
-   }
-
-
-**Image specific**
-
-Just use generic TypoScript within  *content.*
-
-::
-
-   plugin.tx_genericgallery_pi1.gallery.example {
-           custom {
-                   1 {
-                           marker = ###CUSTOM_FCE###
-                           content {
-                                   example = TEXT
-                                   example.value = This works perfectly!
-                                   example.wrap = <p>|</p>
-
-                                   example2 = RECORDS
-                                   example2.source = 233
-                                   example2.tables = tt_content
-                           }
-                   }
-           }
-   }
-
+Use a TypoScript object of any type with help of the cObject ViewHelper:
+https://docs.typo3.org/typo3cms/ExtbaseGuide/Fluid/ViewHelper/CObject.html
 
 
 How to crop pictures
 ^^^^^^^^^^^^^^^^^^^^
 
-Remember you are able to use common imageConf arrays, see
-`http://wiki.typo3.org/TSref/imgResource
-<http://wiki.typo3.org/TSref/imgResource>`_
-
-Example URL:
-
-::
-
-   thumb {
-           1 {
-            width = 40c-0
-                  height = 40c-0
-         }
-   }
+Use the default image ViewHelper configuration:
+https://docs.typo3.org/typo3cms/ExtbaseGuide/Fluid/ViewHelper/Image.html
 
 
+Linkvalidator configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-How to define own marker (with field backfall)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Simply add you own marker in the array and define any FAL field
-available in the DB.
-
-Please note you need to start with the prefix IMAGE\_. You are able to
-define a fallback if a field is empty by using the // notation.
-
-::
-
-   plugin.tx_genericgallery_pi1.gallery.example {
-        marker {
-               IMAGE_DESCRIPTION = description // caption // alt_text // title
-                IMAGE_ALT = alt_text // title
-                  IMAGE_EXIF_MODEL = exif_Model
-                  IMAGE_EXIF_DATE = exif_DateTime // exif_DateTimeOriginal
-       }
-   }
-
-
-
-How to use AJAX functionality
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Use following URL with parameter uid (marker ###UID###) and type (json
-or xml) within your Java-Script AJAX requests.
-
-Example URL:
-
-::
-
-   index.php?eID=generic_gallery&uid=###UID###&type=json
+This extension adds some default page TsConfig in order to config the needed fields:
+`/Configuration/TypoScript/pageTsConfig.ts`
 
 
 Preview is cropped / has overflow:hidden
@@ -168,7 +60,4 @@ This is a problem because of the Busy Noggin Framework
 which sets an overflow: hidden and height: 45px to all previews. Just
 copy that file, change it and add following to your pageTS:
 
-::
-
-   mod.web_txtemplavoilaM1.stylesheet = ../fileadmin/templates/be_css/backend.css
-
+`mod.web_txtemplavoilaM1.stylesheet = ../fileadmin/templates/be_css/backend.css`
