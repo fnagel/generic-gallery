@@ -1,10 +1,24 @@
 <?php
-if (!defined('TYPO3_MODE')) {
-	die ('Access denied.');
-}
 
-$GLOBALS['TCA']['tx_generic_gallery_content'] = array(
-	'ctrl' => $GLOBALS['TCA']['tx_generic_gallery_content']['ctrl'],
+return [
+	'ctrl' => array(
+		'title' => 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:tx_genericgallery_domain_model_textitem',
+		'label' => 'bodytext',
+		'tstamp' => 'tstamp',
+		'crdate' => 'crdate',
+		'cruser_id' => 'cruser_id',
+		'dividers2tabs' => TRUE,
+		'delete' => 'deleted',
+		'enablecolumns' => array(
+			'disabled' => 'hidden',
+			'starttime' => 'starttime',
+			'endtime' => 'endtime',
+		),
+		'searchFields' => 'bodytext,position,width,',
+		'typeicon_classes' => [
+			'default' => 'extensions-generic-gallery-content',
+		],
+	),
 	'interface' => array(
 		'showRecordFieldList' => 'hidden, starttime, endtime, bodytext, position, width'
 	),
@@ -91,6 +105,5 @@ $GLOBALS['TCA']['tx_generic_gallery_content'] = array(
 				'default' => '0',
 			),
 		),
-
-	),
-);
+	)
+];
