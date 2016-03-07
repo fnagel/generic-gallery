@@ -1,8 +1,13 @@
 plugin.tx_genericgallery {
 	view {
-		templateRootPath = {$plugin.tx_genericgallery.view.templateRootPath}
-		partialRootPath = {$plugin.tx_genericgallery.view.partialRootPath}
-		layoutRootPath = {$plugin.tx_genericgallery.view.layoutRootPath}
+		templateRootPaths.0 = EXT:generic_gallery/Resources/Private/Templates/
+		templateRootPaths.10 = {$plugin.tx_genericgallery.view.templateRootPath}
+
+		partialRootPaths.0 = EXT:generic_gallery/Resources/Private/Partials/
+		partialRootPaths.10 = {$plugin.tx_genericgallery.view.partialRootPath}
+
+		layoutRootPaths.0 = EXT:generic_gallery/Resources/Private/Layouts/
+		layoutRootPaths.10 = {$plugin.tx_genericgallery.view.layoutRootPath}
 	}
 
 	settings {
