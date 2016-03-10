@@ -6,7 +6,7 @@ namespace TYPO3\GenericGallery\Controller;
  *
  *  Copyright notice
  *
- *  (c) 2014-2015 Felix Nagel <info@felixnagel.com>
+ *  (c) 2014-2016 Felix Nagel <info@felixnagel.com>
  *
  *  All rights reserved
  *
@@ -35,7 +35,7 @@ use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 class GalleryCollectionController extends AbstractController {
 
 	/**
-	 * Initializes the view before invoking an action method.
+	 * @inheritdoc
 	 *
 	 * @return void
 	 */

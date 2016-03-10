@@ -40,16 +40,34 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
 	const GALLERY_TYPE_IMAGES = 'images';
 	const GALLERY_TYPE_COLLECTION = 'collection';
 
+	/**
+	 * @var null
+	 */
 	protected $uid = NULL;
 
+	/**
+	 * @var array
+	 */
 	protected $cObjData = array();
 
+	/**
+	 * @var array
+	 */
 	protected $gallerySettings = array();
 
+	/**
+	 * @var array
+	 */
 	protected $currentSettings = array();
 
+	/**
+	 * @var string
+	 */
 	protected $galleryType = NULL;
 
+	/**
+	 * @var string
+	 */
 	protected $template = NULL;
 
 	/**
@@ -93,8 +111,6 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
 
 	/**
 	 * @inheritdoc
-	 *
-	 * @return void
 	 */
 	protected function initializeView(ViewInterface $view) {
 		$this->view->assign('uid', $this->getContentElementUid());
@@ -109,6 +125,9 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
 		}
 	}
 
+	/**
+	 * @inheritdoc
+	 */
 	protected function initializeAction() {
 		$this->cObjData = $this->configurationManager->getContentObject()->data;
 		$this->uid = (int)($this->cObjData['_LOCALIZED_UID']) ? $this->cObjData['_LOCALIZED_UID'] : $this->cObjData['uid'];
@@ -166,9 +185,10 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
 	}
 
 	/**
-	 * Generate collection item
+	 * Set gallery tpye
 	 *
 	 * @param string $key
+	 *
 	 * @return void
 	 */
 	protected function setGalleryType($key) {

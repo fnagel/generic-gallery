@@ -66,7 +66,7 @@ class GalleryItemController extends AbstractController {
 	}
 
 	/**
-	 * action show
+	 * Display single item
 	 *
 	 * @param string $item
 	 * @return void
