@@ -23,7 +23,14 @@
 								<i class="icon icon-cloud-download glyphicon glyphicon-download"></i>
 								<span class="sr-only">Download original image</span>
 							</gg:link.typolink>
-							{item.title}
+							<f:if condition="{item.title}">
+								<f:then>
+									{item.title}
+								</f:then>
+								<f:else>
+									{item.imageData.title}
+								</f:else>
+							</f:if>
 						</strong>
 					</p>
 					<f:if condition="{item.imageData.description}">
@@ -39,7 +46,7 @@
 				<ul class="list-group">
 					<f:for each="{item.textItems}" as="textItem">
 						<li class="list-group-item">
-							{textItem.bodytext}
+							<f:format.html>{textItem.bodytext}</f:format.html>
 						</li>
 					</f:for>
 				</ul>

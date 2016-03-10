@@ -1,5 +1,5 @@
 <f:for each="{item.textItems}" as="textItems" iteration="textItemsIterator">
 	<div class="text-item" style="{textItems.cssStyles}">
-		{textItems.text}
+		<f:format.html>{textItems.text}</f:format.html>
 	</div>
 </f:for>

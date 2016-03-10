@@ -1,7 +1,15 @@
 <figcaption class="caption">
 	<p>
+		<f:comment>Detail view link: GalleryItem/Show.html</f:comment>
 		<f:link.action action="show" controller="GalleryItem" arguments="{item: item.uid}">
-			{item.title}
+			<f:if condition="{item.title}">
+				<f:then>
+					{item.title}
+				</f:then>
+				<f:else>
+					{item.imageData.title}
+				</f:else>
+			</f:if>
 		</f:link.action>
 	</p>
 	<p class="small muted">
