@@ -14,6 +14,29 @@ Upgrade Guide
 
 
 
+Update from 1.4.0 to 1.4.1
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Overview**
+
+- Bugfix for multiple plugins on one page (when using item detail action)
+
+- Improved TCA and extension configuration (adjusted to match latest TYPO3 API, thanks to Markus Klein!)
+
+- Fixed composer.json and added correct PHP dependency (thanks to Markus Klein!)
+
+- Small improvements to built in templates
+
+
+**How to upgrade**
+
+Just clear the cache and check your templates. You may need to clear cache in install tool or even re-install the
+extension in case you experiencing issues with backend forms!
+
+Make sure to use new detail action link argument `contentElement`:
+:code:`<f:link.action action="show" controller="GalleryItem" arguments="{item: item.uid, contentElement: uid}"></f:link>`
+
+
 Update from 1.3.x to 1.4.0
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
