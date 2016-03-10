@@ -6,7 +6,7 @@ namespace TYPO3\GenericGallery\Controller;
  *
  *  Copyright notice
  *
- *  (c) 2014-2015 Felix Nagel <info@felixnagel.com>
+ *  (c) 2014-2016 Felix Nagel <info@felixnagel.com>
  *
  *  All rights reserved
  *
@@ -27,6 +27,8 @@ namespace TYPO3\GenericGallery\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Extbase\Mvc\RequestInterface;
+use TYPO3\CMS\Extbase\Mvc\ResponseInterface;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 
 /**
@@ -35,7 +37,26 @@ use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 class GalleryItemController extends AbstractController {
 
 	/**
-	 * Initializes the view before invoking an action method.
+	* @inheritdoc
+	 *
+	 * @return void
+	*/
+	public function processRequest(RequestInterface $request, ResponseInterface $response) {
+		if (
+			!$request->hasArgument('contentElement') ||
+			$this->getContentElementUid() !== (int) $request->getArgument('contentElement')
+		) {
+			// Request should be handled by another instance of this plugin
+			$this->request = $request;
+			$this->request->setDispatched(TRUE);
+			return;
+		}
+
+		parent::processRequest($request, $response);
+	}
+
+	/**
+	 * @inheritdoc
 	 *
 	 * @return void
 	 */

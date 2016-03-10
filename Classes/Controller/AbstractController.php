@@ -6,7 +6,7 @@ namespace TYPO3\GenericGallery\Controller;
  *
  *  Copyright notice
  *
- *  (c) 2014-2015 Felix Nagel <info@felixnagel.com>
+ *  (c) 2014-2016 Felix Nagel <info@felixnagel.com>
  *
  *  All rights reserved
  *
@@ -78,14 +78,26 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
 	}
 
 	/**
-	 * Initializes the view before invoking an action method.
+	 * Get current plugin CE's uid
 	 *
-	 * @param \TYPO3\CMS\Extbase\Mvc\View\ViewInterface $view
+	 * @return int
+	 */
+	protected function getContentElementUid() {
+		if ($this->uid === NULL) {
+			$data = $this->configurationManager->getContentObject()->data;
+			$this->uid = ($data['_LOCALIZED_UID']) ? $data['_LOCALIZED_UID'] : $data['uid'];
+		}
+
+		return (int) $this->uid;
+	}
+
+	/**
+	 * @inheritdoc
 	 *
 	 * @return void
 	 */
 	protected function initializeView(ViewInterface $view) {
-		$this->view->assign('uid', $this->uid);
+		$this->view->assign('uid', $this->getContentElementUid());
 		$this->view->assign('galleryType', $this->galleryType);
 
 		$template = GeneralUtility::getFileAbsFileName($this->template);
@@ -171,7 +183,7 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
 	protected function getSigleItems() {
 		/* @var $itemRepository \TYPO3\GenericGallery\Domain\Repository\GalleryItemRepository */
 		$itemRepository = $this->objectManager->get('TYPO3\\GenericGallery\\Domain\\Repository\\GalleryItemRepository');
-		$items = $itemRepository->findByTtContentUid($this->uid);
+		$items = $itemRepository->findByTtContentUid($this->getContentElementUid());
 
 		return $items;
 	}
@@ -183,7 +195,9 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
 		/* @var $fileRepository \TYPO3\CMS\Core\Resource\FileRepository */
 		$fileRepository = $this->objectManager->get('TYPO3\\CMS\\Core\\Resource\\FileRepository');
 
-		return $fileRepository->findByRelation('tt_content', 'tx_generic_gallery_picture_single', $this->uid);
+		return $fileRepository->findByRelation(
+			'tt_content', 'tx_generic_gallery_picture_single', $this->getContentElementUid()
+		);
 	}
 
 	/**
