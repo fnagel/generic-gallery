@@ -130,7 +130,6 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
 	 */
 	protected function initializeAction() {
 		$this->cObjData = $this->configurationManager->getContentObject()->data;
-		$this->uid = (int)($this->cObjData['_LOCALIZED_UID']) ? $this->cObjData['_LOCALIZED_UID'] : $this->cObjData['uid'];
 		$this->gallerySettings = $this->settings['gallery'];
 		$this->galleryKey = rtrim($this->cObjData['tx_generic_gallery_predefined'], '.');
 		$this->currentSettings = $this->gallerySettings[$this->galleryKey];
