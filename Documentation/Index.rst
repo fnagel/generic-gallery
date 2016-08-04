@@ -1,7 +1,11 @@
-﻿.. -*- coding: utf-8 -*- with BOM.
+﻿.. ==================================================
+.. FOR YOUR INFORMATION
+.. --------------------------------------------------
+.. -*- coding: utf-8 -*- with BOM.
 
-.. include:: ../Includes.txt
+.. include:: Includes.txt
 
+.. _start:
 
 ====================
 EXT: Generic Gallery
@@ -47,9 +51,9 @@ EXT: Generic Gallery
 	**Table of Contents**
 
 .. toctree::
-	:maxdepth: 5
-	:titlesonly:
-	:glob:
+   :maxdepth: 5
+   :titlesonly:
+   :glob:
 
 	Introduction/Index
 	UsersManual/Index
