@@ -5,7 +5,7 @@ namespace TYPO3\GenericGallery\Backend\Hooks;
 /***************************************************************
  * Copyright notice
  *
- * (c) 2015 Felix Nagel (info@felixnagel.com)
+ * (c) 2015-2016 Felix Nagel (info@felixnagel.com)
  * All rights reserved
  *
  * This script is part of the TYPO3 project. The TYPO3 project is
@@ -86,17 +86,16 @@ class PageLayoutViewHook {
 	/**
 	 * Returns information about this plugin content
 	 *
+	 * No type hint for $parentObject parameter due to fatal error when TemplaVoila is installed
+	 *
 	 * @param array &$parameters Parameters for the hook:
 	 *                  'pObj' => reference to \TYPO3\CMS\Backend\View\PageLayoutView
 	 *                  'row' => $row,
 	 *                  'infoArr' => $infoArr
-	 * @param \TYPO3\CMS\Backend\View\PageLayoutView &$parentObject
+	 * @param \TYPO3\CMS\Backend\View\PageLayoutView &$parentObject 
 	 * @return string Rendered output for PageLayoutView
 	 */
-	public function getExtensionSummary(
-		array &$parameters = array(),
-		\TYPO3\CMS\Backend\View\PageLayoutView &$parentObject
-	) {
+	public function getExtensionSummary(array &$parameters = array(), &$parentObject) {
 		if ($parameters['row']['list_type'] !== 'genericgallery_pi1') {
 			return '';
 		}
