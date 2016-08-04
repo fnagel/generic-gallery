@@ -5,7 +5,7 @@ namespace TYPO3\GenericGallery\Backend\Hooks;
 /***************************************************************
  * Copyright notice
  *
- * (c) 2014-2015 Felix Nagel (info@felixnagel.com)
+ * (c) 2014-2016 Felix Nagel (info@felixnagel.com)
  * All rights reserved
  *
  * This script is part of the TYPO3 project. The TYPO3 project is
@@ -28,115 +28,119 @@ namespace TYPO3\GenericGallery\Backend\Hooks;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
- * Hook class for TCA hook
+ * Hook class for TCA hook.
  *
  * @author Felix Nagel <info@felixnagel.com>
  */
-class TcaHook {
+class TcaHook
+{
+    /**
+     * @var \TYPO3\CMS\Extbase\Object\Container\Container
+     */
+    protected $objectContainer = null;
 
-	/**
-	 * @var \TYPO3\CMS\Extbase\Object\Container\Container
-	 */
-	protected $objectContainer = NULL;
+    /**
+     * @var \TYPO3\CMS\Extbase\Object\ObjectManager
+     */
+    protected $objectManager = null;
 
-	/**
-	 * @var \TYPO3\CMS\Extbase\Object\ObjectManager
-	 */
-	protected $objectManager = NULL;
+    /**
+     * @var \TYPO3\GenericGallery\Service\SettingsService
+     */
+    protected $settingsService = null;
 
-	/**
-	 * @var \TYPO3\GenericGallery\Service\SettingsService
-	 */
-	protected $settingsService = NULL;
+    /**
+     * Sets the items for the "Predefined" dropdown.
+     *
+     * @param array $config
+     *
+     * @return array The config including the items for the dropdown
+     */
+    public function addPredefinedFields($config)
+    {
+        if (is_array($config['items'])) {
+            $pid = $config['row']['pid'];
+            if ($pid < 0) {
+                $contentUid = str_replace('-', '', $pid);
+                $row = $this->getDatabase()->exec_SELECTgetSingleRow('pid', 'tt_content', 'uid='.$contentUid);
+                $this->getTypoScriptService()->setPageUid($row['pid']);
+            }
 
-	/**
-	 * Sets the items for the "Predefined" dropdown.
-	 *
-	 * @param array $config
-	 * @return array The config including the items for the dropdown
-	 */
-	public function addPredefinedFields($config) {
-		if (is_array($config['items'])) {
-			$pid = $config['row']['pid'];
-			if ($pid < 0) {
-				$contentUid = str_replace('-', '', $pid);
-				$row = $this->getDatabase()->exec_SELECTgetSingleRow('pid', 'tt_content', 'uid=' . $contentUid);
-				$this->getTypoScriptService()->setPageUid($row['pid']);
-			}
+            $settings = $this->getTypoScriptService()->getTypoScriptSettings();
 
-			$settings = $this->getTypoScriptService()->getTypoScriptSettings();
+            // no config available
+            if (!is_array($settings['gallery']) || count($settings['gallery']) < 1) {
+                $optionList[] = array(
+                    0 => $this->translate('cms_layout.missing_config'), 1 => '',
+                );
 
-			// no config available
-			if (!is_array($settings['gallery']) || count($settings['gallery']) < 1) {
-				$optionList[] = array(
-					0 => $this->translate('cms_layout.missing_config'), 1 => ''
-				);
+                return $config['items'] = array_merge($config['items'], $optionList);
+            }
 
-				return $config['items'] = array_merge($config['items'], $optionList);
-			}
+            // for each view
+            $optionList = array();
+            $optionList[] = array(0 => $this->translate('cms_layout.please_select'), 1 => '');
+            foreach ($settings['gallery'] as $key => $view) {
+                if (is_array($view)) {
+                    $optionList[] = array(
+                        0 => ($view['name']) ? $view['name'] : $key,
+                        1 => $key.'.',
+                    );
+                }
+            }
 
-			// for each view
-			$optionList = array();
-			$optionList[] = array(0 => $this->translate('cms_layout.please_select'), 1 => '');
-			foreach ($settings['gallery'] as $key => $view) {
+            $config['items'] = array_merge($config['items'], $optionList);
+        }
 
-				if (is_array($view)) {
-					$optionList[] = array(
-						0 => ($view['name']) ? $view['name'] : $key,
-						1 => $key . '.',
-					);
-				}
-			}
+        return $config;
+    }
 
-			$config['items'] = array_merge($config['items'], $optionList);
-		}
+    /**
+     * @return \TYPO3\CMS\Core\Database\DatabaseConnection
+     */
+    protected function getDatabase()
+    {
+        return $GLOBALS['TYPO3_DB'];
+    }
 
-		return $config;
-	}
+    /**
+     * @param string $key
+     * @param string $keyPrefix
+     *
+     * @return string
+     */
+    protected function translate(
+        $key,
+        $keyPrefix = 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf'
+    ) {
+        return $GLOBALS['LANG']->sL($keyPrefix.':'.$key);
+    }
 
-	/**
-	 * @return \TYPO3\CMS\Core\Database\DatabaseConnection
-	 */
-	protected function getDatabase() {
-		return $GLOBALS['TYPO3_DB'];
-	}
+    /**
+     * @return \TYPO3\GenericGallery\Service\SettingsService
+     */
+    protected function getTypoScriptService()
+    {
+        if ($this->settingsService === null) {
+            $this->settingsService = $this->getObjectContainer()->getInstance(
+                'TYPO3\\GenericGallery\\Service\\SettingsService'
+            );
+        }
 
-	/**
-	 * @param string $key
-	 * @param string $keyPrefix
-	 *
-	 * @return string
-	 */
-	protected function translate(
-		$key,
-		$keyPrefix = 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf'
-	) {
-		return $GLOBALS['LANG']->sL($keyPrefix . ':' . $key);
-	}
+        return $this->settingsService;
+    }
 
-	/**
-	 * @return \TYPO3\GenericGallery\Service\SettingsService
-	 */
-	protected function getTypoScriptService() {
-		if ($this->settingsService === NULL) {
-			$this->settingsService = $this->getObjectContainer()->getInstance(
-				'TYPO3\\GenericGallery\\Service\\SettingsService'
-			);
-		}
+    /**
+     * Get object container.
+     *
+     * @return \TYPO3\CMS\Extbase\Object\Container\Container
+     */
+    protected function getObjectContainer()
+    {
+        if ($this->objectContainer == null) {
+            $this->objectContainer = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\Container\\Container');
+        }
 
-		return $this->settingsService;
-	}
-
-	/**
-	 * Get object container
-	 *
-	 * @return \TYPO3\CMS\Extbase\Object\Container\Container
-	 */
-	protected function getObjectContainer() {
-		if ($this->objectContainer == NULL) {
-			$this->objectContainer = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\Container\\Container');
-		}
-
-		return $this->objectContainer;
-	}
+        return $this->objectContainer;
+    }
 }

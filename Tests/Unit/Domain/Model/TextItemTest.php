@@ -5,7 +5,7 @@ namespace TYPO3\GenericGallery\Tests\Unit\Domain\Model;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2014-2015 Nagel <info@felixnagel.com>
+ *  (c) 2014-2016 Nagel <info@felixnagel.com>
  *
  *  All rights reserved
  *
@@ -31,113 +31,112 @@ namespace TYPO3\GenericGallery\Tests\Unit\Domain\Model;
  *
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
  * @author Felix Nagel <info@felixnagel.com>
  */
-class TextItemTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
+class TextItemTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
+{
+    /**
+     * @var \TYPO3\CMS\Extbase\Object\ObjectManager
+     */
+    protected $objectManager = null;
 
-	/**
-	 * @var \TYPO3\CMS\Extbase\Object\ObjectManager
-	 */
-	protected $objectManager = NULL;
+    /**
+     * @var \TYPO3\GenericGallery\Domain\Model\TextItem
+     */
+    protected $fixture = null;
 
-	/**
-	 * @var \TYPO3\GenericGallery\Domain\Model\TextItem
-	 */
-	protected $fixture = NULL;
+    /**
+     */
+    protected function setUp()
+    {
+        $this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
+        $this->fixture = $this->objectManager->get('TYPO3\\GenericGallery\\Domain\\Model\\TextItem');
+    }
 
-	/**
-	 * @return void
-	 */
-	protected function setUp() {
-		$this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
-		$this->fixture = $this->objectManager->get('TYPO3\\GenericGallery\\Domain\\Model\\TextItem');
-	}
+    /**
+     */
+    protected function tearDown()
+    {
+        unset($this->fixture);
+    }
 
-	/**
-	 * @return void
-	 */
-	protected function tearDown() {
-		unset($this->fixture);
-	}
+    /**
+     * @test
+     */
+    public function getBodytextReturnsInitialValueForString()
+    {
+        $this->assertSame(
+            '',
+            $this->fixture->getBodytext()
+        );
+    }
 
-	/**
-	 * @test
-	 * @return void
-	 */
-	public function getBodytextReturnsInitialValueForString() {
-		$this->assertSame(
-			'',
-			$this->fixture->getBodytext()
-		);
-	}
+    /**
+     * @test
+     */
+    public function setBodytextForStringSetsBodytext()
+    {
+        $this->fixture->setBodytext('Conceived at T3CON10');
 
-	/**
-	 * @test
-	 * @return void
-	 */
-	public function setBodytextForStringSetsBodytext() {
-		$this->fixture->setBodytext('Conceived at T3CON10');
+        $this->assertAttributeEquals(
+            'Conceived at T3CON10',
+            'bodytext',
+            $this->fixture
+        );
+    }
 
-		$this->assertAttributeEquals(
-			'Conceived at T3CON10',
-			'bodytext',
-			$this->fixture
-		);
-	}
+    /**
+     * @test
+     */
+    public function getPositionReturnsInitialValueForString()
+    {
+        $this->assertSame(
+            array(
+                'x' => null,
+                'y' => null,
+            ),
+            $this->fixture->getPosition()
+        );
+    }
 
-	/**
-	 * @test
-	 * @return void
-	 */
-	public function getPositionReturnsInitialValueForString() {
-		$this->assertSame(
-			array(
-				'x' => NULL,
-				'y' => NULL
-			),
-			$this->fixture->getPosition()
-		);
-	}
+    /**
+     * @test
+     */
+    public function setPositionForStringSetsPosition()
+    {
+        $this->fixture->setPosition('100,200');
 
-	/**
-	 * @test
-	 * @return void
-	 */
-	public function setPositionForStringSetsPosition() {
-		$this->fixture->setPosition('100,200');
+        $this->assertSame(
+            array(
+                'x' => 100,
+                'y' => 200,
+            ),
+            $this->fixture->getPosition()
+        );
+    }
 
-		$this->assertSame(
-			array(
-				'x' => 100,
-				'y' => 200
-			),
-			$this->fixture->getPosition()
-		);
-	}
+    /**
+     * @test
+     */
+    public function getWidthReturnsInitialValueForString()
+    {
+        $this->assertSame(
+            '',
+            $this->fixture->getWidth()
+        );
+    }
 
-	/**
-	 * @test
-	 * @return void
-	 */
-	public function getWidthReturnsInitialValueForString() {
-		$this->assertSame(
-			'',
-			$this->fixture->getWidth()
-		);
-	}
+    /**
+     * @test
+     */
+    public function setWidthForStringSetsWidth()
+    {
+        $this->fixture->setWidth(100);
 
-	/**
-	 * @test
-	 * @return void
-	 */
-	public function setWidthForStringSetsWidth() {
-		$this->fixture->setWidth(100);
-
-		$this->assertAttributeEquals(
-			100,
-			'width',
-			$this->fixture
-		);
-	}
+        $this->assertAttributeEquals(
+            100,
+            'width',
+            $this->fixture
+        );
+    }
 }

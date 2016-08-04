@@ -6,7 +6,7 @@ namespace TYPO3\GenericGallery\Domain\Repository;
  *
  *  Copyright notice
  *
- *  (c) 2014-2015 Felix Nagel <info@felixnagel.com>
+ *  (c) 2014-2016 Felix Nagel <info@felixnagel.com>
  *
  *  All rights reserved
  *
@@ -28,22 +28,20 @@ namespace TYPO3\GenericGallery\Domain\Repository;
  ***************************************************************/
 
 /**
- * The repository for GalleryItems
+ * The repository for GalleryItems.
  */
-class GalleryItemRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
+class GalleryItemRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+{
+    /**
+     * Initializes the repository.
+     */
+    public function initializeObject()
+    {
+        /** @var $querySettings \TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings */
+        $querySettings = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings');
 
-	/**
-	 * Initializes the repository.
-	 *
-	 * @return void
-	 */
-	public function initializeObject() {
-		/** @var $querySettings \TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings */
-		$querySettings = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings');
+        $querySettings->setRespectStoragePage(false);
 
-		$querySettings->setRespectStoragePage(FALSE);
-
-		$this->setDefaultQuerySettings($querySettings);
-	}
-
+        $this->setDefaultQuerySettings($querySettings);
+    }
 }

@@ -8,7 +8,7 @@ namespace TYPO3\GenericGallery\Utility;
  *
  *  (c) Alexander Buchgeher
  *  (c) Georg Ringer <typo3@ringerge.org>
- *  (c) 2015 Felix Nagel <info@felixnagel.com>
+ *  (c) 2015-2016 Felix Nagel <info@felixnagel.com>
  *
  *  All rights reserved
  *
@@ -28,41 +28,44 @@ namespace TYPO3\GenericGallery\Utility;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-use \TYPO3\CMS\Core\Utility\GeneralUtility,
-	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
 /**
- * Utility class to get the settings from Extension Manager
+ * Utility class to get the settings from Extension Manager.
  */
-class EmConfiguration {
+class EmConfiguration
+{
+    /**
+     * Parses the extension settings.
+     *
+     * @return \TYPO3\GenericGallery\Domain\Model\Dto\EmConfiguration
+     *
+     * @throws \Exception If the configuration is invalid.
+     */
+    public static function getSettings()
+    {
+        $configuration = self::parseSettings();
+        GeneralUtility::requireOnce(
+            ExtensionManagementUtility::extPath('generic_gallery').'Classes/Domain/Model/Dto/EmConfiguration.php'
+        );
 
-	/**
-	 * Parses the extension settings.
-	 *
-	 * @return \TYPO3\GenericGallery\Domain\Model\Dto\EmConfiguration
-	 * @throws \Exception If the configuration is invalid.
-	 */
-	static public function getSettings() {
-		$configuration = self::parseSettings();
-		GeneralUtility::requireOnce(
-			ExtensionManagementUtility::extPath('generic_gallery') . 'Classes/Domain/Model/Dto/EmConfiguration.php'
-		);
+        return new \TYPO3\GenericGallery\Domain\Model\Dto\EmConfiguration($configuration);
+    }
 
-		return new \TYPO3\GenericGallery\Domain\Model\Dto\EmConfiguration($configuration);
-	}
+    /**
+     * Parse settings and return it as array.
+     *
+     * @return array unserialized extconf settings
+     */
+    public static function parseSettings()
+    {
+        $settings = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['generic_gallery']);
 
-	/**
-	 * Parse settings and return it as array
-	 *
-	 * @return array unserialized extconf settings
-	 */
-	static public function parseSettings() {
-		$settings = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['generic_gallery']);
+        if (!is_array($settings)) {
+            $settings = array();
+        }
 
-		if (!is_array($settings)) {
-			$settings = array();
-		}
-		return $settings;
-	}
-
+        return $settings;
+    }
 }

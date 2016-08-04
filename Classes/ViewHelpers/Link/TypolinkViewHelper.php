@@ -5,7 +5,7 @@ namespace TYPO3\GenericGallery\ViewHelpers\Link;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2014-2015 Cedric Ziel <cedric@cedric-ziel.com>, Internetdienstleistungen & EDV
+ *  (c) 2014-2016 Cedric Ziel <cedric@cedric-ziel.com>, Internetdienstleistungen & EDV
  *
  *  All rights reserved
  *
@@ -26,7 +26,7 @@ namespace TYPO3\GenericGallery\ViewHelpers\Link;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
 /**
- * ### TypolinkViewhelper
+ * ### TypolinkViewhelper.
  *
  * Renders a link with the TypoLink function.
  * Can be used with the LinkWizard
@@ -50,19 +50,21 @@ namespace TYPO3\GenericGallery\ViewHelpers\Link;
  *
  * @author Cedric Ziel <cedric@cedric-ziel.com>, Cedric Ziel - Internetdienstleistungen & EDV
  */
-class TypolinkViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
+class TypolinkViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+{
+    /**
+     * Initializes the arguments for the ViewHelper.
+     */
+    public function initializeArguments()
+    {
+        $this->registerArgument('configuration', 'array', 'The typoLink configuration', true);
+    }
 
-	/**
-	 * Initializes the arguments for the ViewHelper
-	 */
-	public function initializeArguments() {
-		$this->registerArgument('configuration', 'array', 'The typoLink configuration', TRUE);
-	}
-
-	/**
-	 * @return mixed
-	 */
-	public function render() {
-		return $GLOBALS['TSFE']->cObj->typoLink($this->renderChildren(), $this->arguments['configuration']);
-	}
+    /**
+     * @return mixed
+     */
+    public function render()
+    {
+        return $GLOBALS['TSFE']->cObj->typoLink($this->renderChildren(), $this->arguments['configuration']);
+    }
 }

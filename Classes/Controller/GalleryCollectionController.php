@@ -30,27 +30,24 @@ namespace TYPO3\GenericGallery\Controller;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 
 /**
- * GalleryCollectionController
+ * GalleryCollectionController.
  */
-class GalleryCollectionController extends AbstractController {
+class GalleryCollectionController extends AbstractController
+{
+    /**
+     * {@inheritdoc}
+     */
+    protected function initializeView(ViewInterface $view)
+    {
+        $this->template = $this->currentSettings['template'];
+        parent::initializeView($view);
+    }
 
-	/**
-	 * @inheritdoc
-	 *
-	 * @return void
-	 */
-	protected function initializeView(ViewInterface $view) {
-		$this->template = $this->currentSettings['template'];
-		parent::initializeView($view);
-	}
-
-	/**
-	 * Show gallery
-	 *
-	 * @return void
-	 */
-	public function showAction() {
-		$this->view->assign('collection', $this->collection);
-	}
-
+    /**
+     * Show gallery.
+     */
+    public function showAction()
+    {
+        $this->view->assign('collection', $this->collection);
+    }
 }

@@ -5,7 +5,7 @@ namespace TYPO3\GenericGallery\ViewHelpers\ForGroup;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2014-2015 Felix Nagel <info@felixnagel.com>
+ *  (c) 2014-2016 Felix Nagel <info@felixnagel.com>
  *
  *  All rights reserved
  *
@@ -27,18 +27,19 @@ namespace TYPO3\GenericGallery\ViewHelpers\ForGroup;
  * ************************************************************* */
 
 /**
- * ForGroupViewHelper
+ * ForGroupViewHelper.
  */
-class EndViewHelper extends AbstractViewHelper {
+class EndViewHelper extends AbstractViewHelper
+{
+    /**
+     * @return mixed
+     */
+    public function render()
+    {
+        if ($this->iteration['isLast'] || ($this->iteration['cycle'] % $this->max) === 0) {
+            return $this->renderChildren();
+        }
 
-	/**
-	 * @return mixed
-	 */
-	public function render() {
-		if ($this->iteration['isLast'] || ($this->iteration['cycle'] % $this->max) === 0) {
-			return $this->renderChildren();
-		}
-
-		return '';
-	}
+        return '';
+    }
 }

@@ -6,7 +6,7 @@ namespace TYPO3\GenericGallery\Domain\Model;
  *
  *  Copyright notice
  *
- *  (c) 2014-2015 Felix Nagel <info@felixnagel.com>
+ *  (c) 2014-2016 Felix Nagel <info@felixnagel.com>
  *
  *  All rights reserved
  *
@@ -30,175 +30,179 @@ namespace TYPO3\GenericGallery\Domain\Model;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
- * GalleryCollection
+ * GalleryCollection.
  */
-class GalleryCollection extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity implements \Iterator, \Countable {
+class GalleryCollection extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity implements \Iterator, \Countable
+{
+    /**
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage
+     */
+    protected $items;
 
-	/**
-	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage
-	 */
-	protected $items;
+    /**
+     * Construct class.
+     *
+     * @return \TYPO3\GenericGallery\Domain\Model\GalleryCollection
+     */
+    public function __construct()
+    {
+        $this->items = new ObjectStorage();
+    }
 
+    /**
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
+     */
+    public function getItems()
+    {
+        return $this->items;
+    }
 
-	/**
-	 * Construct class
-	 *
-	 * @return \TYPO3\GenericGallery\Domain\Model\GalleryCollection
-	 */
-	public function __construct() {
-		$this->items = new ObjectStorage();
-	}
+    /**
+     * @param $items \TYPO3\CMS\Extbase\Persistence\ObjectStorage
+     *
+     * @return $this
+     */
+    public function setItems(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $items)
+    {
+        $this->items = $items;
 
+        return $this;
+    }
 
-	/**
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
-	 */
-	public function getItems() {
-		return $this->items;
-	}
+    /**
+     * Rewinds the iterator to the first storage element.
+     */
+    public function rewind()
+    {
+        $this->items->rewind();
+    }
 
-	/**
-	 * @param $items \TYPO3\CMS\Extbase\Persistence\ObjectStorage
-	 *
-	 * @return $this
-	 */
-	public function setItems(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $items) {
-		$this->items = $items;
+    /**
+     * Checks if the array pointer of the storage points to a valid position.
+     *
+     * @return bool
+     */
+    public function valid()
+    {
+        return $this->items->valid();
+    }
 
-		return $this;
-	}
+    /**
+     * Returns the index at which the iterator currently is.
+     *
+     * @return string The index corresponding to the position of the iterator.
+     */
+    public function key()
+    {
+        return $this->items->key();
+    }
 
-	/**
-	 * Rewinds the iterator to the first storage element.
-	 *
-	 * @return void
-	 */
-	public function rewind() {
-		$this->items->rewind();
-	}
+    /**
+     * Returns the current storage entry.
+     *
+     * @return object The object at the current iterator position.
+     */
+    public function current()
+    {
+        return $this->items->current();
+    }
 
-	/**
-	 * Checks if the array pointer of the storage points to a valid position.
-	 *
-	 * @return boolean
-	 */
-	public function valid() {
-		return $this->items->valid();
-	}
+    /**
+     * Returns item the by uid.
+     *
+     * @param string $uid
+     *
+     * @return object The object by item uid.
+     */
+    public function getByUid($uid)
+    {
+        foreach ($this->items as $item) {
+            /* @var $item \TYPO3\GenericGallery\Domain\Model\GalleryItem */
+            if ((string) $uid === (string) $item->getUid()) {
+                return $item;
+            }
+        }
 
-	/**
-	 * Returns the index at which the iterator currently is.
-	 *
-	 * @return string The index corresponding to the position of the iterator.
-	 */
-	public function key() {
-		return $this->items->key();
-	}
+        return;
+    }
 
-	/**
-	 * Returns the current storage entry.
-	 *
-	 * @return object The object at the current iterator position.
-	 */
-	public function current() {
-		return $this->items->current();
-	}
+    /**
+     * Moves to the next entry.
+     */
+    public function next()
+    {
+        $this->items->next();
+    }
 
-	/**
-	 * Returns item the by uid.
-	 *
-	 * @param string $uid
-	 * @return object The object by item uid.
-	 */
-	public function getByUid($uid) {
-		foreach ($this->items as $item) {
-			/* @var $item \TYPO3\GenericGallery\Domain\Model\GalleryItem */
-			if ((string)$uid === (string)$item->getUid()) {
-				return $item;
-			}
-		}
+    /**
+     * Returns the number of objects in the storage.
+     *
+     * @return int The number of objects in the storage.
+     */
+    public function count()
+    {
+        return $this->items->count();
+    }
 
-		return NULL;
-	}
+    /**
+     * @param array|\TYPO3\CMS\Extbase\Persistence\Generic\QueryResult $data
+     *
+     * @return $this
+     */
+    public function addAll($data)
+    {
+        /* @var $object \TYPO3\GenericGallery\Domain\Model\GalleryItem */
+        foreach ($data as $object) {
+            $this->items->attach($object);
+        }
 
-	/**
-	 * Moves to the next entry.
-	 *
-	 * @return void
-	 */
-	public function next() {
-		$this->items->next();
-	}
+        return $this;
+    }
 
-	/**
-	 * Returns the number of objects in the storage.
-	 *
-	 * @return integer The number of objects in the storage.
-	 */
-	public function count() {
-		return $this->items->count();
-	}
+    /**
+     * @param array $data
+     *
+     * @return $this
+     */
+    public function addAllFromFiles(array $data)
+    {
+        foreach ($data as $object) {
+            $item = new GalleryItem();
 
-	/**
-	 *
-	 * @param array|\TYPO3\CMS\Extbase\Persistence\Generic\QueryResult $data
-	 *
-	 * @return $this
-	 */
-	public function addAll($data) {
-		/* @var $object \TYPO3\GenericGallery\Domain\Model\GalleryItem */
-		foreach ($data as $object) {
-			$this->items->attach($object);
-		}
+            if ($object instanceof \TYPO3\CMS\Core\Resource\FileReference) {
+                /* @var $object \TYPO3\CMS\Core\Resource\FileReference */
+                $item->setImage($object->getOriginalFile());
+                $item->setImageReference($object);
+            }
 
-		return $this;
-	}
+            if ($object instanceof \TYPO3\CMS\Core\Resource\File) {
+                /* @var $object \TYPO3\CMS\Core\Resource\File */
+                $item->setImage($object);
+            }
 
-	/**
-	 *
-	 * @param array $data
-	 *
-	 * @return $this
-	 */
-	public function addAllFromFiles(array $data) {
-		foreach ($data as $object) {
-			$item = new GalleryItem();
+            $this->items->attach($item);
+        }
 
-			if ($object instanceof \TYPO3\CMS\Core\Resource\FileReference) {
-				/* @var $object \TYPO3\CMS\Core\Resource\FileReference */
-				$item->setImage($object->getOriginalFile());
-				$item->setImageReference($object);
-			}
+        return $this;
+    }
 
-			if ($object instanceof \TYPO3\CMS\Core\Resource\File) {
-				/* @var $object \TYPO3\CMS\Core\Resource\File */
-				$item->setImage($object);
-			}
+    /**
+     * Returns this object storage as an array.
+     *
+     * @return array The object storage
+     */
+    public function toArray()
+    {
+        return $this->items->toArray();
+    }
 
-			$this->items->attach($item);
-		}
-
-		return $this;
-	}
-
-	/**
-	 * Returns this object storage as an array
-	 *
-	 * @return array The object storage
-	 */
-	public function toArray() {
-		return $this->items->toArray();
-	}
-
-	/**
-	 * Dummy method to avoid serialization.
-	 *
-	 * @throws \RuntimeException
-	 *
-	 * @return void
-	 */
-	public function serialize() {
-		$this->items->serialize();
-	}
-
+    /**
+     * Dummy method to avoid serialization.
+     *
+     * @throws \RuntimeException
+     */
+    public function serialize()
+    {
+        $this->items->serialize();
+    }
 }

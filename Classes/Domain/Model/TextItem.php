@@ -6,7 +6,7 @@ namespace TYPO3\GenericGallery\Domain\Model;
  *
  *  Copyright notice
  *
- *  (c) 2014-2015 Felix Nagel <info@felixnagel.com>
+ *  (c) 2014-2016 Felix Nagel <info@felixnagel.com>
  *
  *  All rights reserved
  *
@@ -30,124 +30,129 @@ namespace TYPO3\GenericGallery\Domain\Model;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
- * TextItem
+ * TextItem.
  */
-class TextItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
+class TextItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+{
+    /**
+     * bodytext.
+     *
+     * @var string
+     */
+    protected $bodytext = '';
 
-	/**
-	 * bodytext
-	 *
-	 * @var string
-	 */
-	protected $bodytext = '';
+    /**
+     * position.
+     *
+     * @var string
+     */
+    protected $position = '';
 
-	/**
-	 * position
-	 *
-	 * @var string
-	 */
-	protected $position = '';
+    /**
+     * width.
+     *
+     * @var string
+     */
+    protected $width = '';
 
-	/**
-	 * width
-	 *
-	 * @var string
-	 */
-	protected $width = '';
+    /**
+     * Returns the bodytext.
+     *
+     * @return string $bodytext
+     */
+    public function getBodytext()
+    {
+        return $this->bodytext;
+    }
 
-	/**
-	 * Returns the bodytext
-	 *
-	 * @return string $bodytext
-	 */
-	public function getBodytext() {
-		return $this->bodytext;
-	}
+    /**
+     * Returns the bodytext.
+     *
+     * @return string $bodytext
+     */
+    public function getText()
+    {
+        return $this->getBodytext();
+    }
 
-	/**
-	 * Returns the bodytext
-	 *
-	 * @return string $bodytext
-	 */
-	public function getText() {
-		return $this->getBodytext();
-	}
+    /**
+     * Sets the bodytext.
+     *
+     * @param string $bodytext
+     */
+    public function setBodytext($bodytext)
+    {
+        $this->bodytext = $bodytext;
+    }
 
-	/**
-	 * Sets the bodytext
-	 *
-	 * @param string $bodytext
-	 * @return void
-	 */
-	public function setBodytext($bodytext) {
-		$this->bodytext = $bodytext;
-	}
+    /**
+     * Returns the position.
+     *
+     * @return string $position
+     */
+    public function getPosition()
+    {
+        $coordsArray = GeneralUtility::intExplode(',', $this->position, true);
 
-	/**
-	 * Returns the position
-	 *
-	 * @return string $position
-	 */
-	public function getPosition() {
-		$coordsArray = GeneralUtility::intExplode(',', $this->position, TRUE);
+        return array(
+            'x' => $coordsArray[0],
+            'y' => $coordsArray[1],
+        );
+    }
 
-		return array(
-			'x' => $coordsArray[0],
-			'y' => $coordsArray[1]
-		);
-	}
+    /**
+     * Sets the position.
+     *
+     * @param string $position
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+    }
 
-	/**
-	 * Sets the position
-	 *
-	 * @param string $position
-	 * @return void
-	 */
-	public function setPosition($position) {
-		$this->position = $position;
-	}
+    /**
+     * Returns the width.
+     *
+     * @return string $width
+     */
+    public function getWidth()
+    {
+        return $this->width;
+    }
 
-	/**
-	 * Returns the width
-	 *
-	 * @return string $width
-	 */
-	public function getWidth() {
-		return $this->width;
-	}
+    /**
+     * Sets the width.
+     *
+     * @param string $width
+     */
+    public function setWidth($width)
+    {
+        $this->width = $width;
+    }
 
-	/**
-	 * Sets the width
-	 *
-	 * @param string $width
-	 * @return void
-	 */
-	public function setWidth($width) {
-		$this->width = $width;
-	}
+    /**
+     * Returns the position.
+     *
+     * @return string $position
+     */
+    public function getCssStyles()
+    {
+        $string = '';
+        $position = $this->getPosition();
+        $classes = array(
+            'position' => 'absolute',
+            'left' => $position['x'].'px',
+            'top' => $position['y'].'px',
+        );
 
-	/**
-	 * Returns the position
-	 *
-	 * @return string $position
-	 */
-	public function getCssStyles() {
-		$string = '';
-		$position = $this->getPosition();
-		$classes = array(
-			'position' => 'absolute',
-			'left' => $position['x'] . 'px',
-			'top' => $position['y'] . 'px',
-		);
+        if ($this->getWidth() !== '') {
+            $classes['width'] = $this->getWidth().'px';
+        }
 
-		if ($this->getWidth() !== '') {
-			$classes['width'] = $this->getWidth() . 'px';
-		}
+        foreach ($classes as $class => $value) {
+            $string .= $class.': '.$value.'; ';
+        }
 
-		foreach ($classes as $class => $value) {
-			$string .= $class . ': ' . $value . '; ';
-		}
-
-		return $string;
-	}
+        return $string;
+    }
 }

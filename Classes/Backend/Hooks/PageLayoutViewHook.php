@@ -27,324 +27,318 @@ namespace TYPO3\GenericGallery\Backend\Hooks;
 
 use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Imaging\IconFactory;
-use \TYPO3\GenericGallery\Utility\EmConfiguration,
-	\TYPO3\CMS\Core\Utility\GeneralUtility,
-	\TYPO3\CMS\Backend\Utility\IconUtility,
-	\TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\GenericGallery\Utility\EmConfiguration;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Backend\Utility\IconUtility;
+use TYPO3\CMS\Backend\Utility\BackendUtility;
 
 /**
- * Hook class for PageLayoutView hook `list_type_Info`
+ * Hook class for PageLayoutView hook `list_type_Info`.
  *
  * @todo Use localization
  */
-class PageLayoutViewHook {
+class PageLayoutViewHook
+{
+    /**
+     * @var \TYPO3\CMS\Extbase\Object\Container\Container
+     */
+    protected $objectContainer = null;
 
-	/**
-	 * @var \TYPO3\CMS\Extbase\Object\Container\Container
-	 */
-	protected $objectContainer = NULL;
+    /**
+     * @var \TYPO3\CMS\Extbase\Object\ObjectManager
+     */
+    protected $objectManager = null;
 
-	/**
-	 * @var \TYPO3\CMS\Extbase\Object\ObjectManager
-	 */
-	protected $objectManager = NULL;
+    /**
+     * @var \TYPO3\GenericGallery\Service\SettingsService
+     */
+    protected $settingsService = null;
 
-	/**
-	 * @var \TYPO3\GenericGallery\Service\SettingsService
-	 */
-	protected $settingsService = NULL;
+    /*
+     * Current page settings
+     *
+     * @var array
+     */
+    private $settings = null;
 
-	/*
-	 * Current page settings
-	 *
-	 * @var array
-	 */
-	private $settings = NULL;
+    /*
+     * Current row data
+     *
+     * @var array
+     */
+    private $data = null;
 
-	/*
-	 * Current row data
-	 *
-	 * @var array
-	 */
-	private $data = NULL;
+    /**
+     * Table information.
+     *
+     * @var array
+     */
+    public $tableData = array();
 
-	/**
-	 * Table information
-	 *
-	 * @var array
-	 */
-	public $tableData = array();
+    /**
+     * Image previews.
+     *
+     * @var string
+     */
+    public $imagePreviewHtml = '';
 
-	/**
-	 * Image previews
-	 *
-	 * @var string
-	 */
-	public $imagePreviewHtml = '';
+    /**
+     * Returns information about this plugin content.
+     *
+     * No type hint for $parentObject parameter due to fatal error when TemplaVoila is installed
+     *
+     * @param array                                  &$parameters   Parameters for the hook:
+     *                                                              'pObj' => reference to \TYPO3\CMS\Backend\View\PageLayoutView
+     *                                                              'row' => $row,
+     *                                                              'infoArr' => $infoArr
+     * @param \TYPO3\CMS\Backend\View\PageLayoutView &$parentObject
+     *
+     * @return string Rendered output for PageLayoutView
+     */
+    public function getExtensionSummary(array &$parameters = array(), &$parentObject)
+    {
+        if ($parameters['row']['list_type'] !== 'genericgallery_pi1') {
+            return '';
+        }
 
+        if (!EmConfiguration::getSettings()->isEnableCmsLayout()) {
+            return '';
+        }
 
-	/**
-	 * Returns information about this plugin content
-	 *
-	 * No type hint for $parentObject parameter due to fatal error when TemplaVoila is installed
-	 *
-	 * @param array &$parameters Parameters for the hook:
-	 *                  'pObj' => reference to \TYPO3\CMS\Backend\View\PageLayoutView
-	 *                  'row' => $row,
-	 *                  'infoArr' => $infoArr
-	 * @param \TYPO3\CMS\Backend\View\PageLayoutView &$parentObject 
-	 * @return string Rendered output for PageLayoutView
-	 */
-	public function getExtensionSummary(array &$parameters = array(), &$parentObject) {
-		if ($parameters['row']['list_type'] !== 'genericgallery_pi1') {
-			return '';
-		}
+        $this->data = $parameters['row'];
+        $this->settings = $this->getTypoScriptService()->getTypoScriptSettings();
 
-		if (!EmConfiguration::getSettings()->isEnableCmsLayout()) {
-			return '';
-		}
+        return $this->renderPreview();
+    }
 
-		$this->data = $parameters['row'];
-		$this->settings = $this->getTypoScriptService()->getTypoScriptSettings();
+    /**
+     * Render header.
+     *
+     * @return string
+     */
+    protected function renderHeader()
+    {
+        $editLink = BackendUtility::editOnClick('&edit[tt_content]['.$this->data['uid'].']=edit', $GLOBALS['BACK_PATH']);
 
-		return $this->renderPreview();
-	}
+        return '<strong><a href="#" onclick="'.$editLink.'">Generic Gallery</strong><br>';
+    }
 
-	/**
-	 * Render header
-	 *
-	 * @return string
-	 */
-	protected function renderHeader() {
-		$editLink = BackendUtility::editOnClick('&edit[tt_content][' . $this->data['uid'] . ']=edit', $GLOBALS['BACK_PATH']);
-		return '<strong><a href="#" onclick="' . $editLink . '">Generic Gallery</strong><br>';
-	}
+    /**
+     * @return string
+     */
+    protected function renderPreview()
+    {
+        $html = '';
 
-	/**
-	 * @return string
-	 */
-	protected function renderPreview() {
-		$html = '';
+        $this->setGalleryType();
 
-		$this->setGalleryType();
+        if ($this->data['tx_generic_gallery_collection']) {
+            $this->renderCollectionPreview();
+        } elseif ($this->data['tx_generic_gallery_images']) {
+            $this->renderImagesPreview();
+        } elseif ($this->data['tx_generic_gallery_items']) {
+            $this->renderItemsPreview();
+        }
 
-		if ($this->data['tx_generic_gallery_collection']) {
-			$this->renderCollectionPreview();
+        $html .= $this->renderHeader();
+        $html .= $this->renderInfoTable();
 
-		} elseif ($this->data['tx_generic_gallery_images']) {
-			$this->renderImagesPreview();
+        if ($this->imagePreviewHtml !== '') {
+            $html .= '<br>'.$this->imagePreviewHtml;
+        }
 
-		} elseif ($this->data['tx_generic_gallery_items']) {
-			$this->renderItemsPreview();
-		}
+        return $html;
+    }
 
-		$html .= $this->renderHeader();
-		$html .= $this->renderInfoTable();
+    /**
+     */
+    protected function renderCollectionPreview()
+    {
+        $collection = BackendUtility::getRecord('sys_file_collection', $this->data['tx_generic_gallery_collection']);
+        $nameValue = $this->getRecordLink($collection, 'sys_file_collection', $collection['title']);
 
-		if ($this->imagePreviewHtml !== '') {
-			$html .= '<br>' . $this->imagePreviewHtml;
-		}
+        $this->tableData[] = array('Source', 'collection');
+        $this->tableData[] = array('Images', $collection['files']);
+        $this->tableData[] = array('Name', $nameValue);
 
-		return $html;
-	}
+        $this->imagePreviewHtml = BackendUtility::thumbCode(
+            $collection,
+            'sys_file_collection',
+            'files',
+            $GLOBALS['BACK_PATH']
+        );
+    }
 
-	/**
-	 * @return void
-	 */
-	protected function renderCollectionPreview() {
-		$collection = BackendUtility::getRecord('sys_file_collection', $this->data['tx_generic_gallery_collection']);
+    /**
+     */
+    protected function renderImagesPreview()
+    {
+        $this->tableData[] = array('Source', 'images');
+        $this->tableData[] = array('Images', $this->data['tx_generic_gallery_images']);
 
-		$this->tableData[] = array('Source', 'collection (' . $collection['type'] . ')');
-		$this->tableData[] = array('Name', $this->getRecordLink($collection, 'sys_file_collection', $collection['title']));
+        $this->imagePreviewHtml = BackendUtility::thumbCode(
+            $this->data,
+            'tt_content',
+            'tx_generic_gallery_images',
+            $GLOBALS['BACK_PATH']
+        );
+    }
 
-		switch ($collection['type']) {
-			case 'folder':
-				// @todo Add preview images for folder images
-				$this->tableData[] = array('Folder', $collection['folder']);
-				break;
+    /**
+     */
+    protected function renderItemsPreview()
+    {
+        // @todo Use localization
+        $this->tableData[] = array('Source', 'items');
 
-			case 'files':
-				$this->tableData[] = array('Images', $collection['files']);
-				$this->imagePreviewHtml = BackendUtility::thumbCode(
-					$collection,
-					'sys_file_collection',
-					'files',
-					$GLOBALS['BACK_PATH']
-				);
-				break;
+        $this->imagePreviewHtml = $this->getItemsImagePreviews($this->data);
+    }
 
-			case 'category':
-				// @todo Add preview images for category images
-				$category = BackendUtility::getRecord('sys_category', $collection['category']);
-				$this->tableData[] = array('Category', $this->getRecordLink($category, 'sys_category', $category['title']));
-				break;
-		}
-	}
+    /**
+     * @param array $data
+     *
+     * @return string
+     */
+    protected function getItemsImagePreviews($data)
+    {
+        $result = '';
 
-	/**
-	 * @return void
-	 */
-	protected function renderImagesPreview() {
-		$this->tableData[] = array('Source', 'images');
-		$this->tableData[] = array('Images', $this->data['tx_generic_gallery_images']);
+        $select = 'uid, title';
+        $table = 'tx_generic_gallery_pictures';
+        $where = 'tt_content_id = '.$data['uid'];
+        $where .= BackendUtility::BEenableFields($table).' AND '.$table.'.deleted = 0';
 
-		$this->imagePreviewHtml = BackendUtility::thumbCode(
-			$this->data,
-			'tt_content',
-			'tx_generic_gallery_images',
-			$GLOBALS['BACK_PATH']
-		);
-	}
+        $rows = $this->getDatabase()->exec_SELECTgetRows($select, $table, $where, '', 'sorting');
+        $this->tableData[] = array('Images', count($rows));
+        if ($rows === null) {
+            return $result;
+        }
 
-	/**
-	 * @return void
-	 */
-	protected function renderItemsPreview() {
-		// @todo Use localization
-		$this->tableData[] = array('Source', 'items');
+        // Get thumbs
+        foreach ($rows as $row) {
+            $result .= BackendUtility::thumbCode(
+                $row,
+                'tx_generic_gallery_pictures',
+                'images',
+                $GLOBALS['BACK_PATH']
+            );
+        }
 
-		$this->imagePreviewHtml = $this->getItemsImagePreviews($this->data);
-	}
+        return $result;
+    }
 
-	/**
-	 * @param array $data
-	 * @return string
-	 */
-	protected function getItemsImagePreviews($data) {
-		$result = '';
+    /**
+     * @return string
+     */
+    protected function getRecordLink($record, $table, $content = '', $addIcon = true)
+    {
+        if ($content === '') {
+            $content = htmlspecialchars(BackendUtility::getRecordTitle($table, $record));
+        }
 
-		$select = 'uid, title';
-		$table = 'tx_generic_gallery_pictures';
-		$where = 'tt_content_id = ' . $data['uid'];
-		$where .= BackendUtility::BEenableFields($table) . ' AND ' . $table . '.deleted = 0';
+        if ($addIcon) {
+            if (version_compare(TYPO3_branch, '7.0', '<')) {
+                $icon = IconUtility::getSpriteIconForRecord($table, $record, array('title' => 'Uid: '.$record['uid']));
+            } else {
+                $iconFactory = GeneralUtility::makeInstance(IconFactory::class);
+                $icon = $iconFactory->getIconForRecord($table, $record, Icon::SIZE_SMALL)->render();
+            }
 
-		$rows = $this->getDatabase()->exec_SELECTgetRows($select, $table, $where, '', 'sorting');
-		$this->tableData[] = array('Images', count($rows));
-		if ($rows === NULL) {
-			return $result;
-		}
+            $content = $icon.$content;
+        }
 
-		// Get thumbs
-		foreach ($rows as $row) {
-			$result .= BackendUtility::thumbCode(
-				$row,
-				'tx_generic_gallery_pictures',
-				'images',
-				$GLOBALS['BACK_PATH']
-			);
-		}
+        if (version_compare(TYPO3_branch, '7.0', '<')) {
+            $output = $GLOBALS['SOBE']->doc->wrapClickMenuOnIcon($content, $table, $record['uid'], 1, '', '+info,edit');
+        } else {
+            $output = BackendUtility::wrapClickMenuOnIcon($content, $table, $record['uid'], 1, '', '+info,edit');
+        }
 
-		return $result;
-	}
+        return $output;
+    }
 
+    /**
+     * Render the settings as table for Web>Page module.
+     *
+     * @return string
+     */
+    protected function renderInfoTable()
+    {
+        if (count($this->tableData) == 0) {
+            return '';
+        }
 
-	/**
-	 * @return string
-	 */
-	protected function getRecordLink($record, $table, $content = '', $addIcon = TRUE) {
-		if ($content === '') {
-			$content = htmlspecialchars(BackendUtility::getRecordTitle($table, $record));
-		}
+        $content = '';
+        foreach ($this->tableData as $line) {
+            $content .= '<strong style="width: 80px; display: inline-block;">'.
+                $line[0].'</strong>'.' '.$line[1].'<br />';
+        }
 
-		if ($addIcon) {
-			if (version_compare(TYPO3_branch, '7.0', '<')) {
-				$icon = IconUtility::getSpriteIconForRecord($table, $record, array('title' => 'Uid: ' . $record['uid']));
-			} else {
-				$iconFactory = GeneralUtility::makeInstance(IconFactory::class);
-				$icon = $iconFactory->getIconForRecord($table, $record, Icon::SIZE_SMALL)->render();
-			}
+        return '<br><pre style="white-space: normal;">'.$content.'</pre>';
+    }
 
-			$content = $icon . $content;
-		}
+    /**
+     * @return \TYPO3\CMS\Core\Database\DatabaseConnection
+     */
+    protected function getDatabase()
+    {
+        return $GLOBALS['TYPO3_DB'];
+    }
 
-		if (version_compare(TYPO3_branch, '7.0', '<')) {
-			$output = $GLOBALS['SOBE']->doc->wrapClickMenuOnIcon($content, $table, $record['uid'], 1, '', '+info,edit');
-		} else {
-			$output = BackendUtility::wrapClickMenuOnIcon($content, $table, $record['uid'], 1, '', '+info,edit');
-		}
+    /**
+     * @param string $key
+     * @param string $keyPrefix
+     *
+     * @return string
+     */
+    protected function translate(
+        $key,
+        $keyPrefix = 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf'
+    ) {
+        return $GLOBALS['LANG']->sL($keyPrefix.':'.$key);
+    }
 
-		return $output;
-	}
+    /**
+     * @return \TYPO3\GenericGallery\Service\SettingsService
+     */
+    protected function getTypoScriptService()
+    {
+        if ($this->settingsService === null) {
+            $this->settingsService = $this->getObjectContainer()->getInstance(
+                'TYPO3\\GenericGallery\\Service\\SettingsService'
+            );
+        }
 
-	/**
-	 * Render the settings as table for Web>Page module
-	 *
-	 * @return string
-	 */
-	protected function renderInfoTable() {
-		if (count($this->tableData) == 0) {
-			return '';
-		}
+        return $this->settingsService;
+    }
 
-		$content = '';
-		foreach ($this->tableData as $line) {
-			$content .= '<strong style="width: 80px; display: inline-block;">' .
-				$line[0] . '</strong>' . ' ' . $line[1] . '<br />';
-		}
+    /**
+     * Get object container.
+     *
+     * @return \TYPO3\CMS\Extbase\Object\Container\Container
+     */
+    protected function getObjectContainer()
+    {
+        if ($this->objectContainer == null) {
+            $this->objectContainer = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\Container\\Container');
+        }
 
-		return '<br><pre style="white-space: normal;">' . $content . '</pre>';
-	}
+        return $this->objectContainer;
+    }
 
-	/**
-	 * @return \TYPO3\CMS\Core\Database\DatabaseConnection
-	 */
-	protected function getDatabase() {
-		return $GLOBALS['TYPO3_DB'];
-	}
+    /**
+     * Set gallery type name.
+     */
+    protected function setGalleryType()
+    {
+        $typeName = rtrim($this->data['tx_generic_gallery_predefined'], '.');
 
-	/**
-	 * @param string $key
-	 * @param string $keyPrefix
-	 *
-	 * @return string
-	 */
-	protected function translate(
-		$key,
-		$keyPrefix = 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf'
-	) {
-		return $GLOBALS['LANG']->sL($keyPrefix . ':' . $key);
-	}
+        if (
+            array_key_exists($typeName, $this->settings['gallery']) &&
+            array_key_exists('name', $this->settings['gallery'][$typeName])
+        ) {
+            $typeName = $this->settings['gallery'][$typeName]['name'];
+        }
 
-	/**
-	 * @return \TYPO3\GenericGallery\Service\SettingsService
-	 */
-	protected function getTypoScriptService() {
-		if ($this->settingsService === NULL) {
-			$this->settingsService = $this->getObjectContainer()->getInstance(
-				'TYPO3\\GenericGallery\\Service\\SettingsService'
-			);
-		}
-
-		return $this->settingsService;
-	}
-
-	/**
-	 * Get object container
-	 *
-	 * @return \TYPO3\CMS\Extbase\Object\Container\Container
-	 */
-	protected function getObjectContainer() {
-		if ($this->objectContainer == NULL) {
-			$this->objectContainer = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\Container\\Container');
-		}
-
-		return $this->objectContainer;
-	}
-
-	/**
-	 * Set gallery type name
-	 */
-	protected function setGalleryType() {
-		$typeName = rtrim($this->data['tx_generic_gallery_predefined'], '.');
-
-		if (
-			array_key_exists($typeName, $this->settings['gallery']) &&
-			array_key_exists('name', $this->settings['gallery'][$typeName])
-		) {
-			$typeName = $this->settings['gallery'][$typeName]['name'];
-		}
-
-		$this->tableData[] = array('Type', $typeName);
-	}
-
+        $this->tableData[] = array('Type', $typeName);
+    }
 }

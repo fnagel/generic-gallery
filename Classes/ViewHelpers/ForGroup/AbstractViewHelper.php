@@ -5,7 +5,7 @@ namespace TYPO3\GenericGallery\ViewHelpers\ForGroup;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2014-2015 Felix Nagel <info@felixnagel.com>
+ *  (c) 2014-2016 Felix Nagel <info@felixnagel.com>
  *
  *  All rights reserved
  *
@@ -26,30 +26,29 @@ namespace TYPO3\GenericGallery\ViewHelpers\ForGroup;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
 /**
- * ForGroupViewHelper
+ * ForGroupViewHelper.
  */
-class AbstractViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
+class AbstractViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+{
+    /**
+     * Initializes the arguments for the ViewHelper.
+     */
+    public function initializeArguments()
+    {
+        $this->registerArgument('iteration', 'array', 'The for VH iteration array', true);
+        $this->registerArgument('max', 'int', 'Max items in one for group', true, 2);
+    }
 
-	/**
-	 * Initializes the arguments for the ViewHelper
-	 *
-	 * @return void
-	 */
-	public function initializeArguments() {
-		$this->registerArgument('iteration', 'array', 'The for VH iteration array', TRUE);
-		$this->registerArgument('max', 'int', 'Max items in one for group', TRUE, 2);
-	}
-
-	/**
-	 * Initializes the view helper before invoking the render method.
-	 *
-	 * Override this method to solve tasks before the view helper content is rendered.
-	 *
-	 * @return void
-	 * @api
-	 */
-	public function initialize() {
-		$this->iteration = $this->arguments['iteration'];
-		$this->max = $this->arguments['max'];
-	}
+    /**
+     * Initializes the view helper before invoking the render method.
+     *
+     * Override this method to solve tasks before the view helper content is rendered.
+     *
+     * @api
+     */
+    public function initialize()
+    {
+        $this->iteration = $this->arguments['iteration'];
+        $this->max = $this->arguments['max'];
+    }
 }
