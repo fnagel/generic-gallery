@@ -4,24 +4,31 @@
 
 <f:section name="main">
 
-	<div class="row">
-		<f:for each="{collection}" as="item" iteration="iterator">
-			<gg:forGroup.begin iteration="{iterator}" max="4">
-				<ul class="thumbnails list-unstyled">
-			</gg:forGroup.begin>
+		<f:widget.paginate objects="{collection}" as="items" configuration="{itemsPerPage: 8}">
+			<div class="row">
+				<f:for each="{items}" as="item" iteration="iterator">
 
-			<li class="col-md-3">
-				<figure class="thumbnail">
-					<f:render partial="GalleryItem/Image" arguments="{_all}" />
-					<f:if condition="{galleryType} == 'single'">
-						<f:render partial="GalleryItem/Caption" arguments="{_all}" />
-					</f:if>
-				</figure>
-			</li>
+						<f:if condition="{item}">
+							<gg:forGroup.begin iteration="{iterator}" max="4">
+								<ul class="thumbnails list-unstyled">
+							</gg:forGroup.begin>
 
-			<gg:forGroup.end iteration="{iterator}" max="4">
-				</ul>
-			</gg:forGroup.end>
-		</f:for>
-	</div>
+							<li class="col-md-3">
+								<figure class="thumbnail">
+									<f:render partial="GalleryItem/Image" arguments="{_all}" />
+									<f:if condition="{galleryType} == 'single'">
+										<f:render partial="GalleryItem/Caption" arguments="{_all}" />
+									</f:if>
+								</figure>
+							</li>
+
+							<gg:forGroup.end iteration="{iterator}" max="4">
+								</ul>
+							</gg:forGroup.end>
+						</f:if>
+
+				</f:for>
+			</div>
+		</f:widget.paginate>
+
 </f:section>
