@@ -32,79 +32,31 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 /**
  * GalleryCollection.
  */
-class GalleryCollection extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity implements \Iterator, \Countable
+class GalleryCollection extends ObjectStorage
 {
-    /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage
-     */
-    protected $items;
 
     /**
-     * Construct class.
-     *
-     * @return \TYPO3\GenericGallery\Domain\Model\GalleryCollection
-     */
-    public function __construct()
-    {
-        $this->items = new ObjectStorage();
-    }
-
-    /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
+     * @todo Remove this with v3
+     * @deprecated
+     * @return ObjectStorage
      */
     public function getItems()
     {
-        return $this->items;
-    }
-
-    /**
-     * @param $items \TYPO3\CMS\Extbase\Persistence\ObjectStorage
-     *
-     * @return $this
-     */
-    public function setItems(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $items)
-    {
-        $this->items = $items;
-
         return $this;
     }
 
     /**
-     * Rewinds the iterator to the first storage element.
-     */
-    public function rewind()
-    {
-        $this->items->rewind();
-    }
-
-    /**
-     * Checks if the array pointer of the storage points to a valid position.
+     * @todo Remove this with v3
+     * @deprecated
+     * @param $items ObjectStorage
      *
-     * @return bool
+     * @return $this
      */
-    public function valid()
+    public function setItems(ObjectStorage $items)
     {
-        return $this->items->valid();
-    }
+        $this->addAll($items);
 
-    /**
-     * Returns the index at which the iterator currently is.
-     *
-     * @return string The index corresponding to the position of the iterator.
-     */
-    public function key()
-    {
-        return $this->items->key();
-    }
-
-    /**
-     * Returns the current storage entry.
-     *
-     * @return object The object at the current iterator position.
-     */
-    public function current()
-    {
-        return $this->items->current();
+        return $this;
     }
 
     /**
@@ -112,51 +64,32 @@ class GalleryCollection extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity i
      *
      * @param string $uid
      *
-     * @return object The object by item uid.
+     * @return GalleryItem The object by item uid.
      */
     public function getByUid($uid)
     {
-        foreach ($this->items as $item) {
+        $storage = array_values($this->storage);
+        foreach ($storage as $item) {
             /* @var $item \TYPO3\GenericGallery\Domain\Model\GalleryItem */
             if ((string) $uid === (string) $item->getUid()) {
                 return $item;
             }
         }
 
-        return;
+        return null;
     }
 
     /**
-     * Moves to the next entry.
-     */
-    public function next()
-    {
-        $this->items->next();
-    }
-
-    /**
-     * Returns the number of objects in the storage.
+     * Adds all objects-data pairs from an array
      *
-     * @return int The number of objects in the storage.
+     * @param array $items
+     * @return void
      */
-    public function count()
+    public function addAllFromArray(array $items)
     {
-        return $this->items->count();
-    }
-
-    /**
-     * @param array|\TYPO3\CMS\Extbase\Persistence\Generic\QueryResult $data
-     *
-     * @return $this
-     */
-    public function addAll($data)
-    {
-        /* @var $object \TYPO3\GenericGallery\Domain\Model\GalleryItem */
-        foreach ($data as $object) {
-            $this->items->attach($object);
+        foreach ($items as $object) {
+            $this->attach($object);
         }
-
-        return $this;
     }
 
     /**
@@ -180,29 +113,10 @@ class GalleryCollection extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity i
                 $item->setImage($object);
             }
 
-            $this->items->attach($item);
+            $this->attach($item);
         }
 
         return $this;
     }
 
-    /**
-     * Returns this object storage as an array.
-     *
-     * @return array The object storage
-     */
-    public function toArray()
-    {
-        return $this->items->toArray();
-    }
-
-    /**
-     * Dummy method to avoid serialization.
-     *
-     * @throws \RuntimeException
-     */
-    public function serialize()
-    {
-        $this->items->serialize();
-    }
 }

@@ -63,6 +63,11 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
     /**
      * @var string
      */
+    protected $galleryKey = null;
+
+    /**
+     * @var string
+     */
     protected $galleryType = null;
 
     /**
@@ -149,7 +154,7 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
     {
         switch ($this->galleryType) {
             case self::GALLERY_TYPE_SINGLE:
-                $this->collection->addAll($this->getSigleItems());
+                $this->collection->addAllFromArray($this->getSigleItems());
                 break;
 
             case self::GALLERY_TYPE_IMAGES:
@@ -159,8 +164,6 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
             case self::GALLERY_TYPE_COLLECTION:
                 $this->collection->addAllFromFiles($this->getCollection());
                 break;
-
-            default;
         }
     }
 
@@ -201,15 +204,16 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
     /**
      * Method to get the image data from one FCE.
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\Generic\QueryResult
+     * @return array
      */
     protected function getSigleItems()
     {
         /* @var $itemRepository \TYPO3\GenericGallery\Domain\Repository\GalleryItemRepository */
         $itemRepository = $this->objectManager->get('TYPO3\\GenericGallery\\Domain\\Repository\\GalleryItemRepository');
+        /* @var $items \TYPO3\CMS\Extbase\Persistence\Generic\QueryResult */
         $items = $itemRepository->findByTtContentUid($this->getContentElementUid());
 
-        return $items;
+        return $items->toArray();
     }
 
     /**
@@ -221,7 +225,9 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
         $fileRepository = $this->objectManager->get('TYPO3\\CMS\\Core\\Resource\\FileRepository');
 
         return $fileRepository->findByRelation(
-            'tt_content', 'tx_generic_gallery_picture_single', $this->getContentElementUid()
+            'tt_content',
+            'tx_generic_gallery_picture_single',
+            $this->getContentElementUid()
         );
     }
 
