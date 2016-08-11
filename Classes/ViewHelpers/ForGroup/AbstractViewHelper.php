@@ -31,6 +31,11 @@ namespace TYPO3\GenericGallery\ViewHelpers\ForGroup;
 class AbstractViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 {
     /**
+     * @inheritdoc
+     */
+    protected $escapeOutput = false;
+
+    /**
      * Initializes the arguments for the ViewHelper.
      */
     public function initializeArguments()
