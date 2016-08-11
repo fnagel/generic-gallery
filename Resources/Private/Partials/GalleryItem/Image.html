@@ -1,10 +1,8 @@
-{namespace gg=TYPO3\GenericGallery\ViewHelpers}
-
-<gg:link.typolink configuration="{parameter: item.link}">
+<f:link.typolink parameter="{item.link}">
 	<f:image
 		width="900c"
 		height="500c"
 		image="{f:if(condition: '{item.imageReference}', then: '{item.imageReference}', else: '{item.image}')}"
 		title="{item.imageData.title}"
 		alt="{item.imageData.alternative}" />
-</gg:link.typolink>
+</f:link.typolink>
