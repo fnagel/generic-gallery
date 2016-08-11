@@ -9,7 +9,23 @@ conf.py:
   version: 1.4.2
   release: 1.4.2
   intersphinx_mapping:
+    restdoc:
+    - http://docs.typo3.org/typo3cms/extensions/restdoc/
+    - null
     t3tsref:
     - http://docs.typo3.org/typo3cms/TyposcriptReference/
     - null
+    t3cmsapi:
+    - http://typo3.org/api/typo3cms/
+    - null
+  extlinks:
+    ter:
+    - http://www.typo3.org/extensions/repository/view/%s
+    - 'TYPO3 extension '
+  extensions:
+  - sphinx.ext.intersphinx
+  - t3sphinx.ext.t3extras
+  - t3sphinx.ext.t3tablerows
+  - t3sphinx.ext.targets
+  - sphinx.ext.extlinks
 ...
