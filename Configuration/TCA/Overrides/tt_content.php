@@ -92,34 +92,6 @@ call_user_func(function ($packageKey) {
         ),
     );
 
-    // @todo Remove this when 6.2 is no longer relevant
-    if (version_compare(TYPO3_branch, '7.0', '<')) {
-        $tempColumns['tx_generic_gallery_collection']['config']['wizards'] = array(
-            'edit' => array(
-                'type' => 'popup',
-                'title' => 'Edit',
-                'script' => 'wizard_edit.php',
-                'icon' => 'edit2.gif',
-                'popup_onlyOpenIfSelected' => 1,
-                'JSopenParams' => 'height=350,width=580,status=0,menubar=0,scrollbars=1',
-            ),
-            'add' => array(
-                'type' => 'script',
-                'title' => 'Create new',
-                'icon' => 'add.gif',
-                'params' => array(
-                    'table' => 'sys_file_collection',
-                    'pid' => '###CURRENT_PID###',
-                    'setValue' => 'prepend',
-                ),
-                'script' => 'wizard_add.php',
-            ),
-            'suggest' => array(
-                'type' => 'suggest',
-            ),
-        );
-    }
-
     if ($configuration->getUseInlineCollection()) {
         unset($tempColumns['tx_generic_gallery_collection']['config']['wizards']);
         $tempColumns['tx_generic_gallery_collection']['config'] = array(

@@ -162,12 +162,12 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function getLink()
     {
         if ($this->isVirtual() || $this->link === '') {
-            // Render cropped image if reference with crop available
-            // @todo Remove version compare when 6.2 is no longer relevant
-            if ($this->imageReference !== null && version_compare(TYPO3_branch, '7.2', '>=')) {
-                if ($this->imageReference->getOriginalResource()->getProperty('crop') !== null) {
-                    return $this->getCroppedImageLinkFromReference();
-                }
+            if (
+                $this->imageReference !== null &&
+                $this->imageReference->getOriginalResource()->getProperty('crop') !== null
+            ) {
+                // Render cropped image if reference with crop available
+                return $this->getCroppedImageLinkFromReference();
             }
 
             return $this->getImage()->getPublicUrl();
