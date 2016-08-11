@@ -10,6 +10,6 @@ conf.py:
   release: 1.4.1
   intersphinx_mapping:
     t3tsref:
-    - http://docs.typo3.org/typo3cms/TypoScriptReference/
+    - http://docs.typo3.org/typo3cms/TyposcriptReference/
     - null
 ...
