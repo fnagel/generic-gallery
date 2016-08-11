@@ -3,6 +3,13 @@
 	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2014-09-14T21:19:47Z" product-name="genericgallery">
 		<header/>
 		<body>
+            <trans-unit id="generic_gallery.plugin.title">
+                <target>Generic Gallery</target>
+            </trans-unit>
+            <trans-unit id="generic_gallery.plugin.description">
+                <target></target>
+            </trans-unit>
+
 			<trans-unit id="generic_gallery_predefined">
 				<target>Galerie Typ</target>
 			</trans-unit>

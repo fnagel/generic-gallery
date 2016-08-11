@@ -12,7 +12,7 @@ call_user_func(function ($packageKey) {
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
         'TYPO3.GenericGallery',
         'Pi1',
-        'Generic Gallery'
+        'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:generic_gallery.plugin.title'
     );
 
     $tempColumns = array(
