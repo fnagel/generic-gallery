@@ -14,6 +14,23 @@ Upgrade Guide
 
 
 
+Update from 1.4.1 to 1.4.3
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Overview**
+
+- Fixed documentation rendering
+
+- Fix for use with TemplaVoila
+
+- Fix for backend preview (page module)
+
+
+**How to upgrade**
+
+Just clear the cache.
+
+
 Update from 1.4.0 to 1.4.1
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
