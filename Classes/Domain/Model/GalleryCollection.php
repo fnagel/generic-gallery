@@ -60,19 +60,21 @@ class GalleryCollection extends ObjectStorage
     }
 
     /**
-     * Returns item the by uid.
+     * Returns item by uid.
      *
-     * @param string $uid
+     * @param int|string $uid UID int or virtual UID string
      *
-     * @return GalleryItem The object by item uid.
+     * @return GalleryItem
      */
     public function getByUid($uid)
     {
         $storage = array_values($this->storage);
         foreach ($storage as $item) {
-            /* @var $item \TYPO3\GenericGallery\Domain\Model\GalleryItem */
-            if ((string) $uid === (string) $item->getUid()) {
-                return $item;
+            /* @var $galleryItem \TYPO3\GenericGallery\Domain\Model\GalleryItem */
+            $galleryItem = $item['obj'];
+
+            if ((string) $uid === (string) $galleryItem->getUid()) {
+                return $galleryItem;
             }
         }
 
