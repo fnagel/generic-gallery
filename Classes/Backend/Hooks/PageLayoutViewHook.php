@@ -153,18 +153,32 @@ class PageLayoutViewHook {
 	 */
 	protected function renderCollectionPreview() {
 		$collection = BackendUtility::getRecord('sys_file_collection', $this->data['tx_generic_gallery_collection']);
-		$nameValue = $this->getRecordLink($collection, 'sys_file_collection', $collection['title']);
 
-		$this->tableData[] = array('Source', 'collection');
-		$this->tableData[] = array('Images', $collection['files']);
-		$this->tableData[] = array('Name', $nameValue);
+		$this->tableData[] = array('Source', 'collection (' . $collection['type'] . ')');
+		$this->tableData[] = array('Name', $this->getRecordLink($collection, 'sys_file_collection', $collection['title']));
 
-		$this->imagePreviewHtml = BackendUtility::thumbCode(
-			$collection,
-			'sys_file_collection',
-			'files',
-			$GLOBALS['BACK_PATH']
-		);
+		switch ($collection['type']) {
+			case 'folder':
+				// @todo Add preview images for folder images
+				$this->tableData[] = array('Folder', $collection['folder']);
+				break;
+
+			case 'files':
+				$this->tableData[] = array('Images', $collection['files']);
+				$this->imagePreviewHtml = BackendUtility::thumbCode(
+					$collection,
+					'sys_file_collection',
+					'files',
+					$GLOBALS['BACK_PATH']
+				);
+				break;
+
+			case 'category':
+				// @todo Add preview images for category images
+				$category = BackendUtility::getRecord('sys_category', $collection['category']);
+				$this->tableData[] = array('Category', $this->getRecordLink($category, 'sys_category', $category['title']));
+				break;
+		}
 	}
 
 	/**
