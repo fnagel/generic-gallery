@@ -14,6 +14,27 @@ Upgrade Guide
 
 
 
+Update from 1.4.x to 2.0
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Overview**
+
+- TYPO3 8.x support
+
+- Removed TYPO3 6.x support
+
+- Removed TypoLink ViewHelper -> use EXT:fluid default
+
+- Removed Bootstrap JS & CSS include from Bootstrap example configuration
+
+- Added new content element wizard for extension plugin
+
+
+**How to upgrade**
+
+Update your templates and clear the cache!
+
+
 Update from 1.4.1 to 1.4.3
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
