@@ -12,6 +12,4 @@ mod.wizards.newContentElement.wizardItems.plugins {
 		tt_content_defValues.CType = list
 		tt_content_defValues.list_type = genericgallery_pi1
 	}
-
-	show := addToList(genericGallery)
 }
