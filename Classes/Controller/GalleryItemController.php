@@ -71,6 +71,7 @@ class GalleryItemController extends AbstractController
      */
     public function showAction($item)
     {
+        $GLOBALS['TSFE']->reqCHash();
         $this->view->assign('item', $this->collection->getByUid($item));
     }
 }
