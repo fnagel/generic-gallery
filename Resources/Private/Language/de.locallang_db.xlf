@@ -7,7 +7,7 @@
                 <target>Generic Gallery</target>
             </trans-unit>
             <trans-unit id="generic_gallery.plugin.description">
-                <target></target>
+                <target>Bildergalerie / Teaser</target>
             </trans-unit>
 
 			<trans-unit id="generic_gallery_predefined">
