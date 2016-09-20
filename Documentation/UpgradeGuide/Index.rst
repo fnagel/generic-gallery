@@ -19,20 +19,24 @@ Update from 1.4.x to 2.0
 
 **Overview**
 
-- TYPO3 8.x support
+- Added TYPO3 8.x support
 
 - Removed TYPO3 6.x support
 
-- Removed TypoLink ViewHelper -> use EXT:fluid default
+- Removed TypoLink ViewHelper -> use EXT:fluid default instead
 
-- Removed Bootstrap JS & CSS include from Bootstrap example configuration
+- `GalleryCollection` now inherits ObjectStorage -> easier usage in Fluid (e.g. paginate VH)
+
+- Added pagination to default gallery template
+
+- Removed Bootstrap JS & CSS file include from Bootstrap example configuration
 
 - Added new content element wizard for extension plugin
 
 
 **How to upgrade**
 
-Update your templates and clear the cache!
+Update your templates and TypoScript if needed. Clear the cache using install tool.
 
 
 Update from 1.4.1 to 1.4.3
