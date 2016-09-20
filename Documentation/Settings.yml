@@ -6,8 +6,8 @@
 conf.py:
   copyright: 2016
   project: generic_gallery
-  version: 1.4.3
-  release: 1.4.3
+  version: 2.0.0
+  release: 2.0.0
   intersphinx_mapping:
     restdoc:
     - http://docs.typo3.org/typo3cms/extensions/restdoc/
