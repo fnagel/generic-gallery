@@ -18,7 +18,7 @@
   ],
   "require": {
     "php": ">=5.5.0,<7.1",
-    "typo3/cms-core": ">=7.2.0,<=8.3"
+    "typo3/cms-core": ">=7.2.0,<=8.4"
   },
   "homepage": "https://github.com/fnagel/generic-gallery",
   "license": "GPL-2.0+",
