@@ -251,21 +251,13 @@ class PageLayoutViewHook
         }
 
         if ($addIcon) {
-            if (version_compare(TYPO3_branch, '7.0', '<')) {
-                $icon = IconUtility::getSpriteIconForRecord($table, $record, array('title' => 'Uid: '.$record['uid']));
-            } else {
-                $iconFactory = GeneralUtility::makeInstance(IconFactory::class);
-                $icon = $iconFactory->getIconForRecord($table, $record, Icon::SIZE_SMALL)->render();
-            }
+            $iconFactory = GeneralUtility::makeInstance(IconFactory::class);
+            $icon = $iconFactory->getIconForRecord($table, $record, Icon::SIZE_SMALL)->render();
 
             $content = $icon.$content;
         }
 
-        if (version_compare(TYPO3_branch, '7.0', '<')) {
-            $output = $GLOBALS['SOBE']->doc->wrapClickMenuOnIcon($content, $table, $record['uid'], 1, '', '+info,edit');
-        } else {
-            $output = BackendUtility::wrapClickMenuOnIcon($content, $table, $record['uid'], 1, '', '+info,edit');
-        }
+        $output = BackendUtility::wrapClickMenuOnIcon($content, $table, $record['uid'], 1, '', '+info,edit');
 
         return $output;
     }
