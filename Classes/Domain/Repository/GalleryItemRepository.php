@@ -27,11 +27,20 @@ namespace TYPO3\GenericGallery\Domain\Repository;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use \TYPO3\CMS\Extbase\Persistence\QueryInterface;
+
 /**
  * The repository for GalleryItems.
  */
 class GalleryItemRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
+    /**
+     * @var array
+     */
+    protected $defaultOrderings = array(
+        'sorting' => QueryInterface::ORDER_ASCENDING
+    );
+
     /**
      * Initializes the repository.
      */

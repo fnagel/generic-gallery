@@ -9,6 +9,7 @@ return [
         'cruser_id' => 'cruser_id',
         'dividers2tabs' => true,
         'delete' => 'deleted',
+        'sortby' => 'sorting',
         'enablecolumns' => array(
             'disabled' => 'hidden',
             'starttime' => 'starttime',
