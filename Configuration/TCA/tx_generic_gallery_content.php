@@ -81,9 +81,22 @@ return [
                 'type' => 'text',
                 'cols' => '48',
                 'rows' => '5',
+                'wizards' => array(
+                    '_PADDING' => 2,
+                    'RTE' => array(
+                        'notNewRecords' => 1,
+                        'RTEonly' => 1,
+                        'type' => 'script',
+                        'title' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:bodytext.W.RTE',
+                        'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_rte.gif',
+                        'module' => array(
+                            'name' => 'wizard_rte',
+                        ),
+                    ),
+                ),
                 'softref' => 'typolink_tag,email[subst],url',
             ),
-            'defaultExtras' => 'richtext[*]:rte_transform[flag=rte_enabled|mode=ts]',
+            'defaultExtras' => 'richtext:rte_transform[mode=ts_css]',
         ),
         'position' => array(
             'exclude' => 1,
