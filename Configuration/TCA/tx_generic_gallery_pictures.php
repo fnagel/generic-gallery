@@ -94,15 +94,12 @@ return [
                     '_PADDING' => 2,
                     'link' => array(
                         'type' => 'popup',
-                        'title' => 'Link',
-                        'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_link.gif',
+                        'title' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:header_link_formlabel',
+                        'icon' => 'actions-wizard-link',
                         'module' => array(
-                            'name' => 'wizard_element_browser',
-                            'urlParameters' => array(
-                                'mode' => 'wizard',
-                            ),
+                            'name' => 'wizard_link',
                         ),
-                        'JSopenParams' => 'height=300,width=500,status=0,menubar=0,scrollbars=1',
+                        'JSopenParams' => 'height=800,width=600,status=0,menubar=0,scrollbars=1',
                     ),
                 ),
                 'softref' => 'typolink,url',
