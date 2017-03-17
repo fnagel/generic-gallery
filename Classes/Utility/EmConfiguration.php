@@ -46,9 +46,8 @@ class EmConfiguration
     public static function getSettings()
     {
         $configuration = self::parseSettings();
-        GeneralUtility::requireOnce(
-            ExtensionManagementUtility::extPath('generic_gallery').'Classes/Domain/Model/Dto/EmConfiguration.php'
-        );
+
+        require_once(ExtensionManagementUtility::extPath('generic_gallery').'Classes/Domain/Model/Dto/EmConfiguration.php');
 
         return new \TYPO3\GenericGallery\Domain\Model\Dto\EmConfiguration($configuration);
     }
