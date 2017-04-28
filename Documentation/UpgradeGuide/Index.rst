@@ -14,6 +14,23 @@ Upgrade Guide
 
 
 
+Update from 2.0.x to 2.1
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Overview**
+
+- Added TYPO3 8.7 LTS support
+
+- Adjust RTE and link TCA configuration
+
+- Make use of gallery item sorting field, see https://github.com/fnagel/generic-gallery/issues/6
+
+
+**How to upgrade**
+
+Clear the cache using install tool.
+
+
 Update from 1.4.x to 2.0
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
