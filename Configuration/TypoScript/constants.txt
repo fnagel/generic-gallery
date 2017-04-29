@@ -7,4 +7,12 @@ plugin.tx_genericgallery {
 		# cat=plugin.tx_genericgallery/file; type=string; label=Path to template layouts (FE)
 		layoutRootPath =
 	}
+	settings {
+		gallery {
+			default {
+				#cat=plugin.tx_genericgallery//a; type=int+ label= maximum Number of Links for Pagination
+				maximumNumberOfLinks = 7
+			}
+		}
+	}
 }

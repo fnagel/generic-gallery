@@ -4,7 +4,7 @@
 
 <f:section name="main">
 
-		<f:widget.paginate objects="{collection}" as="items" configuration="{itemsPerPage: 8}">
+		<f:widget.paginate objects="{collection}" as="items" configuration="{itemsPerPage: 8, maximumNumberOfLinks:settings.gallery.default.pagination.maximumNumberOfLinks}"  >
 			<div class="row">
 				<f:for each="{items}" as="item" iteration="iterator">
 
