@@ -7,4 +7,13 @@ plugin.tx_genericgallery {
 		# cat=plugin.tx_genericgallery/file; type=string; label=Path to template layouts (FE)
 		layoutRootPath =
 	}
+	
+	settings {
+		gallery {
+		    default {
+			# cat=plugin.tx_genericgallery//a; type=int+ label= maximum number of items per Page
+			pagination.itemsPerPage = 8
+		    }
+		}
+    }
 }
