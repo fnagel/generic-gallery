@@ -23,6 +23,10 @@ plugin.tx_genericgallery {
 
 				# template for item detail view
 				itemTemplate = EXT:generic_gallery/Resources/Private/Templates/GalleryItem/Show.html
+				
+				pagination {
+                   			itemsPerPage = {$plugin.tx_genericgallery.settings.gallery.default.pagination.itemsPerPage}
+               			 }
 			}
 		}
 	}
