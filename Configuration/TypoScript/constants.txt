@@ -12,7 +12,7 @@ plugin.tx_genericgallery {
 		gallery {
 		    default {
 			# cat=plugin.tx_genericgallery//a; type=int+ label= maximum number of items per Page
-			pagination.itemsPerPage = 12
+			pagination.itemsPerPage = 8
 		    }
 		}
     }
