@@ -23,6 +23,15 @@ plugin.tx_genericgallery {
 
 				# template for item detail view
 				itemTemplate = EXT:generic_gallery/Resources/Private/Templates/GalleryItem/Show.html
+
+				# pagination configuration for gallery
+				paginate {
+					itemsPerPage = 8
+					insertAbove = 0
+					insertBelow = 1
+					maximumNumberOfLinks = 99
+					addQueryStringMethod = GET
+				}
 			}
 		}
 	}
