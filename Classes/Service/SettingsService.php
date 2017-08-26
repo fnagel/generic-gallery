@@ -6,7 +6,7 @@ namespace TYPO3\GenericGallery\Service;
  *
  *  Copyright notice
  *
- *  (c) 2015-2016 Felix Nagel <info@felixnagel.com>
+ *  (c) 2015-2017 Felix Nagel <info@felixnagel.com>
  *
  *  All rights reserved
  *
@@ -27,10 +27,12 @@ namespace TYPO3\GenericGallery\Service;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use TYPO3\CMS\Core\Utility\ArrayUtility;
+use TYPO3\CMS\Core\TypoScript\TemplateService;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Configuration\Exception;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
+use TYPO3\CMS\Frontend\Page\PageRepository;
 
 /**
  * Class SettingsService.
@@ -55,6 +57,13 @@ class SettingsService
     protected $extensionKey = 'tx_genericgallery';
 
     /**
+     * Plugin name.
+     *
+     * @var string
+     */
+    protected $pluginName = '';
+
+    /**
      * @var mixed
      */
     protected $typoScriptSettings = null;
@@ -65,35 +74,18 @@ class SettingsService
     protected $frameworkSettings = null;
 
     /**
-     * @var ConfigurationManagerInterface
+     * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
+     * @inject
      */
     protected $configurationManager;
 
     /**
+     * Legacy alias of \TYPO3\CMS\Core\TypoScript\TypoScriptService
+     *
      * @var \TYPO3\CMS\Extbase\Service\TypoScriptService
      * @inject
      */
     protected $typoScriptService;
-
-    /**
-     * Injects the Configuration Manager and loads the settings.
-     *
-     * @param ConfigurationManagerInterface $configurationManager An instance of the Configuration Manager
-     */
-    public function injectConfigurationManager(ConfigurationManagerInterface $configurationManager)
-    {
-        $this->configurationManager = $configurationManager;
-    }
-
-    /**
-     * Injects the TypoScriptService.
-     *
-     * @param \TYPO3\CMS\Extbase\Service\TypoScriptService $typoScriptService
-     */
-    public function injectTypoScriptService(\TYPO3\CMS\Extbase\Service\TypoScriptService $typoScriptService)
-    {
-        $this->typoScriptService = $typoScriptService;
-    }
 
     /**
      * Returns all framework settings.
@@ -108,14 +100,8 @@ class SettingsService
             $this->frameworkSettings = $this->configurationManager->getConfiguration(
                 ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK,
                 $this->extensionName,
-                ''
+                $this->pluginName
             );
-
-            // Update BE TS config with changed FE values
-            if (TYPO3_MODE === 'BE') {
-                $overruleSetup = $this->getFullTypoScriptConfig();
-                ArrayUtility::mergeRecursiveWithOverrule($this->frameworkSettings, $overruleSetup);
-            }
         }
 
         if ($this->frameworkSettings === null) {
@@ -138,18 +124,8 @@ class SettingsService
             $this->typoScriptSettings = $this->configurationManager->getConfiguration(
                 ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS,
                 $this->extensionName,
-                ''
+                $this->pluginName
             );
-
-            if ($this->typoScriptSettings === null) {
-                $this->typoScriptSettings = array();
-            }
-
-            // Update BE TS settings with changed FE values
-            if (TYPO3_MODE === 'BE') {
-                $overruleSetup = $this->getFullTypoScriptConfig();
-                ArrayUtility::mergeRecursiveWithOverrule($this->typoScriptSettings, $overruleSetup['settings']);
-            }
         }
 
         if ($this->typoScriptSettings === null) {
@@ -160,17 +136,39 @@ class SettingsService
     }
 
     /**
-     * Get full typoscript configuration.
+     * Returns all TS settings.
      *
+     * @param int $pid
      * @return array
+     *
+     * @throws Exception
      */
-    protected function getFullTypoScriptConfig()
+    public function getTypoScriptSettingsFromBackend($pid)
     {
-        $setup = $this->configurationManager->getConfiguration(
-            ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
-        );
+        if ($this->typoScriptSettings === null) {
+            /* @var $pageRepository PageRepository */
+            $pageRepository = GeneralUtility::makeInstance(PageRepository::class);
+            $rootLine = $pageRepository->getRootLine($pid);
 
-        return $this->typoScriptService->convertTypoScriptArrayToPlainArray($setup['plugin.'][$this->extensionKey.'.']);
+            /* @var $templateService TemplateService */
+            $templateService = GeneralUtility::makeInstance(TemplateService::class);
+            $templateService->tt_track = 0;
+            $templateService->init();
+            $templateService->runThroughTemplates($rootLine);
+            $templateService->generateConfig();
+
+            if (!empty($templateService->setup['plugin.'][$this->extensionKey.'.']['settings.'])) {
+                $this->typoScriptSettings = $this->typoScriptService->convertTypoScriptArrayToPlainArray(
+                    $templateService->setup['plugin.'][$this->extensionKey.'.']['settings.']
+                );
+            }
+        }
+
+        if ($this->typoScriptSettings === null) {
+            throw new Exception('No typoscript settings available.');
+        }
+
+        return $this->typoScriptSettings;
     }
 
     /**
@@ -187,27 +185,5 @@ class SettingsService
     public function getTypoScriptByPath($path)
     {
         return ObjectAccess::getPropertyPath($this->getTypoScriptSettings(), $path);
-    }
-
-    /**
-     * Set storage pid in BE.
-     *
-     * Only needed when the class is called or injected in a BE context, e.g. a hook
-     * Needed for generation of the correct persistence.storagePid in Extbase TS.
-     * Without the generation of the TS is based upon the next root page (default
-     * extbase behaviour) and repositories won't work as expected.
-     *
-     * @param $pageUid
-     *
-     * @return self
-     */
-    public function setPageUid($pageUid)
-    {
-        if (TYPO3_MODE === 'BE') {
-            $currentPid['persistence']['storagePid'] = (int) $pageUid;
-            $this->configurationManager->setConfiguration(array_merge($this->getFrameworkSettings(), $currentPid));
-        }
-
-        return $this;
     }
 }

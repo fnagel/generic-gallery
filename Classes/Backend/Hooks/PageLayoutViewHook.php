@@ -29,7 +29,6 @@ use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\GenericGallery\Utility\EmConfiguration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Backend\Utility\IconUtility;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 
 /**
@@ -106,7 +105,7 @@ class PageLayoutViewHook
         }
 
         $this->data = $parameters['row'];
-        $this->settings = $this->getTypoScriptService()->getTypoScriptSettings();
+        $this->settings = $this->getTypoScriptService()->getTypoScriptSettingsFromBackend($this->data['pid']);
 
         return $this->renderPreview();
     }

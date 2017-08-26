@@ -5,7 +5,7 @@ namespace TYPO3\GenericGallery\Backend\Hooks;
 /***************************************************************
  * Copyright notice
  *
- * (c) 2014-2016 Felix Nagel (info@felixnagel.com)
+ * (c) 2014-2017 Felix Nagel (info@felixnagel.com)
  * All rights reserved
  *
  * This script is part of the TYPO3 project. The TYPO3 project is
@@ -63,10 +63,10 @@ class TcaHook
             if ($pid < 0) {
                 $contentUid = str_replace('-', '', $pid);
                 $row = $this->getDatabase()->exec_SELECTgetSingleRow('pid', 'tt_content', 'uid='.$contentUid);
-                $this->getTypoScriptService()->setPageUid($row['pid']);
+                $pid = $row['pid'];
             }
 
-            $settings = $this->getTypoScriptService()->getTypoScriptSettings();
+            $settings = $this->getTypoScriptService()->getTypoScriptSettingsFromBackend($pid);
 
             // no config available
             if (!is_array($settings['gallery']) || count($settings['gallery']) < 1) {
