@@ -260,7 +260,7 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         if (isset($GLOBALS['TCA']['sys_file_metadata']['columns']['flash']['config']['items'])) {
             $items = (array) $GLOBALS['TCA']['sys_file_metadata']['columns']['flash']['config']['items'];
             foreach ($items as $item) {
-                if ($item[1] === $properties['flash']) {
+                if ((int) $item[1] === (int) $properties['flash']) {
                     $data['flash'] = $item[0];
                 }
             }
