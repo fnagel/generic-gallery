@@ -23,6 +23,10 @@
 				<target>Bilder Sammlung</target>
 			</trans-unit>
 
+			<trans-unit id="sys_file_collection.type.images">
+				<target>Statische Auswahl von Bildern</target>
+			</trans-unit>
+
 			<trans-unit id="tx_genericgallery_domain_model_galleryitem">
 				<target>Generic Gallery: Bild-Relation</target>
 			</trans-unit>

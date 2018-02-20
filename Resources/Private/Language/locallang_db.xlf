@@ -23,6 +23,10 @@
 				<source>Gallery Collection</source>
 			</trans-unit>
 
+			<trans-unit id="sys_file_collection.type.images">
+				<source>Static selection of images</source>
+			</trans-unit>
+
 			<trans-unit id="tx_genericgallery_domain_model_galleryitem">
 				<source>Generic Gallery: picture relation</source>
 			</trans-unit>
