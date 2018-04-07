@@ -62,26 +62,10 @@ class EmConfiguration
     protected $useInlineCollection = 1;
 
     /**
+     * @todo Enable this in version 3.0.0 (here and in ext_conf_template.txt)
      * @var int
      */
     protected $addImageCollection = 0;
-
-
-    /**
-     * @return int
-     */
-    public function getUseInlineCollection()
-    {
-        return $this->useInlineCollection;
-    }
-
-    /**
-     * @param int $useInlineCollection
-     */
-    public function setUseInlineCollection($useInlineCollection)
-    {
-        $this->useInlineCollection = $useInlineCollection;
-    }
 
     /**
      * @return bool
@@ -92,11 +76,11 @@ class EmConfiguration
     }
 
     /**
-     * @param bool $enableCmsLayout
+     * @return int
      */
-    public function setEnableCmsLayout($enableCmsLayout)
+    public function getUseInlineCollection()
     {
-        $this->enableCmsLayout = $enableCmsLayout;
+        return $this->useInlineCollection;
     }
 
     /**
@@ -105,13 +89,5 @@ class EmConfiguration
     public function getAddImageCollection()
     {
         return $this->addImageCollection;
-    }
-
-    /**
-     * @param int $addImageCollection
-     */
-    public function setAddImageCollection($addImageCollection)
-    {
-        $this->addImageCollection = $addImageCollection;
     }
 }
