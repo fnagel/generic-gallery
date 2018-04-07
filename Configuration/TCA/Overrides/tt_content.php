@@ -19,7 +19,7 @@ call_user_func(function ($packageKey) {
         // gallery type
         'tx_generic_gallery_predefined' => array(
             'exclude' => 1,
-            'label' => 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xml:generic_gallery_predefined',
+            'label' => 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:generic_gallery_predefined',
             'config' => array(
                 'type' => 'select',
                 'renderType' => 'selectSingle',
@@ -34,7 +34,7 @@ call_user_func(function ($packageKey) {
         // single items
         'tx_generic_gallery_items' => array(
             'exclude' => 1,
-            'label' => 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xml:generic_gallery_items',
+            'label' => 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:generic_gallery_items',
             'config' => array(
                 'type' => 'inline',
                 'foreign_table' => 'tx_generic_gallery_pictures',
@@ -52,7 +52,7 @@ call_user_func(function ($packageKey) {
         // file reference
         'tx_generic_gallery_images' => array(
             'exclude' => 1,
-            'label' => 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xml:generic_gallery_images',
+            'label' => 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:generic_gallery_images',
             'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
                 'tx_generic_gallery_picture_single',
                 array(
@@ -75,7 +75,7 @@ call_user_func(function ($packageKey) {
         // collection reference
         'tx_generic_gallery_collection' => array(
             'exclude' => 1,
-            'label' => 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xml:generic_gallery_collection',
+            'label' => 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:generic_gallery_collection',
             'config' => array(
                 'type' => 'group',
                 'internal_type' => 'db',
