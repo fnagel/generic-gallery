@@ -69,6 +69,9 @@
 			<trans-unit id="extension_manager.use_inline_collection">
 				<source>Collection rendering in BE: Display collection as 'inline' type. Improved usability but no option to add existing collection records.</source>
 			</trans-unit>
+			<trans-unit id="extension_manager.add_image_collection">
+				<source>Add image collection type: Add a custom collection type for images only.</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

@@ -8,7 +8,7 @@ namespace TYPO3\GenericGallery\Utility;
  *
  *  (c) Alexander Buchgeher
  *  (c) Georg Ringer <typo3@ringerge.org>
- *  (c) 2015-2016 Felix Nagel <info@felixnagel.com>
+ *  (c) 2015-2018 Felix Nagel <info@felixnagel.com>
  *
  *  All rights reserved
  *
@@ -28,7 +28,7 @@ namespace TYPO3\GenericGallery\Utility;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
 /**
@@ -47,6 +47,7 @@ class EmConfiguration
     {
         $configuration = self::parseSettings();
 
+        // @todo Check if this is still needed
         require_once(ExtensionManagementUtility::extPath('generic_gallery').'Classes/Domain/Model/Dto/EmConfiguration.php');
 
         return new \TYPO3\GenericGallery\Domain\Model\Dto\EmConfiguration($configuration);

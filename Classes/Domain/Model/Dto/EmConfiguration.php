@@ -7,7 +7,7 @@ namespace TYPO3\GenericGallery\Domain\Model\Dto;
  *  Copyright notice
  *
  *  (c) Georg Ringer <typo3@ringerge.org>
- *  (c) 2015-2016 Felix Nagel <info@felixnagel.com>
+ *  (c) 2015-2018 Felix Nagel <info@felixnagel.com>
  *
  *  All rights reserved
  *
@@ -62,6 +62,12 @@ class EmConfiguration
     protected $useInlineCollection = 1;
 
     /**
+     * @var int
+     */
+    protected $addImageCollection = 0;
+
+
+    /**
      * @return int
      */
     public function getUseInlineCollection()
@@ -91,5 +97,21 @@ class EmConfiguration
     public function setEnableCmsLayout($enableCmsLayout)
     {
         $this->enableCmsLayout = $enableCmsLayout;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAddImageCollection()
+    {
+        return $this->addImageCollection;
+    }
+
+    /**
+     * @param int $addImageCollection
+     */
+    public function setAddImageCollection($addImageCollection)
+    {
+        $this->addImageCollection = $addImageCollection;
     }
 }
