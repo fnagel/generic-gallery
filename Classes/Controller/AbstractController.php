@@ -6,7 +6,7 @@ namespace TYPO3\GenericGallery\Controller;
  *
  *  Copyright notice
  *
- *  (c) 2014-2016 Felix Nagel <info@felixnagel.com>
+ *  (c) 2014-2018 Felix Nagel <info@felixnagel.com>
  *
  *  All rights reserved
  *
@@ -163,6 +163,7 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
 
             case self::GALLERY_TYPE_COLLECTION:
                 $this->collection->addAllFromFiles($this->getCollection());
+                $this->collection->removeNonImageFiles();
                 break;
         }
     }

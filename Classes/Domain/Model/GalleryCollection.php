@@ -27,6 +27,7 @@ namespace TYPO3\GenericGallery\Domain\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
@@ -34,7 +35,6 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  */
 class GalleryCollection extends ObjectStorage
 {
-
     /**
      * @todo Remove this with v3
      * @deprecated
@@ -121,4 +121,15 @@ class GalleryCollection extends ObjectStorage
         return $this;
     }
 
+    public function removeNonImageFiles()
+    {
+        $extensions = GeneralUtility::trimExplode(',', $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'], true);
+
+        /* @var $item GalleryItem */
+        foreach ($this as $item) {
+            if (!in_array($item->getImage()->getExtension(), $extensions)) {
+                $this->detach($item);
+            }
+        }
+    }
 }
