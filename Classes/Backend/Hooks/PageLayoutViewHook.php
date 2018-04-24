@@ -248,14 +248,13 @@ class PageLayoutViewHook
         if ($content === '') {
             $content = htmlspecialchars(BackendUtility::getRecordTitle($table, $record));
         }
-
-        if ($addIcon) {
-            $iconFactory = GeneralUtility::makeInstance(IconFactory::class);
-            $icon = $iconFactory->getIconForRecord($table, $record, Icon::SIZE_SMALL)->render();
-
-            $content = $icon.$content;
+        if ($record !== null) {
+            if ($addIcon) {
+                $iconFactory = GeneralUtility::makeInstance(IconFactory::class);
+                $icon = $iconFactory->getIconForRecord($table, $record, Icon::SIZE_SMALL)->render();
+                $content = $icon.$content;
+            }
         }
-
         $output = BackendUtility::wrapClickMenuOnIcon($content, $table, $record['uid'], 1, '', '+info,edit');
 
         return $output;
