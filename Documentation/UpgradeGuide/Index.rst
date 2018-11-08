@@ -14,6 +14,30 @@ Upgrade Guide
 
 
 
+Update from 2.1.x to 2.2
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Overview**
+
+- Tested in PHP 7.2
+
+- Fix TS generation in BE context
+
+- Extract pagination configuration to TS
+
+- Fix issue with flash meta data
+
+- Add file collection type for images only (enable in EM config)
+
+- Some minor bugfixes
+
+
+**How to upgrade**
+
+Clear the cache using install tool.
+
+
+
 Update from 2.0.x to 2.1
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
