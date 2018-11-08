@@ -20,6 +20,11 @@
     "php": ">=5.5.0,<7.3",
     "typo3/cms-core": ">=7.2.0,<=8.7.99"
   },
+  "suggest": {
+    "typo3/cms-filemetadata": "*",
+    "fab/metadata": "^2.3",
+    "causal/extractor": "^1.5"
+  },
   "autoload": {
     "psr-4": {
       "TYPO3\\GenericGallery\\": "Classes/"
