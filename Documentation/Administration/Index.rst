@@ -25,5 +25,5 @@ Installation
 Examples
 """"""""
 
-Add the :code:`Generic Gallery: Example - Boostrap` static TS template to your root template.
-This will add a Twitter Boottsrap themed Image Slider and Teaser Slider to your predefined galleries.
+Add the :code:`Generic Gallery: Example - Bootstrap` static TS template to your root template.
+This will add a Twitter Bootstrap themed Image Slider and Teaser Slider to your predefined galleries.
