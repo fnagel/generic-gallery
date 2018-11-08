@@ -6,10 +6,7 @@
 Known problems
 --------------
 
-Please see:
-
-* http://forge.typo3.org/projects/extension-generic\_gallery/issues
-* https://github.com/fnagel/generic-gallery/issues
+Please see: https://github.com/fnagel/generic-gallery/issues
 
 
 Please feel free to drop me a line, open issues or send pull requests.

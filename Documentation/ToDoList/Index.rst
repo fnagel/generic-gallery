@@ -6,9 +6,9 @@
 To-Do list
 ----------
 
-Please take a look in the source and look for  *ToDo* coments or see:
-http://forge.typo3.org/projects/extension-generic\_gallery/issues
+Please take a look in the source and look for `@todo` comments and see:
+https://github.com/fnagel/generic-gallery/issues
 
-See ::code:`EXT:generic_gallery/README.md` file for roadmap and ideas.
+See ::code:`EXT:generic_gallery/README.md` file for road map and ideas.
 
 

@@ -22,8 +22,7 @@ Future ideas
 Bug reports and feature requests
 --------------------------------
 
-* https://github.com/fnagel/generic-gallery/issues
-* https://forge.typo3.org/projects/extension-generic_gallery/issues
+https://github.com/fnagel/generic-gallery/issues
 
 
 Contribution
