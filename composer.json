@@ -1,12 +1,12 @@
 {
   "name": "felixnagel/generic-gallery",
-  "description": "TYPO3 CMS gallery extension.",
-  "autoload": {
-    "psr-4": {
-      "TYPO3\\GenericGallery\\": "Classes/"
-    }
-  },
   "type": "typo3-cms-extension",
+  "description": "TYPO3 CMS gallery extension.",
+  "homepage": "https://github.com/fnagel/generic-gallery",
+  "license": "GPL-2.0+",
+  "support": {
+    "issues": "https://github.com/fnagel/generic-gallery/issues"
+  },
   "keywords": [
     "TYPO3 CMS",
     "gallery",
@@ -20,10 +20,10 @@
     "php": ">=5.5.0,<7.3",
     "typo3/cms-core": ">=7.2.0,<=8.7.99"
   },
-  "homepage": "https://github.com/fnagel/generic-gallery",
-  "license": "GPL-2.0+",
-  "support": {
-    "issues": "https://github.com/fnagel/generic-gallery/issues"
+  "autoload": {
+    "psr-4": {
+      "TYPO3\\GenericGallery\\": "Classes/"
+    }
   },
   "repositories": [
     {
