@@ -60,11 +60,13 @@ call_user_func(function ($packageKey) {
                     'maxitems' => 2000,
                     'minitems' => 0,
                     'autoSizeMax' => 40,
-                    'foreign_types' => [
-                        \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
-                            'showitem' => '
+                    'overrideChildTca' => [
+                        'types' => [
+                            \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
+                                'showitem' => '
 									--palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.basicoverlayPalette;genericGalleryImagePalette,
 									--palette--;;filePalette',
+                            ],
                         ],
                     ],
                 ],
