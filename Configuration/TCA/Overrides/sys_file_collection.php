@@ -11,38 +11,38 @@ call_user_func(function () {
         $GLOBALS['TYPO3_CONF_VARS']['SYS']['fal']['registeredCollections']['images'] =
             \TYPO3\CMS\Core\Resource\Collection\StaticFileCollection::class;
 
-        $GLOBALS['TCA']['sys_file_collection']['columns']['type']['config']['items'][] = array(
+        $GLOBALS['TCA']['sys_file_collection']['columns']['type']['config']['items'][] = [
             'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:sys_file_collection.type.images',
             'images'
-        );
+        ];
 
         $GLOBALS['TCA']['sys_file_collection']['types']['images'] = $GLOBALS['TCA']['sys_file_collection']['types']['static'];
-        $GLOBALS['TCA']['sys_file_collection']['types']['images']['columnsOverrides'] = array(
-            'files' => array(
-                'config' => array(
-                    'overrideChildTca' => array(
-                        'columns' => array(
-                            'uid_local' => array(
-                                'config' => array(
-                                    'appearance' => array(
+        $GLOBALS['TCA']['sys_file_collection']['types']['images']['columnsOverrides'] = [
+            'files' => [
+                'config' => [
+                    'overrideChildTca' => [
+                        'columns' => [
+                            'uid_local' => [
+                                'config' => [
+                                    'appearance' => [
                                         'elementBrowserType' => 'file',
                                         'elementBrowserAllowed' => $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'],
-                                    ),
-                                ),
-                            ),
-                        ),
-                    ),
-                    'filter' => array(
-                        array(
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                    'filter' => [
+                        [
                             'userFunc' => \TYPO3\CMS\Core\Resource\Filter\FileExtensionFilter::class . '->filterInlineChildren',
-                            'parameters' => array(
+                            'parameters' => [
                                 'allowedFileExtensions' => $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'],
                                 'disallowedFileExtensions' => ''
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        );
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
     }
 });

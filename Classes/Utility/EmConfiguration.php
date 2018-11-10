@@ -63,7 +63,7 @@ class EmConfiguration
         $settings = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['generic_gallery']);
 
         if (!is_array($settings)) {
-            $settings = array();
+            $settings = [];
         }
 
         return $settings;

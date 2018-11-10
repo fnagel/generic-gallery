@@ -38,9 +38,9 @@ class GalleryItemRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     /**
      * @var array
      */
-    protected $defaultOrderings = array(
+    protected $defaultOrderings = [
         'sorting' => QueryInterface::ORDER_ASCENDING
-    );
+    ];
 
     /**
      * Initializes the repository.

@@ -52,17 +52,17 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
     /**
      * @var array
      */
-    protected $cObjData = array();
+    protected $cObjData = [];
 
     /**
      * @var array
      */
-    protected $gallerySettings = array();
+    protected $gallerySettings = [];
 
     /**
      * @var array
      */
-    protected $currentSettings = array();
+    protected $currentSettings = [];
 
     /**
      * @var string

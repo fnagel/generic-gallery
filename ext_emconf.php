@@ -10,7 +10,7 @@
  * "version" and "dependencies" must not be touched!
  ***************************************************************/
 
-$EM_CONF[$_EXTKEY] = array(
+$EM_CONF[$_EXTKEY] = [
     'title' => 'Generic Gallery',
     'description' => 'One gallery to rule them all. Extbase & Fluid driven for use with any gallery / slide / rotate plugin.',
     'category' => 'plugin',
@@ -22,15 +22,15 @@ $EM_CONF[$_EXTKEY] = array(
     'createDirs' => '',
     'clearCacheOnLoad' => 1,
     'version' => '2.2.1-dev',
-    'constraints' => array(
-        'depends' => array(
+    'constraints' => [
+        'depends' => [
             'php' => '5.6.0-7.2.99',
             'typo3' => '8.0.0-9.5.99',
-        ),
-        'suggests' => array(
+        ],
+        'suggests' => [
             'filemetadata' => '',
             'metadata' => '',
             'extractor' => '',
-        ),
-    ),
-);
+        ],
+    ],
+];

@@ -42,7 +42,7 @@ class GalleryCollectionControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     protected function setUp()
     {
-        $this->subject = $this->getMock('FelixNagel\\GenericGallery\\Controller\\GalleryCollectionController', array('redirect', 'forward', 'addFlashMessage'), array(), '', false);
+        $this->subject = $this->getMock('FelixNagel\\GenericGallery\\Controller\\GalleryCollectionController', ['redirect', 'forward', 'addFlashMessage'], [], '', false);
     }
 
     /**

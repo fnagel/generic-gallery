@@ -74,7 +74,7 @@ class PageLayoutViewHook
      *
      * @var array
      */
-    public $tableData = array();
+    public $tableData = [];
 
     /**
      * Image previews.
@@ -96,7 +96,7 @@ class PageLayoutViewHook
      *
      * @return string Rendered output for PageLayoutView
      */
-    public function getExtensionSummary(array &$parameters = array(), &$parentObject)
+    public function getExtensionSummary(array &$parameters = [], &$parentObject)
     {
         if ($parameters['row']['list_type'] !== 'genericgallery_pi1') {
             return '';
@@ -157,17 +157,17 @@ class PageLayoutViewHook
     {
         $collection = BackendUtility::getRecord('sys_file_collection', $this->data['tx_generic_gallery_collection']);
 
-        $this->tableData[] = array('Source', 'collection (' . $collection['type'] . ')');
-        $this->tableData[] = array('Name', $this->getRecordLink($collection, 'sys_file_collection', $collection['title']));
+        $this->tableData[] = ['Source', 'collection (' . $collection['type'] . ')'];
+        $this->tableData[] = ['Name', $this->getRecordLink($collection, 'sys_file_collection', $collection['title'])];
 
         switch ($collection['type']) {
             case 'folder':
                 // @todo Add preview images for folder images
-                $this->tableData[] = array('Folder', $collection['folder']);
+                $this->tableData[] = ['Folder', $collection['folder']];
                 break;
 
             case 'files':
-                $this->tableData[] = array('Images', $collection['files']);
+                $this->tableData[] = ['Images', $collection['files']];
                 $this->imagePreviewHtml = BackendUtility::thumbCode(
                     $collection,
                     'sys_file_collection',
@@ -179,7 +179,7 @@ class PageLayoutViewHook
             case 'category':
                 // @todo Add preview images for category images
                 $category = BackendUtility::getRecord('sys_category', $collection['category']);
-                $this->tableData[] = array('Category', $this->getRecordLink($category, 'sys_category', $category['title']));
+                $this->tableData[] = ['Category', $this->getRecordLink($category, 'sys_category', $category['title'])];
                 break;
         }
     }
@@ -188,8 +188,8 @@ class PageLayoutViewHook
      */
     protected function renderImagesPreview()
     {
-        $this->tableData[] = array('Source', 'images');
-        $this->tableData[] = array('Images', $this->data['tx_generic_gallery_images']);
+        $this->tableData[] = ['Source', 'images'];
+        $this->tableData[] = ['Images', $this->data['tx_generic_gallery_images']];
 
         $this->imagePreviewHtml = BackendUtility::thumbCode(
             $this->data,
@@ -204,7 +204,7 @@ class PageLayoutViewHook
     protected function renderItemsPreview()
     {
         // @todo Use localization
-        $this->tableData[] = array('Source', 'items');
+        $this->tableData[] = ['Source', 'items'];
 
         $this->imagePreviewHtml = $this->getItemsImagePreviews($this->data);
     }
@@ -230,7 +230,7 @@ class PageLayoutViewHook
 
         $statement = $queryBuilder->execute();
         $rows = $statement->fetchAll();
-        $this->tableData[] = array('Images', $statement->rowCount());
+        $this->tableData[] = ['Images', $statement->rowCount()];
         if ($rows === null) {
             return $result;
         }
@@ -342,6 +342,6 @@ class PageLayoutViewHook
             $typeName = $this->settings['gallery'][$typeName]['name'];
         }
 
-        $this->tableData[] = array('Type', $typeName);
+        $this->tableData[] = ['Type', $typeName];
     }
 }

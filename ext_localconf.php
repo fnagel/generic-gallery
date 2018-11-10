@@ -13,24 +13,24 @@ call_user_func(function () {
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
         'FelixNagel.GenericGallery',
         'Pi1',
-        array(
+        [
             'GalleryCollection' => 'show',
             'GalleryItem' => 'show',
-        ),
+        ],
         // non-cacheable actions
-        array(
+        [
             'GalleryCollection' => '',
             'GalleryItem' => '',
-        )
+        ]
     );
 
     // add cHash configuration
     // See: http://forum.typo3.org/index.php?t=msg&th=203350
-    $requiredParameters = array(
+    $requiredParameters = [
         'tx_genericgallery_pi1[controller]',
         'tx_genericgallery_pi1[action]',
         'tx_genericgallery_pi1[item]',
         'tx_genericgallery_pi1[contentElement]',
-    );
+    ];
     $GLOBALS['TYPO3_CONF_VARS']['FE']['cHashRequiredParameters'] .= ','.implode(',', $requiredParameters);
 });

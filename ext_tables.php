@@ -5,7 +5,6 @@ if (!defined('TYPO3_MODE')) {
 }
 
 call_user_func(function () {
-
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr(
         'tx_generic_gallery_pictures',
         'EXT:generic_gallery/Resources/Private/Language/locallang_csh_tx_genericgallery_domain_model_galleryitem.xlf'
@@ -35,5 +34,4 @@ call_user_func(function () {
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig(
         '<INCLUDE_TYPOSCRIPT: source="FILE:EXT:generic_gallery/Configuration/TypoScript/pageTsConfig.ts">'
     );
-
 });

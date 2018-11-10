@@ -91,10 +91,10 @@ class TextItemTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     public function getPositionReturnsInitialValueForString()
     {
         $this->assertSame(
-            array(
+            [
                 'x' => null,
                 'y' => null,
-            ),
+            ],
             $this->fixture->getPosition()
         );
     }
@@ -107,10 +107,10 @@ class TextItemTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $this->fixture->setPosition('100,200');
 
         $this->assertSame(
-            array(
+            [
                 'x' => 100,
                 'y' => 200,
-            ),
+            ],
             $this->fixture->getPosition()
         );
     }

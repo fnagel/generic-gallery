@@ -192,7 +192,7 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
         $processedImage = $imageService->applyProcessingInstructions(
             $this->imageReference->getOriginalResource(),
-            array('crop' => $this->imageReference->getOriginalResource()->getProperty('crop'))
+            ['crop' => $this->imageReference->getOriginalResource()->getProperty('crop')]
         );
 
         return $imageService->getImageUri($processedImage);
@@ -250,7 +250,7 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     private function getAdditionalImageProperties()
     {
         $properties = $this->getImage()->getProperties();
-        $data = array();
+        $data = [];
 
         // process exif data
         $data['shutter_speed_value'] = $properties['shutter_speed_value'].'s';

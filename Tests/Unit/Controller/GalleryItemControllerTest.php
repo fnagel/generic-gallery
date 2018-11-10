@@ -44,8 +44,8 @@ class GalleryItemControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     {
         $this->fixture = $this->getMock(
             'FelixNagel\\GenericGallery\\Controller\\GalleryItemController',
-            array('redirect', 'forward', 'addFlashMessage'),
-            array(),
+            ['redirect', 'forward', 'addFlashMessage'],
+            [],
             '',
             false
         );

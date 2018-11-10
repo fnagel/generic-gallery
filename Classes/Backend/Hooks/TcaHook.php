@@ -71,22 +71,22 @@ class TcaHook
 
             // No config available
             if (!is_array($settings['gallery']) || count($settings['gallery']) < 1) {
-                $optionList[] = array(
+                $optionList[] = [
                     0 => $this->translate('cms_layout.missing_config'), 1 => '',
-                );
+                ];
 
                 return $config['items'] = array_merge($config['items'], $optionList);
             }
 
             // For each view
-            $optionList = array();
-            $optionList[] = array(0 => $this->translate('cms_layout.please_select'), 1 => '');
+            $optionList = [];
+            $optionList[] = [0 => $this->translate('cms_layout.please_select'), 1 => ''];
             foreach ($settings['gallery'] as $key => $view) {
                 if (is_array($view)) {
-                    $optionList[] = array(
+                    $optionList[] = [
                         0 => ($view['name']) ? $view['name'] : $key,
                         1 => $key.'.',
-                    );
+                    ];
                 }
             }
 

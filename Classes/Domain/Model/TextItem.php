@@ -94,10 +94,10 @@ class TextItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $coordsArray = GeneralUtility::intExplode(',', $this->position, true);
 
-        return array(
+        return [
             'x' => $coordsArray[0],
             'y' => $coordsArray[1],
-        );
+        ];
     }
 
     /**
@@ -139,11 +139,11 @@ class TextItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $string = '';
         $position = $this->getPosition();
-        $classes = array(
+        $classes = [
             'position' => 'absolute',
             'left' => $position['x'].'px',
             'top' => $position['y'].'px',
-        );
+        ];
 
         if ($this->getWidth() !== '') {
             $classes['width'] = $this->getWidth().'px';
