@@ -2,7 +2,7 @@
 config.tx_extbase {
 	persistence {
 		classes {
-			TYPO3\GenericGallery\Domain\Model\GalleryItem {
+			FelixNagel\GenericGallery\Domain\Model\GalleryItem {
 				mapping {
 					tableName = tx_generic_gallery_pictures
 					columns {
@@ -19,7 +19,7 @@ config.tx_extbase {
 				}
 			}
 
-			TYPO3\GenericGallery\Domain\Model\TextItem {
+			FelixNagel\GenericGallery\Domain\Model\TextItem {
 				mapping {
 					tableName = tx_generic_gallery_content
 					columns {

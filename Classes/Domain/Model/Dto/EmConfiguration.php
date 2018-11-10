@@ -1,6 +1,6 @@
 <?php
 
-namespace TYPO3\GenericGallery\Domain\Model\Dto;
+namespace FelixNagel\GenericGallery\Domain\Model\Dto;
 
 /***************************************************************
  *

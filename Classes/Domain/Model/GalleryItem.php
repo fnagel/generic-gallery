@@ -1,12 +1,12 @@
 <?php
 
-namespace TYPO3\GenericGallery\Domain\Model;
+namespace FelixNagel\GenericGallery\Domain\Model;
 
 /***************************************************************
  *
  *  Copyright notice
  *
- *  (c) 2014-2016 Felix Nagel <info@felixnagel.com>
+ *  (c) 2014-2018 Felix Nagel <info@felixnagel.com>
  *
  *  All rights reserved
  *
@@ -30,6 +30,8 @@ namespace TYPO3\GenericGallery\Domain\Model;
 use TYPO3\CMS\Core\Resource\FileReference as CoreFileReference;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference as ExtbaseFileReference;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Extbase\Service\ImageService;
 
 /**
  * Class GalleryItem.
@@ -74,7 +76,7 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * textItems.
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\GenericGallery\Domain\Model\TextItem>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\FelixNagel\GenericGallery\Domain\Model\TextItem>
      */
     protected $textItems;
 
@@ -184,9 +186,9 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected function getCroppedImageLinkFromReference()
     {
         /* @var $objectManager \TYPO3\CMS\Extbase\Object\ObjectManagerInterface */
-        $objectManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
-        /* @var $imageService \TYPO3\CMS\Extbase\Service\ImageService */
-        $imageService = $objectManager->get('TYPO3\\CMS\\Extbase\\Service\\ImageService');
+        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+        /* @var $imageService ImageService */
+        $imageService = $objectManager->get(ImageService::class);
 
         $processedImage = $imageService->applyProcessingInstructions(
             $this->imageReference->getOriginalResource(),
@@ -322,11 +324,11 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Adds a textItem.
      *
-     * @param \TYPO3\GenericGallery\Domain\Model\TextItem $textItems
+     * @param \FelixNagel\GenericGallery\Domain\Model\TextItem $textItems
      *
      * @api
      */
-    public function addTextItem(\TYPO3\GenericGallery\Domain\Model\TextItem $textItems)
+    public function addTextItem(\FelixNagel\GenericGallery\Domain\Model\TextItem $textItems)
     {
         $this->textItems->attach($textItems);
     }
@@ -334,11 +336,11 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Removes a textItem.
      *
-     * @param \TYPO3\GenericGallery\Domain\Model\TextItem $textItems
+     * @param \FelixNagel\GenericGallery\Domain\Model\TextItem $textItems
      *
      * @api
      */
-    public function removeTextItem(\TYPO3\GenericGallery\Domain\Model\TextItem $textItems)
+    public function removeTextItem(\FelixNagel\GenericGallery\Domain\Model\TextItem $textItems)
     {
         $this->textItems->detach($textItems);
     }

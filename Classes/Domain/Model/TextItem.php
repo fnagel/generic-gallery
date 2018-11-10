@@ -1,12 +1,12 @@
 <?php
 
-namespace TYPO3\GenericGallery\Domain\Model;
+namespace FelixNagel\GenericGallery\Domain\Model;
 
 /***************************************************************
  *
  *  Copyright notice
  *
- *  (c) 2014-2016 Felix Nagel <info@felixnagel.com>
+ *  (c) 2014-2018 Felix Nagel <info@felixnagel.com>
  *
  *  All rights reserved
  *
@@ -88,7 +88,7 @@ class TextItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the position.
      *
-     * @return string $position
+     * @return array $position
      */
     public function getPosition()
     {

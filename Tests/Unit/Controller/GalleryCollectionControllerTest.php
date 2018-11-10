@@ -1,11 +1,11 @@
 <?php
 
-namespace TYPO3\GenericGallery\Tests\Unit\Controller;
+namespace FelixNagel\GenericGallery\Tests\Unit\Controller;
 
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2014-2016 Felix Nagel <info@felixnagel.com>
+ *  (c) 2014-2018 Felix Nagel <info@felixnagel.com>
  *
  *  All rights reserved
  *
@@ -27,14 +27,14 @@ namespace TYPO3\GenericGallery\Tests\Unit\Controller;
  ***************************************************************/
 
 /**
- * Test case for class TYPO3\GenericGallery\Controller\GalleryCollectionController.
+ * Test case for class FelixNagel\GenericGallery\Controller\GalleryCollectionController.
  *
  * @author Felix Nagel <info@felixnagel.com>
  */
 class GalleryCollectionControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 {
     /**
-     * @var \TYPO3\GenericGallery\Controller\GalleryCollectionController
+     * @var \FelixNagel\GenericGallery\Controller\GalleryCollectionController
      */
     protected $subject = null;
 
@@ -42,7 +42,7 @@ class GalleryCollectionControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     protected function setUp()
     {
-        $this->subject = $this->getMock('TYPO3\\GenericGallery\\Controller\\GalleryCollectionController', array('redirect', 'forward', 'addFlashMessage'), array(), '', false);
+        $this->subject = $this->getMock('FelixNagel\\GenericGallery\\Controller\\GalleryCollectionController', array('redirect', 'forward', 'addFlashMessage'), array(), '', false);
     }
 
     /**
@@ -59,7 +59,7 @@ class GalleryCollectionControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     {
         $this->markTestSkipped('to be rewritten');
 
-        $galleryCollection = new \TYPO3\GenericGallery\Domain\Model\GalleryCollection();
+        $galleryCollection = new \FelixNagel\GenericGallery\Domain\Model\GalleryCollection();
 
         $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
         $this->inject($this->subject, 'view', $view);

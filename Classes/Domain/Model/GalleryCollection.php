@@ -1,12 +1,12 @@
 <?php
 
-namespace TYPO3\GenericGallery\Domain\Model;
+namespace FelixNagel\GenericGallery\Domain\Model;
 
 /***************************************************************
  *
  *  Copyright notice
  *
- *  (c) 2014-2016 Felix Nagel <info@felixnagel.com>
+ *  (c) 2014-2018 Felix Nagel <info@felixnagel.com>
  *
  *  All rights reserved
  *
@@ -70,7 +70,7 @@ class GalleryCollection extends ObjectStorage
     {
         $storage = array_values($this->storage);
         foreach ($storage as $item) {
-            /* @var $galleryItem \TYPO3\GenericGallery\Domain\Model\GalleryItem */
+            /* @var $galleryItem GalleryItem */
             $galleryItem = $item['obj'];
 
             if ((string) $uid === (string) $galleryItem->getUid()) {

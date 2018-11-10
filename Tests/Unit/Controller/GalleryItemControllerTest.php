@@ -1,11 +1,11 @@
 <?php
 
-namespace TYPO3\GenericGallery\Tests\Unit\Controller;
+namespace FelixNagel\GenericGallery\Tests\Unit\Controller;
 
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2014-2016 Felix Nagel <info@felixnagel.com>
+ *  (c) 2014-2018 Felix Nagel <info@felixnagel.com>
  *
  *  All rights reserved
  *
@@ -27,14 +27,14 @@ namespace TYPO3\GenericGallery\Tests\Unit\Controller;
  ***************************************************************/
 
 /**
- * Test case for class TYPO3\GenericGallery\Controller\GalleryItemController.
+ * Test case for class FelixNagel\GenericGallery\Controller\GalleryItemController.
  *
  * @author Felix Nagel <info@felixnagel.com>
  */
 class GalleryItemControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 {
     /**
-     * @var \TYPO3\GenericGallery\Controller\GalleryItemController
+     * @var \FelixNagel\GenericGallery\Controller\GalleryItemController
      */
     protected $fixture = null;
 
@@ -43,7 +43,7 @@ class GalleryItemControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     protected function setUp()
     {
         $this->fixture = $this->getMock(
-            'TYPO3\\GenericGallery\\Controller\\GalleryItemController',
+            'FelixNagel\\GenericGallery\\Controller\\GalleryItemController',
             array('redirect', 'forward', 'addFlashMessage'),
             array(),
             '',
@@ -65,7 +65,7 @@ class GalleryItemControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     {
         $this->markTestSkipped('to be rewritten');
 
-        $item = new \TYPO3\GenericGallery\Domain\Model\GalleryCollection();
+        $item = new \FelixNagel\GenericGallery\Domain\Model\GalleryCollection();
         $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
 
         $this->inject($this->fixture, 'view', $view);

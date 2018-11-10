@@ -7,7 +7,7 @@ if (!defined('TYPO3_MODE')) {
 call_user_func(function ($packageKey) {
     $extensionName = \TYPO3\CMS\Core\Utility\GeneralUtility::underscoredToLowerCamelCase($packageKey);
     $pluginSignature = strtolower($extensionName).'_pi1';
-    $configuration = \TYPO3\GenericGallery\Utility\EmConfiguration::getSettings();
+    $configuration = \FelixNagel\GenericGallery\Utility\EmConfiguration::getSettings();
 
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
         'TYPO3.GenericGallery',
@@ -24,7 +24,7 @@ call_user_func(function ($packageKey) {
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'allowNonIdValues' => 1,
-                'itemsProcFunc' => 'TYPO3\GenericGallery\Backend\Hooks\TcaHook->addPredefinedFields',
+                'itemsProcFunc' => 'FelixNagel\GenericGallery\Backend\Hooks\TcaHook->addPredefinedFields',
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,

@@ -5,7 +5,7 @@ if (!defined('TYPO3_MODE')) {
 }
 
 call_user_func(function () {
-    $configuration = \TYPO3\GenericGallery\Utility\EmConfiguration::getSettings();
+    $configuration = \FelixNagel\GenericGallery\Utility\EmConfiguration::getSettings();
 
     if ($configuration->getAddImageCollection()) {
         $GLOBALS['TYPO3_CONF_VARS']['SYS']['fal']['registeredCollections']['images'] =

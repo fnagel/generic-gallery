@@ -1,11 +1,11 @@
 <?php
 
-namespace TYPO3\GenericGallery\ViewHelpers\ForGroup;
+namespace FelixNagel\GenericGallery\ViewHelpers\ForGroup;
 
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2014-2016 Felix Nagel <info@felixnagel.com>
+ *  (c) 2014-2018 Felix Nagel <info@felixnagel.com>
  *
  *  All rights reserved
  *

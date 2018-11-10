@@ -1,6 +1,6 @@
 <?php
 
-namespace TYPO3\GenericGallery\Utility;
+namespace FelixNagel\GenericGallery\Utility;
 
 /***************************************************************
  *
@@ -39,7 +39,7 @@ class EmConfiguration
     /**
      * Parses the extension settings.
      *
-     * @return \TYPO3\GenericGallery\Domain\Model\Dto\EmConfiguration
+     * @return \FelixNagel\GenericGallery\Domain\Model\Dto\EmConfiguration
      *
      * @throws \Exception If the configuration is invalid.
      */
@@ -50,7 +50,7 @@ class EmConfiguration
         // @todo Check if this is still needed
         require_once(ExtensionManagementUtility::extPath('generic_gallery').'Classes/Domain/Model/Dto/EmConfiguration.php');
 
-        return new \TYPO3\GenericGallery\Domain\Model\Dto\EmConfiguration($configuration);
+        return new \FelixNagel\GenericGallery\Domain\Model\Dto\EmConfiguration($configuration);
     }
 
     /**

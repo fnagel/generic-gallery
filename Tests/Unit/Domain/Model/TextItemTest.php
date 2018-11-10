@@ -1,11 +1,11 @@
 <?php
 
-namespace TYPO3\GenericGallery\Tests\Unit\Domain\Model;
+namespace FelixNagel\GenericGallery\Tests\Unit\Domain\Model;
 
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2014-2016 Nagel <info@felixnagel.com>
+ *  (c) 2014-2018 Nagel <info@felixnagel.com>
  *
  *  All rights reserved
  *
@@ -27,7 +27,7 @@ namespace TYPO3\GenericGallery\Tests\Unit\Domain\Model;
  ***************************************************************/
 
 /**
- * Test case for class \TYPO3\GenericGallery\Domain\Model\TextItem.
+ * Test case for class \FelixNagel\GenericGallery\Domain\Model\TextItem.
  *
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
@@ -41,7 +41,7 @@ class TextItemTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     protected $objectManager = null;
 
     /**
-     * @var \TYPO3\GenericGallery\Domain\Model\TextItem
+     * @var \FelixNagel\GenericGallery\Domain\Model\TextItem
      */
     protected $fixture = null;
 
@@ -50,7 +50,7 @@ class TextItemTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     protected function setUp()
     {
         $this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
-        $this->fixture = $this->objectManager->get('TYPO3\\GenericGallery\\Domain\\Model\\TextItem');
+        $this->fixture = $this->objectManager->get('FelixNagel\\GenericGallery\\Domain\\Model\\TextItem');
     }
 
     /**

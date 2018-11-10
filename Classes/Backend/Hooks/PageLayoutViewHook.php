@@ -1,11 +1,11 @@
 <?php
 
-namespace TYPO3\GenericGallery\Backend\Hooks;
+namespace FelixNagel\GenericGallery\Backend\Hooks;
 
 /***************************************************************
  * Copyright notice
  *
- * (c) 2015-2016 Felix Nagel (info@felixnagel.com)
+ * (c) 2015-2018 Felix Nagel (info@felixnagel.com)
  * All rights reserved
  *
  * This script is part of the TYPO3 project. The TYPO3 project is
@@ -25,9 +25,10 @@ namespace TYPO3\GenericGallery\Backend\Hooks;
  * This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use FelixNagel\GenericGallery\Service\SettingsService;
 use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Imaging\IconFactory;
-use TYPO3\GenericGallery\Utility\EmConfiguration;
+use FelixNagel\GenericGallery\Utility\EmConfiguration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 
@@ -49,7 +50,7 @@ class PageLayoutViewHook
     protected $objectManager = null;
 
     /**
-     * @var \TYPO3\GenericGallery\Service\SettingsService
+     * @var \FelixNagel\GenericGallery\Service\SettingsService
      */
     protected $settingsService = null;
 
@@ -303,14 +304,12 @@ class PageLayoutViewHook
     }
 
     /**
-     * @return \TYPO3\GenericGallery\Service\SettingsService
+     * @return SettingsService
      */
     protected function getTypoScriptService()
     {
         if ($this->settingsService === null) {
-            $this->settingsService = $this->getObjectContainer()->getInstance(
-                'TYPO3\\GenericGallery\\Service\\SettingsService'
-            );
+            $this->settingsService = $this->getObjectContainer()->getInstance(SettingsService::class);
         }
 
         return $this->settingsService;

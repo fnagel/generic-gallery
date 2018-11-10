@@ -27,7 +27,7 @@
   },
   "autoload": {
     "psr-4": {
-      "TYPO3\\GenericGallery\\": "Classes/"
+      "FelixNagel\\GenericGallery\\": "Classes/"
     }
   },
   "repositories": [

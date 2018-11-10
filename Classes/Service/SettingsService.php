@@ -1,12 +1,12 @@
 <?php
 
-namespace TYPO3\GenericGallery\Service;
+namespace FelixNagel\GenericGallery\Service;
 
 /***************************************************************
  *
  *  Copyright notice
  *
- *  (c) 2015-2017 Felix Nagel <info@felixnagel.com>
+ *  (c) 2015-2018 Felix Nagel <info@felixnagel.com>
  *
  *  All rights reserved
  *

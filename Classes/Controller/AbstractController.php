@@ -1,6 +1,6 @@
 <?php
 
-namespace TYPO3\GenericGallery\Controller;
+namespace FelixNagel\GenericGallery\Controller;
 
 /***************************************************************
  *
@@ -27,9 +27,13 @@ namespace TYPO3\GenericGallery\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use TYPO3\GenericGallery\Domain\Model\GalleryCollection;
+use FelixNagel\GenericGallery\Domain\Model\GalleryCollection;
+use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
+use TYPO3\CMS\Core\Resource\FileRepository;
+use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
+use FelixNagel\GenericGallery\Domain\Repository\GalleryItemRepository;
 
 /**
  * BaseController.
@@ -78,7 +82,7 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
     /**
      * GalleryCollection.
      *
-     * @var \TYPO3\GenericGallery\Domain\Model\GalleryCollection
+     * @var \FelixNagel\GenericGallery\Domain\Model\GalleryCollection
      */
     protected $collection = null;
 
@@ -209,8 +213,8 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
      */
     protected function getSigleItems()
     {
-        /* @var $itemRepository \TYPO3\GenericGallery\Domain\Repository\GalleryItemRepository */
-        $itemRepository = $this->objectManager->get('TYPO3\\GenericGallery\\Domain\\Repository\\GalleryItemRepository');
+        /* @var $itemRepository GalleryItemRepository */
+        $itemRepository = $this->objectManager->get(GalleryItemRepository::class);
         /* @var $items \TYPO3\CMS\Extbase\Persistence\Generic\QueryResult */
         $items = $itemRepository->findByTtContentUid($this->getContentElementUid());
 
@@ -222,8 +226,8 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
      */
     protected function getMultipleImages()
     {
-        /* @var $fileRepository \TYPO3\CMS\Core\Resource\FileRepository */
-        $fileRepository = $this->objectManager->get('TYPO3\\CMS\\Core\\Resource\\FileRepository');
+        /* @var $fileRepository FileRepository */
+        $fileRepository = $this->objectManager->get(FileRepository::class);
 
         return $fileRepository->findByRelation(
             'tt_content',
@@ -237,8 +241,8 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
      */
     protected function getCollection()
     {
-        /* @var $resourceFactory \TYPO3\CMS\Core\Resource\ResourceFactory */
-        $resourceFactory = $this->objectManager->get('TYPO3\\CMS\\Core\\Resource\\ResourceFactory');
+        /* @var $resourceFactory ResourceFactory */
+        $resourceFactory = $this->objectManager->get(ResourceFactory::class);
 
         /* @var $collection \TYPO3\CMS\Core\Resource\Collection\AbstractFileCollection */
         $collection = $resourceFactory->getCollectionObject((int) $this->cObjData['tx_generic_gallery_collection']);
@@ -255,10 +259,8 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
      */
     protected function logError($message = '', $error = 2)
     {
-        /* @var $backendUserAuthentication \TYPO3\CMS\Core\Authentication\BackendUserAuthentication */
-        $backendUserAuthentication = GeneralUtility::makeInstance(
-            'TYPO3\\CMS\\Core\\Authentication\\BackendUserAuthentication'
-        );
+        /* @var $backendUserAuthentication BackendUserAuthentication */
+        $backendUserAuthentication = GeneralUtility::makeInstance(BackendUserAuthentication::class);
         $backendUserAuthentication->simplelog('Error: '.$message, 'tx_generic_gallery', $error);
     }
 }

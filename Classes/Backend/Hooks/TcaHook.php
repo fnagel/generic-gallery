@@ -1,11 +1,11 @@
 <?php
 
-namespace TYPO3\GenericGallery\Backend\Hooks;
+namespace FelixNagel\GenericGallery\Backend\Hooks;
 
 /***************************************************************
  * Copyright notice
  *
- * (c) 2014-2017 Felix Nagel (info@felixnagel.com)
+ * (c) 2014-2018 Felix Nagel (info@felixnagel.com)
  * All rights reserved
  *
  * This script is part of the TYPO3 project. The TYPO3 project is
@@ -25,7 +25,9 @@ namespace TYPO3\GenericGallery\Backend\Hooks;
  * This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use FelixNagel\GenericGallery\Service\SettingsService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\Container\Container;
 
 /**
  * Hook class for TCA hook.
@@ -45,7 +47,7 @@ class TcaHook
     protected $objectManager = null;
 
     /**
-     * @var \TYPO3\GenericGallery\Service\SettingsService
+     * @var \FelixNagel\GenericGallery\Service\SettingsService
      */
     protected $settingsService = null;
 
@@ -117,14 +119,12 @@ class TcaHook
     }
 
     /**
-     * @return \TYPO3\GenericGallery\Service\SettingsService
+     * @return \FelixNagel\GenericGallery\Service\SettingsService
      */
     protected function getTypoScriptService()
     {
         if ($this->settingsService === null) {
-            $this->settingsService = $this->getObjectContainer()->getInstance(
-                'TYPO3\\GenericGallery\\Service\\SettingsService'
-            );
+            $this->settingsService = $this->getObjectContainer()->getInstance(SettingsService::class);
         }
 
         return $this->settingsService;
@@ -138,7 +138,7 @@ class TcaHook
     protected function getObjectContainer()
     {
         if ($this->objectContainer == null) {
-            $this->objectContainer = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\Container\\Container');
+            $this->objectContainer = GeneralUtility::makeInstance(Container::class);
         }
 
         return $this->objectContainer;

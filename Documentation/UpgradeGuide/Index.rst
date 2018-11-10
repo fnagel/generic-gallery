@@ -14,6 +14,27 @@ Upgrade Guide
 
 
 
+Update from 2.2.x to 3.0
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Overview**
+
+- Changed PHP class namespace
+
+
+**How to upgrade**
+
+#. Adjust your class auto loading or class overwrites to new namespace / composer package name (if needed for your setup)
+
+#. Use "Clear all caches including PHP opcode cache" and "Dump Autoload Information" in the install tool (if needed for your setup)
+
+#. Adjust VH namespace in your overwrite templates
+
+#. Clear all caches
+
+
+
+
 Update from 2.1.x to 2.2
 ^^^^^^^^^^^^^^^^^^^^^^^^
 

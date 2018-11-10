@@ -7,11 +7,11 @@ if (!defined('TYPO3_MODE')) {
 call_user_func(function () {
     // BE preview
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['cms/layout/class.tx_cms_layout.php']['list_type_Info']['genericgallery_pi1'][] =
-        'TYPO3\GenericGallery\Backend\Hooks\PageLayoutViewHook->getExtensionSummary';
+        'FelixNagel\GenericGallery\Backend\Hooks\PageLayoutViewHook->getExtensionSummary';
 
     // FE plugin
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-        'TYPO3.GenericGallery',
+        'FelixNagel.GenericGallery',
         'Pi1',
         array(
             'GalleryCollection' => 'show',
