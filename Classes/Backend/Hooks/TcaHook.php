@@ -26,6 +26,7 @@ namespace FelixNagel\GenericGallery\Backend\Hooks;
  ***************************************************************/
 
 use FelixNagel\GenericGallery\Service\SettingsService;
+use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\Container\Container;
 
@@ -63,14 +64,12 @@ class TcaHook
         if (is_array($config['items'])) {
             $pid = $config['row']['pid'];
             if ($pid < 0) {
-                $contentUid = str_replace('-', '', $pid);
-                $row = $this->getDatabase()->exec_SELECTgetSingleRow('pid', 'tt_content', 'uid='.$contentUid);
-                $pid = $row['pid'];
+                $pid = $this->getRecordPid((int) str_replace('-', '', $pid));
             }
 
             $settings = $this->getTypoScriptService()->getTypoScriptSettingsFromBackend($pid);
 
-            // no config available
+            // No config available
             if (!is_array($settings['gallery']) || count($settings['gallery']) < 1) {
                 $optionList[] = array(
                     0 => $this->translate('cms_layout.missing_config'), 1 => '',
@@ -79,7 +78,7 @@ class TcaHook
                 return $config['items'] = array_merge($config['items'], $optionList);
             }
 
-            // for each view
+            // For each view
             $optionList = array();
             $optionList[] = array(0 => $this->translate('cms_layout.please_select'), 1 => '');
             foreach ($settings['gallery'] as $key => $view) {
@@ -98,11 +97,25 @@ class TcaHook
     }
 
     /**
-     * @return \TYPO3\CMS\Core\Database\DatabaseConnection
+     * @param int $uid
+     * @return int
      */
-    protected function getDatabase()
+    protected function getRecordPid($uid)
     {
-        return $GLOBALS['TYPO3_DB'];
+        $table = 'tt_content';
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable($table);
+        $queryBuilder
+            ->from($table)
+            ->select('pid')
+            ->where(
+                $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($uid))
+            )
+            ->setMaxResults(1);
+
+        $statement = $queryBuilder->execute();
+        $rows = $statement->fetchAll();
+
+        return (int) $rows['pid'];
     }
 
     /**

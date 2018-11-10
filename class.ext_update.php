@@ -14,16 +14,20 @@ class ext_update
      */
     public function main()
     {
-        $GLOBALS['TYPO3_DB']->exec_UPDATEquery(
-            'tt_content',
-            'list_type = "generic_gallery_pi1"',
-            array(
-                'list_type' => 'genericgallery_pi1',
-            )
+        $table = 'tt_content';
+        $connectionPool = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Database\ConnectionPool::class)
+            ->getConnectionForTable($table);
+
+        $count = $connectionPool->update(
+            $table,
+            ['list_type' => 'genericgallery_pi1'],
+            ['list_type' => 'generic_gallery_pi1']
         );
 
-        return $GLOBALS['TYPO3_DB']->sql_affected_rows().' rows have been updated.';
+        return $count.' rows have been updated.';
     }
+
+
 
     /**
      * Checks how many rows are found and returns true if there are any

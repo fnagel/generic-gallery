@@ -26,6 +26,7 @@ namespace FelixNagel\GenericGallery\Backend\Hooks;
  ***************************************************************/
 
 use FelixNagel\GenericGallery\Service\SettingsService;
+use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use FelixNagel\GenericGallery\Utility\EmConfiguration;
@@ -217,13 +218,19 @@ class PageLayoutViewHook
     {
         $result = '';
 
-        $select = 'uid, title';
         $table = 'tx_generic_gallery_pictures';
-        $where = 'tt_content_id = '.$data['uid'];
-        $where .= BackendUtility::BEenableFields($table).' AND '.$table.'.deleted = 0';
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable($table);
+        $queryBuilder
+            ->from($table)
+            ->select('uid', 'title')
+            ->where(
+                $queryBuilder->expr()->eq('tt_content_id', $queryBuilder->createNamedParameter($data['uid']))
+            )
+            ->orderBy('sorting');
 
-        $rows = $this->getDatabase()->exec_SELECTgetRows($select, $table, $where, '', 'sorting');
-        $this->tableData[] = array('Images', count($rows));
+        $statement = $queryBuilder->execute();
+        $rows = $statement->fetchAll();
+        $this->tableData[] = array('Images', $statement->rowCount());
         if ($rows === null) {
             return $result;
         }
@@ -280,14 +287,6 @@ class PageLayoutViewHook
         }
 
         return '<br><pre style="white-space: normal;">'.$content.'</pre>';
-    }
-
-    /**
-     * @return \TYPO3\CMS\Core\Database\DatabaseConnection
-     */
-    protected function getDatabase()
-    {
-        return $GLOBALS['TYPO3_DB'];
     }
 
     /**
