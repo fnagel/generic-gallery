@@ -5,4 +5,4 @@ enable_cms_layout = 1
 use_inline_collection = 1
 
 	# cat=basic; type=options[LLL:EXT:lang/locallang_common.xlf:no=0,LLL:EXT:lang/locallang_common.xlf:yes=1]; label=LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:extension_manager.add_image_collection
-add_image_collection = 0
+add_image_collection = 1
