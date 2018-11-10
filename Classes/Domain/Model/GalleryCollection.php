@@ -36,30 +36,6 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 class GalleryCollection extends ObjectStorage
 {
     /**
-     * @todo Remove this with v3
-     * @deprecated
-     * @return ObjectStorage
-     */
-    public function getItems()
-    {
-        return $this;
-    }
-
-    /**
-     * @todo Remove this with v3
-     * @deprecated
-     * @param $items ObjectStorage
-     *
-     * @return $this
-     */
-    public function setItems(ObjectStorage $items)
-    {
-        $this->addAll($items);
-
-        return $this;
-    }
-
-    /**
      * Returns item by uid.
      *
      * @param int|string $uid UID int or virtual UID string
