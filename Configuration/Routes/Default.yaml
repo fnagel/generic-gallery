@@ -1,0 +1,17 @@
+# Include this route enhancer config:
+# imports:
+#  - { resource: "EXT:generic_gallery/Configuration/Routes/Default.yaml" }
+routeEnhancers:
+  GenericGalleryPi1Plugin:
+    type: Extbase
+    extension: GenericGallery
+    plugin: Pi1
+    routes:
+    - {
+        routePath: '/{item}/{ce}',
+        _controller: 'GalleryItem::show',
+        _arguments: {
+          'item': 'item',
+          'ce': 'contentElement'
+        }
+      }
