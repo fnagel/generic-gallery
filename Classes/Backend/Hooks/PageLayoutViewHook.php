@@ -230,7 +230,7 @@ class PageLayoutViewHook
 
         $statement = $queryBuilder->execute();
         $rows = $statement->fetchAll();
-        $this->tableData[] = ['Images', $statement->rowCount()];
+        $this->tableData[] = ['Images', count($rows)];
         if ($rows === null) {
             return $result;
         }
