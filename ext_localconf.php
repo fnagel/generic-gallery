@@ -9,6 +9,11 @@ call_user_func(function () {
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['cms/layout/class.tx_cms_layout.php']['list_type_Info']['genericgallery_pi1'][] =
         'FelixNagel\GenericGallery\Backend\Hooks\PageLayoutViewHook->getExtensionSummary';
 
+    // Add page TS config
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig(
+        '<INCLUDE_TYPOSCRIPT: source="FILE:EXT:generic_gallery/Configuration/TypoScript/pageTsConfig.ts">'
+    );
+
     // FE plugin
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
         'FelixNagel.GenericGallery',
