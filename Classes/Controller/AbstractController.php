@@ -113,6 +113,8 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
     protected function getContentElementUid()
     {
         if ($this->uid === null) {
+            // @todo getContentObject is deprecated but seems to be available in TYPO3 9.5 (even tough it should not)
+            // See "Scan Extension Files" tool in "Upgrade" BE module
             $data = $this->configurationManager->getContentObject()->data;
             $this->uid = ($data['_LOCALIZED_UID']) ? $data['_LOCALIZED_UID'] : $data['uid'];
         }
