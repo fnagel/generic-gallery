@@ -8,10 +8,32 @@ routeEnhancers:
     plugin: Pi1
     routes:
     - {
-        routePath: '/{item}/{ce}',
+        routePath: '/{prefix_localized}/{item}/{ce}',
         _controller: 'GalleryItem::show',
         _arguments: {
           'item': 'item',
           'ce': 'contentElement'
         }
       }
+    requirements:
+      ce: '\d+'
+    aspects:
+      prefix_localized:
+        type: LocaleModifier
+        default: 'image'
+        localeMap:
+          - locale: 'de_DE.*'
+            value: 'bild'
+      # This will work for galleries of type "pictures"
+      # The "item" route segment could be a record or a virtual identifier for sys_file_reference
+      # @todo Create an own mapper capable of handling both variants
+      item:
+        type: PersistedPatternMapper
+        tableName: 'tx_generic_gallery_pictures'
+        routeFieldPattern: '^(?P<uid>.+)$'
+        routeFieldResult: '{uid}'
+      ce:
+        type: PersistedPatternMapper
+        tableName: 'tt_content'
+        routeFieldPattern: '^(?P<uid>.+)$'
+        routeFieldResult: '{uid}'
