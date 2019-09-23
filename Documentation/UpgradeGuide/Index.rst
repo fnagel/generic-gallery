@@ -14,12 +14,20 @@ Upgrade Guide
 
 
 
-Update from 2.2.x to 3.0
-^^^^^^^^^^^^^^^^^^^^^^^^
+Update from 2.2.x to 3.0.0
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 **Overview**
 
-- Changed PHP class namespace
+- TYPO3 9.x support
+
+- Remove TYPO3 7.x support
+
+- Remove PHP < 7.0 support
+
+- Changed PHP namespace to `FelixNagel`
+
+- Switch to PSR-2 CGL
 
 
 **How to upgrade**
