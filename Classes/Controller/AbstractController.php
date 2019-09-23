@@ -6,7 +6,7 @@ namespace FelixNagel\GenericGallery\Controller;
  *
  *  Copyright notice
  *
- *  (c) 2014-2018 Felix Nagel <info@felixnagel.com>
+ *  (c) 2014-2019 Felix Nagel <info@felixnagel.com>
  *
  *  All rights reserved
  *
@@ -113,13 +113,26 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
     protected function getContentElementUid()
     {
         if ($this->uid === null) {
-            // @todo getContentObject is deprecated but seems to be available in TYPO3 9.5 (even tough it should not)
-            // See "Scan Extension Files" tool in "Upgrade" BE module
-            $data = $this->configurationManager->getContentObject()->data;
+            $data = $this->getContentElementData();
             $this->uid = ($data['_LOCALIZED_UID']) ? $data['_LOCALIZED_UID'] : $data['uid'];
         }
 
         return (int) $this->uid;
+    }
+
+    /**
+     * Get current plugin CE's data.
+     *
+     * @todo getContentObject is deprecated but seems to be available in TYPO3 9.5 (even tough it should not)
+     *
+     * According to the new extension scanner the method getContentObject is
+     * deprecated and removed in TYPO3 9.x but it's still available and the replacement is not.
+     *
+     * @return array
+     */
+    protected function getContentElementData()
+    {
+        return $this->configurationManager->getContentObject()->data;
     }
 
     /**
@@ -144,7 +157,7 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
      */
     protected function initializeAction()
     {
-        $this->cObjData = $this->configurationManager->getContentObject()->data;
+        $this->cObjData = $this->getContentElementData();;
         $this->gallerySettings = $this->settings['gallery'];
         $this->galleryKey = rtrim($this->cObjData['tx_generic_gallery_predefined'], '.');
         $this->currentSettings = $this->gallerySettings[$this->galleryKey];
