@@ -6,7 +6,7 @@ namespace FelixNagel\GenericGallery\Service;
  *
  *  Copyright notice
  *
- *  (c) 2015-2018 Felix Nagel <info@felixnagel.com>
+ *  (c) 2015-2019 Felix Nagel <info@felixnagel.com>
  *
  *  All rights reserved
  *
@@ -80,9 +80,7 @@ class SettingsService
     protected $configurationManager;
 
     /**
-     * Legacy alias of \TYPO3\CMS\Core\TypoScript\TypoScriptService
-     *
-     * @var \TYPO3\CMS\Extbase\Service\TypoScriptService
+     * @var \TYPO3\CMS\Core\TypoScript\TypoScriptService
      * @inject
      */
     protected $typoScriptService;
