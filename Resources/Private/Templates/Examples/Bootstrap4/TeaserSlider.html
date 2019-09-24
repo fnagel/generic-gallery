@@ -1,0 +1,33 @@
+{namespace gg=FelixNagel\GenericGallery\ViewHelpers}
+
+<f:layout name="Default" />
+
+<f:section name="main">
+	<div id="slider-{uid}" class="carousel slide" data-ride="carousel">
+		<ol class="carousel-indicators">
+			<f:for each="{collection}" as="item" iteration="iterator">
+				<li data-target="#slider-{uid}" data-slide-to="{iterator.index}" class="{f:if(condition: '{iterator.index} == 0', then: 'active')}"></li>
+			</f:for>
+		</ol>
+
+		<div class="carousel-inner" role="listbox">
+			<f:for each="{collection}" as="item" iteration="iterator">
+				<div class="carousel-item{f:if(condition: '{iterator.index} == 0', then: ' active')}">
+					<div style="position: relative;">
+						<f:render partial="GalleryItem/Image" arguments="{_all}" />
+						<f:render partial="GalleryItem/TextItems" arguments="{_all}" />
+					</div>
+				</div>
+			</f:for>
+		</div>
+
+		<a class="carousel-control-prev" href="#slider-{uid}" role="button" data-slide="prev">
+			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			<span class="sr-only">Previous</span>
+		</a>
+		<a class="carousel-control-next" href="#slider-{uid}" role="button" data-slide="next">
+			<span class="carousel-control-next-icon" aria-hidden="true"></span>
+			<span class="sr-only">Next</span>
+		</a>
+	</div>
+</f:section>

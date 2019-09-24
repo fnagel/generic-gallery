@@ -1,0 +1,21 @@
+plugin.tx_genericgallery {
+	settings {
+		gallery {
+			# Add carousel example
+			bootstrap_slider_image {
+				name = Bootstrap 4 - Image Slider
+
+				# template for gallery
+				template = EXT:generic_gallery/Resources/Private/Templates/Examples/Bootstrap4/ImageSlider.html
+			}
+
+			# Add carousel example
+			bootstrap_slider_teaser {
+				name = Bootstrap 4 - Teaser Slider
+
+				# template for gallery
+				template = EXT:generic_gallery/Resources/Private/Templates/Examples/Bootstrap4/TeaserSlider.html
+			}
+		}
+	}
+}

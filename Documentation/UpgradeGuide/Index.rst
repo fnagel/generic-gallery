@@ -29,6 +29,8 @@ Update from 2.2.x to 3.0.0
 
 - Switch to PSR-2 CGL
 
+- Add Bootstrap 4 examples
+
 
 **How to upgrade**
 
