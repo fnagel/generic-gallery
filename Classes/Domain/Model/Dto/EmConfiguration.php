@@ -62,7 +62,6 @@ class EmConfiguration
     protected $useInlineCollection = 1;
 
     /**
-     * @todo Enable this in version 3.0.0 (here and in ext_conf_template.txt)
      * @var int
      */
     protected $addImageCollection = 1;
