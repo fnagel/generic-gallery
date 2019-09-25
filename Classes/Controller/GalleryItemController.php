@@ -71,7 +71,13 @@ class GalleryItemController extends AbstractController
      */
     public function showAction($item)
     {
-        $GLOBALS['TSFE']->reqCHash();
-        $this->view->assign('item', $this->collection->getByUid($item));
+        $item = $this->collection->getByUid($item);
+
+        if ($item === null) {
+            $this->getTypoScriptFrontendController()->pageNotFoundAndExit('Image not found!');
+        }
+
+        $this->getTypoScriptFrontendController()->reqCHash();
+        $this->view->assign('item', $item);
     }
 }

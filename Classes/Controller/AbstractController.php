@@ -278,4 +278,12 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
         $backendUserAuthentication = GeneralUtility::makeInstance(BackendUserAuthentication::class);
         $backendUserAuthentication->simplelog('Error: '.$message, 'tx_generic_gallery', $error);
     }
+
+    /**
+     * @return \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController
+     */
+    protected function getTypoScriptFrontendController()
+    {
+        return $GLOBALS['TSFE'];
+    }
 }
