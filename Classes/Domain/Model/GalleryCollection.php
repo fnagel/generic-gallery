@@ -44,6 +44,10 @@ class GalleryCollection extends ObjectStorage
      */
     public function getByUid($uid)
     {
+        if (empty($uid)) {
+            return null;
+        }
+
         $storage = array_values($this->storage);
         foreach ($storage as $item) {
             /* @var $galleryItem GalleryItem */
