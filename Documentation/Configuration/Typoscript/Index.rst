@@ -19,11 +19,9 @@ template to overwrite these settings at any point in your sitetree(s).
 TypoScript Reference
 --------------------
 
-.. only:: html
-
-   .. contents::
-      :local:
-      :depth: 1
+.. contents:: Within this page
+   :local:
+   :depth: 1
 
 
 Properties
@@ -47,11 +45,9 @@ Properties
 Property details
 ^^^^^^^^^^^^^^^^
 
-.. only:: html
-
-   .. contents::
-      :local:
-      :depth: 1
+.. contents::
+   :local:
+   :depth: 1
 
 
 
