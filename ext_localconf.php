@@ -29,7 +29,7 @@ call_user_func(function () {
         ]
     );
 
-    // add cHash configuration
+    // Add cHash configuration
     // See: http://forum.typo3.org/index.php?t=msg&th=203350
     $requiredParameters = [
         'tx_genericgallery_pi1[controller]',
@@ -38,4 +38,8 @@ call_user_func(function () {
         'tx_genericgallery_pi1[contentElement]',
     ];
     $GLOBALS['TYPO3_CONF_VARS']['FE']['cHashRequiredParameters'] .= ','.implode(',', $requiredParameters);
+
+    // Routing
+    $GLOBALS['TYPO3_CONF_VARS']['SYS']['routing']['aspects']['GenericGalleryImageItemMapper'] =
+        \FelixNagel\GenericGallery\Routing\Aspect\ImageItemMapper::class;
 });

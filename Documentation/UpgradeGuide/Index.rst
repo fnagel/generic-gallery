@@ -40,6 +40,8 @@ Update from 2.2.x to 3.0.0
 
 #. Adjust VH namespace in your overwrite templates
 
+#. Add extension routing configuration to your site configuration (TYPO3 9.x only)
+
 #. Clear all caches
 
 

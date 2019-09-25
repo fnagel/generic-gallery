@@ -38,6 +38,8 @@ use TYPO3\CMS\Extbase\Service\ImageService;
  */
 class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
+    const FILE_REFERENCE_IDENTIFIER_PREFIX = 'file-';
+
     /**
      * tt_content UID.
      *
@@ -96,7 +98,7 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $uid = parent::getUid();
 
         if ($uid === null) {
-            $uid = 'file_reference_'.$this->getImage()->getUid();
+            $uid = self::FILE_REFERENCE_IDENTIFIER_PREFIX.$this->getImage()->getUid();
         }
 
         return $uid;
