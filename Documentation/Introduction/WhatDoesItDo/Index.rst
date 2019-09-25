@@ -17,7 +17,6 @@ These gallery types could be easily changed with a selectbox within the plugin c
 Features
 """"""""
 
-* Extbase / Fluid powered
 * One plugin for every kind of picture gallery / teaser slider
 * Single item support (with title, link and positioned descriptions)
 * Multiple images support
@@ -28,6 +27,6 @@ Features
 * EXIF and IPTC support
 * All properties provided by FAL could be used
 * Comes with a nice BE layout
-* Twitter Bootstrap Examples
+* Twitter Bootstrap Examples (version 3 and 4)
 * TYPO3 Linkhandler support
 
