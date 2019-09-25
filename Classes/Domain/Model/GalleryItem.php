@@ -140,7 +140,7 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function getTitle()
     {
         if ($this->isVirtual()) {
-            return $this->getImage()->getProperties()['title'];
+            return $this->getImageData()['title'];
         }
 
         return $this->title;
