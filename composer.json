@@ -1,7 +1,7 @@
 {
   "name": "felixnagel/generic-gallery",
   "type": "typo3-cms-extension",
-  "description": "TYPO3 CMS gallery extension.",
+  "description": "TYPO3 CMS image gallery extension. One gallery to rule them all. Extbase & Fluid driven for use with any gallery / slide / rotate plugin.",
   "homepage": "https://extensions.typo3.org/extension/generic_gallery/",
   "license": "GPL-2.0-or-later",
   "support": {

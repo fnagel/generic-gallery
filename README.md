@@ -1,7 +1,9 @@
 Generic Gallery
 ===============
 
-TYPO3 CMS Extension Generic Gallery (Extbase / Fluid rewrite)
+TYPO3 CMS Extension Generic Gallery (Extbase / Fluid rewrite).
+
+One gallery to rule them all. Extbase & Fluid driven for use with any gallery / slide / rotate plugin.
 
 
 Bug reports and feature requests
