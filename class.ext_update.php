@@ -1,9 +1,16 @@
 <?php
 
 /**
+ * This file is part of the "generic_gallery" Extension for TYPO3 CMS.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
+ */
+
+/**
  * Class ext_update.
  *
- * Performs update tasks for extension genericgallery
+ * Performs update tasks for extension generic_gallery
  */
 class ext_update
 {
