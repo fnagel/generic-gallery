@@ -2,10 +2,12 @@
   "name": "felixnagel/generic-gallery",
   "type": "typo3-cms-extension",
   "description": "TYPO3 CMS gallery extension.",
-  "homepage": "https://github.com/fnagel/generic-gallery",
+  "homepage": "https://extensions.typo3.org/extension/generic_gallery/",
   "license": "GPL-2.0-or-later",
   "support": {
-    "issues": "https://github.com/fnagel/generic-gallery/issues"
+    "issues": "https://github.com/fnagel/generic-gallery/issues",
+    "docs": "https://docs.typo3.org/typo3cms/extensions/generic_gallery/",
+    "source": "https://github.com/fnagel/generic-gallery"
   },
   "keywords": [
     "TYPO3 CMS",
