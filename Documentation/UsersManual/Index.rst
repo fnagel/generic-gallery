@@ -37,6 +37,6 @@ Target group: **Editors**
 
 - Save and enjoy!
 
-**Please note:** Collection Mode overwrites Mass mode overwrites Single mode.
+**Please note:** "Collection mode" overwrites "mass mode" overwrites "single mode".
 
 

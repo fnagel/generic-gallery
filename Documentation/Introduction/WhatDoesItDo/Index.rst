@@ -29,4 +29,3 @@ Features
 * Comes with a nice BE layout
 * Twitter Bootstrap Examples (version 3 and 4)
 * TYPO3 Linkhandler support
-

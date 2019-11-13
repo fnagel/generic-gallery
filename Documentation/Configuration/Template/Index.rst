@@ -101,8 +101,3 @@ This examples is tested with EXT::code:`metadata`.
 			</p>
 		</figure>
 	</f:for>
-
-
-
-
-

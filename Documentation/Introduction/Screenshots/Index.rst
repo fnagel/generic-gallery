@@ -16,4 +16,3 @@ Live examples
 http://www.felixnagel.com/fotografie/
 
 Please help me to add more examples here!
-
