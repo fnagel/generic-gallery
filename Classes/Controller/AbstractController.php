@@ -82,8 +82,6 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
      */
     public function __construct()
     {
-        parent::__construct();
-
         $this->collection = new GalleryCollection();
     }
 
