@@ -71,7 +71,7 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
     /**
      * Object manager.
      *
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      *
      * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
      */
