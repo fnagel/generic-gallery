@@ -11,10 +11,10 @@ namespace FelixNagel\GenericGallery\Service;
 
 use TYPO3\CMS\Core\TypoScript\TemplateService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\RootlineUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Configuration\Exception;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
-use TYPO3\CMS\Frontend\Page\PageRepository;
 
 /**
  * Class SettingsService.
@@ -126,14 +126,13 @@ class SettingsService
     public function getTypoScriptSettingsFromBackend($pid)
     {
         if ($this->typoScriptSettings === null) {
-            /* @var $pageRepository PageRepository */
-            $pageRepository = GeneralUtility::makeInstance(PageRepository::class);
-            $rootLine = $pageRepository->getRootLine($pid);
+            /* @var $rootLineUtility RootlineUtility */
+            $rootLineUtility = GeneralUtility::makeInstance(RootlineUtility::class, $pid);
+            $rootLine = $rootLineUtility->get();
 
             /* @var $templateService TemplateService */
             $templateService = GeneralUtility::makeInstance(TemplateService::class);
             $templateService->tt_track = 0;
-            $templateService->init();
             $templateService->runThroughTemplates($rootLine);
             $templateService->generateConfig();
 
