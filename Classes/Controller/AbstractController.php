@@ -11,11 +11,13 @@ namespace FelixNagel\GenericGallery\Controller;
 
 use FelixNagel\GenericGallery\Domain\Model\GalleryCollection;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
+use TYPO3\CMS\Core\Http\ImmediateResponseException;
 use TYPO3\CMS\Core\Resource\FileRepository;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 use FelixNagel\GenericGallery\Domain\Repository\GalleryItemRepository;
+use TYPO3\CMS\Frontend\Controller\ErrorController;
 
 /**
  * BaseController.
@@ -263,13 +265,16 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
     }
 
     /**
-     * @todo Replace pageNotFoundAndExit method!
-     *
      * @param string $message
      */
     protected function pageNotFoundAndExit($message = 'Image not found!')
     {
-        return $this->getTypoScriptFrontendController()->pageNotFoundAndExit($message);
+        $response = GeneralUtility::makeInstance(ErrorController::class)->pageNotFoundAction(
+            $GLOBALS['TYPO3_REQUEST'],
+            $message
+        );
+
+        throw new ImmediateResponseException($response, 1576748646637);
     }
 
     /**
