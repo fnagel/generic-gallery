@@ -103,7 +103,8 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
     /**
      * Get current plugin CE's data.
      *
-     * @todo getContentObject is deprecated but seems to be available in TYPO3 9.5 (even tough it should not)
+     * @todo getContentObject is deprecated but seems to be available
+     * in TYPO3 9.5 (even tough it should not) and seems to be available in 10.2 too.
      *
      * According to the new extension scanner the method getContentObject is
      * deprecated and removed in TYPO3 9.x but it's still available and the replacement is not.
@@ -123,12 +124,14 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
         $this->view->assign('uid', $this->getContentElementUid());
         $this->view->assign('galleryType', $this->galleryType);
 
-        $template = GeneralUtility::getFileAbsFileName($this->template);
+        if ($this->template !== '') {
+            $template = GeneralUtility::getFileAbsFileName($this->template);
 
-        if ($template !== '') {
-            $view->setTemplatePathAndFilename($template);
-        } else {
-            $this->logError('Template for settings.gallery.'.$this->galleryKey.' not found!');
+            if ($template !== '') {
+                $view->setTemplatePathAndFilename($template);
+            } else {
+                $this->logError('Template for settings.gallery.'.$this->galleryKey.' not found!');
+            }
         }
     }
 
