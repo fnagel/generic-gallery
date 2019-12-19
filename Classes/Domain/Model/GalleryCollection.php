@@ -24,7 +24,7 @@ class GalleryCollection extends ObjectStorage
      *
      * @return GalleryItem
      */
-    public function getByUid($uid)
+    public function getByIdentifier($uid)
     {
         if (empty($uid)) {
             return null;
@@ -35,7 +35,7 @@ class GalleryCollection extends ObjectStorage
             /* @var $galleryItem GalleryItem */
             $galleryItem = $item['obj'];
 
-            if ((string) $uid === (string) $galleryItem->getUid()) {
+            if ((string) $uid === (string) $galleryItem->getIdentifier()) {
                 return $galleryItem;
             }
         }

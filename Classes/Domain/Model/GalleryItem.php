@@ -73,17 +73,17 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * @return string
+     * @return int|string
      */
-    public function getUid()
+    public function getIdentifier()
     {
-        $uid = parent::getUid();
+        $identifier = $this->getUid();
 
-        if ($uid === null) {
-            $uid = self::FILE_REFERENCE_IDENTIFIER_PREFIX.$this->getImage()->getUid();
+        if ($identifier === null) {
+            $identifier = self::FILE_REFERENCE_IDENTIFIER_PREFIX.$this->getImage()->getUid();
         }
 
-        return $uid;
+        return $identifier;
     }
 
     /**

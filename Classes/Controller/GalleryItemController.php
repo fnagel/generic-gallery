@@ -43,6 +43,7 @@ class GalleryItemController extends AbstractController
     protected function initializeView(ViewInterface $view)
     {
         $this->template = $this->currentSettings['itemTemplate'];
+
         parent::initializeView($view);
     }
 
@@ -53,9 +54,10 @@ class GalleryItemController extends AbstractController
      */
     public function showAction($item)
     {
-        $item = $this->collection->getByUid($item);
+        $item = $this->collection->getByIdentifier($item);
 
         if ($item === null) {
+            // @todo Replace pageNotFoundAndExit method!
             $this->getTypoScriptFrontendController()->pageNotFoundAndExit('Image not found!');
         }
 
