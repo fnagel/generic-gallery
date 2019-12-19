@@ -11,6 +11,23 @@ Upgrade Guide
    :depth: 3
 
 
+Update from 3.x.x to 4.0.0
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Overview**
+
+- TYPO3 10.2 support
+
+- Remove TYPO3 8.x support
+
+
+**How to upgrade**
+
+#. Update your templates from `{item.uid}` to  `{item.identifier}`
+
+#. Clear all caches
+
+
 
 Update from 2.2.x to 3.0.0
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -41,7 +58,6 @@ Update from 2.2.x to 3.0.0
 #. Add extension routing configuration to your site configuration (TYPO3 9.x only)
 
 #. Clear all caches
-
 
 
 
