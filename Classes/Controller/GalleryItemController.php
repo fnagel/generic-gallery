@@ -57,8 +57,7 @@ class GalleryItemController extends AbstractController
         $item = $this->collection->getByIdentifier($item);
 
         if ($item === null) {
-            // @todo Replace pageNotFoundAndExit method!
-            $this->getTypoScriptFrontendController()->pageNotFoundAndExit('Image not found!');
+            $this->pageNotFoundAndExit();
         }
 
         $this->getTypoScriptFrontendController()->reqCHash();

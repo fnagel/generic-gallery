@@ -263,6 +263,16 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
     }
 
     /**
+     * @todo Replace pageNotFoundAndExit method!
+     *
+     * @param string $message
+     */
+    protected function pageNotFoundAndExit($message = 'Image not found!')
+    {
+        return $this->getTypoScriptFrontendController()->pageNotFoundAndExit($message);
+    }
+
+    /**
      * @return \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController
      */
     protected function getTypoScriptFrontendController()
