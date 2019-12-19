@@ -9,7 +9,8 @@ namespace FelixNagel\GenericGallery\Utility;
  * LICENSE.txt file that was distributed with this source code.
  */
 
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Utility class to get the settings from Extension Manager.
@@ -25,27 +26,8 @@ class EmConfiguration
      */
     public static function getSettings()
     {
-        $configuration = self::parseSettings();
-
-        // @todo Check if this is still needed
-        require_once(ExtensionManagementUtility::extPath('generic_gallery').'Classes/Domain/Model/Dto/EmConfiguration.php');
+        $configuration = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('generic_gallery');
 
         return new \FelixNagel\GenericGallery\Domain\Model\Dto\EmConfiguration($configuration);
-    }
-
-    /**
-     * Parse settings and return it as array.
-     *
-     * @return array unserialized extconf settings
-     */
-    public static function parseSettings()
-    {
-        $settings = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['generic_gallery']);
-
-        if (!is_array($settings)) {
-            $settings = [];
-        }
-
-        return $settings;
     }
 }
