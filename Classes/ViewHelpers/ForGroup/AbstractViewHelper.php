@@ -12,12 +12,22 @@ namespace FelixNagel\GenericGallery\ViewHelpers\ForGroup;
 /**
  * ForGroupViewHelper.
  */
-class AbstractViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+class AbstractViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractConditionViewHelper
 {
     /**
      * @inheritdoc
      */
     protected $escapeOutput = false;
+
+    /**
+     * @var array
+     */
+    protected $iteration = [];
+
+    /**
+     * @var int
+     */
+    protected $max = 2;
 
     /**
      * Initializes the arguments for the ViewHelper.
