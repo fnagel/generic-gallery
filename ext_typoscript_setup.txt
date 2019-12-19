@@ -1,4 +1,5 @@
-# table & field mapping
+# Table & field mapping
+# @todo Remove this when TYPO3 9.x is no longer supported!
 config.tx_extbase {
 	persistence {
 		classes {
