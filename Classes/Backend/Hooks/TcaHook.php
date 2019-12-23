@@ -10,6 +10,7 @@ namespace FelixNagel\GenericGallery\Backend\Hooks;
  */
 
 use FelixNagel\GenericGallery\Service\SettingsService;
+use TYPO3\CMS\Backend\Form\FormDataProvider\TcaSelectItems;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\Container\Container;
@@ -37,16 +38,19 @@ class TcaHook
     /**
      * Sets the items for the "Predefined" dropdown.
      *
+     *
+     *
      * @param array $config
      *
      * @return array The config including the items for the dropdown
      */
-    public function addPredefinedFields($config)
+    public function addPredefinedFields($config, TcaSelectItems $tcaSelectItems)
     {
         if (is_array($config['items'])) {
-            $pid = $config['row']['pid'];
-            if ($pid < 0) {
-                $pid = $this->getRecordPid((int) str_replace('-', '', $pid));
+            $pid = $this->determinePageId($config['table'], $config['row']);
+
+            if ($pid === false) {
+                throw new \Exception('No record PID determined!', 1577109733537);
             }
 
             $settings = $this->getTypoScriptService()->getTypoScriptSettingsFromBackend($pid);
@@ -79,25 +83,44 @@ class TcaHook
     }
 
     /**
-     * @param int $uid
-     * @return int
+     * Determines the page id for a given record of a database table.
+     *
+     * Taken from \TYPO3\CMS\Backend\View\BackendLayoutView::determinePageId
+     *
+     * @param string $tableName
+     * @param array $data
+     * @return int|bool Returns page id or false on error
      */
-    protected function getRecordPid($uid)
+    protected function determinePageId($tableName, array $data)
     {
-        $table = 'tt_content';
-        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable($table);
-        $queryBuilder
-            ->from($table)
-            ->select('pid')
-            ->where(
-                $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($uid))
-            )
-            ->setMaxResults(1);
+        if (strpos($data['uid'], 'NEW') === 0) {
+            // negative uid_pid values of content elements indicate that the element
+            // has been inserted after an existing element so there is no pid to get
+            // the backendLayout for and we have to get that first
+            if ($data['pid'] < 0) {
+                $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable($tableName);
+                $queryBuilder->getRestrictions()->removeAll();
+                $pageId = $queryBuilder
+                    ->select('pid')
+                    ->from($tableName)
+                    ->where(
+                        $queryBuilder->expr()->eq(
+                            'uid',
+                            $queryBuilder->createNamedParameter(abs($data['pid']), \PDO::PARAM_INT)
+                        )
+                    )
+                    ->execute()
+                    ->fetchColumn();
+            } else {
+                $pageId = $data['pid'];
+            }
+        } elseif ($tableName === 'pages') {
+            $pageId = $data['uid'];
+        } else {
+            $pageId = $data['pid'];
+        }
 
-        $statement = $queryBuilder->execute();
-        $rows = $statement->fetchAll();
-
-        return (int) $rows['pid'];
+        return $pageId;
     }
 
     /**
