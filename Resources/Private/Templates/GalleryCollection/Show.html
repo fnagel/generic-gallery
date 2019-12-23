@@ -5,30 +5,28 @@
 <f:section name="main">
 
 		<f:widget.paginate objects="{collection}" as="items" configuration="{settings.gallery.default.paginate}">
-			<div class="row">
 				<f:for each="{items}" as="item" iteration="iterator">
 
-						<f:if condition="{item}">
-							<gg:forGroup.begin iteration="{iterator}" max="4">
-								<ul class="thumbnails list-unstyled">
-							</gg:forGroup.begin>
+					<f:if condition="{item}">
+						<gg:forGroup.begin iteration="{iterator}" max="4">
+							<ul class="row thumbnails list-unstyled">
+						</gg:forGroup.begin>
 
-							<li class="col-md-3">
-								<figure class="thumbnail">
-									<f:render partial="GalleryItem/Image" arguments="{_all}" />
-									<f:if condition="{galleryType} == 'single'">
-										<f:render partial="GalleryItem/Caption" arguments="{_all}" />
-									</f:if>
-								</figure>
-							</li>
+						<li class="col-md-3">
+							<figure class="thumbnail">
+								<f:render partial="GalleryItem/Image" arguments="{_all}" />
+								<f:if condition="{galleryType} == 'single'">
+									<f:render partial="GalleryItem/Caption" arguments="{_all}" />
+								</f:if>
+							</figure>
+						</li>
 
-							<gg:forGroup.end iteration="{iterator}" max="4">
-								</ul>
-							</gg:forGroup.end>
-						</f:if>
+						<gg:forGroup.end iteration="{iterator}" max="4">
+							</ul>
+						</gg:forGroup.end>
+					</f:if>
 
 				</f:for>
-			</div>
 		</f:widget.paginate>
 
 </f:section>
