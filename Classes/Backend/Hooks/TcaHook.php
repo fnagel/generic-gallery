@@ -70,8 +70,9 @@ class TcaHook
             foreach ($settings['gallery'] as $key => $view) {
                 if (is_array($view)) {
                     $optionList[] = [
-                        0 => ($view['name']) ? $view['name'] : $key,
+                        0 => ($view['name']) ?: $key,
                         1 => $key.'.',
+                        2 => ($view['icon']) ?: 'extensions-generic-gallery',
                     ];
                 }
             }

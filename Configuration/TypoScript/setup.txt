@@ -18,13 +18,16 @@ plugin.tx_genericgallery {
 			default {
 				name = Default Gallery
 
-				# template for gallery
+				# Icon
+				icon = extensions-generic-gallery
+
+				# Template for gallery
 				template = EXT:generic_gallery/Resources/Private/Templates/GalleryCollection/Show.html
 
-				# template for item detail view
+				# Template for item detail view
 				itemTemplate = EXT:generic_gallery/Resources/Private/Templates/GalleryItem/Show.html
 
-				# pagination configuration for gallery
+				# Pagination configuration for gallery
 				paginate {
 					itemsPerPage = 8
 					insertAbove = 0
