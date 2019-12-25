@@ -1,0 +1,24 @@
+plugin.tx_genericgallery.settings.gallery {
+	default {
+		name = Default Gallery
+
+		# Icon
+		icon = extensions-generic-gallery
+
+		# Template for gallery
+		template = EXT:generic_gallery/Resources/Private/Templates/GalleryCollection/Show.html
+
+		# Template for item detail view
+		itemTemplate = EXT:generic_gallery/Resources/Private/Templates/GalleryItem/Show.html
+
+		# Pagination configuration for gallery
+		paginate {
+			itemsPerPage = 8
+			insertAbove = 0
+			insertBelow = 1
+			maximumNumberOfLinks = 99
+			addQueryStringMethod = GET
+		}
+	}
+}
+

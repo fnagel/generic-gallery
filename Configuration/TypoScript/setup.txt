@@ -15,28 +15,9 @@ plugin.tx_genericgallery {
 
 		# Config available gallery types
 		gallery {
-			default {
-				name = Default Gallery
 
-				# Icon
-				icon = extensions-generic-gallery
-
-				# Template for gallery
-				template = EXT:generic_gallery/Resources/Private/Templates/GalleryCollection/Show.html
-
-				# Template for item detail view
-				itemTemplate = EXT:generic_gallery/Resources/Private/Templates/GalleryItem/Show.html
-
-				# Pagination configuration for gallery
-				paginate {
-					itemsPerPage = 8
-					insertAbove = 0
-					insertBelow = 1
-					maximumNumberOfLinks = 99
-					addQueryStringMethod = GET
-				}
-			}
 		}
 	}
 }
 
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:generic_gallery/Configuration/TypoScript/Examples/setup.txt">
