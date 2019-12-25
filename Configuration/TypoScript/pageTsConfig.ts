@@ -6,7 +6,7 @@ mod.linkvalidator.searchFields {
 
 mod.wizards.newContentElement.wizardItems.plugins {
 	elements.genericGallery {
-		iconIdentifier = content-image
+		iconIdentifier = extensions-generic-gallery
 		title = LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:generic_gallery.plugin.title
 		description = LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:generic_gallery.plugin.description
 		tt_content_defValues.CType = list

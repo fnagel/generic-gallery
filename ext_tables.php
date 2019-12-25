@@ -20,6 +20,11 @@ call_user_func(function () {
     /* @var $iconRegistry \TYPO3\CMS\Core\Imaging\IconRegistry */
     $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconRegistry::class);
     $iconRegistry->registerIcon(
+        'extensions-generic-gallery',
+        \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+        ['source' => 'EXT:generic_gallery/Resources/Public/Icons/Extension.svg']
+    );
+    $iconRegistry->registerIcon(
         'extensions-generic-gallery-pictures',
         \TYPO3\CMS\Core\Imaging\IconProvider\BitmapIconProvider::class,
         ['source' => 'EXT:generic_gallery/Resources/Public/Icons/tx_genericgallery_domain_model_galleryitem.gif']

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="64px" height="64px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve">
+<g>
+	<path fill="#999999" d="M5.037,4.002h40v32h-40V4.002z"/>
+	<path fill="#EFEFEF" d="M9.037,8.002h32v24h-32V8.002z"/>
+	<path fill="#5599FF" d="M22.037,17.006l-4.5,6l-4.5,6h24.004l-4-4l-3.996-4l-2.287,2.288l-0.213-0.284l-4.5-6L22.037,17.006z"/>
+	<circle fill="#E8A33D" cx="30.237" cy="14.006" r="3"/>
+</g>
+<g>
+	<path fill="#999999" d="M19.862,14.006h40v32h-40V14.006z"/>
+	<path fill="#EFEFEF" d="M23.862,18.006h32v24h-32V18.006z"/>
+	<path fill="#5599FF" d="M36.862,27.01l-4.5,6l-4.5,6h24.004l-4-4l-3.996-4l-2.287,2.288l-0.213-0.284l-4.5-6L36.862,27.01z"/>
+	<circle fill="#E8A33D" cx="45.063" cy="24.01" r="3"/>
+</g>
+<g>
+	<path fill="#999999" d="M9.575,28h40v32h-40V28z"/>
+	<path fill="#EFEFEF" d="M13.575,32h32v24h-32V32z"/>
+	<path fill="#5599FF" d="M26.575,41.004l-4.5,6l-4.5,6h24.004l-4-4l-3.996-4l-2.287,2.288l-0.213-0.284l-4.5-6L26.575,41.004z"/>
+	<circle fill="#E8A33D" cx="34.775" cy="38.004" r="3"/>
+</g>
+</svg>
