@@ -20,6 +20,12 @@ Update from 3.x.x to 4.0.0
 
 - Remove TYPO3 8.x support
 
+- Update default template to match Bootstrap 4 markup
+
+- Add option to add icon for each gallery type
+
+- Lots of improvements, minor fixes and code clean up
+
 
 **How to upgrade**
 
