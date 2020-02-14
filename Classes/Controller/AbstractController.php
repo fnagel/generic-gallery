@@ -123,8 +123,14 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
      */
     protected function initializeView(ViewInterface $view)
     {
-        $this->view->assign('uid', $this->getContentElementUid());
-        $this->view->assign('galleryType', $this->galleryType);
+        $this->view->assignMultiple([
+            'uid' => $this->getContentElementUid(),
+            'data' => [
+                'content' => $this->getContentElementData(),
+                'page' => $this->getTypoScriptFrontendController()->page,
+            ],
+            'galleryType' => $this->galleryType,
+        ]);
 
         if ($this->template !== '') {
             $template = GeneralUtility::getFileAbsFileName($this->template);
@@ -142,7 +148,7 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
      */
     protected function initializeAction()
     {
-        $this->cObjData = $this->getContentElementData();;
+        $this->cObjData = $this->getContentElementData();
         $this->gallerySettings = $this->settings['gallery'];
         $this->galleryKey = rtrim($this->cObjData['tx_generic_gallery_predefined'], '.');
         $this->currentSettings = $this->gallerySettings[$this->galleryKey];
