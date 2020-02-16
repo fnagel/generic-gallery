@@ -128,6 +128,10 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
             'data' => [
                 'content' => $this->getContentElementData(),
                 'page' => $this->getTypoScriptFrontendController()->page,
+                'pageLayout' => $this->getTypoScriptFrontendController()->cObj->getData(
+                    'levelfield : -1 , layout, slide'
+                ),
+                'pageBackendLayout' => $this->getTypoScriptFrontendController()->cObj->getData('pagelayout'),
             ],
             'galleryType' => $this->galleryType,
         ]);
