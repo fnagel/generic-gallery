@@ -12,7 +12,7 @@ TypoScript Reference
 =======================
 
 Feel free to use the constant editor (go to: module template, root page,
-constant editor, beautyofcode) to edit this settings. Add a TypoScript
+constant editor, generic_gallery) to edit this settings. Add a TypoScript
 template to overwrite these settings at any point in your site tree(s).
 
 
