@@ -11,6 +11,21 @@ Upgrade Guide
    :depth: 3
 
 
+Update from 4.0.x to 4.1.0
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Overview**
+
+- TYPO3 10.3 support
+
+- Add new template variables:
+    - `data.content`: current plugin content element data
+    - `data.page`: current page data
+    - `data.pageLayout`: current page layout
+    - `data.pageBackendLayout`: current page backend layout
+
+
+
 Update from 3.x.x to 4.0.0
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
