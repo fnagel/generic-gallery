@@ -17,10 +17,17 @@ Templating
 
 .. _configuration-template:
 
+**Available variables**
 
-Nothing special here, just default Fluid templating.
-Take a look at the default templates and examples!
+- `uid`: current plugin content element UID (localized)
+- `galleryType`: current plugin gallery type (single, images, collection)
+- `data.content`: current plugin content element data
+- `data.page`: current page data
+- `data.pageLayout`: current page layout
+- `data.pageBackendLayout`: current page backend layout
 
+- `item`: Single image item in detail view
+- `collection`: Image collection array in list view
 
 
 ViewHelpers
