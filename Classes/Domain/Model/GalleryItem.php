@@ -31,7 +31,7 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * title.
-     *
+        *
      * @var string
      */
     protected $title;
@@ -44,7 +44,7 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $link;
 
     /**
-     * image.
+     * imageReference.
      *
      * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
      */
@@ -149,8 +149,8 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         if ($this->isVirtual() || $this->link === '') {
             if (
-                $this->imageReference !== null &&
-                $this->imageReference->getOriginalResource()->getProperty('crop') !== null
+                $this->getImageReference() !== null &&
+                $this->getImageReference()->getOriginalResource()->getProperty('crop') !== null
             ) {
                 // Render cropped image if reference with crop available
                 return $this->getCroppedImageLinkFromReference();
@@ -175,8 +175,8 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $imageService = $objectManager->get(ImageService::class);
 
         $processedImage = $imageService->applyProcessingInstructions(
-            $this->imageReference->getOriginalResource(),
-            ['crop' => $this->imageReference->getOriginalResource()->getProperty('crop')]
+            $this->getImageReference()->getOriginalResource(),
+            ['crop' => $this->getImageReference()->getOriginalResource()->getProperty('crop')]
         );
 
         return $imageService->getImageUri($processedImage);
@@ -200,7 +200,7 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function getImage()
     {
         if ($this->image === null) {
-            return $this->imageReference->getOriginalResource()->getOriginalFile();
+            return $this->getImageReference()->getOriginalResource()->getOriginalFile();
         }
 
         return $this->image;
@@ -215,9 +215,9 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $imageData = $this->getImage()->getProperties();
 
-        if ($this->imageReference !== null) {
+        if ($this->getImageReference() !== null) {
             // Overwrite with merged reference inline data
-            $imageData = $this->imageReference->getOriginalResource()->getProperties();
+            $imageData = $this->getImageReference()->getOriginalResource()->getProperties();
         }
 
         // Merge with modified meta data
