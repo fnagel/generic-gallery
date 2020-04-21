@@ -38,8 +38,6 @@ class TcaHook
     /**
      * Sets the items for the "Predefined" dropdown.
      *
-     *
-     *
      * @param array $config
      *
      * @return array The config including the items for the dropdown
