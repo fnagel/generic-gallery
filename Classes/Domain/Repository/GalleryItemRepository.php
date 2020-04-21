@@ -31,9 +31,25 @@ class GalleryItemRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     {
         /** @var $querySettings Typo3QuerySettings */
         $querySettings = $this->objectManager->get(Typo3QuerySettings::class);
-
         $querySettings->setRespectStoragePage(false);
 
         $this->setDefaultQuerySettings($querySettings);
+    }
+
+    /**
+     * @param int $uid Uid of the content element (tt_content)
+     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     */
+    public function findForContentElement($uid)
+    {
+        $query = $this->createQuery();
+        $constraints = [
+            $query->equals('ttContentUid', (int) $uid),
+            $query->equals('imageReference.hidden', 0),
+        ];
+
+        $query->matching($query->logicalAnd($constraints));
+
+        return $query->execute();
     }
 }

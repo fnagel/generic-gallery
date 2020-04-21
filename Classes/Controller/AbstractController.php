@@ -226,7 +226,7 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
         /* @var $itemRepository GalleryItemRepository */
         $itemRepository = $this->objectManager->get(GalleryItemRepository::class);
         /* @var $items \TYPO3\CMS\Extbase\Persistence\Generic\QueryResult */
-        $items = $itemRepository->findByTtContentUid($this->getContentElementUid());
+        $items = $itemRepository->findForContentElement($this->getContentElementUid());
 
         return $items->toArray();
     }
