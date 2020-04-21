@@ -142,7 +142,10 @@ class PageLayoutViewHook
         $collection = BackendUtility::getRecord('sys_file_collection', $this->data['tx_generic_gallery_collection']);
 
         $this->tableData[] = ['Source', 'collection (' . $collection['type'] . ')'];
-        $this->tableData[] = ['Name', $this->getRecordLink($collection, 'sys_file_collection', $collection['title'])];
+        $this->tableData[] = [
+            'Name',
+            $this->getRecordLink($collection, 'sys_file_collection', ' ' . $collection['title']),
+        ];
 
         switch ($collection['type']) {
             case 'folder':
