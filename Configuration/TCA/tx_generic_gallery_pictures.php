@@ -35,6 +35,21 @@ return [
         'visibility' => ['showitem' => 'starttime, endtime'],
     ],
     'columns' => [
+        'crdate' => [
+            'config' => [
+                'type' => 'passthrough',
+            ],
+        ],
+        'tstamp' => [
+            'config' => [
+                'type' => 'passthrough',
+            ],
+        ],
+        'deleted' => [
+            'config' => [
+                'type' => 'passthrough',
+            ],
+        ],
         'hidden' => [
             'exclude' => true,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.visible',

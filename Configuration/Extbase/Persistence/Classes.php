@@ -4,19 +4,6 @@ return [
     \FelixNagel\GenericGallery\Domain\Model\GalleryItem::class => [
         'tableName' => 'tx_generic_gallery_pictures',
         'properties' => [
-            'sorting' => [
-                'fieldName' => 'sorting'
-            ],
-            'tstamp' => [
-                'fieldName' => 'tstamp'
-            ],
-            'deleted' => [
-                'fieldName' => 'deleted'
-            ],
-            'hidden' => [
-                'fieldName' => 'hidden'
-            ],
-
             'title' => [
                 'fieldName' => 'title'
             ],
@@ -37,19 +24,6 @@ return [
     \FelixNagel\GenericGallery\Domain\Model\TextItem::class => [
         'tableName' => 'tx_generic_gallery_content',
         'properties' => [
-            'sorting' => [
-                'fieldName' => 'sorting'
-            ],
-            'tstamp' => [
-                'fieldName' => 'tstamp'
-            ],
-            'deleted' => [
-                'fieldName' => 'deleted'
-            ],
-            'hidden' => [
-                'fieldName' => 'hidden'
-            ],
-
             'bodytext' => [
                 'fieldName' => 'bodytext'
             ],
