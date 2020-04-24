@@ -11,6 +11,34 @@ Upgrade Guide
    :depth: 3
 
 
+Update from 4.1.0 to 4.2.0
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Overview**
+
+- TYPO3 10.4 LTS support
+
+- Support for PHP 7.3
+
+- Bugfix for single type gallery items with disabled image
+
+- Rename TS and TSconfig files to newer file extensions
+
+- Move TSconfig file to correct folder
+
+- Some minor improvements and fixes
+
+
+**How to upgrade**
+
+#. "Change fields" in DB using "Analyze Database" in Install tool / Maintenance module
+
+#. Adjust your TS / TSconfig file includes if needed
+
+#. Clear all caches
+
+
+
 Update from 4.0.x to 4.1.0
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
