@@ -10,6 +10,7 @@ namespace FelixNagel\GenericGallery\Domain\Model;
  */
 
 use TYPO3\CMS\Core\Resource\FileReference as CoreFileReference;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference as ExtbaseFileReference;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
@@ -148,8 +149,7 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function getLink()
     {
         if ($this->isVirtual() || $this->link === '') {
-            if (
-                $this->getImageReference() !== null &&
+            if ($this->getImageReference() !== null &&
                 $this->getImageReference()->getOriginalResource()->getProperty('crop') !== null
             ) {
                 // Render cropped image if reference with crop available
@@ -231,18 +231,53 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return array
      */
-    private function getAdditionalImageProperties()
+    protected function getAdditionalImageProperties()
     {
         $properties = $this->getImage()->getProperties();
+
+        if (ExtensionManagementUtility::isLoaded('metadata')) {
+            return $this->processPropertiesForMetadaExtension($properties);
+        }
+
+        if (ExtensionManagementUtility::isLoaded('extractor')) {
+            return $this->processPropertiesForExtractorExtension($properties);
+        }
+
+        return [];
+    }
+
+    /**
+     * @param array $properties
+     * @return array
+     */
+    protected function processPropertiesForExtractorExtension(array $properties)
+    {
         $data = [];
 
-        // process exif data
+        // Process exif data
+        $data['shutter_speed'] = $properties['shutter_speed'].'s';
+        $data['aperture'] = 'f/'.$properties['aperture'];
+        $data['focal_length'] = $properties['focal_length'].'mm';
+        $data['iso_speed'] = 'ISO'.$properties['iso_speed'];
+
+        return $data;
+    }
+
+    /**
+     * @param array $properties
+     * @return array
+     */
+    protected function processPropertiesForMetadaExtension(array $properties)
+    {
+        $data = [];
+
+        // Process exif data
         $data['shutter_speed_value'] = $properties['shutter_speed_value'].'s';
         $data['aperture_value'] = 'f/'.$properties['aperture_value'];
         $data['focal_length'] = $properties['focal_length'].'mm';
         $data['iso_speed_ratings'] = 'ISO'.$properties['iso_speed_ratings'];
 
-        // process flash data
+        // Process flash data
         if (isset($GLOBALS['TCA']['sys_file_metadata']['columns']['flash']['config']['items'])) {
             $items = (array) $GLOBALS['TCA']['sys_file_metadata']['columns']['flash']['config']['items'];
             foreach ($items as $item) {
