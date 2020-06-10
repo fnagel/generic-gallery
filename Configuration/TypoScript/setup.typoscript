@@ -20,4 +20,4 @@ plugin.tx_genericgallery {
 	}
 }
 
-<INCLUDE_TYPOSCRIPT: source="FILE:EXT:generic_gallery/Configuration/TypoScript/Examples/setup.txt">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:generic_gallery/Configuration/TypoScript/Examples/setup.typoscript">
