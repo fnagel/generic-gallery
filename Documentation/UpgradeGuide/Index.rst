@@ -11,6 +11,14 @@ Upgrade Guide
    :depth: 3
 
 
+Update from 3.0.0 to 3.0.1
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Overview**
+
+- Added PHP 7.3 and 7.4 support (thanks to @osw-mw)
+
+
 
 Update from 2.2.x to 3.0.0
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
