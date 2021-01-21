@@ -67,6 +67,11 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $textItems;
 
     /**
+     * @var array
+     */
+    protected $imageProperties = null;
+
+    /**
      * Construct class.
      */
     public function __construct()
@@ -214,17 +219,19 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function getImageData()
     {
-        $imageData = $this->getImage()->getProperties();
+        if ($this->imageProperties === null) {
+            if ($this->getImageReference() !== null) {
+                // Use reference inline data overridden properties
+                $imageData = $this->getImageReference()->getOriginalResource()->getProperties();
+            } else {
+                $imageData = $this->getImage()->getProperties();
+            }
 
-        if ($this->getImageReference() !== null) {
-            // Overwrite with merged reference inline data
-            $imageData = $this->getImageReference()->getOriginalResource()->getProperties();
+            // Merge with additional meta data
+            $this->imageProperties = array_merge($imageData, $this->getAdditionalImageProperties());
         }
 
-        // Merge with modified meta data
-        $imageData = array_merge($imageData, $this->getAdditionalImageProperties());
-
-        return $imageData;
+        return $this->imageProperties;
     }
 
     /**
