@@ -15,6 +15,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference as ExtbaseFileReference;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Service\ImageService;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * Class GalleryItem.
@@ -260,6 +261,10 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $data['focal_length'] = $properties['focal_length'].'mm';
         $data['iso_speed'] = 'ISO'.$properties['iso_speed'];
 
+        if (version_compare(ExtensionManagementUtility::getExtensionVersion('extractor'), '2.0.0', '>=')) {
+            $data['flash'] = LocalizationUtility::translate($this->getFlashLabelFromTca($properties));
+        }
+
         return $data;
     }
 
@@ -276,18 +281,27 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $data['aperture_value'] = 'f/'.$properties['aperture_value'];
         $data['focal_length'] = $properties['focal_length'].'mm';
         $data['iso_speed_ratings'] = 'ISO'.$properties['iso_speed_ratings'];
+        $data['flash'] = $this->getFlashLabelFromTca($properties);
 
-        // Process flash data
+        return $data;
+    }
+
+    /**
+     * Process flash data
+     *
+     * @param array $flash
+     * @return string
+     */
+    protected function getFlashLabelFromTca(array $properties)
+    {
         if (isset($GLOBALS['TCA']['sys_file_metadata']['columns']['flash']['config']['items'])) {
-            $items = (array) $GLOBALS['TCA']['sys_file_metadata']['columns']['flash']['config']['items'];
+            $items = (array)$GLOBALS['TCA']['sys_file_metadata']['columns']['flash']['config']['items'];
             foreach ($items as $item) {
-                if ((int) $item[1] === (int) $properties['flash']) {
-                    $data['flash'] = $item[0];
+                if ((int)$item[1] === (int)$properties['flash']) {
+                    return $item[0];
                 }
             }
         }
-
-        return $data;
     }
 
     /**
