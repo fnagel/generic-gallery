@@ -5,6 +5,8 @@ if (!defined('TYPO3_MODE')) {
 }
 
 call_user_func(function () {
+    $configuration = \FelixNagel\GenericGallery\Utility\EmConfiguration::getSettings();
+
     // BE preview
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['cms/layout/class.tx_cms_layout.php']['list_type_Info']['genericgallery_pi1'][] =
         'FelixNagel\GenericGallery\Backend\Hooks\PageLayoutViewHook->getExtensionSummary';
@@ -42,4 +44,10 @@ call_user_func(function () {
     // Routing
     $GLOBALS['TYPO3_CONF_VARS']['SYS']['routing']['aspects']['GenericGalleryImageItemMapper'] =
         \FelixNagel\GenericGallery\Routing\Aspect\ImageItemMapper::class;
+
+    // File collection
+    if ($configuration->getAddImageCollection()) {
+        $GLOBALS['TYPO3_CONF_VARS']['SYS']['fal']['registeredCollections']['images'] =
+            \TYPO3\CMS\Core\Resource\Collection\StaticFileCollection::class;
+    }
 });

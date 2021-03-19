@@ -8,9 +8,6 @@ call_user_func(function () {
     $configuration = \FelixNagel\GenericGallery\Utility\EmConfiguration::getSettings();
 
     if ($configuration->getAddImageCollection()) {
-        $GLOBALS['TYPO3_CONF_VARS']['SYS']['fal']['registeredCollections']['images'] =
-            \TYPO3\CMS\Core\Resource\Collection\StaticFileCollection::class;
-
         $GLOBALS['TCA']['sys_file_collection']['columns']['type']['config']['items'][] = [
             'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:sys_file_collection.type.images',
             'images'
