@@ -13,10 +13,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters = $containerConfigurator->parameters();
 
     // Paths to refactor; solid alternative to CLI arguments
-    $parameters->set(Option::PATHS, [
-        __DIR__ . '/Classes',
-        __DIR__ . '/Tests',
-    ]);
+    $parameters->set(Option::PATHS, [__DIR__]);
 
     $parameters->set(Option::SETS, [
         SetList::CODING_STYLE,

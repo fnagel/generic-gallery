@@ -7,6 +7,9 @@
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Database\ConnectionPool;
+
 /**
  * Class ext_update.
  *
@@ -22,7 +25,7 @@ class ext_update
     public function main()
     {
         $table = 'tt_content';
-        $connectionPool = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Database\ConnectionPool::class)
+        $connectionPool = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getConnectionForTable($table);
 
         $count = $connectionPool->update(
