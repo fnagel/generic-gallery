@@ -26,7 +26,7 @@ class EmConfiguration
         foreach ($configuration as $key => $value) {
             $key = GeneralUtility::underscoredToLowerCamelCase($key);
 
-            if (property_exists(__CLASS__, $key)) {
+            if (property_exists(self::class, $key)) {
                 $this->$key = $value;
             }
         }

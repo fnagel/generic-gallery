@@ -10,11 +10,12 @@ namespace FelixNagel\GenericGallery\Domain\Model;
  */
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
  * TextItem.
  */
-class TextItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class TextItem extends AbstractEntity
 {
     /**
      * bodytext.

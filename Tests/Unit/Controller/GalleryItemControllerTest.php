@@ -9,10 +9,15 @@ namespace FelixNagel\GenericGallery\Tests\Unit\Controller;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use TYPO3\CMS\Core\Tests\UnitTestCase;
+use FelixNagel\GenericGallery\Controller\GalleryItemController;
+use FelixNagel\GenericGallery\Domain\Model\GalleryCollection;
+use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
+
 /**
  * Test case for class FelixNagel\GenericGallery\Controller\GalleryItemController.
  */
-class GalleryItemControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
+class GalleryItemControllerTest extends UnitTestCase
 {
     /**
      * @var \FelixNagel\GenericGallery\Controller\GalleryItemController
@@ -24,7 +29,7 @@ class GalleryItemControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     protected function setUp()
     {
         $this->fixture = $this->getMock(
-            'FelixNagel\\GenericGallery\\Controller\\GalleryItemController',
+            GalleryItemController::class,
             ['redirect', 'forward', 'addFlashMessage'],
             [],
             '',
@@ -46,8 +51,8 @@ class GalleryItemControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     {
         $this->markTestSkipped('to be rewritten');
 
-        $item = new \FelixNagel\GenericGallery\Domain\Model\GalleryCollection();
-        $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
+        $item = new GalleryCollection();
+        $view = $this->getMock(ViewInterface::class);
 
         $this->inject($this->fixture, 'view', $view);
         $view->expects($this->once())->method('assign')->with('item', $item);

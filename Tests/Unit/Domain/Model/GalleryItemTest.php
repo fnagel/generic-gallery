@@ -9,10 +9,18 @@ namespace FelixNagel\GenericGallery\Tests\Unit\Domain\Model;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use TYPO3\CMS\Core\Tests\UnitTestCase;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use FelixNagel\GenericGallery\Domain\Model\GalleryItem;
+use TYPO3\CMS\Extbase\Domain\Model\FileReference;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use FelixNagel\GenericGallery\Domain\Model\TextItem;
+
 /**
  * Test case for class \FelixNagel\GenericGallery\Domain\Model\GalleryItem.
  */
-class GalleryItemTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
+class GalleryItemTest extends UnitTestCase
 {
     /**
      * @var \TYPO3\CMS\Extbase\Object\ObjectManager
@@ -28,8 +36,8 @@ class GalleryItemTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     protected function setUp()
     {
-        $this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
-        $this->fixture = $this->objectManager->get('FelixNagel\\GenericGallery\\Domain\\Model\\GalleryItem');
+        $this->objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+        $this->fixture = $this->objectManager->get(GalleryItem::class);
     }
 
     /**
@@ -110,7 +118,7 @@ class GalleryItemTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     public function setImageForFileReferenceSetsImage()
     {
         // @todo FAL relations needs fixing
-        $fileReferenceFixture = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Domain\\Model\\FileReference');
+        $fileReferenceFixture = $this->objectManager->get(FileReference::class);
         $this->fixture->setImage($fileReferenceFixture);
 
         $this->assertAttributeEquals(
@@ -126,7 +134,7 @@ class GalleryItemTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     public function getTextItemsReturnsInitialValueForTextItem()
     {
         $this->assertEquals(
-            new \TYPO3\CMS\Extbase\Persistence\ObjectStorage(),
+            new ObjectStorage(),
             $this->fixture->getTextItems()
         );
     }
@@ -136,7 +144,7 @@ class GalleryItemTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function setTextItemsForTextItemSetsTextItems()
     {
-        $textItemsFixture = $this->objectManager->get('FelixNagel\\GenericGallery\\Domain\\Model\\TextItem');
+        $textItemsFixture = $this->objectManager->get(TextItem::class);
         $this->fixture->addTextItem($textItemsFixture);
 
         $this->assertAttributeEquals(

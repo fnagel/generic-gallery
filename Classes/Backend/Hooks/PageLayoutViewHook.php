@@ -16,6 +16,8 @@ use TYPO3\CMS\Core\Imaging\IconFactory;
 use FelixNagel\GenericGallery\Utility\EmConfiguration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Backend\Routing\UriBuilder;
+use TYPO3\CMS\Extbase\Object\Container\Container;
 
 /**
  * Hook class for PageLayoutView hook `list_type_Info`.
@@ -103,7 +105,7 @@ class PageLayoutViewHook
      */
     protected function renderHeader()
     {
-        $editLink = BackendUtility::editOnClick('&edit[tt_content]['.$this->data['uid'].']=edit', $GLOBALS['BACK_PATH']);
+        $editLink = GeneralUtility::makeInstance(UriBuilder::class)->buildUriFromRoute('record_edit') . ('&edit[tt_content]['.$this->data['uid'].']=edit') . '&returnUrl=' . rawurlencode(GeneralUtility::getIndpEnv('REQUEST_URI'));
 
         return '<strong><a href="#" onclick="'.$editLink.'">Generic Gallery</strong><br>';
     }
@@ -217,7 +219,7 @@ class PageLayoutViewHook
 
         $statement = $queryBuilder->execute();
         $rows = $statement->fetchAll();
-        $this->tableData[] = ['Images', count($rows)];
+        $this->tableData[] = ['Images', is_countable($rows) ? count($rows) : 0];
         if ($rows === null) {
             return $result;
         }
@@ -251,9 +253,7 @@ class PageLayoutViewHook
             $content = $icon.$content;
         }
 
-        $output = BackendUtility::wrapClickMenuOnIcon($content, $table, $record['uid'], 1, '', '+info,edit');
-
-        return $output;
+        return BackendUtility::wrapClickMenuOnIcon($content, $table, $record['uid'], 1, '', '+info,edit');
     }
 
     /**
@@ -309,7 +309,7 @@ class PageLayoutViewHook
     protected function getObjectContainer()
     {
         if ($this->objectContainer == null) {
-            $this->objectContainer = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\Container\\Container');
+            $this->objectContainer = GeneralUtility::makeInstance(Container::class);
         }
 
         return $this->objectContainer;

@@ -9,10 +9,12 @@ namespace FelixNagel\GenericGallery\ViewHelpers\ForGroup;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractConditionViewHelper;
+
 /**
  * ForGroupViewHelper.
  */
-class AbstractViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractConditionViewHelper
+class AbstractViewHelper extends AbstractConditionViewHelper
 {
     /**
      * @inheritdoc

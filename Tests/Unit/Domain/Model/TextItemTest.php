@@ -9,10 +9,15 @@ namespace FelixNagel\GenericGallery\Tests\Unit\Domain\Model;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use TYPO3\CMS\Core\Tests\UnitTestCase;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use FelixNagel\GenericGallery\Domain\Model\TextItem;
+
 /**
  * Test case for class \FelixNagel\GenericGallery\Domain\Model\TextItem.
  */
-class TextItemTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
+class TextItemTest extends UnitTestCase
 {
     /**
      * @var \TYPO3\CMS\Extbase\Object\ObjectManager
@@ -28,8 +33,8 @@ class TextItemTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     protected function setUp()
     {
-        $this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
-        $this->fixture = $this->objectManager->get('FelixNagel\\GenericGallery\\Domain\\Model\\TextItem');
+        $this->objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+        $this->fixture = $this->objectManager->get(TextItem::class);
     }
 
     /**

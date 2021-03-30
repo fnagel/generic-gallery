@@ -11,6 +11,8 @@ namespace FelixNagel\GenericGallery\Domain\Model;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\CMS\Core\Resource\FileReference;
+use TYPO3\CMS\Core\Resource\File;
 
 /**
  * GalleryCollection.
@@ -66,13 +68,13 @@ class GalleryCollection extends ObjectStorage
         foreach ($data as $object) {
             $item = new GalleryItem();
 
-            if ($object instanceof \TYPO3\CMS\Core\Resource\FileReference) {
+            if ($object instanceof FileReference) {
                 /* @var $object \TYPO3\CMS\Core\Resource\FileReference */
                 $item->setImage($object->getOriginalFile());
                 $item->setImageReference($object);
             }
 
-            if ($object instanceof \TYPO3\CMS\Core\Resource\File) {
+            if ($object instanceof File) {
                 /* @var $object \TYPO3\CMS\Core\Resource\File */
                 $item->setImage($object);
             }

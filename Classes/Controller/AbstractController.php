@@ -9,6 +9,7 @@ namespace FelixNagel\GenericGallery\Controller;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use FelixNagel\GenericGallery\Domain\Model\GalleryCollection;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Http\ImmediateResponseException;
@@ -22,10 +23,19 @@ use TYPO3\CMS\Frontend\Controller\ErrorController;
 /**
  * BaseController.
  */
-abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+abstract class AbstractController extends ActionController
 {
+    /**
+     * @var string
+     */
     const GALLERY_TYPE_SINGLE = 'single';
+    /**
+     * @var string
+     */
     const GALLERY_TYPE_IMAGES = 'images';
+    /**
+     * @var string
+     */
     const GALLERY_TYPE_COLLECTION = 'collection';
 
     /**
@@ -96,7 +106,7 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
     {
         if ($this->uid === null) {
             $data = $this->getContentElementData();
-            $this->uid = ($data['_LOCALIZED_UID']) ? $data['_LOCALIZED_UID'] : $data['uid'];
+            $this->uid = $data['_LOCALIZED_UID'] ?: $data['uid'];
         }
 
         return (int) $this->uid;

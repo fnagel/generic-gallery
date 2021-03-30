@@ -1,41 +1,49 @@
 {
-  "name": "felixnagel/generic-gallery",
-  "type": "typo3-cms-extension",
-  "description": "TYPO3 CMS image gallery extension. One gallery to rule them all. Extbase & Fluid driven for use with any gallery / slide / rotate plugin.",
-  "homepage": "https://extensions.typo3.org/extension/generic_gallery/",
-  "license": "GPL-2.0-or-later",
-  "support": {
-    "issues": "https://github.com/fnagel/generic-gallery/issues",
-    "docs": "https://docs.typo3.org/typo3cms/extensions/generic_gallery/",
-    "source": "https://github.com/fnagel/generic-gallery"
-  },
-  "keywords": [
-    "TYPO3 CMS",
-    "gallery",
-    "image",
-    "slider",
-    "lightbox",
-    "extbase",
-    "fluid"
-  ],
-  "require": {
-    "php": ">=7.2,<7.5",
-    "typo3/cms-core": ">=9.4.0,<=10.4.99"
-  },
-  "suggest": {
-    "typo3/cms-filemetadata": "*",
-    "fab/metadata": "^2.3",
-    "causal/extractor": "^1.5 || ^2.0"
-  },
-  "autoload": {
-    "psr-4": {
-      "FelixNagel\\GenericGallery\\": "Classes/"
-    }
-  },
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/TYPO3/TYPO3.CMS"
-    }
-  ]
+	"name": "felixnagel/generic-gallery",
+	"type": "typo3-cms-extension",
+	"description": "TYPO3 CMS image gallery extension. One gallery to rule them all. Extbase & Fluid driven for use with any gallery / slide / rotate plugin.",
+	"homepage": "https://extensions.typo3.org/extension/generic_gallery/",
+	"license": "GPL-2.0-or-later",
+	"support": {
+		"issues": "https://github.com/fnagel/generic-gallery/issues",
+		"docs": "https://docs.typo3.org/typo3cms/extensions/generic_gallery/",
+		"source": "https://github.com/fnagel/generic-gallery"
+	},
+	"keywords": [
+		"TYPO3 CMS",
+		"gallery",
+		"image",
+		"slider",
+		"lightbox",
+		"extbase",
+		"fluid"
+	],
+	"require": {
+		"php": ">=7.2,<7.5",
+		"typo3/cms-core": ">=9.4.0,<=10.4.99"
+	},
+	"suggest": {
+		"typo3/cms-filemetadata": "*",
+		"fab/metadata": "^2.3",
+		"causal/extractor": "^1.5 || ^2.0"
+	},
+	"autoload": {
+		"psr-4": {
+			"FelixNagel\\GenericGallery\\": "Classes/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"FelixNagel\\GenericGallery\\Tests\\": "Tests/"
+		},
+		"files": [
+			"./class.ext_update.php"
+		]
+	},
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "https://github.com/TYPO3/TYPO3.CMS"
+		}
+	]
 }

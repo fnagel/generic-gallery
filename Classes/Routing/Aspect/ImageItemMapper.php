@@ -42,7 +42,7 @@ class ImageItemMapper extends PersistedPatternMapper
     /**
      * @var string[]
      */
-    protected $routeFieldResultNamesFileReference;
+    protected $routeFieldResultNamesFileReference = [];
 
     /**
      * @var string|null

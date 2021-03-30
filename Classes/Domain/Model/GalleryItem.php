@@ -16,12 +16,17 @@ use TYPO3\CMS\Extbase\Domain\Model\FileReference as ExtbaseFileReference;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Service\ImageService;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * Class GalleryItem.
  */
-class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class GalleryItem extends AbstractEntity
 {
+    /**
+     * @var string
+     */
     const FILE_REFERENCE_IDENTIFIER_PREFIX = 'file-';
 
     /**
@@ -76,7 +81,7 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function __construct()
     {
-        $this->textItems = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->textItems = new ObjectStorage();
     }
 
     /**
@@ -356,7 +361,7 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @api
      */
-    public function setTextItems(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $textItems)
+    public function setTextItems(ObjectStorage $textItems)
     {
         $this->textItems = $textItems;
     }
@@ -368,7 +373,7 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @api
      */
-    public function addTextItem(\FelixNagel\GenericGallery\Domain\Model\TextItem $textItems)
+    public function addTextItem(TextItem $textItems)
     {
         $this->textItems->attach($textItems);
     }
@@ -380,7 +385,7 @@ class GalleryItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @api
      */
-    public function removeTextItem(\FelixNagel\GenericGallery\Domain\Model\TextItem $textItems)
+    public function removeTextItem(TextItem $textItems)
     {
         $this->textItems->detach($textItems);
     }
