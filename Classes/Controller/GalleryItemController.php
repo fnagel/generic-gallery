@@ -63,7 +63,6 @@ class GalleryItemController extends AbstractController
             $this->pageNotFoundAndExit();
         }
 
-        $this->getTypoScriptFrontendController()->reqCHash();
         $this->view->assign('item', $item);
 
 		return $this->htmlResponse();

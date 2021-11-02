@@ -29,12 +29,12 @@ abstract class AbstractController extends ActionController
      * @var string
      */
     public const GALLERY_TYPE_SINGLE = 'single';
-    
+
     /**
      * @var string
      */
     public const GALLERY_TYPE_IMAGES = 'images';
-    
+
     /**
      * @var string
      */
@@ -97,11 +97,8 @@ abstract class AbstractController extends ActionController
     /**
      * Get current plugin CE's data.
      *
-     * @todo getContentObject is deprecated but seems to be available
-     * in TYPO3 9.5 (even tough it should not) and seems to be available in 10.4 and 11.5 too.
-     *
-     * According to the new extension scanner the method getContentObject is
-     * deprecated and removed in TYPO3 9.x but it's still available and the replacement is not.
+     * @note getContentObject is marked as deprecated in "Scan Extension Files" but is to be available
+	 * in TYPO3 9.5, in 10.4 and 11.5.
      *
      * @return array
      */
@@ -267,6 +264,8 @@ abstract class AbstractController extends ActionController
     }
 
     /**
+	 * @note getContentObject is marked as deprecated in "Scan Extension Files" but is available used like this
+	 *
      * @param string $message
      */
     protected function pageNotFoundAndExit($message = 'Image not found!')
