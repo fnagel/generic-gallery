@@ -97,7 +97,7 @@ abstract class AbstractController extends ActionController
     /**
      * Get current plugin CE's data.
      *
-     * @note getContentObject is marked as deprecated in "Scan Extension Files" but is to be available
+     * Note: getContentObject is marked as deprecated in "Scan Extension Files" but is to be available
 	 * in TYPO3 9.5, in 10.4 and 11.5.
      *
      * @return array
@@ -123,6 +123,7 @@ abstract class AbstractController extends ActionController
                 'pageBackendLayout' => $this->getTypoScriptFrontendController()->cObj->getData('pagelayout'),
             ],
             'galleryType' => $this->galleryType,
+            'gallerySettings' => $this->currentSettings,
         ]);
 
         if ($this->template !== '') {
@@ -264,7 +265,7 @@ abstract class AbstractController extends ActionController
     }
 
     /**
-	 * @note getContentObject is marked as deprecated in "Scan Extension Files" but is available used like this
+	 * Note: getContentObject is marked as deprecated in "Scan Extension Files" but is available used like this
 	 *
      * @param string $message
      */

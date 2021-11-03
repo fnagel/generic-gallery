@@ -4,29 +4,33 @@
 
 <f:section name="main">
 
-		<f:widget.paginate objects="{collection}" as="items" configuration="{settings.gallery.default.paginate}">
-				<f:for each="{items}" as="item" iteration="iterator">
+	<f:if condition="{gallerySettings.paginate.insertAbove}">
+		<f:render partial="Pagination" arguments="{pagination: pagination, paginator: paginator}" />
+	</f:if>
 
-					<f:if condition="{item}">
-						<gg:forGroup.begin iteration="{iterator}" max="4">
-							<ul class="row thumbnails list-unstyled">
-						</gg:forGroup.begin>
+	<f:for each="{paginator.paginatedItems}" as="item" iteration="iterator">
 
-						<li class="col-md-3">
-							<figure class="thumbnail">
-								<f:render partial="GalleryItem/Image" arguments="{_all}" />
-								<f:if condition="{galleryType} == 'single'">
-									<f:render partial="GalleryItem/Caption" arguments="{_all}" />
-								</f:if>
-							</figure>
-						</li>
+		<gg:forGroup.begin iteration="{iterator}" max="4">
+			<ul class="row thumbnails list-unstyled">
+		</gg:forGroup.begin>
 
-						<gg:forGroup.end iteration="{iterator}" max="4">
-							</ul>
-						</gg:forGroup.end>
-					</f:if>
+		<li class="col-md-3">
+			<figure class="thumbnail">
+				<f:render partial="GalleryItem/Image" arguments="{_all}" />
+				<f:if condition="{galleryType} == 'single'">
+					<f:render partial="GalleryItem/Caption" arguments="{_all}" />
+				</f:if>
+			</figure>
+		</li>
 
-				</f:for>
-		</f:widget.paginate>
+		<gg:forGroup.end iteration="{iterator}" max="4">
+			</ul>
+		</gg:forGroup.end>
+
+	</f:for>
+
+	<f:if condition="{gallerySettings.paginate.insertBelow}">
+		<f:render partial="Pagination" arguments="{pagination: pagination, paginator: paginator}" />
+	</f:if>
 
 </f:section>

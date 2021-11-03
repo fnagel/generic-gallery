@@ -11,6 +11,8 @@ namespace FelixNagel\GenericGallery\Controller;
 
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Core\Pagination\ArrayPaginator;
+use TYPO3\CMS\Core\Pagination\SimplePagination;
 
 /**
  * GalleryCollectionController.
@@ -29,9 +31,19 @@ class GalleryCollectionController extends AbstractController
     /**
      * Show gallery.
      */
-    public function showAction(): ResponseInterface
+    public function showAction(int $page = 1): ResponseInterface
     {
-        $this->view->assign('collection', $this->collection);
+		$paginator = new ArrayPaginator(
+			$this->collection->getArray(),
+			$page,
+			$this->currentSettings['paginate']['itemsPerPage'] ?: 10,
+		);
+
+        $this->view->assignMultiple([
+			'collection' => $this->collection,
+			'paginator' => $paginator,
+			'pagination' => new SimplePagination($paginator),
+		]);
 
         return $this->htmlResponse();
     }

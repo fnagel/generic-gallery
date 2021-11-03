@@ -70,7 +70,7 @@ class GalleryItem extends AbstractEntity
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\FelixNagel\GenericGallery\Domain\Model\TextItem>
      */
-    protected ObjectStorage $textItems;
+    protected ?ObjectStorage $textItems = null;
 
     /**
      * @var array

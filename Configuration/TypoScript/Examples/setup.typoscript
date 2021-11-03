@@ -16,7 +16,6 @@ plugin.tx_genericgallery.settings.gallery {
 			itemsPerPage = 8
 			insertAbove = 0
 			insertBelow = 1
-			maximumNumberOfLinks = 99
 			addQueryStringMethod = GET
 		}
 	}
