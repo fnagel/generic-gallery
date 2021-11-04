@@ -5,25 +5,36 @@ routeEnhancers:
   GenericGalleryPi1Plugin:
     type: Extbase
     extension: GenericGallery
+    defaultController: 'GalleryCollection::show'
     plugin: Pi1
     routes:
-    - {
-        routePath: '/{prefix_localized}/{ce}/{item}',
-        _controller: 'GalleryItem::show',
-        _arguments: {
-          'item': 'item',
+      - routePath: '/'
+        _controller: 'GalleryCollection::show'
+      - routePath: '/{prefix_localized_collection}/{page}'
+        _controller: 'GalleryCollection::show'
+        _arguments:
+          'page': 'page'
+      - routePath: '/{prefix_localized_item}/{ce}/{item}'
+        _controller: 'GalleryItem::show'
+        _arguments:
+          'item': 'item'
           'ce': 'contentElement'
-        }
-      }
     requirements:
       ce: '\d+'
+      page: '\d+'
     aspects:
-      prefix_localized:
+      prefix_localized_item:
         type: LocaleModifier
         default: 'image'
         localeMap:
           - locale: 'de_DE.*'
             value: 'bild'
+      prefix_localized_collection:
+        type: LocaleModifier
+        default: 'page'
+        localeMap:
+          - locale: 'de_DE.*'
+            value: 'seite'
       item:
         type: GenericGalleryImageItemMapper
         # For single images
@@ -39,3 +50,7 @@ routeEnhancers:
         tableName: 'tt_content'
         routeFieldPattern: '^(?P<uid>.+)$'
         routeFieldResult: '{uid}'
+      page:
+        type: StaticRangeMapper
+        start: '1'
+        end: '99'
