@@ -10,7 +10,9 @@ namespace FelixNagel\GenericGallery\Controller;
  */
 
 use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Core\Http\NullResponse;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
+use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 
@@ -24,6 +26,8 @@ class GalleryItemController extends AbstractController
      */
 	public function processRequest(RequestInterface $request): ResponseInterface
     {
+		/** @var Request $request */
+
         if (
             !$request->hasArgument('contentElement') ||
             $this->getContentElementUid() !== (int) $request->getArgument('contentElement')
@@ -32,12 +36,10 @@ class GalleryItemController extends AbstractController
             $this->request = $request;
             $this->request->setDispatched(true);
 
-            // @todo Fix me for TYPO3 11
-		 	return;
-//			return new ForwardResponse($this->request->getControllerActionName());
+		 	return new NullResponse();
         }
 
-        parent::processRequest($request);
+        return parent::processRequest($request);
     }
 
     /**
