@@ -4,7 +4,7 @@ plugin.tx_genericgallery {
 			# Add carousel example
 			bootstrap_slider_image {
 				name = Bootstrap 4 - Image Slider
-				icon = EXT:core/Resources/Public/Icons/T3Icons/content/content-carousel-image.svg
+				icon = content-carousel-image
 
 				# Template for gallery
 				template = EXT:generic_gallery/Resources/Private/Templates/Examples/Bootstrap4/ImageSlider.html
@@ -13,7 +13,7 @@ plugin.tx_genericgallery {
 			# Add carousel example
 			bootstrap_slider_teaser {
 				name = Bootstrap 4 - Teaser Slider
-				icon = EXT:core/Resources/Public/Icons/T3Icons/content/content-carousel-image.svg
+				icon = content-carousel-image
 
 				# Template for gallery
 				template = EXT:generic_gallery/Resources/Private/Templates/Examples/Bootstrap4/TeaserSlider.html
