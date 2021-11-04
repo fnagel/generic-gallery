@@ -11,6 +11,33 @@ Upgrade Guide
    :depth: 3
 
 
+
+Update from 4.2.x to 5.0.0
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Overview**
+
+- TYPO3 11.5 LTS support
+
+- Removed support for TYPO3 9.x
+
+- Support for PHP 8.0
+
+- Add custom pagination partial
+
+- Added routing for pagination
+
+
+**How to upgrade**
+
+#. Update templates due to pagination widget removal
+
+#. Update pagination routing
+
+#. Clear all caches
+
+
+
 Update from 4.1.0 to 4.2.0
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
