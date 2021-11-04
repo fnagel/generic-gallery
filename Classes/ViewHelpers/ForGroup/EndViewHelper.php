@@ -2,6 +2,8 @@
 
 namespace FelixNagel\GenericGallery\ViewHelpers\ForGroup;
 
+use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
+
 /**
  * This file is part of the "generic_gallery" Extension for TYPO3 CMS.
  *
@@ -14,15 +16,10 @@ namespace FelixNagel\GenericGallery\ViewHelpers\ForGroup;
  */
 class EndViewHelper extends AbstractViewHelper
 {
-    /**
-     * @return mixed
-     */
-    public function render()
-    {
-        if ($this->iteration['isLast'] || ($this->iteration['cycle'] % $this->max) === 0) {
-            return $this->renderChildren();
-        }
-
-        return '';
-    }
+	/**
+	 * @inheritDoc
+	 */
+	public static function verdict(array $arguments, RenderingContextInterface $renderingContext) {
+		return $arguments['iteration']['isLast'] || ($arguments['iteration']['cycle'] % $arguments['max']) === 0;
+	}
 }

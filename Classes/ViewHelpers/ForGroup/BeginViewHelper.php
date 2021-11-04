@@ -9,20 +9,17 @@ namespace FelixNagel\GenericGallery\ViewHelpers\ForGroup;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
+
 /**
  * ForGroupViewHelper.
  */
 class BeginViewHelper extends AbstractViewHelper
 {
-    /**
-     * @return mixed
-     */
-    public function render()
-    {
-        if ($this->iteration['isFirst'] || ($this->iteration['cycle'] % $this->max) === 1) {
-            return $this->renderChildren();
-        }
-
-        return '';
-    }
+	/**
+	 * @inheritDoc
+	 */
+	public static function verdict(array $arguments, RenderingContextInterface $renderingContext) {
+		return $arguments['iteration']['isFirst'] || ($arguments['iteration']['cycle'] % $arguments['max']) === 1;
+	}
 }

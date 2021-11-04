@@ -16,34 +16,16 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractConditionViewHelper;
  */
 class AbstractViewHelper extends AbstractConditionViewHelper
 {
-    /**
-     * @inheritdoc
-     */
-    protected $escapeOutput = false;
+	/**
+	 * @inheritdoc
+	 */
+	protected $escapeOutput = false;
 
-    protected array $iteration = [];
-
-    protected int $max = 2;
-
-    /**
-     * Initializes the arguments for the ViewHelper.
-     */
-    public function initializeArguments()
-    {
-        $this->registerArgument('iteration', 'array', 'The for VH iteration array', true);
-        $this->registerArgument('max', 'int', 'Max items in one for group', true, 2);
-    }
-
-    /**
-     * Initializes the view helper before invoking the render method.
-     *
-     * Override this method to solve tasks before the view helper content is rendered.
-     *
-     * @api
-     */
-    public function initialize()
-    {
-        $this->iteration = $this->arguments['iteration'];
-        $this->max = $this->arguments['max'];
-    }
+	/**
+	 * @inheritDoc
+	 */
+	public function initializeArguments() {
+		$this->registerArgument('iteration', 'array', 'The for VH iteration array', true);
+		$this->registerArgument('max', 'int', 'Max items in one for group', true, 2);
+	}
 }
