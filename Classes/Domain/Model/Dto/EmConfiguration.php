@@ -32,20 +32,11 @@ class EmConfiguration
         }
     }
 
-    /**
-     * @var bool
-     */
-    protected $enableCmsLayout = true;
+    protected bool $enableCmsLayout = true;
 
-    /**
-     * @var int
-     */
-    protected $useInlineCollection = 1;
+    protected int $useInlineCollection = 1;
 
-    /**
-     * @var int
-     */
-    protected $addImageCollection = 1;
+    protected int $addImageCollection = 1;
 
     /**
      * @return bool

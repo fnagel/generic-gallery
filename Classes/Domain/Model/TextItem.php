@@ -19,24 +19,18 @@ class TextItem extends AbstractEntity
 {
     /**
      * bodytext.
-     *
-     * @var string
      */
-    protected $bodytext = '';
+    protected string $bodytext = '';
 
     /**
      * position.
-     *
-     * @var string
      */
-    protected $position = '';
+    protected string $position = '';
 
     /**
      * width.
-     *
-     * @var string
      */
-    protected $width = '';
+    protected string $width = '';
 
     /**
      * Returns the bodytext.

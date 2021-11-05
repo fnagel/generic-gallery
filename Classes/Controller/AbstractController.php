@@ -28,57 +28,39 @@ abstract class AbstractController extends ActionController
     /**
      * @var string
      */
-    const GALLERY_TYPE_SINGLE = 'single';
+    public const GALLERY_TYPE_SINGLE = 'single';
+    
     /**
      * @var string
      */
-    const GALLERY_TYPE_IMAGES = 'images';
+    public const GALLERY_TYPE_IMAGES = 'images';
+    
     /**
      * @var string
      */
-    const GALLERY_TYPE_COLLECTION = 'collection';
+    public const GALLERY_TYPE_COLLECTION = 'collection';
 
     /**
      * @var null
      */
     protected $uid = null;
 
-    /**
-     * @var array
-     */
-    protected $cObjData = [];
+    protected array $cObjData = [];
 
-    /**
-     * @var array
-     */
-    protected $gallerySettings = [];
+    protected array $gallerySettings = [];
 
-    /**
-     * @var array
-     */
-    protected $currentSettings = [];
+    protected array $currentSettings = [];
 
-    /**
-     * @var string
-     */
-    protected $galleryKey = null;
+    protected ?string $galleryKey = null;
 
-    /**
-     * @var string
-     */
-    protected $galleryType = null;
+    protected ?string $galleryType = null;
 
-    /**
-     * @var string
-     */
-    protected $template = null;
+    protected ?string $template = null;
 
     /**
      * GalleryCollection.
-     *
-     * @var \FelixNagel\GenericGallery\Domain\Model\GalleryCollection
      */
-    protected $collection = null;
+    protected ?GalleryCollection $collection = null;
 
     /**
      * Object manager.

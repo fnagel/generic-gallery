@@ -7,7 +7,6 @@ use Rector\Core\ValueObject\PhpVersion;
 use Rector\Set\ValueObject\SetList;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Ssch\TYPO3Rector\Set\Typo3SetList;
-use Ssch\TYPO3Rector\Configuration\Typo3Option;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters = $containerConfigurator->parameters();
@@ -15,26 +14,26 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // Paths to refactor; solid alternative to CLI arguments
     $parameters->set(Option::PATHS, [__DIR__]);
 
-    $parameters->set(Option::SETS, [
-        SetList::CODING_STYLE,
-        SetList::CODE_QUALITY,
+	$containerConfigurator->import(SetList::CODING_STYLE);
+	$containerConfigurator->import(SetList::CODE_QUALITY);
 
-        SetList::PHP_53,
-        SetList::PHP_54,
-        SetList::PHP_55,
-        SetList::PHP_56,
-        SetList::PHP_70,
-        SetList::PHP_71,
-        SetList::PHP_72,
-        SetList::PHP_73,
-        SetList::PHP_74,
+	$containerConfigurator->import(SetList::PHP_53);
+	$containerConfigurator->import(SetList::PHP_54);
+	$containerConfigurator->import(SetList::PHP_55);
+	$containerConfigurator->import(SetList::PHP_56);
+	$containerConfigurator->import(SetList::PHP_70);
+	$containerConfigurator->import(SetList::PHP_71);
+	$containerConfigurator->import(SetList::PHP_72);
+	$containerConfigurator->import(SetList::PHP_73);
+	$containerConfigurator->import(SetList::PHP_74);
+	$containerConfigurator->import(SetList::PHP_80);
 
-        Typo3SetList::TYPO3_95,
-        Typo3SetList::TYPO3_104,
-    ]);
+	$containerConfigurator->import(Typo3SetList::TYPO3_104);
+	$containerConfigurator->import(Typo3SetList::TCA_104);
+	$containerConfigurator->import(Typo3SetList::TYPO3_11);
 
     // Define your target version which you want to support
-    $parameters->set(Option::PHP_VERSION_FEATURES, PhpVersion::PHP_72);
+    $parameters->set(Option::PHP_VERSION_FEATURES, PhpVersion::PHP_80);
 
     // FQN classes are not imported by default. If you don't do it manually after every Rector run, enable it by:
     $parameters->set(Option::AUTO_IMPORT_NAMES, true);
@@ -44,7 +43,4 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     // This will not import classes used in PHP DocBlocks, like in /** @var \Some\Class */
     $parameters->set(Option::IMPORT_DOC_BLOCKS, false);
-
-    // If you would like to see the changelog url when a rector is applied
-    $parameters->set(Typo3Option::OUTPUT_CHANGELOG, true);
 };

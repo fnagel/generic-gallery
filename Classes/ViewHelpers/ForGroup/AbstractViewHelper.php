@@ -21,15 +21,9 @@ class AbstractViewHelper extends AbstractConditionViewHelper
      */
     protected $escapeOutput = false;
 
-    /**
-     * @var array
-     */
-    protected $iteration = [];
+    protected array $iteration = [];
 
-    /**
-     * @var int
-     */
-    protected $max = 2;
+    protected int $max = 2;
 
     /**
      * Initializes the arguments for the ViewHelper.

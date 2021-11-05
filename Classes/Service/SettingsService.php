@@ -15,6 +15,7 @@ use TYPO3\CMS\Core\Utility\RootlineUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Configuration\Exception;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
+use TYPO3\CMS\Core\TypoScript\TypoScriptService;
 
 /**
  * Class SettingsService.
@@ -26,46 +27,34 @@ class SettingsService
      *
      * Needed as parameter for configurationManager->getConfiguration when used in BE context
      * Otherwise generated TS will be incorrect or missing
-     *
-     * @var string
      */
-    protected $extensionName = 'GenericGallery';
+    protected string $extensionName = 'GenericGallery';
 
-    /**
-     * Extension key.
-     *
-     * @var string
-     */
-    protected $extensionKey = 'tx_genericgallery';
+    protected string $extensionKey = 'tx_genericgallery';
 
-    /**
-     * Plugin name.
-     *
-     * @var string
-     */
-    protected $pluginName = '';
+    protected string $pluginName = '';
 
-    /**
-     * @var mixed
-     */
-    protected $typoScriptSettings = null;
+    protected ?array $typoScriptSettings = null;
 
-    /**
-     * @var mixed
-     */
-    protected $frameworkSettings = null;
+    protected ?array $frameworkSettings = null;
 
-    /**
-     * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
-     * @TYPO3\CMS\Extbase\Annotation\Inject
-     */
-    protected $configurationManager;
+    protected ConfigurationManagerInterface $configurationManager;
 
-    /**
-     * @var \TYPO3\CMS\Core\TypoScript\TypoScriptService
-     * @TYPO3\CMS\Extbase\Annotation\Inject
-     */
-    protected $typoScriptService;
+    protected TypoScriptService $typoScriptService;
+
+	/**
+	 * SettingsService constructor.
+	 *
+	 * @param ConfigurationManagerInterface $configurationManager
+	 * @param TypoScriptService $typoScriptService
+	 */
+	public function __construct(
+		ConfigurationManagerInterface $configurationManager,
+		TypoScriptService $typoScriptService
+	) {
+		$this->configurationManager = $configurationManager;
+		$this->typoScriptService = $typoScriptService;
+	}
 
     /**
      * Returns all framework settings.

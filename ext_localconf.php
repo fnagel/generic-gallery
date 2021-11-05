@@ -1,33 +1,39 @@
 <?php
 
-if (!defined('TYPO3_MODE')) {
-    die('Access denied.');
-}
+use FelixNagel\GenericGallery\Utility\EmConfiguration;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
+use FelixNagel\GenericGallery\Controller\GalleryCollectionController;
+use FelixNagel\GenericGallery\Controller\GalleryItemController;
+use FelixNagel\GenericGallery\Routing\Aspect\ImageItemMapper;
+use TYPO3\CMS\Core\Resource\Collection\StaticFileCollection;
+
+defined('TYPO3') || die();
 
 call_user_func(function () {
-    $configuration = \FelixNagel\GenericGallery\Utility\EmConfiguration::getSettings();
+    $configuration = EmConfiguration::getSettings();
 
     // BE preview
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['cms/layout/class.tx_cms_layout.php']['list_type_Info']['genericgallery_pi1'][] =
         'FelixNagel\GenericGallery\Backend\Hooks\PageLayoutViewHook->getExtensionSummary';
 
     // Add page TS config
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig(
+    ExtensionManagementUtility::addPageTSConfig(
         '<INCLUDE_TYPOSCRIPT: source="FILE:EXT:generic_gallery/Configuration/TSconfig/page.tsconfig">'
     );
 
     // FE plugin
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-        'FelixNagel.GenericGallery',
+    ExtensionUtility::configurePlugin(
+        'GenericGallery',
         'Pi1',
         [
-            'GalleryCollection' => 'show',
-            'GalleryItem' => 'show',
+            GalleryCollectionController::class => 'show',
+            GalleryItemController::class => 'show',
         ],
         // non-cacheable actions
         [
-            'GalleryCollection' => '',
-            'GalleryItem' => '',
+            GalleryCollectionController::class => '',
+            GalleryItemController::class => '',
         ]
     );
 
@@ -42,12 +48,11 @@ call_user_func(function () {
     $GLOBALS['TYPO3_CONF_VARS']['FE']['cHashRequiredParameters'] .= ','.implode(',', $requiredParameters);
 
     // Routing
-    $GLOBALS['TYPO3_CONF_VARS']['SYS']['routing']['aspects']['GenericGalleryImageItemMapper'] =
-        \FelixNagel\GenericGallery\Routing\Aspect\ImageItemMapper::class;
+    $GLOBALS['TYPO3_CONF_VARS']['SYS']['routing']['aspects']['GenericGalleryImageItemMapper'] = ImageItemMapper::class;
 
     // File collection
     if ($configuration->getAddImageCollection()) {
         $GLOBALS['TYPO3_CONF_VARS']['SYS']['fal']['registeredCollections']['images'] =
-            \TYPO3\CMS\Core\Resource\Collection\StaticFileCollection::class;
+            StaticFileCollection::class;
     }
 });

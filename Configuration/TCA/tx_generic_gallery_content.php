@@ -19,9 +19,6 @@ return [
             'default' => 'extensions-generic-gallery-content',
         ],
     ],
-    'interface' => [
-        'showRecordFieldList' => 'hidden, starttime, endtime, bodytext, position, width',
-    ],
     'types' => [
         '0' => [
             'showitem' => 'hidden, --palette--;;palettePositioning, bodytext',

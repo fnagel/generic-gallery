@@ -1,37 +1,41 @@
 <?php
 
-if (!defined('TYPO3_MODE')) {
-    die('Access denied.');
-}
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Imaging\IconRegistry;
+use TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider;
+use TYPO3\CMS\Core\Imaging\IconProvider\BitmapIconProvider;
+
+defined('TYPO3') || die();
 
 call_user_func(function () {
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr(
+    ExtensionManagementUtility::addLLrefForTCAdescr(
         'tx_generic_gallery_pictures',
         'EXT:generic_gallery/Resources/Private/Language/locallang_csh_tx_genericgallery_domain_model_galleryitem.xlf'
     );
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_generic_gallery_pictures');
+    ExtensionManagementUtility::allowTableOnStandardPages('tx_generic_gallery_pictures');
 
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr(
+    ExtensionManagementUtility::addLLrefForTCAdescr(
         'tx_generic_gallery_content',
         'EXT:generic_gallery/Resources/Private/Language/locallang_csh_tx_genericgallery_domain_model_textitem.xlf'
     );
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_generic_gallery_content');
+    ExtensionManagementUtility::allowTableOnStandardPages('tx_generic_gallery_content');
 
-    /* @var $iconRegistry \TYPO3\CMS\Core\Imaging\IconRegistry */
-    $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconRegistry::class);
+    /* @var $iconRegistry IconRegistry */
+    $iconRegistry = GeneralUtility::makeInstance(IconRegistry::class);
     $iconRegistry->registerIcon(
         'extensions-generic-gallery',
-        \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+        SvgIconProvider::class,
         ['source' => 'EXT:generic_gallery/Resources/Public/Icons/Extension.svg']
     );
     $iconRegistry->registerIcon(
         'extensions-generic-gallery-pictures',
-        \TYPO3\CMS\Core\Imaging\IconProvider\BitmapIconProvider::class,
+        BitmapIconProvider::class,
         ['source' => 'EXT:generic_gallery/Resources/Public/Icons/tx_genericgallery_domain_model_galleryitem.gif']
     );
     $iconRegistry->registerIcon(
         'extensions-generic-gallery-content',
-        \TYPO3\CMS\Core\Imaging\IconProvider\BitmapIconProvider::class,
+        BitmapIconProvider::class,
         ['source' => 'EXT:generic_gallery/Resources/Public/Icons/tx_genericgallery_domain_model_textitem.gif']
     );
 });

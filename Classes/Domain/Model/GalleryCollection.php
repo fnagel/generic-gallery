@@ -26,7 +26,7 @@ class GalleryCollection extends ObjectStorage
      *
      * @return GalleryItem
      */
-    public function getByIdentifier($uid)
+    public function getByIdentifier(int|string $uid)
     {
         if (empty($uid)) {
             return null;
@@ -48,7 +48,6 @@ class GalleryCollection extends ObjectStorage
     /**
      * Adds all objects-data pairs from an array
      *
-     * @param array $items
      * @return void
      */
     public function addAllFromArray(array $items)
@@ -59,8 +58,6 @@ class GalleryCollection extends ObjectStorage
     }
 
     /**
-     * @param array $data
-     *
      * @return $this
      */
     public function addAllFromFiles(array $data)

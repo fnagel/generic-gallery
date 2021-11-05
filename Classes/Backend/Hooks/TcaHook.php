@@ -14,26 +14,18 @@ use TYPO3\CMS\Backend\Form\FormDataProvider\TcaSelectItems;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\Container\Container;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
  * Hook class for TCA hook.
  */
 class TcaHook
 {
-    /**
-     * @var \TYPO3\CMS\Extbase\Object\Container\Container
-     */
-    protected $objectContainer = null;
+    protected ?object $objectContainer = null;
 
-    /**
-     * @var \TYPO3\CMS\Extbase\Object\ObjectManager
-     */
-    protected $objectManager = null;
+    protected ?ObjectManager $objectManager = null;
 
-    /**
-     * @var \FelixNagel\GenericGallery\Service\SettingsService
-     */
-    protected $settingsService = null;
+    protected ?object $settingsService = null;
 
     /**
      * Sets the items for the "Predefined" dropdown.
@@ -44,6 +36,8 @@ class TcaHook
      */
     public function addPredefinedFields($config, TcaSelectItems $tcaSelectItems)
     {
+        $optionList = [];
+
         if (is_array($config['items'])) {
             $pid = $this->determinePageId($config['table'], $config['row']);
 
@@ -87,12 +81,11 @@ class TcaHook
      * Taken from \TYPO3\CMS\Backend\View\BackendLayoutView::determinePageId
      *
      * @param string $tableName
-     * @param array $data
      * @return int|bool Returns page id or false on error
      */
-    protected function determinePageId($tableName, array $data)
+    protected function determinePageId($tableName, array $data): int|bool
     {
-        if (strpos($data['uid'], 'NEW') === 0) {
+        if (str_starts_with($data['uid'], 'NEW')) {
             // negative uid_pid values of content elements indicate that the element
             // has been inserted after an existing element so there is no pid to get
             // the backendLayout for and we have to get that first

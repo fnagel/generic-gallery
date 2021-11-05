@@ -10,6 +10,7 @@ namespace FelixNagel\GenericGallery\Controller;
  */
 
 use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 
@@ -32,7 +33,8 @@ class GalleryItemController extends AbstractController
             $this->request->setDispatched(true);
 
             // @todo Fix me for TYPO3 11
-//            return;
+		 	return;
+//			return new ForwardResponse($this->request->getControllerActionName());
         }
 
         parent::processRequest($request);
@@ -53,7 +55,7 @@ class GalleryItemController extends AbstractController
      *
      * @param string $item
      */
-    public function showAction($item)
+    public function showAction($item): ResponseInterface
     {
         $item = $this->collection->getByIdentifier($item);
 
@@ -63,5 +65,7 @@ class GalleryItemController extends AbstractController
 
         $this->getTypoScriptFrontendController()->reqCHash();
         $this->view->assign('item', $item);
+
+		return $this->htmlResponse();
     }
 }

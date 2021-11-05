@@ -18,6 +18,7 @@ use TYPO3\CMS\Extbase\Service\ImageService;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\CMS\Core\Resource\File;
 
 /**
  * Class GalleryItem.
@@ -27,54 +28,41 @@ class GalleryItem extends AbstractEntity
     /**
      * @var string
      */
-    const FILE_REFERENCE_IDENTIFIER_PREFIX = 'file-';
+    public const FILE_REFERENCE_IDENTIFIER_PREFIX = 'file-';
 
     /**
      * tt_content UID.
-     *
-     * @var int
      */
-    protected $ttContentUid;
+    protected ?int $ttContentUid = null;
 
     /**
      * title.
-        *
-     * @var string
      */
-    protected $title;
+    protected ?string $title = null;
 
     /**
      * link.
-     *
-     * @var string
      */
-    protected $link;
+    protected ?string $link = null;
 
     /**
      * imageReference.
-     *
-     * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
      */
-    protected $imageReference = null;
+    protected ?\TYPO3\CMS\Extbase\Domain\Model\FileReference $imageReference = null;
 
     /**
      * image.
-     *
-     * @var \TYPO3\CMS\Core\Resource\File
      */
-    protected $image = null;
+    protected ?File $image = null;
 
     /**
      * textItems.
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\FelixNagel\GenericGallery\Domain\Model\TextItem>
      */
-    protected $textItems;
+    protected ObjectStorage $textItems;
 
-    /**
-     * @var array
-     */
-    protected $imageProperties = null;
+    protected ?array $imageProperties = null;
 
     /**
      * Construct class.
@@ -84,10 +72,7 @@ class GalleryItem extends AbstractEntity
         $this->textItems = new ObjectStorage();
     }
 
-    /**
-     * @return int|string
-     */
-    public function getIdentifier()
+    public function getIdentifier(): int|string
     {
         $identifier = $this->getUid();
 
@@ -260,7 +245,6 @@ class GalleryItem extends AbstractEntity
     }
 
     /**
-     * @param array $properties
      * @return array
      */
     protected function processPropertiesForExtractorExtension(array $properties)
@@ -281,7 +265,6 @@ class GalleryItem extends AbstractEntity
     }
 
     /**
-     * @param array $properties
      * @return array
      */
     protected function processPropertiesForMetadaExtension(array $properties)
@@ -328,10 +311,8 @@ class GalleryItem extends AbstractEntity
 
     /**
      * Sets the imageReference.
-     *
-     * @param CoreFileReference|ExtbaseFileReference $imageReference
      */
-    public function setImageReference($imageReference)
+    public function setImageReference(CoreFileReference|ExtbaseFileReference $imageReference)
     {
         $fileReference = $imageReference;
 
@@ -357,7 +338,6 @@ class GalleryItem extends AbstractEntity
     /**
      * Sets the textItems.
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $textItems
      *
      * @api
      */
@@ -369,7 +349,6 @@ class GalleryItem extends AbstractEntity
     /**
      * Adds a textItem.
      *
-     * @param \FelixNagel\GenericGallery\Domain\Model\TextItem $textItems
      *
      * @api
      */
@@ -381,7 +360,6 @@ class GalleryItem extends AbstractEntity
     /**
      * Removes a textItem.
      *
-     * @param \FelixNagel\GenericGallery\Domain\Model\TextItem $textItems
      *
      * @api
      */

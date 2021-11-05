@@ -50,7 +50,6 @@ class ImageItemMapper extends PersistedPatternMapper
     protected $languageParentFieldNameFileReference;
 
     /**
-     * @param array $settings
      * @throws \InvalidArgumentException
      */
     public function __construct(array $settings)
@@ -134,30 +133,19 @@ class ImageItemMapper extends PersistedPatternMapper
         return $array;
     }
 
-    /**
-     * @return string
-     */
     protected function getFileReferencePrefix(): string
     {
         return GalleryItem::FILE_REFERENCE_IDENTIFIER_PREFIX;
     }
 
-    /**
-     * @param string $value
-     * @return string
-     */
     protected function removeFileReferencePrefix(string $value): string
     {
         return substr($value, strlen($this->getFileReferencePrefix()));
     }
 
-    /**
-     * @param string $value
-     * @return bool
-     */
     protected function isFileReference(string $value): bool
     {
-        return (strpos($value, $this->getFileReferencePrefix()) === 0);
+        return (str_starts_with($value, $this->getFileReferencePrefix()));
     }
 
     /**

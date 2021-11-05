@@ -20,9 +20,6 @@ return [
             'default' => 'extensions-generic-gallery-pictures',
         ],
     ],
-    'interface' => [
-        'showRecordFieldList' => 'hidden, starttime, endtime, images, tt_content_id, contents',
-    ],
     'types' => [
         '0' => ['showitem' => '
 		--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:palette.general,

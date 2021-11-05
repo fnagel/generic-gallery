@@ -12,6 +12,7 @@ namespace FelixNagel\GenericGallery\Domain\Repository;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use \TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
 /**
  * The repository for GalleryItems.
@@ -39,9 +40,8 @@ class GalleryItemRepository extends Repository
 
     /**
      * @param int $uid Uid of the content element (tt_content)
-     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      */
-    public function findForContentElement($uid)
+    public function findForContentElement($uid): array|QueryResultInterface
     {
         $query = $this->createQuery();
         $constraints = [

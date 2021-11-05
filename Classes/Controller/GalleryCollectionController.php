@@ -10,6 +10,7 @@ namespace FelixNagel\GenericGallery\Controller;
  */
 
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * GalleryCollectionController.
@@ -28,8 +29,10 @@ class GalleryCollectionController extends AbstractController
     /**
      * Show gallery.
      */
-    public function showAction()
+    public function showAction(): ResponseInterface
     {
         $this->view->assign('collection', $this->collection);
+
+        return $this->htmlResponse();
     }
 }

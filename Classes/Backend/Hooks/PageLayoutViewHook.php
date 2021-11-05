@@ -18,6 +18,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Extbase\Object\Container\Container;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
  * Hook class for PageLayoutView hook `list_type_Info`.
@@ -26,27 +27,18 @@ use TYPO3\CMS\Extbase\Object\Container\Container;
  */
 class PageLayoutViewHook
 {
-    /**
-     * @var \TYPO3\CMS\Extbase\Object\Container\Container
-     */
-    protected $objectContainer = null;
+    protected ?object $objectContainer = null;
 
-    /**
-     * @var \TYPO3\CMS\Extbase\Object\ObjectManager
-     */
-    protected $objectManager = null;
+    protected ?ObjectManager $objectManager = null;
 
-    /**
-     * @var \FelixNagel\GenericGallery\Service\SettingsService
-     */
-    protected $settingsService = null;
+    protected ?object $settingsService = null;
 
     /*
      * Current page settings
      *
      * @var array
      */
-    private $settings = null;
+    private ?array $settings = null;
 
     /*
      * Current row data
@@ -57,17 +49,13 @@ class PageLayoutViewHook
 
     /**
      * Table information.
-     *
-     * @var array
      */
-    public $tableData = [];
+    public array $tableData = [];
 
     /**
      * Image previews.
-     *
-     * @var string
      */
-    public $imagePreviewHtml = '';
+    public string $imagePreviewHtml = '';
 
     /**
      * Returns information about this plugin content.
@@ -82,7 +70,7 @@ class PageLayoutViewHook
      *
      * @return string Rendered output for PageLayoutView
      */
-    public function getExtensionSummary(array &$parameters = [], &$parentObject)
+    public function getExtensionSummary(array &$parameters = [], &$parentObject = null)
     {
         if ($parameters['row']['list_type'] !== 'genericgallery_pi1') {
             return '';
@@ -253,6 +241,7 @@ class PageLayoutViewHook
             $content = $icon.$content;
         }
 
+        // @todo Change this when TYPO3 10 is no longer needed
         return BackendUtility::wrapClickMenuOnIcon($content, $table, $record['uid'], 1, '', '+info,edit');
     }
 
@@ -308,7 +297,7 @@ class PageLayoutViewHook
      */
     protected function getObjectContainer()
     {
-        if ($this->objectContainer == null) {
+        if ($this->objectContainer === null) {
             $this->objectContainer = GeneralUtility::makeInstance(Container::class);
         }
 
