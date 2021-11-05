@@ -9,8 +9,8 @@ namespace FelixNagel\GenericGallery\Controller;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
-use TYPO3\CMS\Extbase\Mvc\ResponseInterface;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 
 /**
@@ -21,7 +21,7 @@ class GalleryItemController extends AbstractController
     /**
      * {@inheritdoc}
      */
-    public function processRequest(RequestInterface $request, ResponseInterface $response)
+	public function processRequest(RequestInterface $request): ResponseInterface
     {
         if (
             !$request->hasArgument('contentElement') ||
@@ -31,10 +31,11 @@ class GalleryItemController extends AbstractController
             $this->request = $request;
             $this->request->setDispatched(true);
 
-            return;
+            // @todo Fix me for TYPO3 11
+//            return;
         }
 
-        parent::processRequest($request, $response);
+        parent::processRequest($request);
     }
 
     /**
