@@ -16,10 +16,11 @@ use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
  */
 class BeginViewHelper extends AbstractViewHelper
 {
-	/**
-	 * @inheritDoc
-	 */
-	public static function verdict(array $arguments, RenderingContextInterface $renderingContext) {
-		return $arguments['iteration']['isFirst'] || ($arguments['iteration']['cycle'] % $arguments['max']) === 1;
-	}
+    /**
+     * @inheritDoc
+     */
+    public static function verdict(array $arguments, RenderingContextInterface $renderingContext)
+    {
+        return $arguments['iteration']['isFirst'] || ($arguments['iteration']['cycle'] % $arguments['max']) === 1;
+    }
 }

@@ -33,17 +33,17 @@ class GalleryCollectionController extends AbstractController
      */
     public function showAction(int $page = 1): ResponseInterface
     {
-		$paginator = new ArrayPaginator(
-			$this->collection->getArray(),
-			$page,
-			$this->currentSettings['paginate']['itemsPerPage'] ?: 10,
-		);
+        $paginator = new ArrayPaginator(
+            $this->collection->getArray(),
+            $page,
+            $this->currentSettings['paginate']['itemsPerPage'] ?: 10,
+        );
 
         $this->view->assignMultiple([
-			'collection' => $this->collection,
-			'paginator' => $paginator,
-			'pagination' => new SimplePagination($paginator),
-		]);
+            'collection' => $this->collection,
+            'paginator' => $paginator,
+            'pagination' => new SimplePagination($paginator),
+        ]);
 
         return $this->htmlResponse();
     }

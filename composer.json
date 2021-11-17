@@ -22,6 +22,9 @@
 		"php": ">=7.2,<8.1",
 		"typo3/cms-core": ">=11.0.0,<=11.5.99"
 	},
+	"require-dev": {
+		"friendsofphp/php-cs-fixer": "^2.19"
+	},
 	"suggest": {
 		"typo3/cms-filemetadata": "*",
 		"fab/metadata": "^2.3",

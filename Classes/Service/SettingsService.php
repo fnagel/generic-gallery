@@ -42,19 +42,19 @@ class SettingsService
 
     protected TypoScriptService $typoScriptService;
 
-	/**
-	 * SettingsService constructor.
-	 *
-	 * @param ConfigurationManagerInterface $configurationManager
-	 * @param TypoScriptService $typoScriptService
-	 */
-	public function __construct(
-		ConfigurationManagerInterface $configurationManager,
-		TypoScriptService $typoScriptService
-	) {
-		$this->configurationManager = $configurationManager;
-		$this->typoScriptService = $typoScriptService;
-	}
+    /**
+     * SettingsService constructor.
+     *
+     * @param ConfigurationManagerInterface $configurationManager
+     * @param TypoScriptService $typoScriptService
+     */
+    public function __construct(
+        ConfigurationManagerInterface $configurationManager,
+        TypoScriptService $typoScriptService
+    ) {
+        $this->configurationManager = $configurationManager;
+        $this->typoScriptService = $typoScriptService;
+    }
 
     /**
      * Returns all framework settings.

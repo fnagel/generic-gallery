@@ -14,23 +14,23 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // Paths to refactor; solid alternative to CLI arguments
     $parameters->set(Option::PATHS, [__DIR__]);
 
-	$containerConfigurator->import(SetList::CODING_STYLE);
-	$containerConfigurator->import(SetList::CODE_QUALITY);
+    $containerConfigurator->import(SetList::CODING_STYLE);
+    $containerConfigurator->import(SetList::CODE_QUALITY);
 
-	$containerConfigurator->import(SetList::PHP_53);
-	$containerConfigurator->import(SetList::PHP_54);
-	$containerConfigurator->import(SetList::PHP_55);
-	$containerConfigurator->import(SetList::PHP_56);
-	$containerConfigurator->import(SetList::PHP_70);
-	$containerConfigurator->import(SetList::PHP_71);
-	$containerConfigurator->import(SetList::PHP_72);
-	$containerConfigurator->import(SetList::PHP_73);
-	$containerConfigurator->import(SetList::PHP_74);
-	$containerConfigurator->import(SetList::PHP_80);
+    $containerConfigurator->import(SetList::PHP_53);
+    $containerConfigurator->import(SetList::PHP_54);
+    $containerConfigurator->import(SetList::PHP_55);
+    $containerConfigurator->import(SetList::PHP_56);
+    $containerConfigurator->import(SetList::PHP_70);
+    $containerConfigurator->import(SetList::PHP_71);
+    $containerConfigurator->import(SetList::PHP_72);
+    $containerConfigurator->import(SetList::PHP_73);
+    $containerConfigurator->import(SetList::PHP_74);
+    $containerConfigurator->import(SetList::PHP_80);
 
-	$containerConfigurator->import(Typo3SetList::TYPO3_104);
-	$containerConfigurator->import(Typo3SetList::TCA_104);
-	$containerConfigurator->import(Typo3SetList::TYPO3_11);
+    $containerConfigurator->import(Typo3SetList::TYPO3_104);
+    $containerConfigurator->import(Typo3SetList::TCA_104);
+    $containerConfigurator->import(Typo3SetList::TYPO3_11);
 
     // Define your target version which you want to support
     $parameters->set(Option::PHP_VERSION_FEATURES, PhpVersion::PHP_80);

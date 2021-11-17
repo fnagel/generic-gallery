@@ -98,7 +98,7 @@ abstract class AbstractController extends ActionController
      * Get current plugin CE's data.
      *
      * Note: getContentObject is marked as deprecated in "Scan Extension Files" but is to be available
-	 * in TYPO3 9.5, in 10.4 and 11.5.
+     * in TYPO3 9.5, in 10.4 and 11.5.
      *
      * @return array
      */
@@ -265,8 +265,8 @@ abstract class AbstractController extends ActionController
     }
 
     /**
-	 * Note: getContentObject is marked as deprecated in "Scan Extension Files" but is available used like this
-	 *
+     * Note: getContentObject is marked as deprecated in "Scan Extension Files" but is available used like this
+     *
      * @param string $message
      */
     protected function pageNotFoundAndExit($message = 'Image not found!')

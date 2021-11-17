@@ -24,9 +24,9 @@ class GalleryItemController extends AbstractController
     /**
      * {@inheritdoc}
      */
-	public function processRequest(RequestInterface $request): ResponseInterface
+    public function processRequest(RequestInterface $request): ResponseInterface
     {
-		/** @var Request $request */
+        /** @var Request $request */
 
         if (
             !$request->hasArgument('contentElement') ||
@@ -36,7 +36,7 @@ class GalleryItemController extends AbstractController
             $this->request = $request;
             $this->request->setDispatched(true);
 
-		 	return new NullResponse();
+            return new NullResponse();
         }
 
         return parent::processRequest($request);
@@ -67,6 +67,6 @@ class GalleryItemController extends AbstractController
 
         $this->view->assign('item', $item);
 
-		return $this->htmlResponse();
+        return $this->htmlResponse();
     }
 }
