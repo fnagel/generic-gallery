@@ -66,6 +66,15 @@
 			<trans-unit id="extension_manager.enable_cms_layout">
 				<source>Enable previews in BE: Improved record preview in backend incl. thumbnails and some more information.</source>
 			</trans-unit>
+			<trans-unit id="extension_manager.enable_type_items">
+				<source>Image source: Enable single items as source</source>
+			</trans-unit>
+			<trans-unit id="extension_manager.enable_type_images">
+				<source>Image source: Enable images as source</source>
+			</trans-unit>
+			<trans-unit id="extension_manager.enable_type_collection">
+				<source>Image source: Enable file collection as source</source>
+			</trans-unit>
 			<trans-unit id="extension_manager.use_inline_collection">
 				<source>Collection rendering in BE: Display collection as 'inline' type. Improved usability but no option to add existing collection records.</source>
 			</trans-unit>
