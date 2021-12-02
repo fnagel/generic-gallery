@@ -30,6 +30,12 @@ call_user_func(function () {
             'TCEFORM.tt_content.tx_generic_gallery_collection.disabled = 1'
         );
     }
+    if ($configuration->isHideRelations()) {
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig(trim('
+            mod.web_list.table.tx_generic_gallery_pictures.hideTable = 1
+            mod.web_list.table.tx_generic_gallery_content.hideTable = 1
+        '));
+    }
 
     // FE plugin
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(

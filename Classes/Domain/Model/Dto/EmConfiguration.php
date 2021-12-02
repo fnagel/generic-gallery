@@ -40,6 +40,11 @@ class EmConfiguration
     /**
      * @var bool
      */
+    protected $hideRelations = true;
+
+    /**
+     * @var bool
+     */
     protected $enableTypeItems = true;
 
     /**
@@ -65,6 +70,22 @@ class EmConfiguration
     /**
      * @return bool
      */
+    public function isEnableCmsLayout()
+    {
+        return $this->enableCmsLayout;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isHideRelations()
+    {
+        return $this->hideRelations;
+    }
+
+    /**
+     * @return bool
+     */
     public function isEnableTypeItems()
     {
         return $this->enableTypeItems;
@@ -76,14 +97,6 @@ class EmConfiguration
     public function isEnableTypeImages()
     {
         return $this->enableTypeImages;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isEnableCmsLayout()
-    {
-        return $this->enableCmsLayout;
     }
 
     /**

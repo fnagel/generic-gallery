@@ -1,5 +1,8 @@
-	# cat=preview; type=boolean; label=LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:extension_manager.enable_cms_layout
+	# cat=basic; type=boolean; label=LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:extension_manager.enable_cms_layout
 enable_cms_layout = 1
+
+	# cat=basic; type=boolean; label=LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:extension_manager.hide_relations
+hide_relations = 1
 
 	# cat=source; type=boolean; label=LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:extension_manager.enable_type_items
 enable_type_items = 1
