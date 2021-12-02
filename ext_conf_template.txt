@@ -1,8 +1,17 @@
-	# cat=basic; type=boolean; label=LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:extension_manager.enable_cms_layout
+	# cat=preview; type=boolean; label=LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:extension_manager.enable_cms_layout
 enable_cms_layout = 1
 
-	# cat=basic; type=options[LLL:EXT:core/Resources/Private/Language/locallang_common.xlf:no=0,LLL:EXT:core/Resources/Private/Language/locallang_common.xlf:yes=1]; label=LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:extension_manager.use_inline_collection
+	# cat=source; type=boolean; label=LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:extension_manager.enable_type_items
+enable_type_items = 1
+
+	# cat=source; type=boolean; label=LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:extension_manager.enable_type_images
+enable_type_images = 1
+
+	# cat=source; type=boolean; label=LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:extension_manager.enable_type_collection
+enable_type_collection = 1
+
+	# cat=collection; type=options[LLL:EXT:core/Resources/Private/Language/locallang_common.xlf:no=0,LLL:EXT:core/Resources/Private/Language/locallang_common.xlf:yes=1]; label=LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:extension_manager.use_inline_collection
 use_inline_collection = 1
 
-	# cat=basic; type=options[LLL:EXT:core/Resources/Private/Language/locallang_common.xlf:no=0,LLL:EXT:core/Resources/Private/Language/locallang_common.xlf:yes=1]; label=LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:extension_manager.add_image_collection
+	# cat=collection; type=options[LLL:EXT:core/Resources/Private/Language/locallang_common.xlf:no=0,LLL:EXT:core/Resources/Private/Language/locallang_common.xlf:yes=1]; label=LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:extension_manager.add_image_collection
 add_image_collection = 1

@@ -15,6 +15,21 @@ call_user_func(function () {
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig(
         '<INCLUDE_TYPOSCRIPT: source="FILE:EXT:generic_gallery/Configuration/TSconfig/page.tsconfig">'
     );
+    if (!$configuration->isEnableTypeItems()) {
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig(
+            'TCEFORM.tt_content.tx_generic_gallery_items.disabled = 1'
+        );
+    }
+    if (!$configuration->isEnableTypeImages()) {
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig(
+            'TCEFORM.tt_content.tx_generic_gallery_images.disabled = 1'
+        );
+    }
+    if (!$configuration->isEnableTypeCollection()) {
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig(
+            'TCEFORM.tt_content.tx_generic_gallery_collection.disabled = 1'
+        );
+    }
 
     // FE plugin
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
