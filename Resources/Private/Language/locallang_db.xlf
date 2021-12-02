@@ -66,6 +66,9 @@
 			<trans-unit id="extension_manager.enable_cms_layout">
 				<source>Enable previews in BE: Improved record preview in backend incl. thumbnails and some more information.</source>
 			</trans-unit>
+			<trans-unit id="extension_manager.hide_relations">
+				<source>List module in BE: Hide image relation tables (items type source) in the list module.</source>
+			</trans-unit>
 			<trans-unit id="extension_manager.enable_type_items">
 				<source>Image source: Enable single items as source</source>
 			</trans-unit>
