@@ -56,10 +56,10 @@
 				<source>Description</source>
 			</trans-unit>
 			<trans-unit id="tx_genericgallery_domain_model_textitem.position">
-				<source>Position (use coordinates starting top left, like 100,200)</source>
+				<source>Position (use x/y coordinates starting top left, like 100,200)</source>
 			</trans-unit>
 			<trans-unit id="tx_genericgallery_domain_model_textitem.width">
-				<source>Width of the textfield (in px, example: 300)</source>
+				<source>Width of the text</source>
 			</trans-unit>
 
 			<trans-unit id="cms_layout.missing_config">

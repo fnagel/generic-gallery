@@ -46,7 +46,7 @@
 				<target>Bild</target>
 			</trans-unit>
 			<trans-unit id="tx_genericgallery_domain_model_galleryitem.text_items">
-				<target>Beschreibung</target>
+				<target>Beschreibungen</target>
 			</trans-unit>
 
 			<trans-unit id="tx_genericgallery_domain_model_textitem">
@@ -56,10 +56,10 @@
 				<target>Beschreibung</target>
 			</trans-unit>
 			<trans-unit id="tx_genericgallery_domain_model_textitem.position">
-				<target>Position (definiert als Koordinate oben links, z.B. 100,200)</target>
+				<target>Position (definiert als x/y Koordinate von oben links, z.B. 100,200)</target>
 			</trans-unit>
 			<trans-unit id="tx_genericgallery_domain_model_textitem.width">
-				<target>Breite des Text (benutze Pixel Werte wie 300)</target>
+				<target>Breite des Text</target>
 			</trans-unit>
 
 			<trans-unit id="cms_layout.missing_config">
@@ -67,13 +67,6 @@
 			</trans-unit>
 			<trans-unit id="cms_layout.please_select">
 				<target>Bitte wähle einen Galerie Typ.</target>
-			</trans-unit>
-
-			<trans-unit id="extension_manager.enable_cms_layout">
-				<target>Previews im BE einschalten: Bessere Backend Previews mit Thumbnails und weiteren Informationen einschalten.</target>
-			</trans-unit>
-			<trans-unit id="extension_manager.use_inline_collection">
-				<target>Collection Darstellung im BE: Collection als Datensatz vom Typ 'inline' darstellen. Bessere Usability aber keine Möglichkeit bereits existierende Collections zu nutzen.</target>
 			</trans-unit>
 		</body>
 	</file>
