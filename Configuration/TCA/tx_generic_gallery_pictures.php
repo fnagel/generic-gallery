@@ -25,14 +25,22 @@ return [
     ],
     'types' => [
         '0' => ['showitem' => '
-		--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:palette.general,
-			title, link, images, contents,
+		--div--;LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:tx_genericgallery_domain_model_galleryitem.tab.general,
+			--palette--;;paletteGeneral, images,
+		--div--;LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:tx_genericgallery_domain_model_galleryitem.tab.contents,
+			contents,
 		--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
 			hidden, --palette--;;visibility
 	'],
     ],
     'palettes' => [
-        'visibility' => ['showitem' => 'starttime, endtime'],
+        'visibility' => [
+            'showitem' => 'starttime, endtime',
+        ],
+        'paletteGeneral' => [
+            'showitem' => 'title, link',
+            'canNotCollapse' => false,
+        ],
     ],
     'columns' => [
         'crdate' => [
