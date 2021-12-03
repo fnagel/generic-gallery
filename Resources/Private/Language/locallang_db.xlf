@@ -30,6 +30,12 @@
 			<trans-unit id="tx_genericgallery_domain_model_galleryitem">
 				<source>Generic Gallery: picture relation</source>
 			</trans-unit>
+			<trans-unit id="tx_genericgallery_domain_model_galleryitem.tab.general">
+				<source>General</source>
+			</trans-unit>
+			<trans-unit id="tx_genericgallery_domain_model_galleryitem.tab.contents">
+				<source>Descriptions</source>
+			</trans-unit>
 			<trans-unit id="tx_genericgallery_domain_model_galleryitem.title">
 				<source>Title</source>
 			</trans-unit>

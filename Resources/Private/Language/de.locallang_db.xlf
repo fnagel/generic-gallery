@@ -30,6 +30,12 @@
 			<trans-unit id="tx_genericgallery_domain_model_galleryitem">
 				<target>Generic Gallery: Bild-Relation</target>
 			</trans-unit>
+			<trans-unit id="tx_genericgallery_domain_model_galleryitem.tab.general">
+				<target>Allgemein</target>
+			</trans-unit>
+			<trans-unit id="tx_genericgallery_domain_model_galleryitem.tab.contents">
+				<target>Beschreibungen</target>
+			</trans-unit>
 			<trans-unit id="tx_genericgallery_domain_model_galleryitem.title">
 				<target>Titel</target>
 			</trans-unit>
