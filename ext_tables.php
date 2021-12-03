@@ -9,16 +9,7 @@ use TYPO3\CMS\Core\Imaging\IconProvider\BitmapIconProvider;
 defined('TYPO3') || die();
 
 call_user_func(function () {
-    ExtensionManagementUtility::addLLrefForTCAdescr(
-        'tx_generic_gallery_pictures',
-        'EXT:generic_gallery/Resources/Private/Language/locallang_csh_tx_genericgallery_domain_model_galleryitem.xlf'
-    );
     ExtensionManagementUtility::allowTableOnStandardPages('tx_generic_gallery_pictures');
-
-    ExtensionManagementUtility::addLLrefForTCAdescr(
-        'tx_generic_gallery_content',
-        'EXT:generic_gallery/Resources/Private/Language/locallang_csh_tx_genericgallery_domain_model_textitem.xlf'
-    );
     ExtensionManagementUtility::allowTableOnStandardPages('tx_generic_gallery_content');
 
     /* @var $iconRegistry IconRegistry */
