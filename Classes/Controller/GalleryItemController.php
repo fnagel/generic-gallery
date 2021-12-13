@@ -61,6 +61,7 @@ class GalleryItemController extends AbstractController
         $item = $this->collection->getByIdentifier($item);
 
         if ($item === null) {
+            // @extensionScannerIgnoreLine
             $this->pageNotFoundAndExit();
         }
 

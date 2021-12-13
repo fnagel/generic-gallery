@@ -104,6 +104,7 @@ abstract class AbstractController extends ActionController
      */
     protected function getContentElementData()
     {
+        // @extensionScannerIgnoreLine
         return $this->configurationManager->getContentObject()->data;
     }
 
