@@ -297,7 +297,6 @@ class GalleryItem extends AbstractEntity
     /**
      * Process flash data
      *
-     * @param array $flash
      * @return string
      */
     protected function getFlashLabelFromTca(array $properties)

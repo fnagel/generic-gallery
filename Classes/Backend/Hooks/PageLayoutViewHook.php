@@ -125,8 +125,7 @@ class PageLayoutViewHook
         return $html;
     }
 
-    /**
-     */
+    
     protected function renderCollectionPreview()
     {
         $collection = BackendUtility::getRecord('sys_file_collection', $this->data['tx_generic_gallery_collection']);
@@ -161,8 +160,7 @@ class PageLayoutViewHook
         }
     }
 
-    /**
-     */
+    
     protected function renderImagesPreview()
     {
         $this->tableData[] = ['Source', 'images'];
@@ -176,8 +174,7 @@ class PageLayoutViewHook
         );
     }
 
-    /**
-     */
+    
     protected function renderItemsPreview()
     {
         // @todo Use localization

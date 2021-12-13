@@ -45,8 +45,6 @@ class SettingsService
     /**
      * SettingsService constructor.
      *
-     * @param ConfigurationManagerInterface $configurationManager
-     * @param TypoScriptService $typoScriptService
      */
     public function __construct(
         ConfigurationManagerInterface $configurationManager,
@@ -148,7 +146,6 @@ class SettingsService
      *
      * @param string $path
      *
-     * @return mixed
      */
     public function getTypoScriptByPath($path)
     {
