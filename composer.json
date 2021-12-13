@@ -22,6 +22,10 @@
 		"php": ">=7.2,<7.5",
 		"typo3/cms-core": ">=9.4.0,<=10.4.99"
 	},
+	"require-dev": {
+		"friendsofphp/php-cs-fixer": "^2.19",
+		"php-parallel-lint/php-parallel-lint": "^1.3"
+	},
 	"suggest": {
 		"typo3/cms-filemetadata": "*",
 		"fab/metadata": "^2.3",
@@ -40,15 +44,23 @@
 			"./class.ext_update.php"
 		]
 	},
-	"repositories": [
-		{
-			"type": "vcs",
-			"url": "https://github.com/TYPO3/TYPO3.CMS"
-		}
-	],
 	"extra": {
 		"typo3/cms": {
 			"extension-key": "generic_gallery"
 		}
+	},
+	"scripts": {
+		"test": [
+			"@test-php-lint",
+			"@test-php-cs-fixer"
+		],
+		"test-php-lint": [
+			"@php vendor/bin/parallel-lint ./Classes/",
+			"@php vendor/bin/parallel-lint ./Configuration/TCA/"
+		],
+		"test-php-cs-fixer": [
+			"@php vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php --verbose --dry-run ./Classes/",
+			"@php vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php --verbose --dry-run ./Configuration/"
+		]
 	}
 }
