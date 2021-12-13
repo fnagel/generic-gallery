@@ -83,7 +83,7 @@ class TcaHook
      * @param string $tableName
      * @return int|bool Returns page id or false on error
      */
-    protected function determinePageId($tableName, array $data): int|bool
+    protected function determinePageId($tableName, array $data)
     {
         if (str_starts_with($data['uid'], 'NEW')) {
             // negative uid_pid values of content elements indicate that the element

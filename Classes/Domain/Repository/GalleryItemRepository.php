@@ -41,7 +41,7 @@ class GalleryItemRepository extends Repository
     /**
      * @param int $uid Uid of the content element (tt_content)
      */
-    public function findForContentElement($uid): array|QueryResultInterface
+    public function findForContentElement(int $uid): QueryResultInterface
     {
         $query = $this->createQuery();
         $constraints = [

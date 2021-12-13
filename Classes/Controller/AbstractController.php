@@ -215,10 +215,8 @@ abstract class AbstractController extends ActionController
     {
         /* @var $itemRepository GalleryItemRepository */
         $itemRepository = $this->objectManager->get(GalleryItemRepository::class);
-        /* @var $items \TYPO3\CMS\Extbase\Persistence\Generic\QueryResult */
-        $items = $itemRepository->findForContentElement($this->getContentElementUid());
 
-        return $items->toArray();
+        return $itemRepository->findForContentElement($this->getContentElementUid())->toArray();
     }
 
     /**

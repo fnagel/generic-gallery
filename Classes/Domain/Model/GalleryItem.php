@@ -85,7 +85,10 @@ class GalleryItem extends AbstractEntity
         $this->textItems = new ObjectStorage();
     }
 
-    public function getIdentifier(): int|string
+    /**
+     * @return int|string|null
+     */
+    public function getIdentifier()
     {
         $identifier = $this->getUid();
 
@@ -323,8 +326,10 @@ class GalleryItem extends AbstractEntity
 
     /**
      * Sets the imageReference.
+     *
+     * @return CoreFileReference|ExtbaseFileReference
      */
-    public function setImageReference(CoreFileReference|ExtbaseFileReference $imageReference)
+    public function setImageReference($imageReference)
     {
         $fileReference = $imageReference;
 
