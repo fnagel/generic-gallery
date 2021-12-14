@@ -12,6 +12,26 @@ Upgrade Guide
 
 
 
+Update from 5.0.0 to 5.0.1
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Overview**
+
+- Bugfix for PHP 7.4
+
+- Removed support for PHP < 7.4
+
+- Removed support for TYPO3 < 11.4
+
+- Added basic lint and php-cs tests
+
+
+**How to upgrade**
+
+#. Clear all caches
+
+
+
 Update from 4.2.x to 5.0.0
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
