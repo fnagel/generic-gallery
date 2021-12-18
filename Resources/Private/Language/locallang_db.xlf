@@ -13,6 +13,9 @@
 			<trans-unit id="generic_gallery_predefined">
 				<source>Gallery type</source>
 			</trans-unit>
+			<trans-unit id="generic_gallery_predefined.desc">
+				<source>Choose how a layout for your images.</source>
+			</trans-unit>
 			<trans-unit id="generic_gallery_items">
 				<source>Single pictures</source>
 			</trans-unit>
@@ -56,10 +59,16 @@
 				<source>Description</source>
 			</trans-unit>
 			<trans-unit id="tx_genericgallery_domain_model_textitem.position">
-				<source>Position (use x/y coordinates starting top left, like 100,200)</source>
+				<source>Position</source>
+			</trans-unit>
+			<trans-unit id="tx_genericgallery_domain_model_textitem.position.desc">
+				<source>Use x/y coordinates starting top left (like 100,200).</source>
 			</trans-unit>
 			<trans-unit id="tx_genericgallery_domain_model_textitem.width">
-				<source>Width of the text</source>
+				<source>Width</source>
+			</trans-unit>
+			<trans-unit id="tx_genericgallery_domain_model_textitem.width.desc">
+				<source>Width of the text box.</source>
 			</trans-unit>
 
 			<trans-unit id="cms_layout.missing_config">

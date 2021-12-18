@@ -104,6 +104,7 @@ return [
         'position' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:tx_genericgallery_domain_model_textitem.position',
+            'description' => 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:tx_genericgallery_domain_model_textitem.position.desc',
             'config' => [
                 'type' => 'input',
                 'size' => 10,
@@ -114,6 +115,7 @@ return [
         'width' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:tx_genericgallery_domain_model_textitem.width',
+            'description' => 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:tx_genericgallery_domain_model_textitem.width.desc',
             'config' => [
                 'type' => 'input',
                 'size' => 10,

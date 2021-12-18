@@ -18,6 +18,7 @@ call_user_func(function ($packageKey) {
         'tx_generic_gallery_predefined' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:generic_gallery_predefined',
+            'description' => 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:generic_gallery_predefined.desc',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
