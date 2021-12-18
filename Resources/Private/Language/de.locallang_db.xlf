@@ -13,6 +13,9 @@
 			<trans-unit id="generic_gallery_predefined">
 				<target>Galerie Typ</target>
 			</trans-unit>
+			<trans-unit id="generic_gallery_predefined.desc">
+				<target>Entscheide wie die Bilder dargestellt werden.</target>
+			</trans-unit>
 			<trans-unit id="generic_gallery_items">
 				<target>Einzelne Bilder</target>
 			</trans-unit>
@@ -56,10 +59,16 @@
 				<target>Beschreibung</target>
 			</trans-unit>
 			<trans-unit id="tx_genericgallery_domain_model_textitem.position">
-				<target>Position (definiert als x/y Koordinate von oben links, z.B. 100,200)</target>
+				<target>Position</target>
+			</trans-unit>
+			<trans-unit id="tx_genericgallery_domain_model_textitem.position.desc">
+				<target>Position definiert als x/y Koordinate von oben links (z.B. 100,200).</target>
 			</trans-unit>
 			<trans-unit id="tx_genericgallery_domain_model_textitem.width">
-				<target>Breite des Text</target>
+				<target>Breite</target>
+			</trans-unit>
+			<trans-unit id="tx_genericgallery_domain_model_textitem.width.desc">
+				<target>Breite der Text-Box.</target>
 			</trans-unit>
 
 			<trans-unit id="cms_layout.missing_config">
