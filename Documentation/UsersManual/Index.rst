@@ -13,7 +13,7 @@ Target group: **Editors**
 
 - Choose a gallery type
 
-- Add pictures
+- Add pictures (please note: not all types might be available on your TYPO3 instance)
 
   - Single mode
 
