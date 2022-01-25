@@ -11,6 +11,32 @@ Upgrade Guide
    :depth: 3
 
 
+
+Update from 4.2.0 to 4.3.0
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Overview**
+
+- Remove support for PHP < 7.2
+
+- Add some more extension manager configuration options
+
+- Improve TCA with palettes and descriptions
+
+- Added basic lint and php-cs tests
+
+- Code quality improvements and clean-up
+
+- Some minor improvements and fixes
+
+
+**How to upgrade**
+
+#. Adjust your EM configuration if needed
+
+#. Clear all caches
+
+
 Update from 4.1.0 to 4.2.0
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -36,7 +62,6 @@ Update from 4.1.0 to 4.2.0
 #. Adjust your TS / TSconfig file includes if needed
 
 #. Clear all caches
-
 
 
 Update from 4.0.x to 4.1.0
