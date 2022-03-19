@@ -39,10 +39,7 @@
 	"autoload-dev": {
 		"psr-4": {
 			"FelixNagel\\GenericGallery\\Tests\\": "Tests/"
-		},
-		"files": [
-			"./class.ext_update.php"
-		]
+		}
 	},
 	"extra": {
 		"typo3/cms": {

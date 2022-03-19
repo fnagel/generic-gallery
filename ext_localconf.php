@@ -6,6 +6,7 @@ use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 use FelixNagel\GenericGallery\Controller\GalleryCollectionController;
 use FelixNagel\GenericGallery\Controller\GalleryItemController;
 use FelixNagel\GenericGallery\Routing\Aspect\ImageItemMapper;
+use FelixNagel\GenericGallery\UpgradeWizard;
 use TYPO3\CMS\Core\Resource\Collection\StaticFileCollection;
 
 defined('TYPO3') || die();
@@ -75,4 +76,8 @@ call_user_func(function () {
         $GLOBALS['TYPO3_CONF_VARS']['SYS']['fal']['registeredCollections']['images'] =
             StaticFileCollection::class;
     }
+
+    // Upgrade wizards
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][UpgradeWizard\PluginListTypeWizard::class]
+        = UpgradeWizard\PluginListTypeWizard::class;
 });
