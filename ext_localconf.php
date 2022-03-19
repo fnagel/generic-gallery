@@ -59,14 +59,13 @@ call_user_func(function () {
     );
 
     // Add cHash configuration
-    // See: http://forum.typo3.org/index.php?t=msg&th=203350
-    $requiredParameters = [
-        'tx_genericgallery_pi1[controller]',
-        'tx_genericgallery_pi1[action]',
-        'tx_genericgallery_pi1[item]',
-        'tx_genericgallery_pi1[contentElement]',
-    ];
-    $GLOBALS['TYPO3_CONF_VARS']['FE']['cHashRequiredParameters'] .= ','.implode(',', $requiredParameters);
+    $GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['requireCacheHashPresenceParameters'] =
+        array_merge($GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['requireCacheHashPresenceParameters'], [
+            'tx_genericgallery_pi1[controller]',
+            'tx_genericgallery_pi1[action]',
+            'tx_genericgallery_pi1[item]',
+            'tx_genericgallery_pi1[contentElement]',
+        ]);
 
     // Routing
     $GLOBALS['TYPO3_CONF_VARS']['SYS']['routing']['aspects']['GenericGalleryImageItemMapper'] = ImageItemMapper::class;
