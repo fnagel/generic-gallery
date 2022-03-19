@@ -20,9 +20,6 @@ use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 use FelixNagel\GenericGallery\Domain\Repository\GalleryItemRepository;
 use TYPO3\CMS\Frontend\Controller\ErrorController;
 
-/**
- * BaseController.
- */
 abstract class AbstractController extends ActionController
 {
     /**
@@ -40,16 +37,13 @@ abstract class AbstractController extends ActionController
      */
     public const GALLERY_TYPE_COLLECTION = 'collection';
 
-    /**
-     * @var null
-     */
-    protected $uid = null;
+    protected ?int $uid = null;
 
     protected array $cObjData = [];
 
     protected array $gallerySettings = [];
 
-    protected array $currentSettings = [];
+    protected ?array $currentSettings = [];
 
     protected ?string $galleryKey = null;
 
