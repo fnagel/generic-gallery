@@ -11,6 +11,29 @@ Upgrade Guide
    :depth: 3
 
 
+Update to 5.1.0
+^^^^^^^^^^^^^^^
+
+**Overview**
+
+- Add some more extension manager configuration options
+
+- Improve TCA with palettes and descriptions
+
+- Migrated EM update class to upgrade wizards (you might need to run those again)
+
+- Code quality improvements and clean-up
+
+- Some more improvements and fixes
+
+
+**How to upgrade**
+
+#. Adjust your EM configuration if needed
+
+#. Clear all caches
+
+
 
 Update from 5.0.0 to 5.0.1
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -32,8 +55,8 @@ Update from 5.0.0 to 5.0.1
 
 
 
-Update from 4.2.x to 5.0.0
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+Update from 4.x to 5.0.0
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 **Overview**
 
