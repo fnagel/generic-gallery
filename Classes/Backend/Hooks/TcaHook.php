@@ -64,7 +64,7 @@ class TcaHook
                     $optionList[] = [
                         0 => ($view['name']) ?: $key,
                         1 => $key.'.',
-                        2 => ($view['icon']) ?: 'extensions-generic-gallery',
+                        2 => (array_key_exists('icon', $view) && $view['icon']) ?: 'extensions-generic-gallery',
                     ];
                 }
             }
