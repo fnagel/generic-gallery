@@ -82,10 +82,10 @@ abstract class AbstractController extends ActionController
     {
         if ($this->uid === null) {
             $data = $this->getContentElementData();
-            $this->uid = $data['_LOCALIZED_UID'] ?: $data['uid'];
+            $this->uid = (int)(array_key_exists('_LOCALIZED_UID', $data) ? $data['_LOCALIZED_UID'] : $data['uid']);
         }
 
-        return (int) $this->uid;
+        return $this->uid;
     }
 
     /**
