@@ -25,6 +25,7 @@ class GalleryCollectionController extends AbstractController
     protected function initializeView(ViewInterface $view)
     {
         $this->template = $this->currentSettings['template'];
+
         parent::initializeView($view);
     }
 
@@ -33,11 +34,7 @@ class GalleryCollectionController extends AbstractController
      */
     public function showAction(int $page = 1): ResponseInterface
     {
-        $paginator = new ArrayPaginator(
-            $this->collection->getArray(),
-            $page,
-            $this->currentSettings['paginate']['itemsPerPage'] ?: 10,
-        );
+        $paginator = new ArrayPaginator($this->collection->getArray(), $page, $this->getItemsPerPage());
 
         $this->view->assignMultiple([
             'collection' => $this->collection,
@@ -46,5 +43,11 @@ class GalleryCollectionController extends AbstractController
         ]);
 
         return $this->htmlResponse();
+    }
+
+    protected function getItemsPerPage(): int
+    {
+        return array_key_exists('paginate', $this->currentSettings) && $this->currentSettings['paginate']['itemsPerPage']
+            ? (int)$this->currentSettings['paginate']['itemsPerPage'] : 10;
     }
 }
