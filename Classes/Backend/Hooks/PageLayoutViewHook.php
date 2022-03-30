@@ -125,7 +125,6 @@ class PageLayoutViewHook
         return $html;
     }
 
-    
     protected function renderCollectionPreview()
     {
         $collection = BackendUtility::getRecord('sys_file_collection', $this->data['tx_generic_gallery_collection']);
@@ -160,21 +159,14 @@ class PageLayoutViewHook
         }
     }
 
-    
     protected function renderImagesPreview()
     {
         $this->tableData[] = ['Source', 'images'];
         $this->tableData[] = ['Images', $this->data['tx_generic_gallery_images']];
 
-        $this->imagePreviewHtml = BackendUtility::thumbCode(
-            $this->data,
-            'tt_content',
-            'tx_generic_gallery_images',
-            $GLOBALS['BACK_PATH']
-        );
+        $this->imagePreviewHtml = BackendUtility::thumbCode($this->data, 'tt_content', 'tx_generic_gallery_images');
     }
 
-    
     protected function renderItemsPreview()
     {
         // @todo Use localization
