@@ -9,12 +9,12 @@ namespace FelixNagel\GenericGallery\Controller;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use TYPO3\CMS\Core\Resource\FileCollectionRepository;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use FelixNagel\GenericGallery\Domain\Model\GalleryCollection;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Http\ImmediateResponseException;
 use TYPO3\CMS\Core\Resource\FileRepository;
-use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 use FelixNagel\GenericGallery\Domain\Repository\GalleryItemRepository;
@@ -140,6 +140,9 @@ abstract class AbstractController extends ActionController
         $this->cObjData = $this->getContentElementData();
         $this->gallerySettings = $this->settings['gallery'];
         $this->galleryKey = rtrim($this->cObjData['tx_generic_gallery_predefined'], '.');
+        if (empty($this->galleryKey)) {
+            $this->galleryKey = 'default';
+        }
         $this->currentSettings = $this->gallerySettings[$this->galleryKey];
 
         $this->determineGalleryType();
@@ -234,11 +237,11 @@ abstract class AbstractController extends ActionController
      */
     protected function getCollection()
     {
-        /* @var $resourceFactory ResourceFactory */
-        $resourceFactory = $this->objectManager->get(ResourceFactory::class);
+        /* @var $fileCollectionRepository FileCollectionRepository */
+        $fileCollectionRepository = GeneralUtility::makeInstance(FileCollectionRepository::class);
 
         /* @var $collection \TYPO3\CMS\Core\Resource\Collection\AbstractFileCollection */
-        $collection = $resourceFactory->getCollectionObject((int) $this->cObjData['tx_generic_gallery_collection']);
+        $collection = $fileCollectionRepository->findByUid((int) $this->cObjData['tx_generic_gallery_collection']);
         $collection->loadContents();
 
         return $collection->getItems();
