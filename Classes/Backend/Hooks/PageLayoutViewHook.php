@@ -142,6 +142,10 @@ class PageLayoutViewHook
     protected function renderCollectionPreview()
     {
         $collection = BackendUtility::getRecord('sys_file_collection', $this->data['tx_generic_gallery_collection']);
+        if ($collection === null) {
+            //record may have been deleted
+            return;
+        }
 
         $this->tableData[] = ['Source', 'collection (' . $collection['type'] . ')'];
         $this->tableData[] = [
