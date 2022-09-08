@@ -9,6 +9,8 @@ namespace FelixNagel\GenericGallery\Controller;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use TYPO3\CMS\Core\Resource\Collection\AbstractFileCollection;
+use TYPO3\CMS\Core\Resource\Exception\ResourceDoesNotExistException;
 use TYPO3\CMS\Core\Resource\FileCollectionRepository;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use FelixNagel\GenericGallery\Domain\Model\GalleryCollection;
@@ -242,9 +244,17 @@ abstract class AbstractController extends ActionController
         /* @var $fileCollectionRepository FileCollectionRepository */
         $fileCollectionRepository = GeneralUtility::makeInstance(FileCollectionRepository::class);
 
-        /* @var $collection \TYPO3\CMS\Core\Resource\Collection\AbstractFileCollection */
-        $collection = $fileCollectionRepository->findByUid((int) $this->cObjData['tx_generic_gallery_collection']);
-        $collection->loadContents();
+        /* @var $collection AbstractFileCollection */
+        try {
+            $uid = (int) $this->cObjData['tx_generic_gallery_collection'];
+            $collection = $fileCollectionRepository->findByUid($uid);
+            $collection->loadContents();
+        } catch (ResourceDoesNotExistException $exception) {
+            $this->logError(
+                'Collection with UID '.$uid.' / PID '.$this->cObjData['pid'].' does not exist (anymore), maybe deleted!'
+            );
+            return [];
+        }
 
         return $collection->getItems();
     }
