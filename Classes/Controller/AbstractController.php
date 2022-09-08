@@ -243,8 +243,13 @@ abstract class AbstractController extends ActionController
         $fileCollectionRepository = GeneralUtility::makeInstance(FileCollectionRepository::class);
 
         /* @var $collection \TYPO3\CMS\Core\Resource\Collection\AbstractFileCollection */
-        $collection = $fileCollectionRepository->findByUid((int) $this->cObjData['tx_generic_gallery_collection']);
-        $collection->loadContents();
+        try {
+            $collection = $fileCollectionRepository->findByUid((int) $this->cObjData['tx_generic_gallery_collection']);
+            $collection->loadContents();
+        } catch (\InvalidArgumentException $exception) {
+            //collection does not exist (anymore), maybe deleted.
+            return [];
+        }
 
         return $collection->getItems();
     }
