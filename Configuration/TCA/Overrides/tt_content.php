@@ -107,6 +107,7 @@ call_user_func(function ($packageKey) {
             ],
             'maxitems' => 1,
             'minitems' => 0,
+            'default' => 0,
         ];
     }
 
