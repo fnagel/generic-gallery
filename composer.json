@@ -23,7 +23,7 @@
 		"typo3/cms-core": ">=11.4.0,<=11.5.99"
 	},
 	"require-dev": {
-		"friendsofphp/php-cs-fixer": "^2.19",
+		"friendsofphp/php-cs-fixer": "^3.12",
 		"php-parallel-lint/php-parallel-lint": "^1.3"
 	},
 	"suggest": {
