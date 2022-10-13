@@ -43,7 +43,7 @@ abstract class AbstractController extends ActionController
 
     protected array $gallerySettings = [];
 
-    protected ?array $currentSettings = [];
+    protected ?array $currentSettings = null;
 
     protected ?string $galleryKey = null;
 
@@ -139,8 +139,13 @@ abstract class AbstractController extends ActionController
     {
         $this->cObjData = $this->getContentElementData();
         $this->gallerySettings = $this->settings['gallery'];
-        $this->galleryKey = rtrim($this->cObjData['tx_generic_gallery_predefined'], '.');
-        $this->currentSettings = $this->gallerySettings[$this->galleryKey];
+        $this->galleryKey = !empty($this->cObjData['tx_generic_gallery_predefined'])
+            ? rtrim($this->cObjData['tx_generic_gallery_predefined'], '.') : null;
+        $this->currentSettings = $this->gallerySettings[$this->galleryKey] ?? null;
+
+        if ($this->currentSettings === null) {
+            throw new \Exception('No configuration found for gallery with key: '.$this->galleryKey, 1665663555);
+        }
 
         $this->determineGalleryType();
         $this->generateCollection();
