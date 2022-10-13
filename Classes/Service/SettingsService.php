@@ -18,7 +18,7 @@ use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 use TYPO3\CMS\Core\TypoScript\TypoScriptService;
 
 /**
- * Class SettingsService.
+ * Provide a way to get the configuration just everywhere.
  */
 class SettingsService
 {
@@ -44,7 +44,6 @@ class SettingsService
 
     /**
      * SettingsService constructor.
-     *
      */
     public function __construct(
         ConfigurationManagerInterface $configurationManager,
@@ -56,12 +55,8 @@ class SettingsService
 
     /**
      * Returns all framework settings.
-     *
-     * @return array
-     *
-     * @throws Exception
      */
-    public function getFrameworkSettings()
+    public function getFrameworkSettings(): array
     {
         if ($this->frameworkSettings === null) {
             $this->frameworkSettings = $this->configurationManager->getConfiguration(
@@ -72,7 +67,7 @@ class SettingsService
         }
 
         if ($this->frameworkSettings === null) {
-            throw new Exception('No framework typoscript settings available.');
+            throw new Exception('No framework TypoScript configuration available!', 1592249266);
         }
 
         return $this->frameworkSettings;
@@ -80,12 +75,8 @@ class SettingsService
 
     /**
      * Returns all TS settings.
-     *
-     * @return array
-     *
-     * @throws Exception
      */
-    public function getTypoScriptSettings()
+    public function getTypoScriptSettings(): array
     {
         if ($this->typoScriptSettings === null) {
             $this->typoScriptSettings = $this->configurationManager->getConfiguration(
@@ -96,7 +87,7 @@ class SettingsService
         }
 
         if ($this->typoScriptSettings === null) {
-            throw new Exception('No typoscript settings available.');
+            throw new Exception('No settings TypoScript configuration available!', 1592249324);
         }
 
         return $this->typoScriptSettings;
@@ -104,13 +95,8 @@ class SettingsService
 
     /**
      * Returns all TS settings.
-     *
-     * @param int $pid
-     * @return array
-     *
-     * @throws Exception
      */
-    public function getTypoScriptSettingsFromBackend($pid)
+    public function getTypoScriptSettingsFromBackend(int $pid): array
     {
         if ($this->typoScriptSettings === null) {
             /* @var $rootLineUtility RootlineUtility */
@@ -143,11 +129,8 @@ class SettingsService
      * "pages.uid" would return $this->settings['pages']['uid'].
      *
      * If the path is invalid or no entry is found, false is returned.
-     *
-     * @param string $path
-     *
      */
-    public function getTypoScriptByPath($path)
+    public function getTypoScriptByPath(string $path)
     {
         return ObjectAccess::getPropertyPath($this->getTypoScriptSettings(), $path);
     }

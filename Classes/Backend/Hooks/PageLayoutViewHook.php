@@ -17,8 +17,6 @@ use FelixNagel\GenericGallery\Utility\EmConfiguration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
-use TYPO3\CMS\Extbase\Object\Container\Container;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
  * Hook class for PageLayoutView hook `list_type_Info`.
@@ -27,25 +25,17 @@ use TYPO3\CMS\Extbase\Object\ObjectManager;
  */
 class PageLayoutViewHook
 {
-    protected ?object $objectContainer = null;
-
-    protected ?ObjectManager $objectManager = null;
-
     protected ?object $settingsService = null;
 
     /*
      * Current page settings
-     *
-     * @var array
      */
     private ?array $settings = null;
 
     /*
      * Current row data
-     *
-     * @var array
      */
-    private $data = null;
+    private ?array $data = null;
 
     /**
      * Table information.
@@ -60,17 +50,9 @@ class PageLayoutViewHook
     /**
      * Returns information about this plugin content.
      *
-     * No type hint for $parentObject parameter due to fatal error when TemplaVoila is installed
-     *
-     * @param array                                  &$parameters   Parameters for the hook:
-     *                                                              'pObj' => reference to \TYPO3\CMS\Backend\View\PageLayoutView
-     *                                                              'row' => $row,
-     *                                                              'infoArr' => $infoArr
-     * @param \TYPO3\CMS\Backend\View\PageLayoutView &$parentObject
-     *
      * @return string Rendered output for PageLayoutView
      */
-    public function getExtensionSummary(array &$parameters = [], &$parentObject = null)
+    public function getExtensionSummary(array &$parameters = [])
     {
         if ($parameters['row']['list_type'] !== 'genericgallery_pi1') {
             return '';
@@ -93,7 +75,9 @@ class PageLayoutViewHook
      */
     protected function renderHeader()
     {
-        $editLink = GeneralUtility::makeInstance(UriBuilder::class)->buildUriFromRoute('record_edit') . ('&edit[tt_content]['.$this->data['uid'].']=edit') . '&returnUrl=' . rawurlencode(GeneralUtility::getIndpEnv('REQUEST_URI'));
+        $editLink = GeneralUtility::makeInstance(UriBuilder::class)->buildUriFromRoute('record_edit')
+            .('&edit[tt_content]['.$this->data['uid'].']=edit')
+            .'&returnUrl='.rawurlencode(GeneralUtility::getIndpEnv('REQUEST_URI'));
 
         return '<strong><a href="#" onclick="'.$editLink.'">Generic Gallery</strong><br>';
     }
@@ -190,7 +174,7 @@ class PageLayoutViewHook
             ->orderBy('sorting');
 
         $statement = $queryBuilder->execute();
-        $rows = $statement->fetchAll();
+        $rows = $statement->fetchAllAssociative();
         $this->tableData[] = ['Images', is_countable($rows) ? count($rows) : 0];
         if ($rows === null) {
             return $result;
@@ -220,8 +204,7 @@ class PageLayoutViewHook
             $content = $icon.$content;
         }
 
-        // @todo Change this when TYPO3 10 is no longer needed
-        return BackendUtility::wrapClickMenuOnIcon($content, $table, $record['uid'], 1, '', '+info,edit');
+        return BackendUtility::wrapClickMenuOnIcon($content, $table, $record['uid']);
     }
 
     /**
@@ -231,7 +214,7 @@ class PageLayoutViewHook
      */
     protected function renderInfoTable()
     {
-        if (count($this->tableData) == 0) {
+        if (count($this->tableData) === 0) {
             return '';
         }
 
@@ -245,42 +228,15 @@ class PageLayoutViewHook
     }
 
     /**
-     * @param string $key
-     * @param string $keyPrefix
-     *
-     * @return string
-     */
-    protected function translate(
-        $key,
-        $keyPrefix = 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf'
-    ) {
-        return $GLOBALS['LANG']->sL($keyPrefix.':'.$key);
-    }
-
-    /**
      * @return SettingsService
      */
     protected function getTypoScriptService()
     {
         if ($this->settingsService === null) {
-            $this->settingsService = $this->getObjectContainer()->getInstance(SettingsService::class);
+            $this->settingsService = GeneralUtility::makeInstance(SettingsService::class);
         }
 
         return $this->settingsService;
-    }
-
-    /**
-     * Get object container.
-     *
-     * @return \TYPO3\CMS\Extbase\Object\Container\Container
-     */
-    protected function getObjectContainer()
-    {
-        if ($this->objectContainer === null) {
-            $this->objectContainer = GeneralUtility::makeInstance(Container::class);
-        }
-
-        return $this->objectContainer;
     }
 
     /**
