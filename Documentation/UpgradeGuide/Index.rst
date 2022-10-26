@@ -11,6 +11,27 @@ Upgrade Guide
    :depth: 3
 
 
+Update to 5.2.0
+^^^^^^^^^^^^^^^
+
+**Overview**
+
+- Add support for PHP 8.1
+
+- Bugfix for deleted image collection records
+
+- Bugfix for SQL mode issue
+
+- Bugfixes and minor CGL improvements
+
+
+**How to upgrade**
+
+#. Clear all caches
+
+
+
+
 Update to 5.1.0
 ^^^^^^^^^^^^^^^
 
