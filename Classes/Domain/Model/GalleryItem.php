@@ -56,19 +56,19 @@ class GalleryItem extends AbstractEntity
      *
      * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
      */
-    protected ?\TYPO3\CMS\Extbase\Domain\Model\FileReference $imageReference = null;
+    protected ?ExtbaseFileReference $imageReference = null;
 
     /**
      * image.
      *
-     * @var \TYPO3\CMS\Core\Resource\File
+     * @var File
      */
     protected ?File $image = null;
 
     /**
      * textItems.
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\FelixNagel\GenericGallery\Domain\Model\TextItem>
+     * @var ObjectStorage<TextItem>
      */
     protected ?ObjectStorage $textItems = null;
 
@@ -85,10 +85,7 @@ class GalleryItem extends AbstractEntity
         $this->textItems = new ObjectStorage();
     }
 
-    /**
-     * @return int|string|null
-     */
-    public function getIdentifier()
+    public function getIdentifier(): int|string|null
     {
         $identifier = $this->getUid();
 
@@ -207,7 +204,7 @@ class GalleryItem extends AbstractEntity
     /**
      * Returns the image.
      *
-     * @return \TYPO3\CMS\Core\Resource\File $image
+     * @return File $image
      */
     public function getImage()
     {
@@ -285,16 +282,14 @@ class GalleryItem extends AbstractEntity
      */
     protected function processPropertiesForMetadaExtension(array $properties)
     {
-        $data = [];
-
-        // Process exif data
-        $data['shutter_speed_value'] = $properties['shutter_speed_value'].'s';
-        $data['aperture_value'] = 'f/'.$properties['aperture_value'];
-        $data['focal_length'] = $properties['focal_length'].'mm';
-        $data['iso_speed_ratings'] = 'ISO'.$properties['iso_speed_ratings'];
-        $data['flash'] = $this->getFlashLabelFromTca($properties);
-
-        return $data;
+        return [
+            // Process exif data
+            'shutter_speed_value' => $properties['shutter_speed_value'].'s',
+            'aperture_value' => 'f/'.$properties['aperture_value'],
+            'focal_length' => $properties['focal_length'].'mm',
+            'iso_speed_ratings' => 'ISO'.$properties['iso_speed_ratings'],
+            'flash' => $this->getFlashLabelFromTca($properties),
+        ];
     }
 
     /**
@@ -317,7 +312,7 @@ class GalleryItem extends AbstractEntity
     /**
      * Sets the image.
      *
-     * @param \TYPO3\CMS\Core\Resource\File $image
+     * @param File $image
      */
     public function setImage($image)
     {
@@ -329,7 +324,7 @@ class GalleryItem extends AbstractEntity
      *
      * @return CoreFileReference|ExtbaseFileReference
      */
-    public function setImageReference($imageReference)
+    public function setImageReference($imageReference): CoreFileReference|ExtbaseFileReference
     {
         $fileReference = $imageReference;
 
@@ -388,7 +383,7 @@ class GalleryItem extends AbstractEntity
     /**
      * Returns the textItems.
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage An object storage containing the textItems
+     * @return ObjectStorage An object storage containing the textItems
      *
      * @api
      */

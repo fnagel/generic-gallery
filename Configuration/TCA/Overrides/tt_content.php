@@ -1,13 +1,19 @@
 <?php
 
-defined('TYPO3') or die();
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use FelixNagel\GenericGallery\Utility\EmConfiguration;
+use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Core\Resource\File;
 
-call_user_func(function ($packageKey) {
-    $extensionName = \TYPO3\CMS\Core\Utility\GeneralUtility::underscoredToLowerCamelCase($packageKey);
+defined('TYPO3') || die();
+
+call_user_func(static function ($packageKey) {
+    $extensionName = GeneralUtility::underscoredToLowerCamelCase($packageKey);
     $pluginSignature = strtolower($extensionName).'_pi1';
-    $configuration = \FelixNagel\GenericGallery\Utility\EmConfiguration::getSettings();
+    $configuration = EmConfiguration::getSettings();
 
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+    ExtensionUtility::registerPlugin(
         'GenericGallery',
         'Pi1',
         'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:generic_gallery.plugin.title'
@@ -52,7 +58,7 @@ call_user_func(function ($packageKey) {
         'tx_generic_gallery_images' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:generic_gallery_images',
-            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
+            'config' => ExtensionManagementUtility::getFileFieldTCAConfig(
                 'tx_generic_gallery_picture_single',
                 [
                     'size' => 20,
@@ -61,9 +67,9 @@ call_user_func(function ($packageKey) {
                     'autoSizeMax' => 40,
                     'overrideChildTca' => [
                         'types' => [
-                            \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
+                            File::FILETYPE_IMAGE => [
                                 'showitem' => '
-									--palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.basicoverlayPalette;genericGalleryImagePalette,
+									--palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.basicoverlayPalette;genericGalleryImagePalette,
 									--palette--;;filePalette',
                             ],
                         ],
@@ -79,7 +85,6 @@ call_user_func(function ($packageKey) {
             'label' => 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:generic_gallery_collection',
             'config' => [
                 'type' => 'group',
-                'internal_type' => 'db',
                 'allowed' => 'sys_file_collection',
                 'size' => 1,
                 'maxitems' => 1,
@@ -110,7 +115,7 @@ call_user_func(function ($packageKey) {
     }
 
     // Add field to tt_content
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('tt_content', $tempColumns);
+    ExtensionManagementUtility::addTCAcolumns('tt_content', $tempColumns);
     $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] =
         'tx_generic_gallery_predefined,tx_generic_gallery_items,tx_generic_gallery_images,tx_generic_gallery_collection';
 

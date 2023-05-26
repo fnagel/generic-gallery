@@ -70,10 +70,8 @@ class PageLayoutViewHook
 
     /**
      * Render header.
-     *
-     * @return string
      */
-    protected function renderHeader()
+    protected function renderHeader(): string
     {
         $editLink = GeneralUtility::makeInstance(UriBuilder::class)->buildUriFromRoute('record_edit')
             .('&edit[tt_content]['.$this->data['uid'].']=edit')
@@ -178,8 +176,7 @@ class PageLayoutViewHook
             )
             ->orderBy('sorting');
 
-        $statement = $queryBuilder->execute();
-        $rows = $statement->fetchAllAssociative();
+        $rows = $queryBuilder->executeQuery()->fetchAllAssociative();
         $this->tableData[] = ['Images', is_countable($rows) ? count($rows) : 0];
         if ($rows === null) {
             return $result;
@@ -214,10 +211,8 @@ class PageLayoutViewHook
 
     /**
      * Render the settings as table for Web>Page module.
-     *
-     * @return string
      */
-    protected function renderInfoTable()
+    protected function renderInfoTable(): string
     {
         if (count($this->tableData) === 0) {
             return '';

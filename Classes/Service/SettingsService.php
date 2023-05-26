@@ -38,19 +38,14 @@ class SettingsService
 
     protected ?array $frameworkSettings = null;
 
-    protected ConfigurationManagerInterface $configurationManager;
-
-    protected TypoScriptService $typoScriptService;
-
     /**
      * SettingsService constructor.
      */
     public function __construct(
-        ConfigurationManagerInterface $configurationManager,
-        TypoScriptService $typoScriptService
-    ) {
-        $this->configurationManager = $configurationManager;
-        $this->typoScriptService = $typoScriptService;
+        protected ConfigurationManagerInterface $configurationManager,
+        protected TypoScriptService $typoScriptService
+    )
+    {
     }
 
     /**

@@ -83,7 +83,7 @@ class TcaHook
      * @param string $tableName
      * @return int|bool Returns page id or false on error
      */
-    protected function determinePageId($tableName, array $data)
+    protected function determinePageId($tableName, array $data): int|bool
     {
         if (str_starts_with($data['uid'], 'NEW')) {
             // negative uid_pid values of content elements indicate that the element
@@ -100,9 +100,8 @@ class TcaHook
                             'uid',
                             $queryBuilder->createNamedParameter(abs($data['pid']), \PDO::PARAM_INT)
                         )
-                    )
-                    ->execute()
-                    ->fetchColumn();
+                    )->executeQuery()
+                    ->fetchOne();
             } else {
                 $pageId = $data['pid'];
             }
@@ -129,7 +128,7 @@ class TcaHook
     }
 
     /**
-     * @return \FelixNagel\GenericGallery\Service\SettingsService
+     * @return SettingsService
      */
     protected function getTypoScriptService()
     {

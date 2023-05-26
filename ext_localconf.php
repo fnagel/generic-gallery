@@ -11,7 +11,7 @@ use TYPO3\CMS\Core\Resource\Collection\StaticFileCollection;
 
 defined('TYPO3') || die();
 
-call_user_func(function () {
+call_user_func(static function () {
     $configuration = EmConfiguration::getSettings();
 
     // BE preview
@@ -23,22 +23,22 @@ call_user_func(function () {
         '<INCLUDE_TYPOSCRIPT: source="FILE:EXT:generic_gallery/Configuration/TSconfig/page.tsconfig">'
     );
     if (!$configuration->isEnableTypeItems()) {
-        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig(
+        ExtensionManagementUtility::addPageTSConfig(
             'TCEFORM.tt_content.tx_generic_gallery_items.disabled = 1'
         );
     }
     if (!$configuration->isEnableTypeImages()) {
-        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig(
+        ExtensionManagementUtility::addPageTSConfig(
             'TCEFORM.tt_content.tx_generic_gallery_images.disabled = 1'
         );
     }
     if (!$configuration->isEnableTypeCollection()) {
-        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig(
+        ExtensionManagementUtility::addPageTSConfig(
             'TCEFORM.tt_content.tx_generic_gallery_collection.disabled = 1'
         );
     }
     if ($configuration->isHideRelations()) {
-        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig(trim('
+        ExtensionManagementUtility::addPageTSConfig(trim('
             mod.web_list.table.tx_generic_gallery_pictures.hideTable = 1
             mod.web_list.table.tx_generic_gallery_content.hideTable = 1
         '));

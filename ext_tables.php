@@ -8,11 +8,10 @@ use TYPO3\CMS\Core\Imaging\IconProvider\BitmapIconProvider;
 
 defined('TYPO3') || die();
 
-call_user_func(function () {
+call_user_func(static function () {
     ExtensionManagementUtility::allowTableOnStandardPages('tx_generic_gallery_pictures');
     ExtensionManagementUtility::allowTableOnStandardPages('tx_generic_gallery_content');
 
-    /* @var $iconRegistry IconRegistry */
     $iconRegistry = GeneralUtility::makeInstance(IconRegistry::class);
     $iconRegistry->registerIcon(
         'extensions-generic-gallery',

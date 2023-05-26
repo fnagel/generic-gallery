@@ -1,9 +1,12 @@
 <?php
 
-defined('TYPO3') or die();
+use FelixNagel\GenericGallery\Utility\EmConfiguration;
+use TYPO3\CMS\Core\Resource\Filter\FileExtensionFilter;
 
-call_user_func(function () {
-    $configuration = \FelixNagel\GenericGallery\Utility\EmConfiguration::getSettings();
+defined('TYPO3') || die();
+
+call_user_func(static function () {
+    $configuration = EmConfiguration::getSettings();
 
     if ($configuration->getAddImageCollection()) {
         $GLOBALS['TCA']['sys_file_collection']['columns']['type']['config']['items'][] = [
@@ -29,7 +32,7 @@ call_user_func(function () {
                     ],
                     'filter' => [
                         [
-                            'userFunc' => \TYPO3\CMS\Core\Resource\Filter\FileExtensionFilter::class . '->filterInlineChildren',
+                            'userFunc' => FileExtensionFilter::class . '->filterInlineChildren',
                             'parameters' => [
                                 'allowedFileExtensions' => $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'],
                                 'disallowedFileExtensions' => ''

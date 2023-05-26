@@ -9,6 +9,7 @@ namespace FelixNagel\GenericGallery\Controller;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3\CMS\Core\Resource\Collection\AbstractFileCollection;
 use TYPO3\CMS\Core\Resource\Exception\ResourceDoesNotExistException;
 use TYPO3\CMS\Core\Resource\FileCollectionRepository;
@@ -61,7 +62,6 @@ abstract class AbstractController extends ActionController
     /**
      * Object manager.
      *
-     * @TYPO3\CMS\Extbase\Annotation\Inject
      *
      * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
      */
@@ -288,7 +288,7 @@ abstract class AbstractController extends ActionController
     }
 
     /**
-     * @return \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController
+     * @return TypoScriptFrontendController
      */
     protected function getTypoScriptFrontendController()
     {

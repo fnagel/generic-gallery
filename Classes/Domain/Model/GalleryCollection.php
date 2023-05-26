@@ -24,10 +24,9 @@ class GalleryCollection extends ObjectStorage
      *
      * @param int|string $uid UID int or virtual UID string
      *
-     * @param int|string $uid
      * @return GalleryItem
      */
-    public function getByIdentifier($uid): ?GalleryItem
+    public function getByIdentifier(int|string $uid): ?GalleryItem
     {
         if (empty($uid)) {
             return null;

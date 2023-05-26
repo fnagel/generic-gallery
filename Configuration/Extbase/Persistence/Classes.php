@@ -1,7 +1,10 @@
 <?php
 
+use FelixNagel\GenericGallery\Domain\Model\GalleryItem;
+use FelixNagel\GenericGallery\Domain\Model\TextItem;
+
 return [
-    \FelixNagel\GenericGallery\Domain\Model\GalleryItem::class => [
+    GalleryItem::class => [
         'tableName' => 'tx_generic_gallery_pictures',
         'properties' => [
             'title' => [
@@ -21,7 +24,7 @@ return [
             ],
         ],
     ],
-    \FelixNagel\GenericGallery\Domain\Model\TextItem::class => [
+    TextItem::class => [
         'tableName' => 'tx_generic_gallery_content',
         'properties' => [
             'bodytext' => [
