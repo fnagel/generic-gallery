@@ -8,7 +8,7 @@ call_user_func(function ($packageKey) {
     $configuration = \FelixNagel\GenericGallery\Utility\EmConfiguration::getSettings();
 
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-        'TYPO3.GenericGallery',
+        'GenericGallery',
         'Pi1',
         'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:generic_gallery.plugin.title'
     );
