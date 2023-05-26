@@ -66,7 +66,7 @@ return [
                         0 => '',
                         1 => '',
                         'invertStateDisplay' => true
-                    ]
+                    ],
                 ],
             ]
         ],
@@ -80,7 +80,7 @@ return [
                 'default' => 0
             ],
             'l10n_mode' => 'exclude',
-            'l10n_display' => 'defaultAsReadonly'
+            'l10n_display' => 'defaultAsReadonly',
         ],
         'endtime' => [
             'exclude' => true,
@@ -91,11 +91,11 @@ return [
                 'eval' => 'datetime,int',
                 'default' => 0,
                 'range' => [
-                    'upper' => mktime(0, 0, 0, 1, 1, 2038)
+                    'upper' => mktime(0, 0, 0, 1, 1, 2038),
                 ]
             ],
             'l10n_mode' => 'exclude',
-            'l10n_display' => 'defaultAsReadonly'
+            'l10n_display' => 'defaultAsReadonly',
         ],
 
         'title' => [
@@ -130,8 +130,8 @@ return [
                         'types' => [
                             \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
                                 'showitem' => '
-							--palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.basicoverlayPalette;genericGalleryImagePalette,
-							--palette--;;filePalette',
+                                    --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.basicoverlayPalette;genericGalleryImagePalette,
+                                    --palette--;;filePalette',
                             ],
                         ],
                     ],

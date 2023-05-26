@@ -56,7 +56,7 @@ return [
                     [
                         0 => '',
                         1 => '',
-                        'invertStateDisplay' => true
+                        'invertStateDisplay' => true,
                     ]
                 ],
             ]
@@ -71,7 +71,7 @@ return [
                 'default' => 0
             ],
             'l10n_mode' => 'exclude',
-            'l10n_display' => 'defaultAsReadonly'
+            'l10n_display' => 'defaultAsReadonly',
         ],
         'endtime' => [
             'exclude' => true,
@@ -86,7 +86,7 @@ return [
                 ]
             ],
             'l10n_mode' => 'exclude',
-            'l10n_display' => 'defaultAsReadonly'
+            'l10n_display' => 'defaultAsReadonly',
         ],
 
         'bodytext' => [
