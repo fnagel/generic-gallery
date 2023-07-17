@@ -19,7 +19,6 @@ use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Http\ImmediateResponseException;
 use TYPO3\CMS\Core\Resource\FileRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 use FelixNagel\GenericGallery\Domain\Repository\GalleryItemRepository;
 use TYPO3\CMS\Frontend\Controller\ErrorController;
 
@@ -58,14 +57,6 @@ abstract class AbstractController extends ActionController
      * GalleryCollection.
      */
     protected ?GalleryCollection $collection = null;
-
-    /**
-     * Object manager.
-     *
-     *
-     * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
-     */
-    protected $objectManager = null;
 
     /**
      * Construct class.
@@ -107,7 +98,7 @@ abstract class AbstractController extends ActionController
     /**
      * {@inheritdoc}
      */
-    protected function initializeView(ViewInterface $view)
+    protected function initializeView($view)
     {
         $this->view->assignMultiple([
             'uid' => $this->getContentElementUid(),
@@ -181,19 +172,16 @@ abstract class AbstractController extends ActionController
     {
         if ($this->cObjData['tx_generic_gallery_collection']) {
             $this->setGalleryType(self::GALLERY_TYPE_COLLECTION);
-
             return;
         }
 
         if ($this->cObjData['tx_generic_gallery_images']) {
             $this->setGalleryType(self::GALLERY_TYPE_IMAGES);
-
             return;
         }
 
         if ($this->cObjData['tx_generic_gallery_items']) {
             $this->setGalleryType(self::GALLERY_TYPE_SINGLE);
-
             return;
         }
     }
@@ -216,7 +204,7 @@ abstract class AbstractController extends ActionController
     protected function getSigleItems()
     {
         /* @var $itemRepository GalleryItemRepository */
-        $itemRepository = $this->objectManager->get(GalleryItemRepository::class);
+        $itemRepository = GeneralUtility::makeInstance(GalleryItemRepository::class);
 
         return $itemRepository->findForContentElement($this->getContentElementUid())->toArray();
     }
@@ -227,7 +215,7 @@ abstract class AbstractController extends ActionController
     protected function getMultipleImages()
     {
         /* @var $fileRepository FileRepository */
-        $fileRepository = $this->objectManager->get(FileRepository::class);
+        $fileRepository = GeneralUtility::makeInstance(FileRepository::class);
 
         return $fileRepository->findByRelation(
             'tt_content',

@@ -13,18 +13,12 @@ use FelixNagel\GenericGallery\Service\SettingsService;
 use TYPO3\CMS\Backend\Form\FormDataProvider\TcaSelectItems;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Object\Container\Container;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
  * Hook class for TCA hook.
  */
 class TcaHook
 {
-    protected ?object $objectContainer = null;
-
-    protected ?ObjectManager $objectManager = null;
-
     protected ?object $settingsService = null;
 
     /**
@@ -114,16 +108,10 @@ class TcaHook
         return $pageId;
     }
 
-    /**
-     * @param string $key
-     * @param string $keyPrefix
-     *
-     * @return string
-     */
     protected function translate(
-        $key,
-        $keyPrefix = 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf'
-    ) {
+        string $key,
+        string $keyPrefix = 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf'
+    ): string {
         return $GLOBALS['LANG']->sL($keyPrefix.':'.$key);
     }
 
@@ -133,23 +121,9 @@ class TcaHook
     protected function getTypoScriptService()
     {
         if ($this->settingsService === null) {
-            $this->settingsService = $this->getObjectContainer()->getInstance(SettingsService::class);
+            $this->settingsService = GeneralUtility::makeInstance(SettingsService::class);
         }
 
         return $this->settingsService;
-    }
-
-    /**
-     * Get object container.
-     *
-     * @return \TYPO3\CMS\Extbase\Object\Container\Container
-     */
-    protected function getObjectContainer()
-    {
-        if ($this->objectContainer == null) {
-            $this->objectContainer = GeneralUtility::makeInstance(Container::class);
-        }
-
-        return $this->objectContainer;
     }
 }

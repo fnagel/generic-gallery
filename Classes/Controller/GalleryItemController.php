@@ -13,7 +13,6 @@ use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Http\NullResponse;
 use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
-use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 
 /**
  * GalleryItemController.
@@ -44,7 +43,7 @@ class GalleryItemController extends AbstractController
     /**
      * {@inheritdoc}
      */
-    protected function initializeView(ViewInterface $view)
+    protected function initializeView($view)
     {
         $this->template = $this->currentSettings['itemTemplate'];
 

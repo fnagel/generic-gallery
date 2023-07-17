@@ -13,7 +13,6 @@ use TYPO3\CMS\Core\Resource\FileReference as CoreFileReference;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference as ExtbaseFileReference;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Service\ImageService;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
@@ -178,10 +177,8 @@ class GalleryItem extends AbstractEntity
      */
     protected function getCroppedImageLinkFromReference()
     {
-        /* @var $objectManager \TYPO3\CMS\Extbase\Object\ObjectManagerInterface */
-        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
         /* @var $imageService ImageService */
-        $imageService = $objectManager->get(ImageService::class);
+        $imageService = GeneralUtility::makeInstance(ImageService::class);
 
         $processedImage = $imageService->applyProcessingInstructions(
             $this->getImageReference()->getOriginalResource(),

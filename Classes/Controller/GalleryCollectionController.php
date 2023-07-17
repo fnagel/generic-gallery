@@ -9,7 +9,6 @@ namespace FelixNagel\GenericGallery\Controller;
  * LICENSE.txt file that was distributed with this source code.
  */
 
-use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Pagination\ArrayPaginator;
 use TYPO3\CMS\Core\Pagination\SimplePagination;
@@ -22,7 +21,7 @@ class GalleryCollectionController extends AbstractController
     /**
      * {@inheritdoc}
      */
-    protected function initializeView(ViewInterface $view)
+    protected function initializeView($view)
     {
         $this->template = $this->currentSettings['template'];
 
