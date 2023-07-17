@@ -17,6 +17,9 @@ return [
             'endtime' => 'endtime',
         ],
         'searchFields' => 'title,link,image,text_items,',
+        'security' => [
+            'ignorePageTypeRestriction' => true,
+        ],
         'typeicon_classes' => [
             'default' => 'extensions-generic-gallery-pictures',
         ],
@@ -114,6 +117,7 @@ return [
         ],
         'images' => [
             'label' => 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:tx_genericgallery_domain_model_galleryitem.images',
+            // @todo This might need a migration as the fieldName is no longer available!?
             'config' => ExtensionManagementUtility::getFileFieldTCAConfig(
                 'tx_generic_gallery_picture_single',
                 [

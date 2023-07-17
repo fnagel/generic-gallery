@@ -1,6 +1,5 @@
 <?php
 
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Imaging\IconRegistry;
 use TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider;
@@ -9,9 +8,6 @@ use TYPO3\CMS\Core\Imaging\IconProvider\BitmapIconProvider;
 defined('TYPO3') || die();
 
 call_user_func(static function () {
-    ExtensionManagementUtility::allowTableOnStandardPages('tx_generic_gallery_pictures');
-    ExtensionManagementUtility::allowTableOnStandardPages('tx_generic_gallery_content');
-
     $iconRegistry = GeneralUtility::makeInstance(IconRegistry::class);
     $iconRegistry->registerIcon(
         'extensions-generic-gallery',

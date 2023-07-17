@@ -13,6 +13,9 @@ return [
             'endtime' => 'endtime',
         ],
         'searchFields' => 'bodytext,position,width,',
+        'security' => [
+            'ignorePageTypeRestriction' => true,
+        ],
         'typeicon_classes' => [
             'default' => 'extensions-generic-gallery-content',
         ],
