@@ -112,10 +112,8 @@ return [
             'exclude' => 1,
             'label' => 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:tx_genericgallery_domain_model_galleryitem.link',
             'config' => [
-                'type' => 'input',
+                'type' => 'link',
                 'size' => 30,
-                'eval' => 'trim',
-                'renderType' => 'inputLink',
                 'softref' => 'typolink,url',
             ],
         ],
