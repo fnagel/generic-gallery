@@ -1,6 +1,6 @@
 <?php
 
-namespace FelixNagel\GenericGallery\Backend\Hooks;
+namespace FelixNagel\GenericGallery\Backend\EventListener;
 
 /**
  * This file is part of the "generic_gallery" Extension for TYPO3 CMS.
@@ -10,74 +10,66 @@ namespace FelixNagel\GenericGallery\Backend\Hooks;
  */
 
 use FelixNagel\GenericGallery\Service\SettingsService;
+use FelixNagel\GenericGallery\Utility\EmConfiguration;
+use TYPO3\CMS\Backend\Routing\UriBuilder;
+use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Backend\View\Event\PageContentPreviewRenderingEvent;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Imaging\IconFactory;
-use FelixNagel\GenericGallery\Utility\EmConfiguration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Backend\Utility\BackendUtility;
-use TYPO3\CMS\Backend\Routing\UriBuilder;
 
 /**
- * Hook class for PageLayoutView hook `list_type_Info`.
- *
  * @todo Use localization
  */
-class PageLayoutViewHook
+class ContentElementPreviewListener
 {
     protected ?object $settingsService = null;
 
     /*
      * Current page settings
      */
-    private ?array $settings = null;
+    protected ?array $settings = null;
 
     /*
      * Current row data
      */
-    private ?array $data = null;
+    protected ?array $data = null;
 
     /**
      * Table information.
      */
-    public array $tableData = [];
+    protected array $tableData = [];
 
     /**
      * Image previews.
      */
-    public string $imagePreviewHtml = '';
+    protected string $imagePreviewHtml = '';
+
+    public function __invoke(PageContentPreviewRenderingEvent $event): void
+    {
+        if ($event->getTable() !== 'tt_content') {
+            return;
+        }
+
+        if ($event->getRecord()['CType'] === 'list' && $event->getRecord()['list_type'] === 'genericgallery_pi1') {
+            $event->setPreviewContent($this->getExtensionSummary($event->getRecord()));
+        }
+    }
 
     /**
      * Returns information about this plugin content.
-     *
-     * @return string Rendered output for PageLayoutView
      */
-    public function getExtensionSummary(array &$parameters = [])
+    public function getExtensionSummary(array $data = []): string
     {
-        if ($parameters['row']['list_type'] !== 'genericgallery_pi1') {
-            return '';
-        }
-
         if (!EmConfiguration::getSettings()->isEnableCmsLayout()) {
             return '';
         }
 
-        $this->data = $parameters['row'];
+        $this->data = $data;
         $this->settings = $this->getTypoScriptService()->getTypoScriptSettingsFromBackend($this->data['pid']);
 
         return $this->renderPreview();
-    }
-
-    /**
-     * Render header.
-     */
-    protected function renderHeader(): string
-    {
-        $editLink = GeneralUtility::makeInstance(UriBuilder::class)->buildUriFromRoute('record_edit')
-            .('&edit[tt_content]['.$this->data['uid'].']=edit')
-            .'&returnUrl='.rawurlencode(GeneralUtility::getIndpEnv('REQUEST_URI'));
-
-        return '<strong><a href="#" onclick="'.$editLink.'">Generic Gallery</a></strong><br>';
     }
 
     /**
@@ -101,10 +93,29 @@ class PageLayoutViewHook
         $html .= $this->renderInfoTable();
 
         if ($this->imagePreviewHtml !== '') {
-            $html .= '<br>'.$this->imagePreviewHtml;
+            $html .= $this->imagePreviewHtml;
         }
 
         return $html;
+    }
+
+    /**
+     * Render header.
+     */
+    protected function renderHeader(): string
+    {
+        $urlParameters = [
+            'edit' => [
+                'tt_content' => [
+                    $this->data['uid'] => 'edit',
+                ],
+            ],
+            'returnUrl' => $GLOBALS['TYPO3_REQUEST']->getAttribute('normalizedParams')->getRequestUri() . '#element-tt_content-' . $this->data['uid'],
+        ];
+        $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
+        $url = (string)$uriBuilder->buildUriFromRoute('record_edit', $urlParameters);
+
+        return '<strong><a href="'.htmlspecialchars($url).'">Generic Gallery</a></strong><br>';
     }
 
     protected function renderCollectionPreview()
@@ -187,13 +198,10 @@ class PageLayoutViewHook
             $result .= BackendUtility::thumbCode($row, 'tx_generic_gallery_pictures', 'images');
         }
 
-        return $result;
+        return '<div class="preview-thumbnails">'.$result.'</div>';
     }
 
-    /**
-     * @return string
-     */
-    protected function getRecordLink($record, $table, $content = '', $addIcon = true)
+    protected function getRecordLink($record, $table, $content = '', $addIcon = true): string
     {
         if ($content === '') {
             $content = htmlspecialchars(BackendUtility::getRecordTitle($table, $record));

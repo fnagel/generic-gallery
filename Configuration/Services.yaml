@@ -10,3 +10,8 @@ services:
   # Dependency injection
   FelixNagel\GenericGallery\Service\SettingsService:
     public: true
+
+  FelixNagel\GenericGallery\Backend\EventListener\ContentElementPreviewListener:
+    tags:
+      - name: event.listener
+        identifier: 'generic-gallery/preview-rendering'

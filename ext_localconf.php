@@ -14,10 +14,6 @@ defined('TYPO3') || die();
 call_user_func(static function () {
     $configuration = EmConfiguration::getSettings();
 
-    // BE preview
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['cms/layout/class.tx_cms_layout.php']['list_type_Info']['genericgallery_pi1'][] =
-        'FelixNagel\GenericGallery\Backend\Hooks\PageLayoutViewHook->getExtensionSummary';
-
     // Add page TS config
     ExtensionManagementUtility::addPageTSConfig(
         '<INCLUDE_TYPOSCRIPT: source="FILE:EXT:generic_gallery/Configuration/TSconfig/page.tsconfig">'
