@@ -1,0 +1,38 @@
+{namespace gg=FelixNagel\GenericGallery\ViewHelpers}
+
+<f:layout name="Default" />
+
+<f:section name="main">
+	<div id="gallery-{uid}" class="carousel slide" data-ride="carousel">
+		<div class="carousel-indicators">
+			<f:for each="{collection}" as="item" iteration="iterator">
+				<button type="button" data-bs-target="#gallery-{uid}" data-bs-slide-to="{iterator.index}"
+								class="{f:if(condition: '{iterator.index} == 0', then: 'active')}"></button>
+			</f:for>
+		</div>
+
+		<div class="carousel-inner" role="listbox">
+			<f:for each="{collection}" as="item" iteration="iterator">
+				<div class="carousel-item{f:if(condition: '{iterator.index} == 0', then: ' active')}">
+					<f:render partial="GalleryItem/Image" arguments="{_all}" />
+					<div class="carousel-caption d-none d-md-block">
+						<f:render partial="GalleryItem/Caption" arguments="{_all}" />
+					</div>
+				</div>
+			</f:for>
+		</div>
+
+		<button class="carousel-control-prev" type="button" data-bs-target="#gallery-{uid}" data-bs-slide="prev">
+			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			<span class="visually-hidden">Previous</span>
+		</button>
+		<button class="carousel-control-next" type="button" data-bs-target="#gallery-{uid}" data-bs-slide="next">
+			<span class="carousel-control-next-icon" aria-hidden="true"></span>
+			<span class="visually-hidden">Next</span>
+		</button>
+	</div>
+
+	<f:asset.script identifier="generic-gallery-{uid}">
+		new bootstrap.Carousel('#gallery-{uid}');
+	</f:asset.script>
+</f:section>

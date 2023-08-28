@@ -19,3 +19,8 @@ ExtensionManagementUtility::addStaticFile(
     'Configuration/TypoScript/Examples/Bootstrap4',
     'Generic Gallery: Example - Bootstrap 4'
 );
+ExtensionManagementUtility::addStaticFile(
+    'generic_gallery',
+    'Configuration/TypoScript/Examples/Bootstrap5',
+    'Generic Gallery: Example - Bootstrap 5'
+);
