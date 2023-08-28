@@ -58,25 +58,23 @@ call_user_func(static function ($packageKey) {
         'tx_generic_gallery_images' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:generic_gallery_images',
-            'config' => ExtensionManagementUtility::getFileFieldTCAConfig(
-                'tx_generic_gallery_picture_single',
-                [
-                    'size' => 20,
-                    'maxitems' => 2000,
-                    'minitems' => 0,
-                    'autoSizeMax' => 40,
-                    'overrideChildTca' => [
-                        'types' => [
-                            File::FILETYPE_IMAGE => [
-                                'showitem' => '
-									--palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.basicoverlayPalette;genericGalleryImagePalette,
-									--palette--;;filePalette',
-                            ],
+            'config' => [
+                'type' => 'file',
+                'allowed' => 'jpg,gif,jpeg,png',
+                'size' => 20,
+                'maxitems' => 2000,
+                'minitems' => 0,
+                'autoSizeMax' => 40,
+                'overrideChildTca' => [
+                    'types' => [
+                        File::FILETYPE_IMAGE => [
+                            'showitem' => '
+                                --palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.basicoverlayPalette;genericGalleryImagePalette,
+                                --palette--;;filePalette',
                         ],
                     ],
                 ],
-                'jpg,gif,jpeg,png'
-            ),
+            ],
         ],
 
         // collection reference

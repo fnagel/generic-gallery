@@ -117,25 +117,22 @@ return [
         ],
         'images' => [
             'label' => 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:tx_genericgallery_domain_model_galleryitem.images',
-            // @todo This might need a migration as the fieldName is no longer available!?
-            'config' => ExtensionManagementUtility::getFileFieldTCAConfig(
-                'tx_generic_gallery_picture_single',
-                [
-                    'size' => 1,
-                    'maxitems' => 1,
-                    'minitems' => 1,
-                    'overrideChildTca' => [
-                        'types' => [
-                            File::FILETYPE_IMAGE => [
-                                'showitem' => '
-                                    --palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.basicoverlayPalette;genericGalleryImagePalette,
-                                    --palette--;;filePalette',
-                            ],
+            'config' => [
+                'type' => 'file',
+                'allowed' => $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'],
+                'size' => 1,
+                'maxitems' => 1,
+                'minitems' => 1,
+                'overrideChildTca' => [
+                    'types' => [
+                        File::FILETYPE_IMAGE => [
+                            'showitem' => '
+                                --palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.basicoverlayPalette;genericGalleryImagePalette,
+                                --palette--;;filePalette',
                         ],
                     ],
                 ],
-                $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
-            ),
+            ],
         ],
         'tt_content_id' => [
             'config' => [

@@ -219,7 +219,7 @@ abstract class AbstractController extends ActionController
 
         return $fileRepository->findByRelation(
             'tt_content',
-            'tx_generic_gallery_picture_single',
+            'tx_generic_gallery_images',
             $this->getContentElementUid()
         );
     }
