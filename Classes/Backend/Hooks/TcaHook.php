@@ -47,18 +47,24 @@ class TcaHook
                     0 => $this->translate('cms_layout.missing_config'), 1 => '',
                 ];
 
-                return $config['items'] = array_merge($config['items'], $optionList);
+                $config['items'] = array_merge($config['items'], $optionList);
+
+                return $config;
             }
 
             // For each view
-            $optionList = [];
-            $optionList[] = [0 => $this->translate('cms_layout.please_select'), 1 => ''];
+            $optionList = [
+                [
+                    'label' => $this->translate('cms_layout.please_select'),
+                    'value' => '',
+                ],
+            ];
             foreach ($settings['gallery'] as $key => $view) {
                 if (is_array($view)) {
                     $optionList[] = [
-                        0 => ($view['name']) ?: $key,
-                        1 => $key.'.',
-                        2 => (array_key_exists('icon', $view) && $view['icon']) ?: 'extensions-generic-gallery',
+                        'label' => ($view['name']) ?: $key,
+                        'value' => $key.'.',
+                        'icon' => (isset($view['icon']) && $view['icon']) ? $view['icon'] : 'extensions-generic-gallery',
                     ];
                 }
             }
