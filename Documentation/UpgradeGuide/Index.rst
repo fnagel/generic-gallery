@@ -11,6 +11,29 @@ Upgrade Guide
    :depth: 3
 
 
+Update to 6.0.0
+^^^^^^^^^^^^^^^
+
+**Overview**
+
+- TYPO3 12.4 LTS support
+
+- Add support for PHP 8.2
+
+- Added Twitter Bootstrap 5 example templates
+
+- Bugfixes and CGL improvements
+
+
+**How to upgrade**
+
+#. Clear all caches
+
+#. Use upgrade wizard to update image field name of existing plugins
+
+
+
+
 Update to 5.2.0
 ^^^^^^^^^^^^^^^
 
