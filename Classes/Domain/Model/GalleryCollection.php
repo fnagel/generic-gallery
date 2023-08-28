@@ -66,13 +66,11 @@ class GalleryCollection extends ObjectStorage
             $item = new GalleryItem();
 
             if ($object instanceof FileReference) {
-                /* @var $object \TYPO3\CMS\Core\Resource\FileReference */
                 $item->setImage($object->getOriginalFile());
                 $item->setImageReference($object);
             }
 
             if ($object instanceof File) {
-                /* @var $object \TYPO3\CMS\Core\Resource\File */
                 $item->setImage($object);
             }
 

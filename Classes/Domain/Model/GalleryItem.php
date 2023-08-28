@@ -318,10 +318,8 @@ class GalleryItem extends AbstractEntity
 
     /**
      * Sets the imageReference.
-     *
-     * @return CoreFileReference|ExtbaseFileReference
      */
-    public function setImageReference($imageReference): CoreFileReference|ExtbaseFileReference
+    public function setImageReference($imageReference)
     {
         $fileReference = $imageReference;
 

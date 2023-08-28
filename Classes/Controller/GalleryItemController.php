@@ -31,9 +31,6 @@ class GalleryItemController extends AbstractController
             $this->getContentElementUid() !== (int) $request->getArgument('contentElement')
         ) {
             // Request should be handled by another instance of this plugin
-            $this->request = $request;
-            $this->request->setDispatched(true);
-
             return new NullResponse();
         }
 

@@ -46,11 +46,11 @@ class GalleryItemRepository extends Repository
     {
         $query = $this->createQuery();
         $constraints = [
-            $query->equals('ttContentUid', (int) $uid),
+            $query->equals('ttContentUid', $uid),
             $query->equals('imageReference.hidden', 0),
         ];
 
-        $query->matching($query->logicalAnd($constraints));
+        $query->matching($query->logicalAnd(...$constraints));
 
         return $query->execute();
     }
