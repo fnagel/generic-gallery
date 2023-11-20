@@ -69,6 +69,10 @@ class ContentElementPreviewListener
         $this->data = $data;
         $this->settings = $this->getTypoScriptService()->getTypoScriptSettingsFromBackend($this->data['pid']);
 
+        // Clear internal HTML variables
+        $this->tableData = [];
+        $this->imagePreviewHtml = '';
+
         return $this->renderPreview();
     }
 
@@ -136,10 +140,11 @@ class ContentElementPreviewListener
         switch ($collection['type']) {
             case 'folder':
                 // @todo Add preview images for folder images
-                $this->tableData[] = ['Folder', $collection['folder']];
+                $this->tableData[] = ['Folder', $collection['folder_identifier']];
                 break;
 
-            case 'files':
+            case 'static':
+            case 'images':
                 $this->tableData[] = ['Images', $collection['files']];
                 $this->imagePreviewHtml = BackendUtility::thumbCode($collection, 'sys_file_collection', 'files');
                 break;
