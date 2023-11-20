@@ -10,8 +10,8 @@ call_user_func(static function () {
 
     if ($configuration->getAddImageCollection()) {
         $GLOBALS['TCA']['sys_file_collection']['columns']['type']['config']['items'][] = [
-            'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:sys_file_collection.type.images',
-            'images'
+            'label' => 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:sys_file_collection.type.images',
+            'value' => 'images',
         ];
 
         $GLOBALS['TCA']['sys_file_collection']['types']['images'] = $GLOBALS['TCA']['sys_file_collection']['types']['static'];

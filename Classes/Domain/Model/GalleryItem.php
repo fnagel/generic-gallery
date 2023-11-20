@@ -254,10 +254,7 @@ class GalleryItem extends AbstractEntity
         return [];
     }
 
-    /**
-     * @return array
-     */
-    protected function processPropertiesForExtractorExtension(array $properties)
+    protected function processPropertiesForExtractorExtension(array $properties): array
     {
         $data = [];
 
@@ -291,19 +288,22 @@ class GalleryItem extends AbstractEntity
 
     /**
      * Process flash data
-     *
-     * @return string
      */
-    protected function getFlashLabelFromTca(array $properties)
+    protected function getFlashLabelFromTca(array $properties): ?string
     {
         if (isset($GLOBALS['TCA']['sys_file_metadata']['columns']['flash']['config']['items'])) {
             $items = (array)$GLOBALS['TCA']['sys_file_metadata']['columns']['flash']['config']['items'];
+
             foreach ($items as $item) {
-                if ((int)$item[1] === (int)$properties['flash']) {
-                    return $item[0];
+                if (array_key_exists('value', $item) && array_key_exists('label', $item) &&
+                    array_key_exists('flash', $properties) && (int)$item['value'] === (int)$properties['flash']
+                ) {
+                    return $item['label'];
                 }
             }
         }
+
+        return null;
     }
 
     /**
