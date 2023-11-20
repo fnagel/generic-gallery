@@ -10,8 +10,9 @@ $config
 			'syntax' => 'short',
 		],
 		// PHPdocs / type hinting
-		'no_superfluous_phpdoc_tags' => true,
 		'no_empty_phpdoc' => true,
+        // @todo Disabled until https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/issues/4512 due to some PHP docs are needed!
+        'no_superfluous_phpdoc_tags' => false,
 	]);
 
 return $config;

@@ -23,8 +23,6 @@ class GalleryCollection extends ObjectStorage
      * Returns item by uid.
      *
      * @param int|string $uid UID int or virtual UID string
-     *
-     * @return GalleryItem
      */
     public function getByIdentifier(int|string $uid): ?GalleryItem
     {
@@ -47,20 +45,15 @@ class GalleryCollection extends ObjectStorage
 
     /**
      * Adds all objects-data pairs from an array
-     *
-     * @return void
      */
-    public function addAllFromArray(array $items)
+    public function addAllFromArray(array $items): void
     {
         foreach ($items as $object) {
             $this->attach($object);
         }
     }
 
-    /**
-     * @return $this
-     */
-    public function addAllFromFiles(array $data)
+    public function addAllFromFiles(array $data): void
     {
         foreach ($data as $object) {
             $item = new GalleryItem();
@@ -76,11 +69,9 @@ class GalleryCollection extends ObjectStorage
 
             $this->attach($item);
         }
-
-        return $this;
     }
 
-    public function removeNonImageFiles()
+    public function removeNonImageFiles(): void
     {
         $extensions = GeneralUtility::trimExplode(',', $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'], true);
 

@@ -46,58 +46,37 @@ class EmConfiguration
 
     protected int $addImageCollection = 1;
 
-    /**
-     * @return bool
-     */
-    public function isEnableCmsLayout()
+    public function isEnableCmsLayout(): bool
     {
         return $this->enableCmsLayout;
     }
 
-    /**
-     * @return bool
-     */
-    public function isHideRelations()
+    public function isHideRelations(): bool
     {
         return $this->hideRelations;
     }
 
-    /**
-     * @return bool
-     */
-    public function isEnableTypeItems()
+    public function isEnableTypeItems(): bool
     {
         return $this->enableTypeItems;
     }
 
-    /**
-     * @return bool
-     */
-    public function isEnableTypeImages()
+    public function isEnableTypeImages(): bool
     {
         return $this->enableTypeImages;
     }
 
-    /**
-     * @return bool
-     */
-    public function isEnableTypeCollection()
+    public function isEnableTypeCollection(): bool
     {
         return $this->enableTypeCollection;
     }
 
-    /**
-     * @return int
-     */
-    public function getUseInlineCollection()
+    public function getUseInlineCollection(): int
     {
         return $this->useInlineCollection;
     }
 
-    /**
-     * @return int
-     */
-    public function getAddImageCollection()
+    public function getAddImageCollection(): int
     {
         return $this->addImageCollection;
     }

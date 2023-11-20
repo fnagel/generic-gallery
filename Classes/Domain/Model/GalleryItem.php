@@ -29,56 +29,29 @@ class GalleryItem extends AbstractEntity
      */
     public const FILE_REFERENCE_IDENTIFIER_PREFIX = 'file-';
 
-    /**
-     * tt_content UID.
-     *
-     * @var int
-     */
     protected ?int $ttContentUid = null;
 
-    /**
-     * title.
-     *
-     * @var string
-     */
     protected ?string $title = null;
 
-    /**
-     * link.
-     *
-     * @var string
-     */
     protected ?string $link = null;
 
     /**
-     * imageReference.
+     * Annotation needed for Extbase.
      *
-     * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
+     * @var ExtbaseFileReference
      */
     protected ?ExtbaseFileReference $imageReference = null;
 
-    /**
-     * image.
-     *
-     * @var File
-     */
     protected ?File $image = null;
 
     /**
-     * textItems.
-     *
      * @var ObjectStorage<TextItem>
      */
     protected ?ObjectStorage $textItems = null;
 
-    /**
-     * @var array
-     */
+
     protected ?array $imageProperties = null;
 
-    /**
-     * Construct class.
-     */
     public function __construct()
     {
         $this->textItems = new ObjectStorage();
@@ -101,36 +74,23 @@ class GalleryItem extends AbstractEntity
      * Virtual means it's generated and not a DB relation
      * So, if the object is virtual the plugin is of type
      * 'images' or 'collection'
-     *
-     * @return bool
      */
-    public function isVirtual()
+    public function isVirtual(): bool
     {
-        return !((bool) parent::getUid());
+        return !(parent::getUid());
     }
 
-    /**
-     * @param int $ttContentUid
-     */
-    public function setTtContentUid($ttContentUid)
+    public function setTtContentUid(int $ttContentUid): void
     {
         $this->ttContentUid = $ttContentUid;
     }
 
-    /**
-     * @return int
-     */
-    public function getTtContentUid()
+    public function getTtContentUid(): int
     {
         return $this->ttContentUid;
     }
 
-    /**
-     * Returns the title.
-     *
-     * @return string $title
-     */
-    public function getTitle()
+    public function getTitle(): string
     {
         if ($this->isVirtual()) {
             return $this->getImageData()['title'];
@@ -139,22 +99,12 @@ class GalleryItem extends AbstractEntity
         return $this->title;
     }
 
-    /**
-     * Sets the title.
-     *
-     * @param string $title
-     */
-    public function setTitle($title)
+    public function setTitle(string $title): void
     {
         $this->title = $title;
     }
 
-    /**
-     * Returns the link.
-     *
-     * @return string $link
-     */
-    public function getLink()
+    public function getLink(): string
     {
         if ($this->isVirtual() || $this->link === '') {
             if ($this->getImageReference() !== null &&
@@ -172,10 +122,8 @@ class GalleryItem extends AbstractEntity
 
     /**
      * Get url to cropped image from reference.
-     *
-     * @return string
      */
-    protected function getCroppedImageLinkFromReference()
+    protected function getCroppedImageLinkFromReference(): string
     {
         /* @var $imageService ImageService */
         $imageService = GeneralUtility::makeInstance(ImageService::class);
@@ -188,22 +136,12 @@ class GalleryItem extends AbstractEntity
         return $imageService->getImageUri($processedImage);
     }
 
-    /**
-     * Sets the link.
-     *
-     * @param string $link
-     */
-    public function setLink($link)
+    public function setLink(string $link): void
     {
         $this->link = $link;
     }
 
-    /**
-     * Returns the image.
-     *
-     * @return File $image
-     */
-    public function getImage()
+    public function getImage(): File
     {
         if ($this->image === null) {
             return $this->getImageReference()->getOriginalResource()->getOriginalFile();
@@ -212,12 +150,15 @@ class GalleryItem extends AbstractEntity
         return $this->image;
     }
 
+    public function setImage(File $image): void
+    {
+        $this->image = $image;
+    }
+
     /**
      * Shortcut for image properties.
-     *
-     * @return array
      */
-    public function getImageData()
+    public function getImageData(): array
     {
         if ($this->imageProperties === null) {
             if ($this->getImageReference() !== null) {
@@ -227,7 +168,7 @@ class GalleryItem extends AbstractEntity
                 $imageData = $this->getImage()->getProperties();
             }
 
-            // Merge with additional meta data
+            // Merge with additional metadata
             $this->imageProperties = array_merge($imageData, $this->getAdditionalImageProperties());
         }
 
@@ -236,10 +177,8 @@ class GalleryItem extends AbstractEntity
 
     /**
      * Return formatted image properties.
-     *
-     * @return array
      */
-    protected function getAdditionalImageProperties()
+    protected function getAdditionalImageProperties(): array
     {
         $properties = $this->getImage()->getProperties();
 
@@ -271,10 +210,7 @@ class GalleryItem extends AbstractEntity
         return $data;
     }
 
-    /**
-     * @return array
-     */
-    protected function processPropertiesForMetadaExtension(array $properties)
+    protected function processPropertiesForMetadaExtension(array $properties): array
     {
         return [
             // Process exif data
@@ -306,20 +242,7 @@ class GalleryItem extends AbstractEntity
         return null;
     }
 
-    /**
-     * Sets the image.
-     *
-     * @param File $image
-     */
-    public function setImage($image)
-    {
-        $this->image = $image;
-    }
-
-    /**
-     * Sets the imageReference.
-     */
-    public function setImageReference($imageReference)
+    public function setImageReference(ExtbaseFileReference|CoreFileReference $imageReference): void
     {
         $fileReference = $imageReference;
 
@@ -332,57 +255,41 @@ class GalleryItem extends AbstractEntity
         $this->imageReference = $fileReference;
     }
 
-    /**
-     * Gets the imageReference.
-     *
-     * @return ExtbaseFileReference
-     */
-    public function getImageReference()
+    public function getImageReference(): ExtbaseFileReference
     {
         return $this->imageReference;
     }
 
     /**
-     * Sets the textItems.
-     *
-     *
      * @api
      */
-    public function setTextItems(ObjectStorage $textItems)
+    public function setTextItems(ObjectStorage $textItems): void
     {
         $this->textItems = $textItems;
     }
 
     /**
-     * Adds a textItem.
-     *
-     *
      * @api
      */
-    public function addTextItem(TextItem $textItems)
+    public function addTextItem(TextItem $textItems): void
     {
         $this->textItems->attach($textItems);
     }
 
     /**
-     * Removes a textItem.
-     *
-     *
      * @api
      */
-    public function removeTextItem(TextItem $textItems)
+    public function removeTextItem(TextItem $textItems): void
     {
         $this->textItems->detach($textItems);
     }
 
     /**
-     * Returns the textItems.
-     *
      * @return ObjectStorage An object storage containing the textItems
      *
      * @api
      */
-    public function getTextItems()
+    public function getTextItems(): ObjectStorage
     {
         return $this->textItems;
     }

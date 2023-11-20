@@ -44,8 +44,7 @@ class SettingsService
     public function __construct(
         protected ConfigurationManagerInterface $configurationManager,
         protected TypoScriptService $typoScriptService
-    )
-    {
+    ) {
     }
 
     /**

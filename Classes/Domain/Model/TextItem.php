@@ -17,60 +17,28 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
  */
 class TextItem extends AbstractEntity
 {
-    /**
-     * bodytext.
-     *
-     */
     protected string $bodytext = '';
 
-    /**
-     * position.
-     *
-     */
     protected string $position = '';
 
-    /**
-     * width.
-     *
-     */
     protected string $width = '';
 
-    /**
-     * Returns the bodytext.
-     *
-     * @return string $bodytext
-     */
-    public function getBodytext()
+    public function getBodytext(): string
     {
         return $this->bodytext;
     }
 
-    /**
-     * Returns the bodytext.
-     *
-     * @return string $bodytext
-     */
-    public function getText()
+    public function getText(): string
     {
         return $this->getBodytext();
     }
 
-    /**
-     * Sets the bodytext.
-     *
-     * @param string $bodytext
-     */
-    public function setBodytext($bodytext)
+    public function setBodytext(string $bodytext)
     {
         $this->bodytext = $bodytext;
     }
 
-    /**
-     * Returns the position.
-     *
-     * @return array $position
-     */
-    public function getPosition()
+    public function getPosition(): array
     {
         $coordsArray = GeneralUtility::intExplode(',', $this->position, true);
 
@@ -80,42 +48,22 @@ class TextItem extends AbstractEntity
         ];
     }
 
-    /**
-     * Sets the position.
-     *
-     * @param string $position
-     */
-    public function setPosition($position)
+    public function setPosition(string $position): void
     {
         $this->position = $position;
     }
 
-    /**
-     * Returns the width.
-     *
-     * @return string $width
-     */
-    public function getWidth()
+    public function getWidth(): string
     {
         return $this->width;
     }
 
-    /**
-     * Sets the width.
-     *
-     * @param string $width
-     */
-    public function setWidth($width)
+    public function setWidth(string $width)
     {
         $this->width = $width;
     }
 
-    /**
-     * Returns the position.
-     *
-     * @return string $position
-     */
-    public function getCssStyles()
+    public function getCssStyles(): string
     {
         $string = '';
         $position = $this->getPosition();
