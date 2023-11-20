@@ -9,9 +9,6 @@ namespace FelixNagel\GenericGallery\UpgradeWizard;
  * LICENSE.txt file that was distributed with this source code.
  */
 
-/**
- * @todo Needs testing!
- */
 class PluginImageFieldWizard extends AbstractUpgradeWizard
 {
     public function getTitle(): string
