@@ -79,7 +79,7 @@ class PageLayoutViewHook
             .('&edit[tt_content]['.$this->data['uid'].']=edit')
             .'&returnUrl='.rawurlencode(GeneralUtility::getIndpEnv('REQUEST_URI'));
 
-        return '<strong><a href="#" onclick="'.$editLink.'">Generic Gallery</strong><br>';
+        return '<strong><a href="#" onclick="'.$editLink.'">Generic Gallery</a></strong><br>';
     }
 
     /**
