@@ -22,14 +22,18 @@ Update to 6.0.0
 
 - Added Twitter Bootstrap 5 example templates
 
+- Make use of new TCA types (link, datetime, file)
+
+- Replaced BE preview hook
+
 - Bugfixes and CGL improvements
 
 
 **How to upgrade**
 
-#. Clear all caches
+#. Use upgrade wizard in "Upgrade" BE module to update image field name of existing plugins
 
-#. Use upgrade wizard to update image field name of existing plugins
+#. Clear all caches
 
 
 
