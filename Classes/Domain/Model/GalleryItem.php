@@ -255,7 +255,7 @@ class GalleryItem extends AbstractEntity
         $this->imageReference = $fileReference;
     }
 
-    public function getImageReference(): ExtbaseFileReference
+    public function getImageReference(): ?ExtbaseFileReference
     {
         return $this->imageReference;
     }
