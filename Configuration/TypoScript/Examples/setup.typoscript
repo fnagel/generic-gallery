@@ -1,17 +1,24 @@
 plugin.tx_genericgallery.settings.gallery {
 	default {
+        # Name (for use in backend)
 		name = Default Gallery
 
-		# Icon
+		# Icon (for use in backend)
 		icon = extensions-generic-gallery
 
-		# Template for gallery
-		template = EXT:generic_gallery/Resources/Private/Templates/GalleryCollection/Show.html
+        # Templates, partials and layouts files configured by standard extbase / fluid config
+        # Templates for each gallery can be overridden by using the following configuration:
+        # "template = EXT:my_ext/Resources/Private/Templates/SomeFolder/SomeFile.html"
+        # Otherwise the extension will use your "view.templateRootPaths" configuration
+        # together with the default template path as described below
 
-		# Template for item detail view
-		itemTemplate = EXT:generic_gallery/Resources/Private/Templates/GalleryItem/Show.html
+		# Template for gallery view (default: "GalleryCollection/Show.html")
+		template =
 
-		# Pagination configuration for gallery
+		# Template for gallery item detail view (default: "GalleryItem/Show.html")
+		itemTemplate =
+
+		# Pagination configuration
 		paginate {
 			itemsPerPage = 8
 			insertAbove = 0

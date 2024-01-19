@@ -37,8 +37,8 @@ Properties
    view.layoutRootPath_                                  :ref:`t3tsref:data-type-string`                                       no                      :code:`EXT:generic_gallery/Resources/Private/Layouts/`
    settings.gallery_                                     array                                       						   no
    settings.gallery.name_                                :ref:`t3tsref:data-type-string`                                       no
-   settings.gallery.template_                            :ref:`t3tsref:data-type-string`                                       no
-   settings.gallery.itemTemplate_                        :ref:`t3tsref:data-type-string`                                       no                      :code:`EXT:generic_gallery/Resources/Private/Templates/GalleryItem/Show.html`
+   settings.gallery.template_                            :ref:`t3tsref:data-type-string`                                       no                      Fallback to Extbase's' default behavior
+   settings.gallery.itemTemplate_                        :ref:`t3tsref:data-type-string`                                       no                      Fallback to Extbase's' default behavior
    ===================================================== ===================================================================== ======================= ==================
 
 
@@ -97,6 +97,10 @@ settings.gallery.template
 :typoscript:`plugin.tx_genericgallery.settings.gallery.template =` :ref:`t3tsref:data-type-string`
 
 Define a template file for this gallery type.
+Use something like `EXT:my_extension/Resources/Private/Templates/SomeFolder/SomeFile.html`
+
+If not set, the Extbase's default behavior will be used:
+TYPO3 uses the template root path from `plugin.tx_genericgallery.view.templateRootPaths` and adds `GalleryCollection/Show.html` to it.
 
 
 settings.gallery.itemTemplate
@@ -105,3 +109,7 @@ settings.gallery.itemTemplate
 :typoscript:`plugin.tx_genericgallery.settings.gallery.itemTemplate =` :ref:`t3tsref:data-type-string`
 
 Define a detail view template file for this gallery type.
+Use something like `EXT:my_extension/Resources/Private/Templates/SomeFolder/SomeFile.html`
+
+If not set, the Extbase's default behavior will be used:
+TYPO3 uses the template root path from `plugin.tx_genericgallery.view.templateRootPaths` and adds `GalleryItem/Show.html` to it.
