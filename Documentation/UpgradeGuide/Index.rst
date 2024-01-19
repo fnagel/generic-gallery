@@ -444,6 +444,15 @@ See demos: :code:`/Configuration/TypoScript/Examples`
 
 .. tip::
 
+	Since version 1.0.0 Generic Gallery uses fluid as templating engine.
+	This means you will need to recreate your templates when updating from previous versions.
+
+	It's still possible to use grouped elements. For example four items wrapped in a :code:`<div>`.
+	There's a view helper for that.
+
+
+.. tip::
+
 	You will need to install EXT:filemetadata and EXT:metadata in order to use EXIF data
 
 

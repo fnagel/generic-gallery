@@ -6,18 +6,36 @@
 Templating
 ^^^^^^^^^^
 
+This extension uses Extbase / Fluid default functionality for templating, even though, there is come custom configuration to handle gallery types.
+
+So by default, TYPO3 will search in the default template root path of the extension: `EXT:generic_gallery/Resources/Private/Templates/GalleryCollection/Show.html`
+
+If you change the template path like this: `plugin.tx_genericgallery.view.templateRootPaths.0 = EXT:my_extension/Resources/Private/Templates/GenericGallery/`,
+TYPO3 will search for `EXT:my_extension/Resources/Private/Templates/GenericGallery/GalleryCollection/Show.html`.
+
+
+**How to configure the template file for each gallery type**
+
+This extension allows to define multiple gallery types. Each gallery type needs a custom template file.
+To accomplish this, there are two TypoScript settings: `template` and `templateItem` (used for the item detail view)
+
+You can change the path for each gallery type by using the following TS:
+`plugin.tx_genericgallery.settings.gallery.myGalleryType.template = EXT:my_extension/Resources/Private/Templates/SomeFolder/SomeFile.html`
+
+See the example TypoScript files for more info!
+
+
 .. tip::
 
-	Since version 1.0.0 Generic Gallery uses fluid as templating engine.
-	This means you will need to recreate your templates when updating from previous versions.
+   When using more than one gallery type, you should always use `template` (and `templateItem`) TS settings
+   in order to configure the template file for each gallery type!
 
-	It's still possible to use grouped elements. For example four items wrapped in a :code:`<div>`.
-	There's a view helper for that.
 
 
 .. _configuration-template:
 
-**Available variables**
+Available variables
+"""""""""""""""""""
 
 - `uid`: current plugin content element UID (localized)
 - `galleryType`: current plugin gallery type (single, images, collection)

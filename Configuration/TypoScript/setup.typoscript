@@ -1,4 +1,5 @@
 plugin.tx_genericgallery {
+    # Please see documentation for custom templating configuration!
 	view {
 		templateRootPaths.0 = EXT:generic_gallery/Resources/Private/Templates/
 		templateRootPaths.10 = {$plugin.tx_genericgallery.view.templateRootPath}
@@ -11,9 +12,7 @@ plugin.tx_genericgallery {
 	}
 
 	settings {
-		# Partial and layout files configured by standard extbase / fluid config, see above
-
-		# Config available gallery types
+		# Config available gallery types (see documentation or examples for more info)
 		gallery {
 
 		}
