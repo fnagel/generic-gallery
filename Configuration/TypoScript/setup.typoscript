@@ -1,5 +1,5 @@
 plugin.tx_genericgallery {
-    # Please see documentation for custom templating configuration!
+	# Please see documentation for custom templating configuration!
 	view {
 		templateRootPaths.0 = EXT:generic_gallery/Resources/Private/Templates/
 		templateRootPaths.10 = {$plugin.tx_genericgallery.view.templateRootPath}
