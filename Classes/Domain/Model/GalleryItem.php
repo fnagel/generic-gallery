@@ -93,7 +93,7 @@ class GalleryItem extends AbstractEntity
     public function getTitle(): string
     {
         if ($this->isVirtual()) {
-            return $this->getImageData()['title'];
+            return $this->getImageData()['title'] ?? '';
         }
 
         return $this->title;
