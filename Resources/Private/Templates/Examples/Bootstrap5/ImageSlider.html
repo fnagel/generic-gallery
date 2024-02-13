@@ -3,7 +3,7 @@
 <f:layout name="Default" />
 
 <f:section name="main">
-	<div id="gallery-{uid}" class="carousel slide" data-ride="carousel">
+	<div id="gallery-{uid}" class="carousel slide">
 		<div class="carousel-indicators">
 			<f:for each="{collection}" as="item" iteration="iterator">
 				<button type="button" data-bs-target="#gallery-{uid}" data-bs-slide-to="{iterator.index}"
