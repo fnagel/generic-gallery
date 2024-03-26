@@ -114,7 +114,9 @@ class ContentElementPreviewListener
                     $this->data['uid'] => 'edit',
                 ],
             ],
-            'returnUrl' => $GLOBALS['TYPO3_REQUEST']->getAttribute('normalizedParams')->getRequestUri() . '#element-tt_content-' . $this->data['uid'],
+            // @extensionScannerIgnoreLine
+            'returnUrl' => $GLOBALS['TYPO3_REQUEST']->getAttribute('normalizedParams')->getRequestUri()
+                .'#element-tt_content-'.$this->data['uid'],
         ];
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
         $url = (string)$uriBuilder->buildUriFromRoute('record_edit', $urlParameters);
