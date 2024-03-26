@@ -72,10 +72,4 @@ call_user_func(static function () {
         $GLOBALS['TYPO3_CONF_VARS']['SYS']['fal']['registeredCollections']['images'] =
             StaticFileCollection::class;
     }
-
-    // Upgrade wizards
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][UpgradeWizard\PluginListTypeWizard::class]
-        = UpgradeWizard\PluginListTypeWizard::class;
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][UpgradeWizard\PluginImageFieldWizard::class]
-        = UpgradeWizard\PluginImageFieldWizard::class;
 });

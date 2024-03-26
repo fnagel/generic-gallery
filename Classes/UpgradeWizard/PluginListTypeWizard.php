@@ -9,13 +9,19 @@ namespace FelixNagel\GenericGallery\UpgradeWizard;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use TYPO3\CMS\Install\Attribute\UpgradeWizard;
+
+#[UpgradeWizard(PluginListTypeWizard::class)]
 class PluginListTypeWizard extends AbstractUpgradeWizard
 {
     public function getTitle(): string
     {
-        return 'Generic Gallery: Migrate old plugin list type name';
+        return 'Generic Gallery: Migrate old plugin list type name (TYPO3 v6)';
     }
 
+    /**
+     * @deprecated Remove this with TYPO3 14 as this migration is ancient.
+     */
     public function executeUpdate(): bool
     {
         $table = 'tt_content';
