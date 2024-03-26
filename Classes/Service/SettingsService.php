@@ -9,13 +9,17 @@ namespace FelixNagel\GenericGallery\Service;
  * LICENSE.txt file that was distributed with this source code.
  */
 
-use TYPO3\CMS\Core\TypoScript\TemplateService;
+use Psr\Http\Message\ServerRequestInterface;
+use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Routing\PageArguments;
+use TYPO3\CMS\Core\Site\SiteFinder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Utility\RootlineUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Configuration\Exception;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 use TYPO3\CMS\Core\TypoScript\TypoScriptService;
+use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * Provide a way to get the configuration just everywhere.
@@ -93,19 +97,11 @@ class SettingsService
     public function getTypoScriptSettingsFromBackend(int $pid): array
     {
         if ($this->typoScriptSettings === null) {
-            /* @var $rootLineUtility RootlineUtility */
-            $rootLineUtility = GeneralUtility::makeInstance(RootlineUtility::class, $pid);
-            $rootLine = $rootLineUtility->get();
+            $setup = $this->generateTypoScript($pid, $GLOBALS['TYPO3_REQUEST']);
 
-            /* @var $templateService TemplateService */
-            $templateService = GeneralUtility::makeInstance(TemplateService::class);
-            $templateService->tt_track = 0;
-            $templateService->runThroughTemplates($rootLine);
-            $templateService->generateConfig();
-
-            if (!empty($templateService->setup['plugin.'][$this->extensionKey.'.']['settings.'])) {
+            if (!empty($setup['plugin.'][$this->extensionKey.'.']['settings.'])) {
                 $this->typoScriptSettings = $this->typoScriptService->convertTypoScriptArrayToPlainArray(
-                    $templateService->setup['plugin.'][$this->extensionKey.'.']['settings.']
+                    $setup['plugin.'][$this->extensionKey.'.']['settings.']
                 );
             }
         }
@@ -115,6 +111,30 @@ class SettingsService
         }
 
         return $this->typoScriptSettings;
+    }
+
+    /**
+     * Taken from \TYPO3\CMS\Redirects\Service\RedirectService::bootFrontendController
+     */
+    protected function generateTypoScript(int $pid, ServerRequestInterface $request): array
+    {
+        $siteFinder = GeneralUtility::makeInstance(SiteFinder::class);
+        $site = $siteFinder->getSiteByPageId($pid);
+
+        $controller = GeneralUtility::makeInstance(
+            TypoScriptFrontendController::class,
+            GeneralUtility::makeInstance(Context::class),
+            $site,
+            $site->getDefaultLanguage(),
+            new PageArguments($site->getRootPageId(), '0', []),
+            GeneralUtility::makeInstance(FrontendUserAuthentication::class)
+        );
+
+        // @extensionScannerIgnoreLine
+        $controller->id = $pid;
+        $controller->determineId($request);
+
+        return $controller->getFromCache($request)->getAttribute('frontend.typoscript')->getSetupArray();
     }
 
     /**
