@@ -86,6 +86,7 @@ abstract class AbstractController extends ActionController
      */
     protected function getContentElementData(): array
     {
+        // @extensionScannerIgnoreLine
         return $this->request->getAttribute('currentContentObject')->data;
     }
 
