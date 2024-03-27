@@ -128,7 +128,7 @@ abstract class AbstractController extends ActionController
     /**
      * {@inheritdoc}
      */
-    protected function initializeAction()
+    protected function initializeAction(): void
     {
         $this->cObjData = $this->getContentElementData();
         $this->gallerySettings = $this->settings['gallery'];
