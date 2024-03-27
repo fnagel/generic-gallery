@@ -83,16 +83,10 @@ abstract class AbstractController extends ActionController
 
     /**
      * Get current plugin CE's data.
-     *
-     * Note: getContentObject is marked as deprecated in "Scan Extension Files" but is to be available
-     * in TYPO3 9.5, in 10.4 and 11.5.
-     *
-     * @return array
      */
-    protected function getContentElementData()
+    protected function getContentElementData(): array
     {
-        // @extensionScannerIgnoreLine
-        return $this->configurationManager->getContentObject()->data;
+        return $this->request->getAttribute('currentContentObject')->data;
     }
 
     /**
