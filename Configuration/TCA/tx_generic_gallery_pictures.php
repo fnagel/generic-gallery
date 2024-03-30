@@ -1,6 +1,6 @@
 <?php
 
-use TYPO3\CMS\Core\Resource\File;
+use TYPO3\CMS\Core\Resource\FileType;
 
 return [
     'ctrl' => [
@@ -124,7 +124,7 @@ return [
                 'minitems' => 1,
                 'overrideChildTca' => [
                     'types' => [
-                        File::FILETYPE_IMAGE => [
+                        FileType::IMAGE->value => [
                             'showitem' => '
                                 --palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.basicoverlayPalette;genericGalleryImagePalette,
                                 --palette--;;filePalette',

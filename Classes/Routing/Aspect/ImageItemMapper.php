@@ -12,7 +12,6 @@ namespace FelixNagel\GenericGallery\Routing\Aspect;
 
 use FelixNagel\GenericGallery\Domain\Model\GalleryItem;
 use TYPO3\CMS\Core\Routing\Aspect\PersistedPatternMapper;
-use TYPO3\CMS\Core\Site\SiteLanguageAwareTrait;
 
 /**
  * ImageItemMapper
@@ -22,8 +21,6 @@ use TYPO3\CMS\Core\Site\SiteLanguageAwareTrait;
  */
 class ImageItemMapper extends PersistedPatternMapper
 {
-    use SiteLanguageAwareTrait;
-
     /**
      * @var string
      */
@@ -63,12 +60,15 @@ class ImageItemMapper extends PersistedPatternMapper
         if (!is_string($tableNameFileReference)) {
             throw new \InvalidArgumentException('tableNameFileReference must be string', 1569340715360);
         }
+
         if (!is_string($routeFieldPatternFileReference)) {
             throw new \InvalidArgumentException('routeFieldPatternFileReference must be string', 1569340717709);
         }
+
         if (!is_string($routeFieldResultFileReference)) {
             throw new \InvalidArgumentException('routeFieldResultFileReference must be string', 1569340720105);
         }
+
         if (!preg_match_all(static::PATTERN_RESULT, $routeFieldResultFileReference, $routeFieldResultNamesFileReference)) {
             throw new \InvalidArgumentException(
                 'routeFieldResultFileReference must contain substitutable field names',
@@ -129,7 +129,7 @@ class ImageItemMapper extends PersistedPatternMapper
                 break;
             }
         }
-        
+
         return $array;
     }
 

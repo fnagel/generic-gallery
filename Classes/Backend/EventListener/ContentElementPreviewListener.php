@@ -9,13 +9,13 @@ namespace FelixNagel\GenericGallery\Backend\EventListener;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use TYPO3\CMS\Core\Imaging\IconSize;
 use FelixNagel\GenericGallery\Service\SettingsService;
 use FelixNagel\GenericGallery\Utility\EmConfiguration;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Backend\View\Event\PageContentPreviewRenderingEvent;
 use TYPO3\CMS\Core\Database\ConnectionPool;
-use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -216,7 +216,7 @@ class ContentElementPreviewListener
 
         if ($addIcon) {
             $iconFactory = GeneralUtility::makeInstance(IconFactory::class);
-            $icon = $iconFactory->getIconForRecord($table, $record, Icon::SIZE_SMALL)->render();
+            $icon = $iconFactory->getIconForRecord($table, $record, IconSize::SMALL->value)->render();
 
             $content = $icon.$content;
         }
@@ -229,7 +229,7 @@ class ContentElementPreviewListener
      */
     protected function renderInfoTable(): string
     {
-        if (count($this->tableData) === 0) {
+        if ($this->tableData === []) {
             return '';
         }
 
