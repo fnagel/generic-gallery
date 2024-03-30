@@ -9,6 +9,7 @@ namespace FelixNagel\GenericGallery\Backend\Hooks;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use Doctrine\DBAL\ParameterType;
 use FelixNagel\GenericGallery\Service\SettingsService;
 use TYPO3\CMS\Backend\Form\FormDataProvider\TcaSelectItems;
 use TYPO3\CMS\Core\Database\ConnectionPool;
@@ -98,7 +99,7 @@ class TcaHook
                     ->where(
                         $queryBuilder->expr()->eq(
                             'uid',
-                            $queryBuilder->createNamedParameter(abs($data['pid']), \PDO::PARAM_INT)
+                            $queryBuilder->createNamedParameter(abs($data['pid']), ParameterType::INTEGER)
                         )
                     )->executeQuery()
                     ->fetchOne();
