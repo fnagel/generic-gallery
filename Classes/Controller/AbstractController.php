@@ -127,8 +127,8 @@ abstract class AbstractController extends ActionController
     {
         $this->cObjData = $this->getContentElementData();
         $this->gallerySettings = $this->settings['gallery'];
-        $this->galleryKey = !empty($this->cObjData['tx_generic_gallery_predefined'])
-            ? rtrim($this->cObjData['tx_generic_gallery_predefined'], '.') : null;
+        $this->galleryKey = empty($this->cObjData['tx_generic_gallery_predefined'])
+            ? null : rtrim($this->cObjData['tx_generic_gallery_predefined'], '.');
         $this->currentSettings = $this->gallerySettings[$this->galleryKey] ?? null;
 
         if ($this->currentSettings === null) {
@@ -260,7 +260,7 @@ abstract class AbstractController extends ActionController
      *
      * @param string $message
      */
-    protected function pageNotFoundAndExit($message = 'Image not found!')
+    protected function pageNotFoundAndExit($message = 'Image not found!'): never
     {
         $response = GeneralUtility::makeInstance(ErrorController::class)->pageNotFoundAction(
             $GLOBALS['TYPO3_REQUEST'],

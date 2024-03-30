@@ -23,16 +23,19 @@ call_user_func(static function () {
             'TCEFORM.tt_content.tx_generic_gallery_items.disabled = 1'
         );
     }
+    
     if (!$configuration->isEnableTypeImages()) {
         ExtensionManagementUtility::addPageTSConfig(
             'TCEFORM.tt_content.tx_generic_gallery_images.disabled = 1'
         );
     }
+    
     if (!$configuration->isEnableTypeCollection()) {
         ExtensionManagementUtility::addPageTSConfig(
             'TCEFORM.tt_content.tx_generic_gallery_collection.disabled = 1'
         );
     }
+    
     if ($configuration->isHideRelations()) {
         ExtensionManagementUtility::addPageTSConfig(trim('
             mod.web_list.table.tx_generic_gallery_pictures.hideTable = 1

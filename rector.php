@@ -2,37 +2,42 @@
 
 declare(strict_types=1);
 
-use Rector\Core\ValueObject\PhpVersion;
+use Rector\CodeQuality\Rector\Identical\FlipTypeControlToUseExclusiveTypeRector;
+use Rector\CodeQuality\Rector\If_\ExplicitBoolCompareRector;
+use Rector\CodingStyle\Rector\Catch_\CatchExceptionNameMatchingTypeRector;
+use Rector\ValueObject\PhpVersion;
+use Rector\Php80\Rector\Catch_\RemoveUnusedVariableInCatchRector;
+use Rector\Php81\Rector\FuncCall\NullToStrictStringFuncCallArgRector;
+use Rector\Set\ValueObject\LevelSetList;
 use Rector\Set\ValueObject\SetList;
 use Rector\Config\RectorConfig;
+use Rector\Strict\Rector\Empty_\DisallowedEmptyRuleFixerRector;
 use Ssch\TYPO3Rector\Configuration\Typo3Option;
 use Ssch\TYPO3Rector\Set\Typo3LevelSetList;
+use Ssch\TYPO3Rector\Set\Typo3SetList;
 
 // See https://github.com/sabbelasichon/typo3-rector/tree/main/docs
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->sets([
-        Typo3LevelSetList::UP_TO_TYPO3_12
+        SetList::CODING_STYLE,
+        SetList::CODE_QUALITY,
+        LevelSetList::UP_TO_PHP_82,
+
+        Typo3LevelSetList::UP_TO_TYPO3_12,
+        Typo3SetList::TYPO3_13,
     ]);
 
-    $rectorConfig->import(SetList::CODING_STYLE);
-    $rectorConfig->import(SetList::CODE_QUALITY);
-
-    $rectorConfig->import(SetList::PHP_52);
-    $rectorConfig->import(SetList::PHP_53);
-    $rectorConfig->import(SetList::PHP_54);
-    $rectorConfig->import(SetList::PHP_55);
-    $rectorConfig->import(SetList::PHP_56);
-    $rectorConfig->import(SetList::PHP_70);
-    $rectorConfig->import(SetList::PHP_71);
-    $rectorConfig->import(SetList::PHP_72);
-    $rectorConfig->import(SetList::PHP_73);
-    $rectorConfig->import(SetList::PHP_74);
-    $rectorConfig->import(SetList::PHP_80);
-    $rectorConfig->import(SetList::PHP_81);
-    $rectorConfig->import(SetList::PHP_82);
-
     // Define your target version which you want to support
-    $rectorConfig->phpVersion(PhpVersion::PHP_80);
+    $rectorConfig->phpVersion(PhpVersion::PHP_82);
+
+    $rectorConfig->skip([
+        NullToStrictStringFuncCallArgRector::class,
+        DisallowedEmptyRuleFixerRector::class,
+        RemoveUnusedVariableInCatchRector::class,
+        ExplicitBoolCompareRector::class,
+        CatchExceptionNameMatchingTypeRector::class,
+        FlipTypeControlToUseExclusiveTypeRector::class,
+    ]);
 
     // If you only want to process one/some TYPO3 extension(s), you can specify its path(s) here.
     // If you use the option --config change __DIR__ to getcwd()

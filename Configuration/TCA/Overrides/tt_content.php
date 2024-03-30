@@ -1,10 +1,10 @@
 <?php
 
+use TYPO3\CMS\Core\Resource\FileType;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use FelixNagel\GenericGallery\Utility\EmConfiguration;
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
-use TYPO3\CMS\Core\Resource\File;
 
 defined('TYPO3') || die();
 
@@ -67,7 +67,7 @@ call_user_func(static function ($packageKey) {
                 'autoSizeMax' => 40,
                 'overrideChildTca' => [
                     'types' => [
-                        File::FILETYPE_IMAGE => [
+                        FileType::IMAGE->value => [
                             'showitem' => '
                                 --palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.basicoverlayPalette;genericGalleryImagePalette,
                                 --palette--;;filePalette',
