@@ -20,7 +20,7 @@
 	],
 	"require": {
 		"php": "^8.2",
-		"typo3/cms-core": "^13"
+		"typo3/cms-core": "^13.3"
 	},
 	"require-dev": {
 		"friendsofphp/php-cs-fixer": "^3.12",
