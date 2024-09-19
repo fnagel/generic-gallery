@@ -259,6 +259,10 @@ class ContentElementPreviewListener
      */
     protected function setGalleryType()
     {
+        if ($this->data['tx_generic_gallery_predefined'] === null) {
+            return;
+        }
+
         $typeName = rtrim($this->data['tx_generic_gallery_predefined'], '.');
 
         if (
