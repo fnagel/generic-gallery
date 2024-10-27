@@ -16,7 +16,10 @@ call_user_func(static function ($packageKey) {
     ExtensionUtility::registerPlugin(
         'GenericGallery',
         'Pi1',
-        'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:generic_gallery.plugin.title'
+        'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:generic_gallery.plugin.title',
+        'extensions-generic-gallery',
+        'plugins',
+        'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:generic_gallery.plugin.description'
     );
 
     $tempColumns = [
