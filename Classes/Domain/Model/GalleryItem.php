@@ -33,35 +33,30 @@ class GalleryItem extends AbstractEntity
     /**
      * tt_content UID.
      *
-     * @var int
      */
     protected ?int $ttContentUid = null;
 
     /**
      * title.
      *
-     * @var string
      */
     protected ?string $title = null;
 
     /**
      * link.
      *
-     * @var string
      */
     protected ?string $link = null;
 
     /**
      * imageReference.
      *
-     * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
      */
     protected ?\TYPO3\CMS\Extbase\Domain\Model\FileReference $imageReference = null;
 
     /**
      * image.
      *
-     * @var \TYPO3\CMS\Core\Resource\File
      */
     protected ?File $image = null;
 
@@ -72,9 +67,6 @@ class GalleryItem extends AbstractEntity
      */
     protected ?ObjectStorage $textItems = null;
 
-    /**
-     * @var array
-     */
     protected ?array $imageProperties = null;
 
     /**
