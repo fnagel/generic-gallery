@@ -2,13 +2,13 @@ plugin.tx_genericgallery {
 	# Please see documentation for custom templating configuration!
 	view {
 		templateRootPaths.0 = EXT:generic_gallery/Resources/Private/Templates/
-		templateRootPaths.10 = {$plugin.tx_genericgallery.view.templateRootPath}
+		templateRootPaths.10 = {$plugin.tx_genericgallery.view.templateRootPath ?? $plugin.generic_gallery.view.templateRootPath}
 
 		partialRootPaths.0 = EXT:generic_gallery/Resources/Private/Partials/
-		partialRootPaths.10 = {$plugin.tx_genericgallery.view.partialRootPath}
+		partialRootPaths.10 = {$plugin.tx_genericgallery.view.partialRootPath ?? $plugin.generic_gallery.view.partialRootPath}
 
 		layoutRootPaths.0 = EXT:generic_gallery/Resources/Private/Layouts/
-		layoutRootPaths.10 = {$plugin.tx_genericgallery.view.layoutRootPath}
+		layoutRootPaths.10 = {$plugin.tx_genericgallery.view.layoutRootPath ?? $plugin.generic_gallery.view.layoutRootPath}
 	}
 
 	settings {
@@ -19,4 +19,4 @@ plugin.tx_genericgallery {
 	}
 }
 
-<INCLUDE_TYPOSCRIPT: source="FILE:EXT:generic_gallery/Configuration/TypoScript/Examples/setup.typoscript">
+@import 'EXT:generic_gallery/Configuration/TypoScript/Examples/setup.typoscript'

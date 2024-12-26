@@ -1,0 +1,25 @@
+categories:
+  genericGallery:
+    label: 'Generic Gallery'
+  genericGallery.templates:
+    label: 'Templates'
+    parent: genericGallery
+
+settings:
+  plugin.generic_gallery.view.templateRootPath:
+    label: 'Path to template root (FE)'
+    default: 'EXT:generic_gallery/Resources/Private/Templates/'
+    type: string
+    category: genericGallery.templates
+
+  plugin.generic_gallery.view.partialRootPath:
+    label: 'Path to template partials (FE)'
+    default: 'EXT:generic_gallery/Resources/Private/Partials/'
+    type: string
+    category: genericGallery.templates
+
+  plugin.generic_gallery.view.layoutRootPath:
+    label: 'Path to template layouts (FE)'
+    default: 'EXT:generic_gallery/Resources/Private/Layouts/'
+    type: string
+    category: genericGallery.templates

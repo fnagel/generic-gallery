@@ -1,0 +1,4 @@
+name: felixnagel/generic-gallery-bootstrap-4
+label: 'Generic Gallery: Example - Bootstrap 4'
+dependencies:
+  - felixnagel/generic-gallery
