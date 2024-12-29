@@ -27,7 +27,7 @@ EXT: Generic Gallery
    forEditors, forAdmins, forBeginners, fal, gallery, picture, image, collection, slideshow, slider, exif, iptc
 
 :Copyright:
-   2011-2022
+   2011-2024
 
 :Author:
    Felix Nagel

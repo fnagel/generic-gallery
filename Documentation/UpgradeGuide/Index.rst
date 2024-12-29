@@ -11,6 +11,27 @@ Upgrade Guide
    :depth: 3
 
 
+Update to 7.0.0
+^^^^^^^^^^^^^^^
+
+**Overview**
+
+- TYPO3 13.4 LTS support
+
+- Add support for PHP 8.3
+
+- Support for site sets
+
+- Lots of fixed deprecations and CGL improvements
+
+
+**How to upgrade**
+
+#. Clear all caches
+
+
+
+
 Update to 6.0.0
 ^^^^^^^^^^^^^^^
 
