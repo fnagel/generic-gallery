@@ -1,0 +1,7 @@
+* text=auto
+
+/.github export-ignore
+/.gitattributes export-ignore
+/.php-cs-fixer.dist.php export-ignore
+/ExtensionBuilder.json export-ignore
+/rector.php export-ignore
