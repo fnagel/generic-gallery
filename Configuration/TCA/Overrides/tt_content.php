@@ -68,6 +68,11 @@ call_user_func(static function ($packageKey) {
                 'maxitems' => 2000,
                 'minitems' => 0,
                 'autoSizeMax' => 40,
+                'appearance' => [
+                    'useSortable' => true,
+                    'collapseAll' => true,
+                    'expandSingle' => true,
+                ],
                 'overrideChildTca' => [
                     'types' => [
                         FileType::IMAGE->value => [
