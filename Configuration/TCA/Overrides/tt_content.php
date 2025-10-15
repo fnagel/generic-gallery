@@ -25,13 +25,13 @@ call_user_func(static function ($packageKey) {
     $tempColumns = [
         // gallery type
         'tx_generic_gallery_predefined' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:generic_gallery_predefined',
             'description' => 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:generic_gallery_predefined.desc',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'allowNonIdValues' => 1,
+                'allowNonIdValues' => true,
                 'itemsProcFunc' => 'FelixNagel\GenericGallery\Backend\Hooks\TcaHook->addPredefinedFields',
                 'size' => 1,
                 'minitems' => 0,
@@ -41,16 +41,16 @@ call_user_func(static function ($packageKey) {
 
         // single items
         'tx_generic_gallery_items' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:generic_gallery_items',
             'config' => [
                 'type' => 'inline',
                 'foreign_table' => 'tx_generic_gallery_pictures',
                 'foreign_field' => 'tt_content_id',
                 'appearance' => [
-                    'useSortable' => 1,
-                    'collapseAll' => 1,
-                    'expandSingle' => 1,
+                    'useSortable' => true,
+                    'collapseAll' => true,
+                    'expandSingle' => true,
                 ],
                 'maxitems' => 1000,
                 'minitems' => 0,
@@ -59,7 +59,7 @@ call_user_func(static function ($packageKey) {
 
         // file reference
         'tx_generic_gallery_images' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:generic_gallery_images',
             'config' => [
                 'type' => 'file',
@@ -82,7 +82,7 @@ call_user_func(static function ($packageKey) {
 
         // collection reference
         'tx_generic_gallery_collection' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:generic_gallery_collection',
             'config' => [
                 'type' => 'group',
@@ -106,8 +106,8 @@ call_user_func(static function ($packageKey) {
             'type' => 'inline',
             'foreign_table' => 'sys_file_collection',
             'appearance' => [
-                'collapseAll' => 0,
-                'expandSingle' => 1,
+                'collapseAll' => false,
+                'expandSingle' => true,
             ],
             'maxitems' => 1,
             'minitems' => 0,

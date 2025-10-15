@@ -97,7 +97,7 @@ return [
         ],
 
         'title' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:tx_genericgallery_domain_model_galleryitem.title',
             'config' => [
                 'type' => 'input',
@@ -106,7 +106,7 @@ return [
             ],
         ],
         'link' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:tx_genericgallery_domain_model_galleryitem.link',
             'config' => [
                 'type' => 'link',
@@ -139,7 +139,7 @@ return [
             ],
         ],
         'contents' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:tx_genericgallery_domain_model_galleryitem.text_items',
             'config' => [
                 'type' => 'inline',
@@ -148,9 +148,9 @@ return [
                 'minitems' => 0,
                 'maxitems' => 99,
                 'appearance' => [
-                    'useSortable' => 1,
-                    'collapseAll' => 1,
-                    'expandSingle' => 1,
+                    'useSortable' => true,
+                    'collapseAll' => true,
+                    'expandSingle' => true,
                 ],
             ],
         ],
