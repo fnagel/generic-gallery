@@ -148,7 +148,7 @@ class ContentElementPreviewListener
             case 'static':
             case 'images':
                 $this->tableData[] = ['Images', $collection['files']];
-                $this->imagePreviewHtml = BackendUtility::thumbCode($collection, 'sys_file_collection', 'files');
+                $this->imagePreviewHtml = $this->renderImage($collection, 'sys_file_collection', 'files');
                 break;
 
             case 'category':
@@ -164,7 +164,7 @@ class ContentElementPreviewListener
         $this->tableData[] = ['Source', 'images'];
         $this->tableData[] = ['Images', $this->data['tx_generic_gallery_images']];
 
-        $this->imagePreviewHtml = BackendUtility::thumbCode($this->data, 'tt_content', 'tx_generic_gallery_images');
+        $this->imagePreviewHtml = $this->renderImage($this->data, 'tt_content', 'tx_generic_gallery_images');
     }
 
     protected function renderItemsPreview()
@@ -202,7 +202,7 @@ class ContentElementPreviewListener
 
         // Get thumbs
         foreach ($rows as $row) {
-            $result .= BackendUtility::thumbCode($row, 'tx_generic_gallery_pictures', 'images');
+            $result .= $this->renderImage($row, 'tx_generic_gallery_pictures', 'images');
         }
 
         return '<div class="preview-thumbnails">'.$result.'</div>';
@@ -265,13 +265,18 @@ class ContentElementPreviewListener
 
         $typeName = rtrim($this->data['tx_generic_gallery_predefined'], '.');
 
-        if (
-            array_key_exists($typeName, $this->settings['gallery']) &&
+        if (array_key_exists($typeName, $this->settings['gallery']) &&
             array_key_exists('name', $this->settings['gallery'][$typeName])
         ) {
             $typeName = $this->settings['gallery'][$typeName]['name'];
         }
 
         $this->tableData[] = ['Type', $typeName];
+    }
+
+    // @todo Replace this for TYPO3 v14!
+    protected function renderImage(array $data, string $table, string $field): string
+    {
+        return BackendUtility::thumbCode($data, $table, $field);
     }
 }
