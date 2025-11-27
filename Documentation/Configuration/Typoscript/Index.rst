@@ -29,17 +29,16 @@ Properties
 
 .. container:: ts-properties
 
-   ===================================================== ===================================================================== ======================= ==================
+   ===================================================== ===================================================================== ======================= ====================================
    Property                                              Data type                                                             :ref:`t3tsref:stdwrap`  Default
-   ===================================================== ===================================================================== ======================= ==================
-   view.templateRootPath_                                :ref:`t3tsref:data-type-string`                                       no                      :code:`EXT:generic_gallery/Resources/Private/Templates/`
-   view.partialRootPath_                                 :ref:`t3tsref:data-type-string`                                       no                      :code:`EXT:generic_gallery/Resources/Private/Partials/`
-   view.layoutRootPath_                                  :ref:`t3tsref:data-type-string`                                       no                      :code:`EXT:generic_gallery/Resources/Private/Layouts/`
-   settings.gallery_                                     array                                       						   no
-   settings.gallery.name_                                :ref:`t3tsref:data-type-string`                                       no
-   settings.gallery.template_                            :ref:`t3tsref:data-type-string`                                       no                      Fallback to Extbase's' default behavior
-   settings.gallery.itemTemplate_                        :ref:`t3tsref:data-type-string`                                       no                      Fallback to Extbase's' default behavior
-   ===================================================== ===================================================================== ======================= ==================
+   ===================================================== ===================================================================== ======================= ====================================
+   `settings.gallery`                                    array                                                                 no
+   `settings.gallery.name`                               :ref:`t3tsref:data-type-string`                                       no
+   `settings.gallery.icon`                               :ref:`t3tsref:data-type-string`                                       no                      `extensions-generic-gallery`
+   `settings.gallery.template`                           :ref:`t3tsref:data-type-string`                                       no                      Fallback to Extbase's default behavior
+   `settings.gallery.itemTemplate`                       :ref:`t3tsref:data-type-string`                                       no                      Fallback to Extbase's default behavior
+   `settings.gallery.paginate`                           array                                                                 no                      Fallback to Fluid's default behavior
+   ===================================================== ===================================================================== ======================= ====================================
 
 
 Property details
@@ -48,31 +47,6 @@ Property details
 .. contents::
    :local:
    :depth: 1
-
-
-
-view.templateRootPath
-"""""""""""""""""""""
-
-:typoscript:`plugin.tx_genericgallery.view.templateRootPath =` :ref:`t3tsref:data-type-string`
-
-Path to the templates. Overwrite these by using settings.gallery.template_ and settings.gallery.itemTemplate_.
-
-
-view.partialRootPath
-""""""""""""""""""""
-
-:typoscript:`plugin.tx_genericgallery.view.partialRootPath =` :ref:`t3tsref:data-type-string`
-
-Path to the partials.
-
-
-view.layoutRootPath
-"""""""""""""""""""
-
-:typoscript:`plugin.tx_genericgallery.view.layoutRootPath =` :ref:`t3tsref:data-type-string`
-
-Path to the layouts.
 
 
 settings.gallery
@@ -89,6 +63,14 @@ settings.gallery.name
 :typoscript:`plugin.tx_genericgallery.settings.gallery.name =` :ref:`t3tsref:data-type-string`
 
 Define a name for this gallery type.
+
+
+settings.gallery.icon
+"""""""""""""""""""""
+
+:typoscript:`plugin.tx_genericgallery.settings.gallery.icon =` :ref:`t3tsref:data-type-string`
+
+Define a icon for this gallery type. Use registrated TYPO3 icon key.
 
 
 settings.gallery.template
