@@ -1,7 +1,6 @@
 <?php
 
 use TYPO3\CMS\Core\Resource\FileType;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use FelixNagel\GenericGallery\Utility\EmConfiguration;
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
@@ -9,11 +8,10 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 defined('TYPO3') || die();
 
 call_user_func(static function ($packageKey) {
-    $extensionName = GeneralUtility::underscoredToLowerCamelCase($packageKey);
-    $pluginSignature = strtolower($extensionName).'_pi1';
     $configuration = EmConfiguration::getSettings();
 
-    ExtensionUtility::registerPlugin(
+    // Add plugin
+    $contentTypeName = ExtensionUtility::registerPlugin(
         'GenericGallery',
         'Pi1',
         'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:generic_gallery.plugin.title',
@@ -120,11 +118,13 @@ call_user_func(static function ($packageKey) {
         ];
     }
 
-    // Add field to tt_content
+    // Add fields to tt_content
     ExtensionManagementUtility::addTCAcolumns('tt_content', $tempColumns);
-    $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] =
-        'tx_generic_gallery_predefined,tx_generic_gallery_items,tx_generic_gallery_images,tx_generic_gallery_collection';
-
-    // Remove unneeded fields
-    $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist'][$pluginSignature] = 'select_key,recursive,pages';
+    ExtensionManagementUtility::addToAllTCAtypes(
+        'tt_content',
+        '--div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:plugin,
+            tx_generic_gallery_predefined,tx_generic_gallery_items,tx_generic_gallery_images,tx_generic_gallery_collection',
+        $contentTypeName,
+        'after:palette:headers'
+    );
 }, 'generic_gallery');

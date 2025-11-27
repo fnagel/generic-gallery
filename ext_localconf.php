@@ -51,7 +51,8 @@ call_user_func(static function () {
         [
             GalleryCollectionController::class => '',
             GalleryItemController::class => '',
-        ]
+        ],
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
 
     // Add cHash configuration
