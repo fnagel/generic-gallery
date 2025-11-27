@@ -9,7 +9,7 @@ namespace FelixNagel\GenericGallery\Controller;
  * LICENSE.txt file that was distributed with this source code.
  */
 
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Core\Resource\Collection\AbstractFileCollection;
 use TYPO3\CMS\Core\Resource\Exception\ResourceDoesNotExistException;
 use TYPO3\CMS\Core\Resource\FileCollectionRepository;
@@ -87,7 +87,13 @@ abstract class AbstractController extends ActionController
     protected function getContentElementData(): array
     {
         // @extensionScannerIgnoreLine
-        return $this->request->getAttribute('currentContentObject')->data;
+        return $this->getContentObjectRenderer()->data;
+    }
+
+    protected function getContentObjectRenderer(): ContentObjectRenderer
+    {
+        // @extensionScannerIgnoreLine
+        return $this->request->getAttribute('currentContentObject');
     }
 
     /**
@@ -99,11 +105,11 @@ abstract class AbstractController extends ActionController
             'uid' => $this->getContentElementUid(),
             'data' => [
                 'content' => $this->getContentElementData(),
-                'page' => $this->getTypoScriptFrontendController()->page,
-                'pageLayout' => $this->getTypoScriptFrontendController()->cObj->getData(
+                'page' => $this->request->getAttribute('frontend.page.information')->getPageRecord(),
+                'pageLayout' => $this->getContentObjectRenderer()->getData(
                     'levelfield : -1 , layout, slide'
                 ),
-                'pageBackendLayout' => $this->getTypoScriptFrontendController()->cObj->getData('pagelayout'),
+                'pageBackendLayout' => $this->getContentObjectRenderer()->getData('pagelayout'),
             ],
             'galleryType' => $this->galleryType,
             'gallerySettings' => $this->currentSettings,
@@ -177,7 +183,6 @@ abstract class AbstractController extends ActionController
 
         if ($this->cObjData['tx_generic_gallery_items']) {
             $this->setGalleryType(self::GALLERY_TYPE_SINGLE);
-            return;
         }
     }
 
@@ -248,7 +253,7 @@ abstract class AbstractController extends ActionController
      * @param string $message Error message
      * @param int    $error   Error level. 0 = message, 1 = error (user problem), 2 = System Error (which should not happen), 3 = security notice (admin)
      */
-    protected function logError($message = '', $error = 2)
+    protected function logError(string $message = '', int $error = 2)
     {
         /* @var $backendUserAuthentication BackendUserAuthentication */
         $backendUserAuthentication = GeneralUtility::makeInstance(BackendUserAuthentication::class);
@@ -260,21 +265,13 @@ abstract class AbstractController extends ActionController
      *
      * @param string $message
      */
-    protected function pageNotFoundAndExit($message = 'Image not found!'): never
+    protected function pageNotFoundAndExit(string $message = 'Image not found!'): never
     {
         $response = GeneralUtility::makeInstance(ErrorController::class)->pageNotFoundAction(
-            $GLOBALS['TYPO3_REQUEST'],
+            $this->request,
             $message
         );
 
         throw new ImmediateResponseException($response, 1576748646637);
-    }
-
-    /**
-     * @return TypoScriptFrontendController
-     */
-    protected function getTypoScriptFrontendController()
-    {
-        return $GLOBALS['TSFE'];
     }
 }
