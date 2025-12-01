@@ -1,5 +1,6 @@
 <?php
 
+use FelixNagel\GenericGallery\Backend\Preview\ContentElementPreview;
 use TYPO3\CMS\Core\Resource\FileType;
 use FelixNagel\GenericGallery\Utility\EmConfiguration;
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
@@ -123,8 +124,14 @@ call_user_func(static function ($packageKey) {
     ExtensionManagementUtility::addToAllTCAtypes(
         'tt_content',
         '--div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:plugin,
-            tx_generic_gallery_predefined,tx_generic_gallery_items,tx_generic_gallery_images,tx_generic_gallery_collection',
+            tx_generic_gallery_predefined,tx_generic_gallery_items,
+            tx_generic_gallery_images,tx_generic_gallery_collection',
         $contentTypeName,
         'after:palette:headers'
     );
+
+    // Preview
+    if (EmConfiguration::getSettings()->isEnableCmsLayout()) {
+        $GLOBALS['TCA']['tt_content']['types'][$contentTypeName]['previewRenderer'] = ContentElementPreview::class;
+    }
 }, 'generic_gallery');

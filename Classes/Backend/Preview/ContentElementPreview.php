@@ -1,6 +1,6 @@
 <?php
 
-namespace FelixNagel\GenericGallery\Backend\EventListener;
+namespace FelixNagel\GenericGallery\Backend\Preview;
 
 /**
  * This file is part of the "generic_gallery" Extension for TYPO3 CMS.
@@ -9,20 +9,16 @@ namespace FelixNagel\GenericGallery\Backend\EventListener;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use TYPO3\CMS\Backend\Preview\StandardContentPreviewRenderer;
+use TYPO3\CMS\Backend\View\BackendLayout\Grid\GridColumnItem;
 use TYPO3\CMS\Core\Imaging\IconSize;
 use FelixNagel\GenericGallery\Service\SettingsService;
-use FelixNagel\GenericGallery\Utility\EmConfiguration;
-use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
-use TYPO3\CMS\Backend\View\Event\PageContentPreviewRenderingEvent;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-/**
- * @todo Use localization
- */
-class ContentElementPreviewListener
+class ContentElementPreview extends StandardContentPreviewRenderer
 {
     protected ?object $settingsService = null;
 
@@ -46,26 +42,25 @@ class ContentElementPreviewListener
      */
     protected string $imagePreviewHtml = '';
 
-    public function __invoke(PageContentPreviewRenderingEvent $event): void
+    public function renderPageModulePreviewContent(GridColumnItem $item): string
     {
-        if ($event->getTable() !== 'tt_content') {
-            return;
+        $table = $item->getTable();
+        $record = $item->getRecord();
+
+        // This preview should only be used for tt_content records of the extension.
+        if ($table !== 'tt_content' || $record['CType'] !== 'genericgallery_pi1') {
+            return '';
         }
 
-        if ($event->getRecord()['CType'] === 'list' && $event->getRecord()['list_type'] === 'genericgallery_pi1') {
-            $event->setPreviewContent($this->getExtensionSummary($event->getRecord()));
-        }
+        return $this->getExtensionSummary($record);
     }
+
 
     /**
      * Returns information about this plugin content.
      */
-    public function getExtensionSummary(array $data = []): string
+    protected function getExtensionSummary(array $data = []): string
     {
-        if (!EmConfiguration::getSettings()->isEnableCmsLayout()) {
-            return '';
-        }
-
         $this->data = $data;
         $this->settings = $this->getTypoScriptService()->getTypoScriptSettingsFromBackend($this->data['pid']);
 
@@ -76,10 +71,7 @@ class ContentElementPreviewListener
         return $this->renderPreview();
     }
 
-    /**
-     * @return string
-     */
-    protected function renderPreview()
+    protected function renderPreview(): string
     {
         $html = '';
 
@@ -93,38 +85,13 @@ class ContentElementPreviewListener
             $this->renderItemsPreview();
         }
 
-        $html .= $this->renderHeader();
         $html .= $this->renderInfoTable();
-
-        if ($this->imagePreviewHtml !== '') {
-            $html .= $this->imagePreviewHtml;
-        }
+        $html .= '<div class="preview-thumbnails">'.$this->imagePreviewHtml.'</div>';
 
         return $html;
     }
 
-    /**
-     * Render header.
-     */
-    protected function renderHeader(): string
-    {
-        $urlParameters = [
-            'edit' => [
-                'tt_content' => [
-                    $this->data['uid'] => 'edit',
-                ],
-            ],
-            // @extensionScannerIgnoreLine
-            'returnUrl' => $GLOBALS['TYPO3_REQUEST']->getAttribute('normalizedParams')->getRequestUri()
-                .'#element-tt_content-'.$this->data['uid'],
-        ];
-        $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
-        $url = (string)$uriBuilder->buildUriFromRoute('record_edit', $urlParameters);
-
-        return '<strong><a href="'.htmlspecialchars($url).'">Generic Gallery</a></strong><br>';
-    }
-
-    protected function renderCollectionPreview()
+    protected function renderCollectionPreview(): void
     {
         $collection = BackendUtility::getRecord('sys_file_collection', $this->data['tx_generic_gallery_collection']);
         if ($collection === null) {
@@ -159,28 +126,21 @@ class ContentElementPreviewListener
         }
     }
 
-    protected function renderImagesPreview()
+    protected function renderImagesPreview(): void
     {
         $this->tableData[] = ['Source', 'images'];
         $this->tableData[] = ['Images', $this->data['tx_generic_gallery_images']];
-
         $this->imagePreviewHtml = $this->renderImage($this->data, 'tt_content', 'tx_generic_gallery_images');
     }
 
-    protected function renderItemsPreview()
+    protected function renderItemsPreview(): void
     {
         // @todo Use localization
         $this->tableData[] = ['Source', 'items'];
-
         $this->imagePreviewHtml = $this->getItemsImagePreviews($this->data);
     }
 
-    /**
-     * @param array $data
-     *
-     * @return string
-     */
-    protected function getItemsImagePreviews($data)
+    protected function getItemsImagePreviews(array $data): string
     {
         $result = '';
 
@@ -205,7 +165,7 @@ class ContentElementPreviewListener
             $result .= $this->renderImage($row, 'tx_generic_gallery_pictures', 'images');
         }
 
-        return '<div class="preview-thumbnails">'.$result.'</div>';
+        return $result;
     }
 
     protected function getRecordLink($record, $table, $content = '', $addIcon = true): string
@@ -242,10 +202,7 @@ class ContentElementPreviewListener
         return '<br><pre style="white-space: normal;">'.$content.'</pre>';
     }
 
-    /**
-     * @return SettingsService
-     */
-    protected function getTypoScriptService()
+    protected function getTypoScriptService(): SettingsService
     {
         if ($this->settingsService === null) {
             $this->settingsService = GeneralUtility::makeInstance(SettingsService::class);
@@ -257,7 +214,7 @@ class ContentElementPreviewListener
     /**
      * Set gallery type name.
      */
-    protected function setGalleryType()
+    protected function setGalleryType(): void
     {
         if ($this->data['tx_generic_gallery_predefined'] === null) {
             return;
@@ -274,9 +231,19 @@ class ContentElementPreviewListener
         $this->tableData[] = ['Type', $typeName];
     }
 
-    // @todo Replace this for TYPO3 v14!
     protected function renderImage(array $data, string $table, string $field): string
     {
-        return BackendUtility::thumbCode($data, $table, $field);
+        $html = '';
+
+        $files = BackendUtility::resolveFileReferences($table, $field, $data);
+        foreach ($files as $file) {
+            $attributes = GeneralUtility::implodeAttributes([
+                'data-dispatch-action' => 'TYPO3.InfoWindow.showItem',
+                'data-dispatch-args-list' => '_FILE,'.$file->getOriginalFile()->getUid(),
+            ], true);
+            $html .= '<a href="#" '.$attributes.'>'.$this->getThumbCodeUnlinked($file).'</a>';
+        }
+
+        return $html;
     }
 }
