@@ -11,7 +11,6 @@ namespace FelixNagel\GenericGallery\Controller;
 
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Http\NullResponse;
-use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 
 /**
@@ -24,10 +23,7 @@ class GalleryItemController extends AbstractController
      */
     public function processRequest(RequestInterface $request): ResponseInterface
     {
-        /** @var Request $request */
-        if (!$request->hasArgument('contentElement') ||
-            $this->getContentElementUid($request) !== (int) $request->getArgument('contentElement')
-        ) {
+        if (!$this->isContentElement($request)) {
             // Request should be handled by another instance of this plugin
             return new NullResponse();
         }

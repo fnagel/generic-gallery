@@ -9,6 +9,7 @@ namespace FelixNagel\GenericGallery\Controller;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Core\Resource\Collection\AbstractFileCollection;
@@ -65,6 +66,13 @@ abstract class AbstractController extends ActionController
     public function __construct()
     {
         $this->collection = new GalleryCollection();
+    }
+
+    protected function isContentElement(RequestInterface $request): bool
+    {
+        /** @var Request $request */
+        return $request->hasArgument('contentElement') &&
+            $this->getContentElementUid($request) === (int) $request->getArgument('contentElement');
     }
 
     /**
