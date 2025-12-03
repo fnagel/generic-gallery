@@ -17,8 +17,13 @@ routeEnhancers:
       - routePath: '/{prefix_localized_item}/{ce}/{item}'
         _controller: 'GalleryItem::show'
         _arguments:
-          'item': 'item'
           'ce': 'contentElement'
+          'item': 'item'
+      - routePath: '/{prefix_localized_item}/{ce}/{file}'
+        _controller: 'GalleryItem::show'
+        _arguments:
+          'ce': 'contentElement'
+          'file': 'file'
     requirements:
       ce: '\d+'
       page: '\d+'
@@ -35,21 +40,23 @@ routeEnhancers:
         localeMap:
           - locale: 'de_DE.*'
             value: 'seite'
-      item:
-        type: GenericGalleryImageItemMapper
-        # For single images
-        tableName: 'tx_generic_gallery_pictures'
-        routeFieldPattern: '^(?P<uid>.+)$'
-        routeFieldResult: '{uid}'
-        # For file references (multiple images and collections)
-        tableNameFileReference: 'sys_file'
-        routeFieldPatternFileReference: '^file-(?P<uid>.+)$'
-        routeFieldResultFileReference: 'file-{uid}'
       ce:
         type: PersistedPatternMapper
         tableName: 'tt_content'
         routeFieldPattern: '^(?P<uid>.+)$'
         routeFieldResult: '{uid}'
+      item:
+        type: PersistedPatternMapper
+        # For single images
+        tableName: 'tx_generic_gallery_pictures'
+        routeFieldPattern: '^(?P<uid>.+)$'
+        routeFieldResult: '{uid}'
+      file:
+        type: PersistedPatternMapper
+        # For file references (multiple images and collections)
+        tableName: 'sys_file'
+        routeFieldPattern: '^file-(?P<uid>.+)$'
+        routeFieldResult: 'file-{uid}'
       page:
         type: StaticRangeMapper
         start: '1'

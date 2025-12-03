@@ -155,11 +155,11 @@ abstract class AbstractController extends ActionController
                 break;
 
             case self::GALLERY_TYPE_IMAGES:
-                $this->collection->addAllFromFiles($this->getMultipleImages());
+                $this->collection->addAllFromFiles($this->getMultipleImages(), $this->getContentElementUid());
                 break;
 
             case self::GALLERY_TYPE_COLLECTION:
-                $this->collection->addAllFromFiles($this->getCollection());
+                $this->collection->addAllFromFiles($this->getCollection(), $this->getContentElementUid());
                 $this->collection->removeNonImageFiles();
                 break;
         }
@@ -185,22 +185,15 @@ abstract class AbstractController extends ActionController
         }
     }
 
-    /**
-     * Set gallery tpye.
-     *
-     * @param string $key
-     */
-    protected function setGalleryType($key)
+    protected function setGalleryType(string $key): void
     {
         $this->galleryType = $key;
     }
 
     /**
      * Method to get the image data from one FCE.
-     *
-     * @return array
      */
-    protected function getSigleItems()
+    protected function getSigleItems(): array
     {
         /* @var $itemRepository GalleryItemRepository */
         $itemRepository = GeneralUtility::makeInstance(GalleryItemRepository::class);
@@ -223,10 +216,7 @@ abstract class AbstractController extends ActionController
         );
     }
 
-    /**
-     * @return array
-     */
-    protected function getCollection()
+    protected function getCollection(): array
     {
         /* @var $fileCollectionRepository FileCollectionRepository */
         $fileCollectionRepository = GeneralUtility::makeInstance(FileCollectionRepository::class);
@@ -252,7 +242,7 @@ abstract class AbstractController extends ActionController
      * @param string $message Error message
      * @param int    $error   Error level. 0 = message, 1 = error (user problem), 2 = System Error (which should not happen), 3 = security notice (admin)
      */
-    protected function logError(string $message = '', int $error = 2)
+    protected function logError(string $message = '', int $error = 2): void
     {
         /* @var $backendUserAuthentication BackendUserAuthentication */
         $backendUserAuthentication = GeneralUtility::makeInstance(BackendUserAuthentication::class);

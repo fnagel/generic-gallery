@@ -53,10 +53,11 @@ class GalleryCollection extends ObjectStorage
         }
     }
 
-    public function addAllFromFiles(array $data): void
+    public function addAllFromFiles(array $data, int $contentElementUid): void
     {
         foreach ($data as $object) {
             $item = new GalleryItem();
+            $item->setTtContentUid($contentElementUid);
 
             if ($object instanceof FileReference) {
                 $item->setImage($object->getOriginalFile());

@@ -25,7 +25,6 @@ class GalleryItemController extends AbstractController
     public function processRequest(RequestInterface $request): ResponseInterface
     {
         /** @var Request $request */
-
         if (!$request->hasArgument('contentElement') ||
             $this->getContentElementUid($request) !== (int) $request->getArgument('contentElement')
         ) {
@@ -48,12 +47,10 @@ class GalleryItemController extends AbstractController
 
     /**
      * Display single item.
-     *
-     * @param string $item
      */
-    public function showAction($item): ResponseInterface
+    public function showAction(?string $item = null, ?string $file = null): ResponseInterface
     {
-        $item = $this->collection->getByIdentifier($item);
+        $item = $this->collection->getByIdentifier($item ?: $file);
 
         if ($item === null) {
             // @extensionScannerIgnoreLine

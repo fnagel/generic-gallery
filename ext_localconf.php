@@ -5,7 +5,6 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 use FelixNagel\GenericGallery\Controller\GalleryCollectionController;
 use FelixNagel\GenericGallery\Controller\GalleryItemController;
-use FelixNagel\GenericGallery\Routing\Aspect\ImageItemMapper;
 use TYPO3\CMS\Core\Resource\Collection\StaticFileCollection;
 
 defined('TYPO3') || die();
@@ -61,11 +60,9 @@ call_user_func(static function () {
             'tx_genericgallery_pi1[controller]',
             'tx_genericgallery_pi1[action]',
             'tx_genericgallery_pi1[item]',
+            'tx_genericgallery_pi1[file]',
             'tx_genericgallery_pi1[contentElement]',
         ]);
-
-    // Routing
-    $GLOBALS['TYPO3_CONF_VARS']['SYS']['routing']['aspects']['GenericGalleryImageItemMapper'] = ImageItemMapper::class;
 
     // File collection
     if ($configuration->getAddImageCollection()) {

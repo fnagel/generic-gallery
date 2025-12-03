@@ -24,11 +24,6 @@ use TYPO3\CMS\Core\Resource\File;
  */
 class GalleryItem extends AbstractEntity
 {
-    /**
-     * @var string
-     */
-    public const FILE_REFERENCE_IDENTIFIER_PREFIX = 'file-';
-
     protected ?int $ttContentUid = null;
 
     protected ?string $title = null;
@@ -60,7 +55,7 @@ class GalleryItem extends AbstractEntity
     public function getIdentifier(): int|string|null
     {
         if ($this->isVirtual()) {
-            return self::FILE_REFERENCE_IDENTIFIER_PREFIX.$this->getImage()->getUid();
+            return $this->getImage()->getUid();
         }
 
         return $this->getUid();
@@ -76,6 +71,14 @@ class GalleryItem extends AbstractEntity
     public function isVirtual(): bool
     {
         return !(parent::getUid());
+    }
+
+    public function getLinkArguments(): array
+    {
+        return [
+            'contentElement' => $this->getTtContentUid(),
+            ($this->isVirtual() ? 'file' : 'item') => $this->getIdentifier(),
+        ];
     }
 
     public function setTtContentUid(int $ttContentUid): void
