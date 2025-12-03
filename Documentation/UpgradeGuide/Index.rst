@@ -11,6 +11,60 @@ Upgrade Guide
    :depth: 3
 
 
+Update to 7.1.0
+^^^^^^^^^^^^^^^
+
+**Overview**
+
+- Add support for PHP 8.4
+
+- Migrated the plugin to a custom content element type
+
+- Fixed and improved image detail view route mapping
+
+- Pagination is now content element aware
+
+- Migrated docs to PHP rendering
+
+- Refactored BE preview
+
+- Improved TCA configuration
+
+- Lots of fixed deprecations
+
+- Minor improvements
+
+
+**How to upgrade**
+
+#. Use provided upgrade wizard in "Upgrade" BE module to migrate existing plugins to content elements
+
+#. Update routing configuration (optional, when using image detail view)
+
+   * Update yaml routing configuration
+
+   * Adjust link generation in all templates
+
+     * replace :code:`<f:link.action action="show" controller="GalleryItem" arguments="{item: item.identifier, contentElement: uid}">`
+     * with :code:`<f:link.action action="show" controller="GalleryItem" arguments="{item.linkArguments}">`
+
+   * Adjust pagination in all templates
+
+     * Pass all arguments to pagination partial
+
+       * replace :code:`<f:render partial="Pagination" arguments="{pagination: pagination, paginator: paginator}" />`
+       * with :code:`<f:render partial="Pagination" arguments="{_all}" />`
+
+   * Pass content element UID to link generation in pagination partial
+
+     * replace :code:`{f:uri.action(action:actionName, arguments: {page: page}, addQueryString: 1)}`
+     * with :code:`{f:uri.action(action:actionName, arguments: {contentElement: uid, page: page}, addQueryString: 1)}`
+
+#. Clear all caches
+
+
+
+
 Update to 7.0.0
 ^^^^^^^^^^^^^^^
 
