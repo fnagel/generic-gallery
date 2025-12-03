@@ -18,9 +18,9 @@ Installation
 
 * Install extension using Extension Manager or composer
 * Configure extension using the EM settings
-* Add static TS :code:`Generic Gallery: default`
-* Configure TS and templates as you wish
-* TYPO3 9.x and above: add :code:`EXT:generic_gallery/Configuration/Routes/Default.yaml` to your site configuration, see core docs for more info:
+* Add :code:`Generic Gallery: default` site set or static TypoScript
+* Configure TypoScript and templates as you wish
+* Add :code:`EXT:generic_gallery/Configuration/Routes/Default.yaml` to your site configuration, see core docs for more info:
    https://docs.typo3.org/m/typo3/reference-coreapi/master/en-us/ApiOverview/Routing/Examples.html#usage-with-imports
 
 
