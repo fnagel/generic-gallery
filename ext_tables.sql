@@ -23,7 +23,7 @@ CREATE TABLE tx_generic_gallery_content (
 # Table structure for table 'pages'
 #
 CREATE TABLE tt_content (
-    tx_generic_gallery_predefined tinytext,
+	tx_generic_gallery_predefined tinytext,
 	tx_generic_gallery_items int(11) DEFAULT '0' NOT NULL,
 	tx_generic_gallery_images blob,
 	tx_generic_gallery_collection int(11) DEFAULT '0' NOT NULL

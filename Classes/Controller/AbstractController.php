@@ -114,7 +114,7 @@ abstract class AbstractController extends ActionController
             'gallerySettings' => $this->currentSettings,
         ]);
 
-        if ($this->template !== '') {
+        if ($this->template) {
             $template = GeneralUtility::getFileAbsFileName($this->template);
 
             if ($template !== '') {

@@ -21,34 +21,19 @@ use TYPO3\CMS\Core\Routing\Aspect\PersistedPatternMapper;
  */
 class ImageItemMapper extends PersistedPatternMapper
 {
-    /**
-     * @var string
-     */
-    protected $tableNameFileReference;
+    protected string $tableNameFileReference;
 
-    /**
-     * @var string
-     */
-    protected $routeFieldPatternFileReference;
+    protected string $routeFieldPatternFileReference;
 
-    /**
-     * @var string
-     */
-    protected $routeFieldResultFileReference;
+    protected string $routeFieldResultFileReference;
 
     /**
      * @var string[]
      */
-    protected $routeFieldResultNamesFileReference = [];
+    protected array $routeFieldResultNamesFileReference = [];
 
-    /**
-     * @var string|null
-     */
-    protected $languageParentFieldNameFileReference;
+    protected ?string $languageParentFieldNameFileReference;
 
-    /**
-     * @throws \InvalidArgumentException
-     */
     public function __construct(array $settings)
     {
         parent::__construct($settings);
@@ -69,7 +54,11 @@ class ImageItemMapper extends PersistedPatternMapper
             throw new \InvalidArgumentException('routeFieldResultFileReference must be string', 1569340720105);
         }
 
-        if (!preg_match_all(static::PATTERN_RESULT, $routeFieldResultFileReference, $routeFieldResultNamesFileReference)) {
+        if (!preg_match_all(
+            static::PATTERN_RESULT,
+            $routeFieldResultFileReference,
+            $routeFieldResultNamesFileReference
+        )) {
             throw new \InvalidArgumentException(
                 'routeFieldResultFileReference must contain substitutable field names',
                 1569340740933
@@ -80,12 +69,10 @@ class ImageItemMapper extends PersistedPatternMapper
         $this->routeFieldPatternFileReference = $routeFieldPatternFileReference;
         $this->routeFieldResultFileReference = $routeFieldResultFileReference;
         $this->routeFieldResultNamesFileReference = $routeFieldResultNamesFileReference['fieldName'] ?? [];
-        $this->languageParentFieldNameFileReference = $GLOBALS['TCA'][$this->tableNameFileReference]['ctrl']['transOrigPointerField'] ?? null;
+        $this->languageParentFieldNameFileReference =
+            $GLOBALS['TCA'][$this->tableNameFileReference]['ctrl']['transOrigPointerField'] ?? null;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function generate(string $value): ?string
     {
         if ($this->isFileReference($value)) {
@@ -95,9 +82,6 @@ class ImageItemMapper extends PersistedPatternMapper
         return parent::generate($value);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function resolve(string $value): ?string
     {
         $isFileReference = $this->isFileReference($value);
@@ -115,9 +99,6 @@ class ImageItemMapper extends PersistedPatternMapper
         return $result;
     }
 
-    /**
-     * @inheritDoc
-     */
     protected function filterNamesKeys(array $array): array
     {
         $array = parent::filterNamesKeys($array);
@@ -148,10 +129,7 @@ class ImageItemMapper extends PersistedPatternMapper
         return (str_starts_with($value, $this->getFileReferencePrefix()));
     }
 
-    /**
-     * @return void
-     */
-    protected function changeSettingsForFileReference()
+    protected function changeSettingsForFileReference(): void
     {
         $this->tableName = $this->tableNameFileReference;
         $this->routeFieldPattern = $this->routeFieldPatternFileReference;

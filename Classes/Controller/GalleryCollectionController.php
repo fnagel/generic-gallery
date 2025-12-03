@@ -21,9 +21,9 @@ class GalleryCollectionController extends AbstractController
     /**
      * {@inheritdoc}
      */
-    protected function initializeView($view)
+    protected function initializeView($view): void
     {
-        $this->template = $this->currentSettings['template'];
+        $this->template = $this->currentSettings['template'] ?? null;
 
         parent::initializeView($view);
     }
@@ -46,7 +46,8 @@ class GalleryCollectionController extends AbstractController
 
     protected function getItemsPerPage(): int
     {
-        return array_key_exists('paginate', $this->currentSettings) && $this->currentSettings['paginate']['itemsPerPage']
+        return array_key_exists('paginate', $this->currentSettings)
+            && $this->currentSettings['paginate']['itemsPerPage']
             ? (int)$this->currentSettings['paginate']['itemsPerPage'] : 10;
     }
 }
