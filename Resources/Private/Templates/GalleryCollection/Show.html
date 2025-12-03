@@ -17,9 +17,7 @@
 		<li class="col-md-3">
 			<figure class="thumbnail">
 				<f:render partial="GalleryItem/Image" arguments="{_all}" />
-				<f:if condition="{galleryType} == 'single'">
-					<f:render partial="GalleryItem/Caption" arguments="{_all}" />
-				</f:if>
+				<f:render partial="GalleryItem/Caption" arguments="{_all}" />
 			</figure>
 		</li>
 
