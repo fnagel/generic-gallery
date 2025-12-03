@@ -9,6 +9,7 @@ namespace FelixNagel\GenericGallery\Controller;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Core\Resource\Collection\AbstractFileCollection;
 use TYPO3\CMS\Core\Resource\Exception\ResourceDoesNotExistException;
@@ -68,13 +69,11 @@ abstract class AbstractController extends ActionController
 
     /**
      * Get current plugin CE's uid.
-     *
-     * @return int
      */
-    protected function getContentElementUid()
+    protected function getContentElementUid(?RequestInterface $request = null): int
     {
         if ($this->uid === null) {
-            $data = $this->getContentElementData();
+            $data = $this->getContentElementData($request);
             $this->uid = (int)(array_key_exists('_LOCALIZED_UID', $data) ? $data['_LOCALIZED_UID'] : $data['uid']);
         }
 
@@ -84,22 +83,22 @@ abstract class AbstractController extends ActionController
     /**
      * Get current plugin CE's data.
      */
-    protected function getContentElementData(): array
+    protected function getContentElementData(?RequestInterface $request = null): array
     {
         // @extensionScannerIgnoreLine
-        return $this->getContentObjectRenderer()->data;
+        return $this->getContentObjectRenderer($request)->data;
     }
 
-    protected function getContentObjectRenderer(): ContentObjectRenderer
+    protected function getContentObjectRenderer(?RequestInterface $request = null): ContentObjectRenderer
     {
         // @extensionScannerIgnoreLine
-        return $this->request->getAttribute('currentContentObject');
+        return ($request === null ? $this->request : $request)->getAttribute('currentContentObject');
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function initializeView($view)
+    protected function initializeView($view): void
     {
         $this->view->assignMultiple([
             'uid' => $this->getContentElementUid(),

@@ -26,9 +26,8 @@ class GalleryItemController extends AbstractController
     {
         /** @var Request $request */
 
-        if (
-            !$request->hasArgument('contentElement') ||
-            $this->getContentElementUid() !== (int) $request->getArgument('contentElement')
+        if (!$request->hasArgument('contentElement') ||
+            $this->getContentElementUid($request) !== (int) $request->getArgument('contentElement')
         ) {
             // Request should be handled by another instance of this plugin
             return new NullResponse();
@@ -40,9 +39,9 @@ class GalleryItemController extends AbstractController
     /**
      * {@inheritdoc}
      */
-    protected function initializeView($view)
+    protected function initializeView($view): void
     {
-        $this->template = $this->currentSettings['itemTemplate'];
+        $this->template = $this->currentSettings['itemTemplate'] ?? null;
 
         parent::initializeView($view);
     }
