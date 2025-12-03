@@ -4,12 +4,16 @@
 
 
 Upgrade Guide
--------------
+=============
 
 .. contents:: Within this page
    :local:
    :depth: 3
 
+
+
+Version 7
+---------
 
 Update to 7.1.0
 ^^^^^^^^^^^^^^^
@@ -64,7 +68,6 @@ Update to 7.1.0
 
 
 
-
 Update to 7.0.0
 ^^^^^^^^^^^^^^^
 
@@ -85,6 +88,8 @@ Update to 7.0.0
 
 
 
+Version 6
+---------
 
 Update to 6.0.0
 ^^^^^^^^^^^^^^^
@@ -112,6 +117,8 @@ Update to 6.0.0
 
 
 
+Version 5
+---------
 
 Update to 5.2.0
 ^^^^^^^^^^^^^^^
@@ -130,7 +137,6 @@ Update to 5.2.0
 **How to upgrade**
 
 #. Clear all caches
-
 
 
 
@@ -204,6 +210,9 @@ Update from 4.x to 5.0.0
 
 
 
+Version 4
+---------
+
 Update from 4.1.0 to 4.2.0
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -271,6 +280,9 @@ Update from 3.x.x to 4.0.0
 
 
 
+Version 3
+---------
+
 Update from 2.2.x to 3.0.0
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -302,6 +314,9 @@ Update from 2.2.x to 3.0.0
 #. Clear all caches
 
 
+
+Version 2
+---------
 
 Update from 2.1.x to 2.2
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -368,6 +383,10 @@ Update from 1.4.x to 2.0
 
 Update your templates and TypoScript if needed. Clear the cache using install tool.
 
+
+
+Version 1
+---------
 
 Update from 1.4.1 to 1.4.3
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -532,6 +551,8 @@ See demos: :code:`/Configuration/TypoScript/Examples`
 
 
 
+Version 0
+---------
 
 Update from 0.3.x to 0.4.0
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
