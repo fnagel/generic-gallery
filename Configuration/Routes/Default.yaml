@@ -43,8 +43,8 @@ routeEnhancers:
         routeFieldResult: '{uid}'
         # For file references (multiple images and collections)
         tableNameFileReference: 'sys_file'
-        routeFieldPatternFileReference: '^(?P<uid>.+)$'
-        routeFieldResultFileReference: '{uid}'
+        routeFieldPatternFileReference: '^file-(?P<uid>.+)$'
+        routeFieldResultFileReference: 'file-{uid}'
       ce:
         type: PersistedPatternMapper
         tableName: 'tt_content'

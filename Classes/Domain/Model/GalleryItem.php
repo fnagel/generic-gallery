@@ -59,13 +59,11 @@ class GalleryItem extends AbstractEntity
 
     public function getIdentifier(): int|string|null
     {
-        $identifier = $this->getUid();
-
-        if ($identifier === null) {
-            $identifier = self::FILE_REFERENCE_IDENTIFIER_PREFIX.$this->getImage()->getUid();
+        if ($this->isVirtual()) {
+            return self::FILE_REFERENCE_IDENTIFIER_PREFIX.$this->getImage()->getUid();
         }
 
-        return $identifier;
+        return $this->getUid();
     }
 
     /**

@@ -82,6 +82,15 @@ class ImageItemMapper extends PersistedPatternMapper
         return parent::generate($value);
     }
 
+    protected function findByIdentifier(string $value): ?array
+    {
+        if ($this->isFileReference($value)) {
+            $value = static::removeFileReferencePrefix($value);
+        }
+
+        return parent::findByIdentifier($value);
+    }
+
     public function resolve(string $value): ?string
     {
         $isFileReference = $this->isFileReference($value);
