@@ -10,9 +10,10 @@ routeEnhancers:
     routes:
       - routePath: '/'
         _controller: 'GalleryCollection::show'
-      - routePath: '/{prefix_localized_collection}/{page}'
+      - routePath: '/{ce}/{prefix_localized_collection}/{page}'
         _controller: 'GalleryCollection::show'
         _arguments:
+          'ce': 'contentElement'
           'page': 'page'
       - routePath: '/{prefix_localized_item}/{ce}/{item}'
         _controller: 'GalleryItem::show'
@@ -27,6 +28,8 @@ routeEnhancers:
     requirements:
       ce: '\d+'
       page: '\d+'
+    defaults:
+      page: '1'
     aspects:
       prefix_localized_item:
         type: LocaleModifier

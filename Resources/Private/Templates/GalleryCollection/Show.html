@@ -5,7 +5,7 @@
 <f:section name="main">
 
 	<f:if condition="{gallerySettings.paginate.insertAbove}">
-		<f:render partial="Pagination" arguments="{pagination: pagination, paginator: paginator}" />
+		<f:render partial="Pagination" arguments="{_all}" />
 	</f:if>
 
 	<f:for each="{paginator.paginatedItems}" as="item" iteration="iterator">
@@ -28,7 +28,7 @@
 	</f:for>
 
 	<f:if condition="{gallerySettings.paginate.insertBelow}">
-		<f:render partial="Pagination" arguments="{pagination: pagination, paginator: paginator}" />
+		<f:render partial="Pagination" arguments="{_all}" />
 	</f:if>
 
 </f:section>

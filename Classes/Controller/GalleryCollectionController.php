@@ -33,6 +33,11 @@ class GalleryCollectionController extends AbstractController
      */
     public function showAction(int $page = 1): ResponseInterface
     {
+        // Reset page if different content element
+        if (!$this->isContentElement($this->request)) {
+            $page = 1;
+        }
+
         $paginator = new ArrayPaginator($this->collection->getArray(), $page, $this->getItemsPerPage());
 
         $this->view->assignMultiple([
