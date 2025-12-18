@@ -1,7 +1,6 @@
 <?php
 
 use FelixNagel\GenericGallery\Utility\EmConfiguration;
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 use FelixNagel\GenericGallery\Controller\GalleryCollectionController;
 use FelixNagel\GenericGallery\Controller\GalleryItemController;
@@ -11,32 +10,6 @@ defined('TYPO3') || die();
 
 call_user_func(static function () {
     $configuration = EmConfiguration::getSettings();
-
-    // Add page TS config
-    if (!$configuration->isEnableTypeItems()) {
-        ExtensionManagementUtility::addPageTSConfig(
-            'TCEFORM.tt_content.tx_generic_gallery_items.disabled = 1'
-        );
-    }
-
-    if (!$configuration->isEnableTypeImages()) {
-        ExtensionManagementUtility::addPageTSConfig(
-            'TCEFORM.tt_content.tx_generic_gallery_images.disabled = 1'
-        );
-    }
-
-    if (!$configuration->isEnableTypeCollection()) {
-        ExtensionManagementUtility::addPageTSConfig(
-            'TCEFORM.tt_content.tx_generic_gallery_collection.disabled = 1'
-        );
-    }
-
-    if ($configuration->isHideRelations()) {
-        ExtensionManagementUtility::addPageTSConfig(trim('
-            mod.web_list.table.tx_generic_gallery_pictures.hideTable = 1
-            mod.web_list.table.tx_generic_gallery_content.hideTable = 1
-        '));
-    }
 
     // FE plugin
     ExtensionUtility::configurePlugin(

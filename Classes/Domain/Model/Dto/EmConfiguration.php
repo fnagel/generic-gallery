@@ -34,14 +34,6 @@ class EmConfiguration
 
     protected bool $enableCmsLayout = true;
 
-    protected bool $hideRelations = true;
-
-    protected bool $enableTypeItems = true;
-
-    protected bool $enableTypeImages = true;
-
-    protected bool $enableTypeCollection = true;
-
     protected int $useInlineCollection = 1;
 
     protected int $addImageCollection = 1;
@@ -49,26 +41,6 @@ class EmConfiguration
     public function isEnableCmsLayout(): bool
     {
         return $this->enableCmsLayout;
-    }
-
-    public function isHideRelations(): bool
-    {
-        return $this->hideRelations;
-    }
-
-    public function isEnableTypeItems(): bool
-    {
-        return $this->enableTypeItems;
-    }
-
-    public function isEnableTypeImages(): bool
-    {
-        return $this->enableTypeImages;
-    }
-
-    public function isEnableTypeCollection(): bool
-    {
-        return $this->enableTypeCollection;
     }
 
     public function getUseInlineCollection(): int

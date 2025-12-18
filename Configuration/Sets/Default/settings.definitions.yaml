@@ -4,8 +4,15 @@ categories:
   genericGallery.templates:
     label: 'Templates'
     parent: genericGallery
+  genericGallery.features:
+    label: 'Features'
+    parent: genericGallery
+  genericGallery.features.types:
+    label: 'Content types'
+    parent: genericGallery.features
 
 settings:
+  # Templating
   plugin.generic_gallery.view.templateRootPath:
     label: 'Path to template root (FE)'
     default: 'EXT:generic_gallery/Resources/Private/Templates/'
@@ -23,3 +30,28 @@ settings:
     default: 'EXT:generic_gallery/Resources/Private/Layouts/'
     type: string
     category: genericGallery.templates
+
+  # Features
+  plugin.generic_gallery.features.hideRelations:
+    label: 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:extension_manager.hide_relations'
+    default: true
+    type: bool
+    category: genericGallery.features
+
+  plugin.generic_gallery.features.types.items:
+    label: 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:extension_manager.enable_type_items'
+    default: true
+    type: bool
+    category: genericGallery.features.types
+
+  plugin.generic_gallery.features.types.images:
+    label: 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:extension_manager.enable_type_images'
+    default: true
+    type: bool
+    category: genericGallery.features.types
+
+  plugin.generic_gallery.features.types.collection:
+    label: 'LLL:EXT:generic_gallery/Resources/Private/Language/locallang_db.xlf:extension_manager.enable_type_collection'
+    default: true
+    type: bool
+    category: genericGallery.features.types

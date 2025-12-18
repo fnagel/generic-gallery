@@ -27,7 +27,7 @@ How to add existing collections
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 It's possible to disable inline editing of collection records in the plugin.
-Disable :code:`use_inline_collection` in the extension manager.
+Disable :code:`use_inline_collection` in the site settings (setup module) or extension manager (before version 8).
 
 
 Custom marker (how to render any content)
@@ -47,7 +47,7 @@ https://docs.typo3.org/typo3cms/ExtbaseGuide/Fluid/ViewHelper/Image.html
 Linkvalidator configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This extension adds some default page TsConfig in order to config the needed fields:
+This extension adds some default page TsConfig in order to config the needed fields, see:
 `/Configuration/TypoScript/pageTsConfig.ts`
 
 
