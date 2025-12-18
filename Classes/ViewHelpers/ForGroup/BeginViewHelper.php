@@ -19,7 +19,7 @@ class BeginViewHelper extends AbstractViewHelper
     /**
      * @inheritDoc
      */
-    public static function verdict(array $arguments, RenderingContextInterface $renderingContext)
+    public static function verdict(array $arguments, RenderingContextInterface $renderingContext): bool
     {
         return $arguments['iteration']['isFirst'] || ($arguments['iteration']['cycle'] % $arguments['max']) === 1;
     }

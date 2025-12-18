@@ -19,7 +19,7 @@ class EndViewHelper extends AbstractViewHelper
     /**
      * @inheritDoc
      */
-    public static function verdict(array $arguments, RenderingContextInterface $renderingContext)
+    public static function verdict(array $arguments, RenderingContextInterface $renderingContext): bool
     {
         return $arguments['iteration']['isLast'] || ($arguments['iteration']['cycle'] % $arguments['max']) === 0;
     }

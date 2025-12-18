@@ -24,9 +24,9 @@ class AbstractViewHelper extends AbstractConditionViewHelper
     /**
      * @inheritDoc
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         $this->registerArgument('iteration', 'array', 'The for VH iteration array', true);
-        $this->registerArgument('max', 'int', 'Max items in one for group', true, 2);
+        $this->registerArgument('max', 'int', 'Max items in one for group', false, 2);
     }
 }
