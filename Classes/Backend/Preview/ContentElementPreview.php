@@ -48,11 +48,11 @@ class ContentElementPreview extends StandardContentPreviewRenderer
         $record = $item->getRecord();
 
         // This preview should only be used for tt_content records of the extension.
-        if ($table !== 'tt_content' || $record['CType'] !== 'genericgallery_pi1') {
+        if ($table !== 'tt_content' || $record->getRecordType() !== 'genericgallery_pi1') {
             return '';
         }
 
-        return $this->getExtensionSummary($record);
+        return $this->getExtensionSummary($record->getRawRecord()->toArray());
     }
 
 
@@ -176,7 +176,7 @@ class ContentElementPreview extends StandardContentPreviewRenderer
 
         if ($addIcon) {
             $iconFactory = GeneralUtility::makeInstance(IconFactory::class);
-            $icon = $iconFactory->getIconForRecord($table, $record, IconSize::SMALL->value)->render();
+            $icon = $iconFactory->getIconForRecord($table, $record, IconSize::SMALL)->render();
 
             $content = $icon.$content;
         }
