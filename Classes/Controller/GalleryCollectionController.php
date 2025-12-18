@@ -12,16 +12,14 @@ namespace FelixNagel\GenericGallery\Controller;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Pagination\ArrayPaginator;
 use TYPO3\CMS\Core\Pagination\SimplePagination;
+use TYPO3\CMS\Fluid\View\FluidViewAdapter;
 
 /**
  * GalleryCollectionController.
  */
 class GalleryCollectionController extends AbstractController
 {
-    /**
-     * {@inheritdoc}
-     */
-    protected function initializeView($view): void
+    protected function initializeView(FluidViewAdapter $view): void
     {
         $this->template = $this->currentSettings['template'] ?? null;
 

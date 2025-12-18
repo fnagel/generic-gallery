@@ -9,12 +9,13 @@ namespace FelixNagel\GenericGallery\Controller;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use FelixNagel\GenericGallery\Domain\Repository\CollectionRepository;
 use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
+use TYPO3\CMS\Fluid\View\FluidViewAdapter;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Core\Resource\Collection\AbstractFileCollection;
 use TYPO3\CMS\Core\Resource\Exception\ResourceDoesNotExistException;
-use TYPO3\CMS\Core\Resource\FileCollectionRepository;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use FelixNagel\GenericGallery\Domain\Model\GalleryCollection;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
@@ -103,12 +104,9 @@ abstract class AbstractController extends ActionController
         return ($request === null ? $this->request : $request)->getAttribute('currentContentObject');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function initializeView($view): void
+    protected function initializeView(FluidViewAdapter $view): void
     {
-        $this->view->assignMultiple([
+        $view->assignMultiple([
             'uid' => $this->getContentElementUid(),
             'data' => [
                 'content' => $this->getContentElementData(),
@@ -126,7 +124,7 @@ abstract class AbstractController extends ActionController
             $template = GeneralUtility::getFileAbsFileName($this->template);
 
             if ($template !== '') {
-                $view->setTemplatePathAndFilename($template);
+                $view->getRenderingContext()->getTemplatePaths()->setTemplatePathAndFilename($template);
             } else {
                 $this->logError('Template for settings.gallery.'.$this->galleryKey.' not found!');
             }
@@ -155,11 +153,11 @@ abstract class AbstractController extends ActionController
     /**
      * Generate collection item.
      */
-    protected function generateCollection()
+    protected function generateCollection(): void
     {
         switch ($this->galleryType) {
             case self::GALLERY_TYPE_SINGLE:
-                $this->collection->addAllFromArray($this->getSigleItems());
+                $this->collection->addAllFromArray($this->getSingleItems());
                 break;
 
             case self::GALLERY_TYPE_IMAGES:
@@ -176,7 +174,7 @@ abstract class AbstractController extends ActionController
     /**
      * Determine gallery type.
      */
-    protected function determineGalleryType()
+    protected function determineGalleryType(): void
     {
         if ($this->cObjData['tx_generic_gallery_collection']) {
             $this->setGalleryType(self::GALLERY_TYPE_COLLECTION);
@@ -201,7 +199,7 @@ abstract class AbstractController extends ActionController
     /**
      * Method to get the image data from one FCE.
      */
-    protected function getSigleItems(): array
+    protected function getSingleItems(): array
     {
         /* @var $itemRepository GalleryItemRepository */
         $itemRepository = GeneralUtility::makeInstance(GalleryItemRepository::class);
@@ -209,10 +207,7 @@ abstract class AbstractController extends ActionController
         return $itemRepository->findForContentElement($this->getContentElementUid())->toArray();
     }
 
-    /**
-     * @return array
-     */
-    protected function getMultipleImages()
+    protected function getMultipleImages(): array
     {
         /* @var $fileRepository FileRepository */
         $fileRepository = GeneralUtility::makeInstance(FileRepository::class);
@@ -226,13 +221,12 @@ abstract class AbstractController extends ActionController
 
     protected function getCollection(): array
     {
-        /* @var $fileCollectionRepository FileCollectionRepository */
-        $fileCollectionRepository = GeneralUtility::makeInstance(FileCollectionRepository::class);
+        $collectionRepository = GeneralUtility::makeInstance(CollectionRepository::class);
 
         /* @var $collection AbstractFileCollection */
         try {
             $uid = (int) $this->cObjData['tx_generic_gallery_collection'];
-            $collection = $fileCollectionRepository->findByUid($uid);
+            $collection = $collectionRepository->findByUid($uid);
             $collection->loadContents();
         } catch (ResourceDoesNotExistException $exception) {
             $this->logError(

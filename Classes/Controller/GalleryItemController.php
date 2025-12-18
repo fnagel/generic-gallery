@@ -12,6 +12,7 @@ namespace FelixNagel\GenericGallery\Controller;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Http\NullResponse;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
+use TYPO3\CMS\Fluid\View\FluidViewAdapter;
 
 /**
  * GalleryItemController.
@@ -31,10 +32,7 @@ class GalleryItemController extends AbstractController
         return parent::processRequest($request);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function initializeView($view): void
+    protected function initializeView(FluidViewAdapter $view): void
     {
         $this->template = $this->currentSettings['itemTemplate'] ?? null;
 
