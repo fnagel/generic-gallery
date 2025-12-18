@@ -26,10 +26,8 @@ class TcaHook
      * Sets the items for the "Predefined" dropdown.
      *
      * @param array $config
-     *
-     * @return array The config including the items for the dropdown
      */
-    public function addPredefinedFields($config, TcaSelectItems $tcaSelectItems)
+    public function addPredefinedFields(array &$config): void
     {
         $optionList = [];
 
@@ -49,8 +47,7 @@ class TcaHook
                 ];
 
                 $config['items'] = array_merge($config['items'], $optionList);
-
-                return $config;
+                return;
             }
 
             // For each view
@@ -72,8 +69,6 @@ class TcaHook
 
             $config['items'] = array_merge($config['items'], $optionList);
         }
-
-        return $config;
     }
 
     /**

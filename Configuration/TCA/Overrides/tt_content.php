@@ -1,5 +1,6 @@
 <?php
 
+use FelixNagel\GenericGallery\Backend\Hooks\TcaHook;
 use FelixNagel\GenericGallery\Backend\Preview\ContentElementPreview;
 use TYPO3\CMS\Core\Resource\FileType;
 use FelixNagel\GenericGallery\Utility\EmConfiguration;
@@ -8,7 +9,7 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
 defined('TYPO3') || die();
 
-call_user_func(static function ($packageKey) {
+call_user_func(static function() {
     $configuration = EmConfiguration::getSettings();
 
     // Add plugin
@@ -31,7 +32,7 @@ call_user_func(static function ($packageKey) {
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'allowNonIdValues' => true,
-                'itemsProcFunc' => 'FelixNagel\GenericGallery\Backend\Hooks\TcaHook->addPredefinedFields',
+                'itemsProcFunc' => TcaHook::class.'->addPredefinedFields',
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,
@@ -134,4 +135,4 @@ call_user_func(static function ($packageKey) {
     if (EmConfiguration::getSettings()->isEnableCmsLayout()) {
         $GLOBALS['TCA']['tt_content']['types'][$contentTypeName]['previewRenderer'] = ContentElementPreview::class;
     }
-}, 'generic_gallery');
+});
