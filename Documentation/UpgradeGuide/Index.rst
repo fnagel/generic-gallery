@@ -12,6 +12,31 @@ Upgrade Guide
 
 
 
+Update to 8.0.0
+^^^^^^^^^^^^^^^
+
+**Overview**
+
+- TYPO3 14.0 support
+
+- Support for site settings
+
+- Minor improvements
+
+
+**How to upgrade**
+
+#. Migrate extension manager configuration to site settings
+   Following EM configuration settings have been migrated, please adjust your setup accordingly:
+   * `hide_relations`
+   * `enable_type_items`
+   * `enable_type_images`
+   * `enable_type_collection`
+
+#. Clear all caches
+
+
+
 Version 7
 ---------
 
