@@ -11,7 +11,6 @@ namespace FelixNagel\GenericGallery\Backend\Hooks;
 
 use Doctrine\DBAL\ParameterType;
 use FelixNagel\GenericGallery\Service\SettingsService;
-use TYPO3\CMS\Backend\Form\FormDataProvider\TcaSelectItems;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 

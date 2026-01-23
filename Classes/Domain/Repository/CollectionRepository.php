@@ -15,9 +15,9 @@ use TYPO3\CMS\Core\SingletonInterface;
 
 class CollectionRepository implements SingletonInterface
 {
-    public function __construct(
-        protected readonly FileCollectionRepository $fileCollectionRepository,
-    ) {}
+    public function __construct(protected readonly FileCollectionRepository $fileCollectionRepository)
+    {
+    }
 
     public function findByUid(int $uid): CollectionInterface
     {

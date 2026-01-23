@@ -9,7 +9,7 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
 defined('TYPO3') || die();
 
-call_user_func(static function() {
+call_user_func(static function () {
     $configuration = EmConfiguration::getSettings();
 
     // Add plugin

@@ -63,8 +63,8 @@
 			"@php vendor/bin/parallel-lint ./Configuration/TCA/"
 		],
 		"test-php-cs-fixer": [
-			"@php vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php --verbose --dry-run ./Classes/",
-			"@php vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php --verbose --dry-run ./Configuration/"
+			"@php vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php --verbose --diff --dry-run ./Classes/",
+			"@php vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php --verbose --diff --dry-run ./Configuration/"
 		]
 	}
 }
