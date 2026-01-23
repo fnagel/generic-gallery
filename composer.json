@@ -25,12 +25,12 @@
 	"require-dev": {
 		"friendsofphp/php-cs-fixer": "^3.12",
 		"php-parallel-lint/php-parallel-lint": "^1.3",
-		"ssch/typo3-rector": "^2.3"
+		"ssch/typo3-rector": "^3.11"
 	},
 	"suggest": {
 		"typo3/cms-filemetadata": "*",
-		"fab/metadata": "^2.3",
-		"causal/extractor": "^1.5 || ^2.0"
+		"fab/metadata": "*",
+		"causal/extractor": "^2"
 	},
 	"autoload": {
 		"psr-4": {
