@@ -37,11 +37,6 @@
 			"FelixNagel\\GenericGallery\\": "Classes/"
 		}
 	},
-	"autoload-dev": {
-		"psr-4": {
-			"FelixNagel\\GenericGallery\\Tests\\": "Tests/"
-		}
-	},
 	"extra": {
 		"typo3/cms": {
 			"extension-key": "generic_gallery"
