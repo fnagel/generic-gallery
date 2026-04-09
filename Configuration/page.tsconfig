@@ -5,19 +5,22 @@ mod.linkvalidator.searchFields {
 }
 
 # Site settings features (former EM configuration)
-[siteSetting("plugin.generic_gallery.features.hideRelations", true) == false]
+[traverse(site('configuration'), 'settings/plugin/generic_gallery/features/hideRelations') == true]
     mod.web_list.table.tx_generic_gallery_pictures.hideTable = 1
     mod.web_list.table.tx_generic_gallery_content.hideTable = 1
 [END]
 
-[siteSetting("plugin.generic_gallery.features.types.items", true) == false]
-    TCEFORM.tt_content.tx_generic_gallery_items.disabled = 1
+TCEFORM.tt_content.tx_generic_gallery_items.disabled = 1
+[traverse(site('configuration'), 'settings/plugin/generic_gallery/features/types/items') == true]
+    TCEFORM.tt_content.tx_generic_gallery_items.disabled = 0
 [END]
 
-[siteSetting("plugin.generic_gallery.features.types.images", true) == false]
-    TCEFORM.tt_content.tx_generic_gallery_images.disabled = 1
+TCEFORM.tt_content.tx_generic_gallery_images.disabled = 1
+[traverse(site('configuration'), 'settings/plugin/generic_gallery/features/types/images') == true]
+    TCEFORM.tt_content.tx_generic_gallery_images.disabled = 0
 [END]
 
-[siteSetting("plugin.generic_gallery.features.types.collection", true) == false]
-    TCEFORM.tt_content.tx_generic_gallery_collection.disabled = 1
+TCEFORM.tt_content.tx_generic_gallery_collection.disabled = 1
+[traverse(site('configuration'), 'settings/plugin/generic_gallery/features/types/collection') == true]
+    TCEFORM.tt_content.tx_generic_gallery_collection.disabled = 0
 [END]
