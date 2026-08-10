@@ -289,7 +289,8 @@ class GalleryItem extends AbstractEntity
     }
 
     /**
-     * @return ObjectStorage An object storage containing the textItems
+     * /**
+     * @var ObjectStorage<TextItem> An object storage containing the textItems
      *
      * @api
      */

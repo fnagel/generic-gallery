@@ -55,7 +55,7 @@ return [
                 'type' => 'text',
                 'cols' => '48',
                 'rows' => '5',
-                'enableRichtext' => '1',
+                'enableRichtext' => true,
                 'richtextConfiguration' => 'default',
                 'softref' => 'typolink_tag,email[subst],url',
             ],
