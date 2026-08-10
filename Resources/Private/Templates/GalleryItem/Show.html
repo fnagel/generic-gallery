@@ -23,7 +23,7 @@
 							</f:link.typolink>
 							<f:if condition="{item.title}">
 								<f:then>
-									{item.title}
+									{item -> f:render.text(field: 'title')}
 								</f:then>
 								<f:else>
 									{item.imageData.title}
@@ -44,7 +44,7 @@
 				<ul class="list-group">
 					<f:for each="{item.textItems}" as="textItem">
 						<li class="list-group-item">
-							<f:format.html>{textItem.bodytext}</f:format.html>
+							{textItem -> f:render.text(field: 'bodytext')}
 						</li>
 					</f:for>
 				</ul>

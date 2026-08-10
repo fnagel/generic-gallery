@@ -20,7 +20,7 @@
 	],
 	"require": {
 		"php": "^8.2",
-		"typo3/cms-core": "^14"
+		"typo3/cms-core": "^14.2"
 	},
 	"require-dev": {
 		"friendsofphp/php-cs-fixer": "^3.12",
@@ -30,7 +30,8 @@
 	"suggest": {
 		"typo3/cms-filemetadata": "Improves TYPO3 CMS file meta data. Adds lot's of useful fields.",
 		"fab/metadata": "Extension for extracting meta data from files.",
-		"causal/extractor": "Extension for extracting meta data from files (recommended)"
+		"causal/extractor": "Extension for extracting meta data from files (recommended)",
+		"friendsoftypo3/visual-editor": "This extension supports the visual editor package."
 	},
 	"autoload": {
 		"psr-4": {

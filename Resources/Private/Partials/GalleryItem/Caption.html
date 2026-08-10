@@ -2,7 +2,10 @@
 	<p>
 		<f:comment>Detail view link: GalleryItem/Show.html</f:comment>
 		<f:link.action action="show" controller="GalleryItem" arguments="{item.linkArguments}">
-			{item.title}
+			<span class="icon icon-link glyphicon glyphicon-link" aria-hidden="true"></span>
+		</f:link.action>
+		<f:link.action action="show" controller="GalleryItem" arguments="{item.linkArguments}">
+			{item -> f:render.text(field: 'title')}
 		</f:link.action>
 	</p>
 	<p class="small muted">
