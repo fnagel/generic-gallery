@@ -28,9 +28,9 @@
 		"ssch/typo3-rector": "^3.11"
 	},
 	"suggest": {
-		"typo3/cms-filemetadata": "*",
-		"fab/metadata": "*",
-		"causal/extractor": "^2"
+		"typo3/cms-filemetadata": "Improves TYPO3 CMS file meta data. Adds lot's of useful fields.",
+		"fab/metadata": "Extension for extracting meta data from files.",
+		"causal/extractor": "Extension for extracting meta data from files (recommended)"
 	},
 	"autoload": {
 		"psr-4": {
