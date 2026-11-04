@@ -31,7 +31,8 @@
 		"typo3/cms-filemetadata": "Improves TYPO3 CMS file meta data. Adds lot's of useful fields.",
 		"fab/metadata": "Extension for extracting meta data from files.",
 		"causal/extractor": "Extension for extracting meta data from files (recommended)",
-		"friendsoftypo3/visual-editor": "This extension supports the visual editor package."
+		"friendsoftypo3/visual-editor": "This extension supports the visual editor package.",
+		"lochmueller/index": "This extension supports search indexing (database indexing) based on the index package."
 	},
 	"autoload": {
 		"psr-4": {

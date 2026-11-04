@@ -61,3 +61,17 @@ which sets an overflow: hidden and height: 45px to all previews. Just
 copy that file, change it and add following to your pageTS:
 
 `mod.web_txtemplavoilaM1.stylesheet = ../fileadmin/templates/be_css/backend.css`
+
+
+Search indexing (EXT:index and EXT:seal)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This extension ships a content type for the database indexing of
+`EXT:index <https://github.com/lochmueller/index>`__ (package name `lochmueller/index`), which is used by search
+extensions like `EXT:seal <https://github.com/lochmueller/seal>`__. It is registered automatically when EXT:index is
+installed.
+
+The header of the content element and the title and description of all images are indexed. All gallery sources are
+supported: single items (incl. text items), images and file collections.
+
+When using the frontend or HTTP indexing no integration is needed, as the rendered page is indexed.
