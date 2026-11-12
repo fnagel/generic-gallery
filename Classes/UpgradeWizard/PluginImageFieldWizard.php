@@ -9,7 +9,7 @@ namespace FelixNagel\GenericGallery\UpgradeWizard;
  * LICENSE.txt file that was distributed with this source code.
  */
 
-use TYPO3\CMS\Install\Attribute\UpgradeWizard;
+use TYPO3\CMS\Core\Attribute\UpgradeWizard;
 
 #[UpgradeWizard(PluginImageFieldWizard::class)]
 class PluginImageFieldWizard extends AbstractUpgradeWizard
