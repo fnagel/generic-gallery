@@ -12,6 +12,26 @@ Upgrade Guide
 
 
 
+Update to 8.1.0
+^^^^^^^^^^^^^^^
+
+**Overview**
+
+- Added support for EXT:index (search indexing extension)
+
+- Use render content area, record and text VH
+
+- Deprecation free (in TYPO3 v14)
+
+- Minor fixes and improvements
+
+
+**How to upgrade**
+
+#. Clear all caches
+
+
+
 Update to 8.0.0
 ^^^^^^^^^^^^^^^
 
