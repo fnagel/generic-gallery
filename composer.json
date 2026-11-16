@@ -42,7 +42,7 @@
 	"extra": {
 		"typo3/cms": {
 			"extension-key": "generic_gallery",
-			"version": "8.0.3+dev",
+			"version": "8.1.0",
 			"Package": {
 				"providesPackages": {}
 			}
